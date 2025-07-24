@@ -2,41 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* DanraK Productions Cinematic Design System 
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
+    /* Light Mode - Crisp & Clean */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 3.9%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 3.9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 3.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 195 83% 51%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 195 83% 51%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 195 83% 51%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* DanraK Brand Colors */
+    --brand-ocean: 195 83% 51%;      /* #2d9ed4 */
+    --brand-crimson: 340 100% 55%;   /* #bf0052 */
+    --brand-sky: 197 75% 59%;        /* #44bae9 */
+    --brand-forest: 98 44% 56%;      /* #80c257 */
+    --brand-sage: 98 44% 69%;        /* #a2d180 */
+
+    /* Cinematic Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--brand-ocean)) 0%, hsl(var(--brand-sky)) 50%, hsl(var(--brand-crimson)) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(var(--brand-ocean) / 0.3) 0%, transparent 70%);
+    --gradient-backdrop: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--brand-ocean) / 0.05) 100%);
+
+    /* Glass Effects */
+    --glass-light: hsla(0, 0%, 100%, 0.1);
+    --glass-border: hsla(0, 0%, 100%, 0.2);
+    --glass-shadow: 0 8px 32px hsla(0, 0%, 0%, 0.1);
+
+    /* Navigation Colors */
+    --nav-hero: var(--brand-ocean);
+    --nav-about: var(--brand-crimson);
+    --nav-showcase: var(--brand-sky);
+    --nav-contact: var(--brand-forest);
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,33 +80,44 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Dark Mode - Deep Cinematic */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 195 83% 51%;
+    --primary-foreground: 0 0% 4%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 195 83% 51%;
+    --accent-foreground: 0 0% 4%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 95%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 195 83% 51%;
+
+    /* Dark Mode Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--brand-ocean)) 0%, hsl(var(--brand-sky)) 50%, hsl(var(--brand-crimson)) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(var(--brand-ocean) / 0.5) 0%, transparent 70%);
+    --gradient-backdrop: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--brand-ocean) / 0.1) 100%);
+
+    /* Dark Glass Effects */
+    --glass-light: hsla(0, 0%, 100%, 0.05);
+    --glass-border: hsla(0, 0%, 100%, 0.1);
+    --glass-shadow: 0 8px 32px hsla(0, 0%, 0%, 0.4);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +135,86 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
+    scroll-behavior: smooth;
+  }
+
+  html {
+    scroll-snap-type: y mandatory;
+  }
+}
+
+@layer components {
+  /* Section Styling */
+  .section {
+    @apply min-h-screen flex items-center justify-center relative;
+    scroll-snap-align: start;
+  }
+
+  .section-glow {
+    @apply absolute inset-0 opacity-0 transition-opacity duration-1000;
+    background: var(--gradient-glow);
+    pointer-events: none;
+  }
+
+  .section-glow.active {
+    @apply opacity-100;
+  }
+
+  /* Glass Morphism */
+  .glass {
+    background: var(--glass-light);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  /* Cinematic Text */
+  .hero-text {
+    @apply text-6xl md:text-8xl font-black tracking-tight;
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Floating Navigation */
+  .floating-nav {
+    @apply fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50;
+    @apply flex items-center gap-4 px-6 py-3 rounded-full;
+    @apply glass;
+  }
+
+  .nav-indicator {
+    @apply w-12 h-2 rounded-full cursor-pointer transition-all duration-300;
+    @apply hover:scale-110;
+  }
+
+  .nav-indicator.active {
+    @apply scale-125 shadow-lg;
+  }
+
+  /* Theme Toggle */
+  .theme-toggle {
+    @apply fixed top-6 right-6 z-50 p-3 rounded-full;
+    @apply glass hover:scale-110 transition-transform duration-300;
+  }
+
+  /* Scrollbar Hide */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Line Clamp */
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 }
