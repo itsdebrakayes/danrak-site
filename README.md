@@ -1,73 +1,150 @@
-# Welcome to your Lovable project
+## 🌟 DanraK Productions Website — Full Vision Overview
 
-## Project info
+### 🎬 **Purpose:**
 
-**URL**: https://lovable.dev/projects/f7531383-b9d9-4ebf-af75-e78af6edc031
+The website showcases the creative work and services of **DanraK Productions**, run by your mom. It’s built with a **cinematic, Apple-style aesthetic** to reflect a high-end production company with flair, elegance, and visual impact.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🧭 Structure & Navigation
 
-**Use Lovable**
+### 🧩 **Website Sections (in scroll order):**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f7531383-b9d9-4ebf-af75-e78af6edc031) and start prompting.
+1. **Hero / Landing Page**
+2. **About Section**
+3. **Showcase Section**
+4. **Contact Section**
 
-Changes made via Lovable will be committed automatically to this repo.
+Each section:
 
-**Use your preferred IDE**
+* Occupies **100% of the viewport height**.
+* Has **smooth scroll snapping** and transitions.
+* Uses **GSAP animations** for immersive entrance effects.
+* Features a **section glow** effect when scrolled to (color-coded).
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🖼️ 1. **Hero Section** – *“The Cinematic Entrance”*
 
-Follow these steps:
+**Inspiration**: Apple product pages + dynamic 3D hero effects.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### 💡 Design:
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+* **Centered composition**: Your mother’s **portrait image** appears slightly **to the right**.
+* On the **left side**, the **DanraK Productions logo or name** is displayed boldly.
+* A **burst of business brand colors** radiates behind her (colors: `#2d9ed4`, `#bf0052`, `#44bae9`, `#80c257`, `#a2d180`).
+* Her image appears to **emerge from the screen**, giving a 3D depth feel, as if she’s stepping forward into the spotlight.
 
-# Step 3: Install the necessary dependencies.
-npm i
+### 🌈 Light/Dark Mode:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+* In **dark mode**, the background is deep black with luminous neon accents.
+* In **light mode**, the design switches to crisp white backgrounds with black text and softened highlight bursts.
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 👤 2. **About Section** – *“The Story Behind the Production”*
 
-**Use GitHub Codespaces**
+### 💡 Design:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+* Minimalist and elegant.
+* Her image shifts from the hero section to a **new pose** or layout (like a cinematic scene change).
+* Includes:
 
-## What technologies are used for this project?
+  * A short bio.
+  * The mission or vision of DanraK Productions.
+  * Brief highlight of services.
 
-This project is built with:
+### 🌀 Animation:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+* GSAP entrance effects animate the section in as the user scrolls.
+* Slight background movement (parallax or fade-in) to enhance visual flow.
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/f7531383-b9d9-4ebf-af75-e78af6edc031) and click on Share -> Publish.
+## 🎥 3. **Showcase Section** – *“Where Past Events Come to Life”*
 
-## Can I connect a custom domain to my Lovable project?
+**Inspiration**: The video you shared of the scrolling events showcase (exact replica requested).
 
-Yes, you can!
+### 💡 Design:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+* **Horizontally scrollable section** where events flow from **right to left**.
+* **Start centered** on the most current event.
+* Each event has:
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+  * A **rounded-rectangle thumbnail** (not circular).
+  * Thumbnail floats in front of a **fullscreen background** version of that same image.
+* When a thumbnail is **clicked**:
+
+  * It **expands** to show a short write-up and a **“Read Full Article”** button that links to the full event page.
+
+### 🌀 Animation:
+
+* GSAP-powered **entrance animations** on each thumbnail.
+* Smooth scroll with snappy transitions and fade effects.
+* Background dynamically updates as the user scrolls horizontally.
+
+---
+
+## 📬 4. **Contact Section** – *“Get in Touch”*
+
+### 💡 Design:
+
+* A **modern, glowing form** over a blurred gradient background (uses your brand colors).
+* Form fields:
+
+  * Name
+  * Email
+  * Message
+* Styled with **frosted glass effect** (`backdrop-blur`), elegant spacing, and soft shadows.
+* Below the form: **clickable social icons** (Instagram, LinkedIn, YouTube).
+
+---
+
+## 🧭 Floating Footer Nav – *“Elegant Navigation”*
+
+**Inspiration**: iPhone swipe-up handle + interactive section marker.
+
+### 💡 Design:
+
+* A **floating, oval-shaped transparent nav bar** fixed slightly above the screen bottom.
+* Contains **four colored bars**, each representing one section:
+
+  * Hero: `#2d9ed4`
+  * About: `#bf0052`
+  * Showcase: `#44bae9`
+  * Contact: `#80c257` (or black/white depending on mode)
+* Bars are **long and thin**, like the iPhone home indicator.
+
+### 🔄 Functionality:
+
+* Clicking a nav bar:
+
+  * Scrolls smoothly to its section.
+  * Triggers a **soft neon glow** around that section (matching its color).
+* On **hover**, the nav bar reveals a **tooltip name** of the section.
+
+---
+
+## 🌗 Theme Switching – *“Light & Dark Personality”*
+
+### 💡 Design:
+
+* A **sun/moon toggle button** floats in the top-right corner.
+* On click:
+
+  * Light mode = sun icon → bright white background, black text.
+  * Dark mode = moon icon → deep black background, white text.
+* Glow and nav colors adapt to the current theme.
+
+---
+
+## 🧰 Tech Stack Summary
+
+| Technology           | Purpose                                        |
+| -------------------- | ---------------------------------------------- |
+| **React**            | Frontend UI library                            |
+| **GSAP**             | Advanced scroll + animation handling           |
+| **Tailwind CSS**     | Utility-first styling + responsive layout      |
+| **React Router**     | Handles page links (e.g., full event articles) |
+| **React Icons**      | Sun/Moon toggle, social icons                  |
+| **Create React App** | Base framework                                 |
