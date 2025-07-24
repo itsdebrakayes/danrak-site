@@ -1,6 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import aboutLeaning from '@/assets/about-leaning.jpg';
+import { removeBackground, loadImageFromSrc } from '@/utils/backgroundRemoval';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -8,6 +10,25 @@ const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const [transparentImageUrl, setTransparentImageUrl] = useState<string>('');
+
+  useEffect(() => {
+    // Remove background from the leaning image
+    const processImage = async () => {
+      try {
+        const img = await loadImageFromSrc(aboutLeaning);
+        const blob = await removeBackground(img);
+        const url = URL.createObjectURL(blob);
+        setTransparentImageUrl(url);
+      } catch (error) {
+        console.error('Failed to remove background:', error);
+        // Fallback to original image
+        setTransparentImageUrl(aboutLeaning);
+      }
+    };
+
+    processImage();
+  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -47,7 +68,7 @@ const AboutSection = () => {
       id="about" 
       className="section relative overflow-hidden"
     >
-      {/* Scenic Background Pattern */}
+      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-brand-crimson/3 to-brand-forest/5" />
       
       <div className="section-glow" />
@@ -63,12 +84,12 @@ const AboutSection = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-brand-crimson via-brand-sky to-brand-forest rounded-full mx-auto" />
         </div>
 
-        {/* Card-based Layout Inspired by Pinterest Reference */}
-        <div className="grid lg:grid-cols-12 gap-8 max-w-7xl mx-auto">
+        {/* Main Content Layout */}
+        <div className="grid lg:grid-cols-12 gap-8 max-w-7xl mx-auto relative">
           
-          {/* Large Story Card (Left) */}
-          <div ref={contentRef} className="lg:col-span-7">
-            <div className="glass p-8 lg:p-12 rounded-3xl h-full hover:scale-[1.02] transition-all duration-700">
+          {/* Text Content Area */}
+          <div ref={contentRef} className="lg:col-span-8 relative">
+            <div className="glass p-8 lg:p-12 rounded-3xl hover:scale-[1.02] transition-all duration-700">
               <div className="space-y-8">
                 {/* Story Content */}
                 <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
@@ -77,16 +98,70 @@ const AboutSection = () => {
                     has been at the forefront of cinematic storytelling and visual excellence.
                   </p>
                   
-                  <p>
-                    Our mission is to transform ideas into compelling visual narratives that resonate 
-                    with audiences and create lasting impact. From concept to completion, we bring 
-                    unparalleled creativity and technical expertise to every project.
-                  </p>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <p>
+                      Our mission is to transform ideas into compelling visual narratives that resonate 
+                      with audiences and create lasting impact.
+                    </p>
+                    
+                    <p>
+                      From concept to completion, we bring unparalleled creativity and technical 
+                      expertise to every project.
+                    </p>
+                  </div>
                   
                   <p>
                     Whether it's corporate events, brand campaigns, or artistic productions, 
                     we approach each project with the same dedication to craftsmanship and innovation.
                   </p>
+                </div>
+
+                {/* Services Grid */}
+                <div className="grid md:grid-cols-2 gap-4 pt-6 border-t border-muted-foreground/10">
+                  
+                  {/* Service Card 1 */}
+                  <div className="flex items-center gap-4 p-4 rounded-xl glass hover:scale-105 transition-all duration-300 group">
+                    <div className="w-12 h-12 bg-gradient-to-br from-brand-ocean to-brand-sky rounded-xl flex items-center justify-center text-lg">
+                      🎬
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold group-hover:text-brand-ocean transition-colors">Event Production</h3>
+                    </div>
+                    <div className="w-2 h-2 bg-brand-ocean rounded-full opacity-60 group-hover:opacity-100 transition-opacity" />
+                  </div>
+
+                  {/* Service Card 2 */}
+                  <div className="flex items-center gap-4 p-4 rounded-xl glass hover:scale-105 transition-all duration-300 group">
+                    <div className="w-12 h-12 bg-gradient-to-br from-brand-crimson to-brand-sky rounded-xl flex items-center justify-center text-lg">
+                      📱
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold group-hover:text-brand-crimson transition-colors">Brand Campaigns</h3>
+                    </div>
+                    <div className="w-2 h-2 bg-brand-crimson rounded-full opacity-60 group-hover:opacity-100 transition-opacity" />
+                  </div>
+
+                  {/* Service Card 3 */}
+                  <div className="flex items-center gap-4 p-4 rounded-xl glass hover:scale-105 transition-all duration-300 group">
+                    <div className="w-12 h-12 bg-gradient-to-br from-brand-sky to-brand-sage rounded-xl flex items-center justify-center text-lg">
+                      🎨
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold group-hover:text-brand-sky transition-colors">Creative Direction</h3>
+                    </div>
+                    <div className="w-2 h-2 bg-brand-sky rounded-full opacity-60 group-hover:opacity-100 transition-opacity" />
+                  </div>
+
+                  {/* Service Card 4 */}
+                  <div className="flex items-center gap-4 p-4 rounded-xl glass hover:scale-105 transition-all duration-300 group">
+                    <div className="w-12 h-12 bg-gradient-to-br from-brand-forest to-brand-sage rounded-xl flex items-center justify-center text-lg">
+                      ✨
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold group-hover:text-brand-forest transition-colors">Post-Production</h3>
+                    </div>
+                    <div className="w-2 h-2 bg-brand-forest rounded-full opacity-60 group-hover:opacity-100 transition-opacity" />
+                  </div>
                 </div>
 
                 {/* Stats Row */}
@@ -108,67 +183,28 @@ const AboutSection = () => {
             </div>
           </div>
 
-          {/* Service Cards Grid (Right) - Pinterest Card Style */}
-          <div ref={imageRef} className="lg:col-span-5 space-y-4">
-            
-            {/* Service Card 1 */}
-            <div className="glass p-6 rounded-2xl hover:scale-105 transition-all duration-500 group cursor-pointer">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-brand-ocean to-brand-sky rounded-2xl flex items-center justify-center text-2xl">
-                  🎬
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-lg group-hover:text-brand-ocean transition-colors">Event Production</h3>
-                  <p className="text-sm text-muted-foreground">Complete event management and production</p>
-                </div>
-                <div className="w-3 h-3 bg-brand-ocean rounded-full opacity-60 group-hover:opacity-100 transition-opacity" />
+          {/* Leaning Portrait - Positioned to look like she's leaning on the content */}
+          {transparentImageUrl && (
+            <div 
+              ref={imageRef}
+              className="lg:col-span-4 relative flex items-end justify-start"
+            >
+              <div className="relative -ml-8 lg:-ml-16">
+                <img 
+                  src={transparentImageUrl}
+                  alt="DanraK Productions Director Leaning"
+                  className="h-96 lg:h-[500px] w-auto object-contain opacity-95"
+                  style={{
+                    filter: 'drop-shadow(0 0 30px hsl(var(--brand-crimson) / 0.2))'
+                  }}
+                />
               </div>
             </div>
+          )}
 
-            {/* Service Card 2 */}
-            <div className="glass p-6 rounded-2xl hover:scale-105 transition-all duration-500 group cursor-pointer">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-brand-crimson to-brand-sky rounded-2xl flex items-center justify-center text-2xl">
-                  📱
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-lg group-hover:text-brand-crimson transition-colors">Brand Campaigns</h3>
-                  <p className="text-sm text-muted-foreground">Strategic brand storytelling and campaigns</p>
-                </div>
-                <div className="w-3 h-3 bg-brand-crimson rounded-full opacity-60 group-hover:opacity-100 transition-opacity" />
-              </div>
-            </div>
-
-            {/* Service Card 3 */}
-            <div className="glass p-6 rounded-2xl hover:scale-105 transition-all duration-500 group cursor-pointer">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-brand-sky to-brand-sage rounded-2xl flex items-center justify-center text-2xl">
-                  🎨
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-lg group-hover:text-brand-sky transition-colors">Creative Direction</h3>
-                  <p className="text-sm text-muted-foreground">Artistic vision and creative leadership</p>
-                </div>
-                <div className="w-3 h-3 bg-brand-sky rounded-full opacity-60 group-hover:opacity-100 transition-opacity" />
-              </div>
-            </div>
-
-            {/* Service Card 4 */}
-            <div className="glass p-6 rounded-2xl hover:scale-105 transition-all duration-500 group cursor-pointer">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-brand-forest to-brand-sage rounded-2xl flex items-center justify-center text-2xl">
-                  ✨
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-lg group-hover:text-brand-forest transition-colors">Post-Production</h3>
-                  <p className="text-sm text-muted-foreground">Professional editing and finishing</p>
-                </div>
-                <div className="w-3 h-3 bg-brand-forest rounded-full opacity-60 group-hover:opacity-100 transition-opacity" />
-              </div>
-            </div>
-
-            {/* Philosophy Card */}
-            <div className="glass p-6 rounded-2xl bg-gradient-to-br from-brand-ocean/5 to-brand-sky/5 mt-6">
+          {/* Philosophy Card - Positioned near the leaning image */}
+          <div className="lg:col-span-12 mt-8">
+            <div className="glass p-6 rounded-2xl bg-gradient-to-br from-brand-ocean/5 to-brand-sky/5 max-w-md mx-auto lg:mx-0 lg:ml-auto">
               <div className="text-center space-y-3">
                 <div className="text-sm font-semibold text-brand-ocean tracking-wider">OUR PHILOSOPHY</div>
                 <p className="text-sm text-muted-foreground italic">

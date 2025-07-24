@@ -60,11 +60,13 @@ const ShowcaseSection = () => {
   ];
 
   useEffect(() => {
+    // Set initial background to the first event
+    if (events.length > 0) {
+      setBackgroundImage(events[0].image);
+    }
+
     const section = sectionRef.current;
     if (!section) return;
-
-    // Set initial background to the first event
-    setBackgroundImage(events[0]?.image || '');
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -93,7 +95,7 @@ const ShowcaseSection = () => {
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, []);
+  }, [events]);
 
   const handleEventClick = (event: Event) => {
     setSelectedEvent(event);
@@ -108,7 +110,7 @@ const ShowcaseSection = () => {
     <section 
       ref={sectionRef}
       id="showcase" 
-      className="section relative overflow-hidden"
+      className="section relative overflow-hidden min-h-screen"
     >
       {/* Dynamic Background */}
       <div 
@@ -124,7 +126,7 @@ const ShowcaseSection = () => {
       
       <div className="section-glow" />
       
-      <div className="relative z-10 container mx-auto px-6">
+      <div className="relative z-10 container mx-auto px-6 py-20">
         <div className="text-center mb-16">
           <h2 className="showcase-title text-5xl md:text-6xl font-black text-brand-sky mb-4">
             Where Past Events
