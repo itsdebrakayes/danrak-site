@@ -80,7 +80,7 @@ const ContactSection = () => {
     <section 
       ref={sectionRef}
       id="contact" 
-      className="section relative overflow-hidden"
+      className="section relative overflow-hidden min-h-screen"
     >
       {/* Gradient Background */}
       <div 
@@ -95,7 +95,7 @@ const ContactSection = () => {
       
       <div className="section-glow" />
       
-      <div className="relative z-10 container mx-auto px-6">
+      <div className="relative z-10 container mx-auto px-6 py-20">
         <div className="text-center mb-16">
           <h2 className="contact-title text-5xl md:text-6xl font-black text-brand-forest mb-4">
             Get in Touch
