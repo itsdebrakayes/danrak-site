@@ -1,11 +1,10 @@
 import ThemeToggle from '@/components/ThemeToggle';
 import Header from '@/components/sections/Header';
 import Footer from '@/components/sections/Footer';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import aboutLeaning from '@/assets/about-leaning.jpg';
-import { removeBackground, loadImageFromSrc } from '@/utils/backgroundRemoval';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,23 +12,6 @@ const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
-  const [transparentImageUrl, setTransparentImageUrl] = useState<string>('');
-
-  useEffect(() => {
-    const processImage = async () => {
-      try {
-        const img = await loadImageFromSrc(aboutLeaning);
-        const blob = await removeBackground(img);
-        const url = URL.createObjectURL(blob);
-        setTransparentImageUrl(url);
-      } catch (error) {
-        console.error('Failed to remove background:', error);
-        setTransparentImageUrl(aboutLeaning);
-      }
-    };
-
-    processImage();
-  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -167,18 +149,16 @@ const AboutSection = () => {
             </div>
           </div>
 
-          {transparentImageUrl && (
-            <div ref={imageRef} className="lg:col-span-4 relative flex items-end justify-start">
-              <div className="relative -ml-8 lg:-ml-16">
-                <img
-                  src={transparentImageUrl}
-                  alt="DanraK Productions Director Leaning"
-                  className="h-96 lg:h-[500px] w-auto object-contain opacity-95"
-                  style={{ filter: 'drop-shadow(0 0 30px hsl(var(--brand-crimson) / 0.2))' }}
-                />
-              </div>
+          <div ref={imageRef} className="lg:col-span-4 relative flex items-end justify-start">
+            <div className="relative -ml-8 lg:-ml-16">
+              <img
+                src={aboutLeaning}
+                alt="DanraK Productions Director Leaning"
+                className="h-96 lg:h-[500px] w-auto object-contain opacity-95"
+                style={{ filter: 'drop-shadow(0 0 30px hsl(var(--brand-crimson) / 0.2))' }}
+              />
             </div>
-          )}
+          </div>
 
           <div className="lg:col-span-12 mt-8">
             <div className="glass p-6 rounded-2xl bg-gradient-to-br from-brand-ocean/5 to-brand-sky/5 max-w-md mx-auto lg:mx-0 lg:ml-auto">
