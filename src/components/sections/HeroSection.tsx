@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 import heroPortrait from '@/assets/hero-portrait.jpg';
 import heroArmsFolded from '@/assets/hero-arms-folded.jpg';
 import { removeBackground, loadImageFromSrc } from '@/utils/backgroundRemoval';
@@ -73,92 +75,100 @@ const HeroSection = () => {
       {/* Cinematic Glow Effect */}
       <div className="section-glow" />
       
-      {/* Large Portrait Background - Like the car in LOGAN */}
-      {transparentImageUrl && (
-        <div 
-          ref={imageRef}
-          className="absolute inset-0 flex items-center justify-end pr-8 md:pr-16"
-          style={{ zIndex: 2 }}
-        >
-          <img 
-            src={transparentImageUrl}
-            alt="DanraK Productions Director"
-            className="h-full w-auto object-contain opacity-95 max-w-[60%] lg:max-w-[50%]"
-            style={{
-              minHeight: '100vh',
-              filter: 'drop-shadow(0 0 60px hsl(var(--brand-ocean) / 0.4))',
-              transform: 'translateX(10%)'
-            }}
-          />
-        </div>
-      )}
-      
-      {/* Main Content - Text over the image */}
-      <div className="relative z-10 container mx-auto px-6 h-screen flex items-center justify-center">
-        
-        {/* Large Company Name - Like LOGAN text */}
-        <div className="text-center space-y-8">
-          <div className="space-y-4">
-            {/* Main Company Name - Going behind the image where they meet */}
-            <h1 
-              ref={titleRef}
-              className="text-8xl md:text-[10rem] lg:text-[12rem] xl:text-[14rem] font-black leading-none tracking-tighter relative"
-              style={{
-                background: 'linear-gradient(135deg, hsl(var(--brand-ocean)) 0%, hsl(var(--brand-sky)) 30%, hsl(var(--brand-crimson)) 70%, hsl(var(--brand-sage)) 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                textShadow: '0 0 80px hsl(var(--brand-ocean) / 0.5)',
-                filter: 'drop-shadow(0 8px 32px hsl(var(--brand-ocean) / 0.3))',
-                // Position to go behind the portrait where they intersect
-                zIndex: 1
-              }}
-            >
-              DanraK
-            </h1>
-            
-            {/* Productions Text */}
+      {/* Main Content */}
+      <div className="relative z-10 container mx-auto px-6 h-screen flex items-center">
+        <div className="flex items-center justify-between w-full max-w-7xl mx-auto">
+          
+          {/* Left Side - Text Content */}
+          <div className="flex-1 space-y-16">
             <div 
-              ref={subtitleRef}
-              className="relative -mt-8"
+              ref={titleRef}
+              className="opacity-0"
             >
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.3em] text-muted-foreground/80">
+              <h1 
+                className="text-8xl md:text-[10rem] lg:text-[12rem] xl:text-[14rem] font-black leading-none tracking-tighter"
+                style={{
+                  background: 'linear-gradient(135deg, hsl(var(--brand-ocean)) 0%, hsl(var(--brand-sky)) 30%, hsl(var(--brand-crimson)) 70%, hsl(var(--brand-sage)) 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  textShadow: '0 0 80px hsl(var(--brand-ocean) / 0.5)',
+                  filter: 'drop-shadow(0 8px 32px hsl(var(--brand-ocean) / 0.3))',
+                }}
+              >
+                DanraK
+              </h1>
+              
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-[0.3em] text-black dark:text-white -mt-8">
                 PRODUCTIONS
               </h2>
-              <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-40 h-0.5 bg-gradient-to-r from-transparent via-brand-ocean to-transparent rounded-full" />
+            </div>
+
+            <div 
+              ref={subtitleRef}
+              className="opacity-0"
+            >
+              <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed">
+                Cinematic experiences that transcend the ordinary
+              </p>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-6">
+              <Link to="/showcase">
+                <Button 
+                  size="lg" 
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg font-semibold rounded-lg shadow-lg"
+                >
+                  Explore Our Work
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button 
+                  variant="secondary" 
+                  size="lg" 
+                  className="bg-secondary text-secondary-foreground hover:bg-secondary/80 px-8 py-4 text-lg font-semibold rounded-lg shadow-lg"
+                >
+                  Start Your Project
+                </Button>
+              </Link>
             </div>
           </div>
 
-          {/* Tagline */}
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed opacity-0 animate-fade-in-up" 
-             style={{ animationDelay: '1.5s', animationFillMode: 'forwards' }}>
-            Crafting cinematic experiences that captivate, inspire, and leave lasting impressions.
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center opacity-0 animate-fade-in-up" 
-               style={{ animationDelay: '2s', animationFillMode: 'forwards' }}>
-            <button className="glass px-10 py-5 rounded-2xl text-lg font-semibold bg-brand-ocean/20 hover:bg-brand-ocean/30 transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-              Explore Our Work
-            </button>
-            <button className="glass px-10 py-5 rounded-2xl text-lg font-semibold hover:bg-foreground/5 transition-all duration-500 border border-muted-foreground/20">
-              Start Your Project
-            </button>
+          {/* Right Side - Portrait Image */}
+          <div className="flex-1 flex justify-center">
+            {transparentImageUrl && (
+              <div 
+                ref={imageRef}
+                className="relative w-96 h-96 opacity-0"
+                style={{ perspective: '1000px' }}
+              >
+                <img
+                  src={transparentImageUrl}
+                  alt="DanraK Portrait"
+                  className="w-full h-full object-cover rounded-lg shadow-2xl"
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    filter: 'drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5))',
+                  }}
+                />
+              </div>
+            )}
           </div>
         </div>
+      </div>
 
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-20 w-6 h-6 bg-brand-sky/60 rounded-full animate-float blur-sm" />
-        <div className="absolute bottom-32 right-24 w-8 h-8 bg-brand-crimson/50 rounded-full animate-float blur-sm" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/3 right-16 w-4 h-4 bg-brand-sage/70 rounded-full animate-float blur-sm" style={{ animationDelay: '2s' }} />
+      {/* Floating Elements */}
+      <div className="absolute top-20 left-20 w-6 h-6 bg-brand-sky/60 rounded-full animate-float blur-sm" />
+      <div className="absolute bottom-32 right-24 w-8 h-8 bg-brand-crimson/50 rounded-full animate-float blur-sm" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-1/3 right-16 w-4 h-4 bg-brand-sage/70 rounded-full animate-float blur-sm" style={{ animationDelay: '2s' }} />
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 animate-fade-in-up" 
-             style={{ animationDelay: '2.5s', animationFillMode: 'forwards' }}>
-          <div className="flex flex-col items-center gap-2 text-muted-foreground">
-            <span className="text-xs tracking-wider">SCROLL</span>
-            <div className="w-px h-8 bg-gradient-to-b from-muted-foreground to-transparent" />
-          </div>
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 animate-fade-in-up" 
+           style={{ animationDelay: '2.5s', animationFillMode: 'forwards' }}>
+        <div className="flex flex-col items-center gap-2 text-muted-foreground">
+          <span className="text-xs tracking-wider">SCROLL</span>
+          <div className="w-px h-8 bg-gradient-to-b from-muted-foreground to-transparent" />
         </div>
       </div>
     </section>
