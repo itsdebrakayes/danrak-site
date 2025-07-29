@@ -1,5 +1,5 @@
 import { FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
-import logo from '@/assets/hero-portrait.png';
+import logo from '@/assets/DanRak Prod Logo.png';
 
 const socials = [
   { icon: <FaInstagram />, url: 'https://instagram.com' },
