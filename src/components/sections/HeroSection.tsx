@@ -87,7 +87,7 @@ const HeroSection = () => {
             <h1
               className="text-8xl md:text-[10rem] lg:text-[12rem] xl:text-[14rem] font-black leading-none tracking-tighter"
               style={{
-                background: 'linear-gradient(135deg, hsl(var(--brand-ocean)) 0%, hsl(var(--brand-sky)) 30%, hsl(var(--brand-crimson)) 70%, hsl(var(--brand-sage)) 100%)',
+                background: 'linear-gradient(135deg, hsl(var(--brand-ocean)) 0%, hsl(var(--brand-sky)) 25%, hsl(var(--brand-crimson)) 50%, hsl(var(--brand-sage)) 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -97,7 +97,7 @@ const HeroSection = () => {
             >
               DanraK
             </h1>
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-[0.3em] text-black dark:text-white mt-2">
+            <h2 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-[0.05em] text-black dark:text-white mt-2">
               PRODUCTIONS
             </h2>
           </div>
