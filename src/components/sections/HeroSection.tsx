@@ -77,15 +77,17 @@ const HeroSection = () => {
       {transparentImageUrl && (
         <div 
           ref={imageRef}
-          className="absolute inset-0 flex items-center justify-center"
+          className="absolute inset-0 flex items-center justify-end pr-8 md:pr-16"
+          style={{ zIndex: 2 }}
         >
           <img 
             src={transparentImageUrl}
             alt="DanraK Productions Director"
-            className="h-full w-auto object-cover opacity-90"
+            className="h-full w-auto object-contain opacity-95 max-w-[60%] lg:max-w-[50%]"
             style={{
               minHeight: '100vh',
-              filter: 'drop-shadow(0 0 40px hsl(var(--brand-ocean) / 0.3))'
+              filter: 'drop-shadow(0 0 60px hsl(var(--brand-ocean) / 0.4))',
+              transform: 'translateX(10%)'
             }}
           />
         </div>
@@ -100,14 +102,16 @@ const HeroSection = () => {
             {/* Main Company Name - Going behind the image where they meet */}
             <h1 
               ref={titleRef}
-              className="text-9xl md:text-[12rem] lg:text-[15rem] font-black leading-none tracking-tighter relative"
+              className="text-8xl md:text-[10rem] lg:text-[12rem] xl:text-[14rem] font-black leading-none tracking-tighter relative"
               style={{
                 background: 'linear-gradient(135deg, hsl(var(--brand-ocean)) 0%, hsl(var(--brand-sky)) 30%, hsl(var(--brand-crimson)) 70%, hsl(var(--brand-sage)) 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-                // Mix blend mode to go behind the image where they intersect
-                mixBlendMode: 'multiply'
+                textShadow: '0 0 80px hsl(var(--brand-ocean) / 0.5)',
+                filter: 'drop-shadow(0 8px 32px hsl(var(--brand-ocean) / 0.3))',
+                // Position to go behind the portrait where they intersect
+                zIndex: 1
               }}
             >
               DanraK
