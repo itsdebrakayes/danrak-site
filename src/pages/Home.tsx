@@ -1,11 +1,11 @@
 import ThemeToggle from '@/components/ThemeToggle';
 import Header from '@/components/sections/Header';
 import Footer from '@/components/sections/Footer';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import heroPortrait from '@/assets/hero-portrait.jpg';
+import heroPortrait from '@/assets/hero-portrait.png';
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -13,11 +13,6 @@ const HeroSection = () => {
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const burstRef = useRef<HTMLDivElement>(null);
-  const [transparentImageUrl, setTransparentImageUrl] = useState<string>('');
-
-  useEffect(() => {
-    setTransparentImageUrl(heroPortrait);
-  }, []);
 
   useEffect(() => {
     const tl = gsap.timeline({ delay: 0.5 });
@@ -62,16 +57,14 @@ const HeroSection = () => {
           <div className="w-[600px] h-[600px] rounded-full bg-gradient-to-br from-brand-ocean via-brand-sky to-brand-crimson opacity-60 blur-3xl" />
         </div>
 
-        {transparentImageUrl && (
-          <div ref={imageRef} className="relative opacity-0">
-            <img
-              src={transparentImageUrl}
-              alt="DanraK Portrait"
-              className="max-h-[80vh] w-auto object-contain shadow-2xl"
-              style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.5))' }}
-            />
-          </div>
-        )}
+        <div ref={imageRef} className="relative opacity-0">
+          <img
+            src={heroPortrait}
+            alt="DanraK Portrait"
+            className="max-h-[80vh] w-auto object-contain shadow-2xl"
+            style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.5))' }}
+          />
+        </div>
 
         <div className="absolute left-1/2 transform -translate-x-1/2 text-center space-y-8" style={{ bottom: '20%' }}>
           <div ref={titleRef} className="opacity-0 space-y-3">
