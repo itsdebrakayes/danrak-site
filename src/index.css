@@ -185,21 +185,6 @@ All colors MUST be HSL.
     background-clip: text;
   }
 
-  /* Floating Navigation */
-  .floating-nav {
-    @apply fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50;
-    @apply flex items-center gap-4 px-6 py-3 rounded-full;
-    @apply glass;
-  }
-
-  .nav-indicator {
-    @apply w-12 h-2 rounded-full cursor-pointer transition-all duration-300;
-    @apply hover:scale-110;
-  }
-
-  .nav-indicator.active {
-    @apply scale-125 shadow-lg;
-  }
 
   /* Theme Toggle */
   .theme-toggle {
