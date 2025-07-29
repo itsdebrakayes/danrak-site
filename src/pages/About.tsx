@@ -1,10 +1,14 @@
 import ThemeToggle from '@/components/ThemeToggle';
-import AboutSection from '@/components/sections/AboutSection';
+import Header from '@/components/sections/Header';
+import Footer from '@/components/sections/Footer';
+import AboutSection from '@/components/site/AboutSection';
 
 const About = () => (
-  <div className="relative">
+  <div className="relative min-h-screen overflow-hidden">
     <ThemeToggle />
+    <Header />
     <AboutSection />
+    <Footer />
   </div>
 );
 

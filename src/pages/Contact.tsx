@@ -1,10 +1,14 @@
 import ThemeToggle from '@/components/ThemeToggle';
-import ContactSection from '@/components/sections/ContactSection';
+import Header from '@/components/sections/Header';
+import Footer from '@/components/sections/Footer';
+import ContactSection from '@/components/site/ContactSection';
 
 const Contact = () => (
-  <div className="relative">
+  <div className="relative min-h-screen overflow-hidden">
     <ThemeToggle />
+    <Header />
     <ContactSection />
+    <Footer />
   </div>
 );
 

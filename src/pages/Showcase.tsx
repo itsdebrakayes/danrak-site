@@ -6,6 +6,8 @@ import { projects } from "../data/projects";
 import { Button } from "@/components/ui/button";
 import FloatingNavigation from "@/components/FloatingNavigation";
 import ThemeToggle from "@/components/ThemeToggle";
+import Header from '@/components/sections/Header';
+import Footer from '@/components/sections/Footer';
 import "swiper/css";
 
 const Showcase = () => {
@@ -18,6 +20,7 @@ const Showcase = () => {
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
+      <Header />
       {/* Dynamic Background */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -117,6 +120,7 @@ const Showcase = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
