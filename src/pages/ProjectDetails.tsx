@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { projects } from "../data/projects";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import FloatingNavigation from "@/components/FloatingNavigation";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const ProjectDetails = () => {
@@ -30,7 +29,6 @@ const ProjectDetails = () => {
       <div className="fixed top-6 left-6 z-50">
         <ThemeToggle />
       </div>
-      <FloatingNavigation activeSection="showcase" onNavigate={() => {}} />
 
       <div className="container mx-auto px-6 py-20">
         {/* Back Button */}

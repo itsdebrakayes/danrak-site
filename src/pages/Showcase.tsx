@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { projects } from "../data/projects";
 import { Button } from "@/components/ui/button";
-import FloatingNavigation from "@/components/FloatingNavigation";
 import ThemeToggle from "@/components/ThemeToggle";
 import Header from '@/components/sections/Header';
 import Footer from '@/components/sections/Footer';
@@ -45,7 +44,6 @@ const Showcase = () => {
       <div className="absolute top-6 left-6 z-50">
         <ThemeToggle />
       </div>
-      <FloatingNavigation activeSection="showcase" onNavigate={() => {}} />
 
       {/* Content */}
       <div className="relative z-10 h-full flex">
