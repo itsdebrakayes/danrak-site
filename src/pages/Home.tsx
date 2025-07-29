@@ -60,7 +60,7 @@ const HeroSection = () => {
         <div ref={imageRef} className="relative opacity-0">
           <img
             src={heroPortrait}
-            alt="DanraK Portrait"
+            alt="Danrak Portrait"
             className="max-h-[80vh] w-auto object-contain shadow-2xl"
             style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.5))' }}
           />
@@ -80,7 +80,7 @@ const HeroSection = () => {
                 filter: 'drop-shadow(0 8px 32px hsl(var(--brand-ocean) / 0.3))'
               }}
             >
-              DanraK
+              Danrak
             </h1>
             <h2 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-[0.05em] text-black dark:text-white mt-2">
               PRODUCTIONS
