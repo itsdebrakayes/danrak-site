@@ -19,9 +19,9 @@ interface Event {
 
 const ShowcaseSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
-  const [backgroundImage, setBackgroundImage] = useState<string>('');
 
   // Events data with real images
   const events: Event[] = [
@@ -29,7 +29,7 @@ const ShowcaseSection = () => {
       id: '1',
       title: 'Corporate Gala 2024',
       date: 'March 2024',
-      description: 'A spectacular corporate event featuring cutting-edge production design and immersive lighting.',
+      description: 'A spectacular corporate event featuring cutting-edge production design and immersive lighting that transformed the venue into a cinematic experience.',
       image: showcase1,
       category: 'Corporate'
     },
@@ -37,7 +37,7 @@ const ShowcaseSection = () => {
       id: '2',
       title: 'Brand Launch Campaign',
       date: 'February 2024',
-      description: 'Complete brand identity and campaign launch for a major tech company.',
+      description: 'Complete brand identity and campaign launch for a major tech company with innovative visual storytelling.',
       image: showcase2,
       category: 'Branding'
     },
@@ -45,7 +45,7 @@ const ShowcaseSection = () => {
       id: '3',
       title: 'Music Video Production',
       date: 'January 2024',
-      description: 'Cinematic music video with complex choreography and visual effects.',
+      description: 'Cinematic music video with complex choreography and visual effects that pushed creative boundaries.',
       image: showcase3,
       category: 'Entertainment'
     },
@@ -53,18 +53,23 @@ const ShowcaseSection = () => {
       id: '4',
       title: 'Fashion Week Coverage',
       date: 'December 2023',
-      description: 'Complete visual coverage of Fashion Week with live streaming and post-production.',
+      description: 'Complete visual coverage of Fashion Week with live streaming and post-production excellence.',
       image: showcase4,
       category: 'Fashion'
     }
   ];
 
-  useEffect(() => {
-    // Set initial background to the first event
-    if (events.length > 0) {
-      setBackgroundImage(events[0].image);
-    }
+  const nextStory = () => {
+    setActiveIndex((prev) => (prev + 1) % events.length);
+  };
 
+  const currentEvent = events[activeIndex];
+  const upcomingEvents = [
+    ...events.slice(activeIndex + 1),
+    ...events.slice(0, activeIndex)
+  ];
+
+  useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
@@ -81,29 +86,39 @@ const ShowcaseSection = () => {
     tl.fromTo(".showcase-title",
       { y: 50, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }
+    )
+    .fromTo(".featured-story",
+      { x: -100, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+      "-=0.4"
+    )
+    .fromTo(".story-carousel",
+      { x: 100, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+      "-=0.6"
     );
-
-    // Animate each event card with stagger
-    events.forEach((_, index) => {
-      tl.fromTo(`.event-card-${index}`,
-        { x: 100, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
-        index * 0.1
-      );
-    });
 
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, [events]);
+  }, []);
+
+  // Auto-advance stories every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(nextStory, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleEventClick = (event: Event) => {
     setSelectedEvent(event);
-    setBackgroundImage(event.image);
   };
 
   const closeModal = () => {
     setSelectedEvent(null);
+  };
+
+  const handleCarouselClick = (index: number) => {
+    setActiveIndex(index);
   };
 
   return (
@@ -112,17 +127,17 @@ const ShowcaseSection = () => {
       id="showcase" 
       className="section relative overflow-hidden min-h-screen"
     >
-      {/* Dynamic Background */}
+      {/* Dynamic Background - Current Featured Story */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000"
         style={{
-          backgroundImage: `url(${backgroundImage})`,
-          filter: 'blur(20px) brightness(0.3)'
+          backgroundImage: `url(${currentEvent.image})`,
+          filter: 'blur(15px) brightness(0.4)'
         }}
       />
       
       {/* Overlay */}
-      <div className="absolute inset-0 bg-background/80" />
+      <div className="absolute inset-0 bg-background/70" />
       
       <div className="section-glow" />
       
@@ -135,61 +150,87 @@ const ShowcaseSection = () => {
           <div className="w-20 h-1 bg-gradient-to-r from-brand-sky to-brand-forest rounded-full mx-auto" />
         </div>
 
-        {/* Horizontal Scrolling Events */}
-        <div 
-          ref={scrollRef}
-          className="flex gap-8 overflow-x-auto pb-8 scrollbar-hide"
-          style={{ scrollSnapType: 'x mandatory' }}
-        >
-          {events.map((event, index) => (
-            <div
-              key={event.id}
-              className={`event-card-${index} flex-shrink-0 w-80 cursor-pointer`}
-              style={{ scrollSnapAlign: 'center' }}
-              onClick={() => handleEventClick(event)}
-              onMouseEnter={() => setBackgroundImage(event.image)}
-            >
-              <div className="glass rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 group">
-                <div className="aspect-video bg-muted relative overflow-hidden">
-                  <img 
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  
-                  {/* Category Badge */}
-                  <div className="absolute top-4 left-4">
-                    <span className="glass px-3 py-1 text-sm font-medium rounded-full">
-                      {event.category}
-                    </span>
+        {/* Main Layout: Featured Story + Carousel */}
+        <div className="grid lg:grid-cols-5 gap-8 items-center min-h-[60vh]">
+          
+          {/* Left Side: Featured Story Excerpt */}
+          <div className="lg:col-span-2 featured-story">
+            <div className="glass p-8 rounded-3xl space-y-6">
+              <div className="text-sm text-brand-sky font-medium">{currentEvent.category}</div>
+              <h3 className="text-4xl md:text-5xl font-black leading-tight">{currentEvent.title}</h3>
+              <div className="text-muted-foreground text-lg">{currentEvent.date}</div>
+              <p className="text-muted-foreground leading-relaxed text-lg">
+                {currentEvent.description}
+              </p>
+              <button 
+                onClick={() => handleEventClick(currentEvent)}
+                className="glass px-8 py-4 rounded-xl font-semibold bg-brand-sky/20 hover:bg-brand-sky/30 transition-all duration-300 hover:scale-105"
+              >
+                Read More →
+              </button>
+            </div>
+          </div>
+
+          {/* Right Side: Upcoming Stories Carousel */}
+          <div className="lg:col-span-3 story-carousel">
+            <div className="space-y-6">
+              <h4 className="text-xl font-bold text-center text-muted-foreground">Coming Up Next</h4>
+              
+              <div 
+                ref={carouselRef}
+                className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide"
+              >
+                {upcomingEvents.map((event, index) => (
+                  <div
+                    key={`${event.id}-${index}`}
+                    className="flex-shrink-0 w-64 cursor-pointer group"
+                    onClick={() => handleCarouselClick((activeIndex + index + 1) % events.length)}
+                  >
+                    <div className="glass rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300">
+                      <div className="aspect-video bg-muted relative overflow-hidden">
+                        <img 
+                          src={event.image}
+                          alt={event.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                        
+                        {/* Category Badge */}
+                        <div className="absolute top-3 left-3">
+                          <span className="glass px-2 py-1 text-xs font-medium rounded-full">
+                            {event.category}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <div className="p-4 space-y-2">
+                        <div className="text-xs text-muted-foreground">{event.date}</div>
+                        <h4 className="text-sm font-bold line-clamp-1">{event.title}</h4>
+                        <p className="text-muted-foreground text-xs line-clamp-2">
+                          {event.description}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="p-6 space-y-3">
-                  <div className="text-sm text-muted-foreground">{event.date}</div>
-                  <h3 className="text-xl font-bold">{event.title}</h3>
-                  <p className="text-muted-foreground text-sm line-clamp-2">
-                    {event.description}
-                  </p>
-                  
-                  <button className="text-brand-sky font-semibold text-sm hover:text-brand-ocean transition-colors">
-                    Read More →
-                  </button>
-                </div>
+                ))}
+              </div>
+
+              {/* Navigation Dots */}
+              <div className="flex justify-center gap-2">
+                {events.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveIndex(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === activeIndex 
+                        ? 'bg-brand-sky scale-125' 
+                        : 'bg-muted-foreground/30 hover:bg-brand-sky/50'
+                    }`}
+                  />
+                ))}
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Navigation Dots */}
-        <div className="flex justify-center gap-2 mt-8">
-          {events.map((_, index) => (
-            <button
-              key={index}
-              className="w-2 h-2 rounded-full bg-muted-foreground/30 hover:bg-brand-sky transition-colors"
-            />
-          ))}
+          </div>
         </div>
       </div>
 
