@@ -209,4 +209,14 @@ All colors MUST be HSL.
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
   }
+
+  .hero-title {
+  font-family: 'DM Serif Display', serif;
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 8px 32px hsl(var(--brand-ocean) / 0.3));
+}
+
 }
