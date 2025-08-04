@@ -7,9 +7,6 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import heroPortrait from '@/assets/hero-portrait.png';
 
-// Import this in index.html or globally:
-// <link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet" />
-
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -77,9 +74,9 @@ const HeroSection = () => {
         >
           <div ref={titleRef} className="opacity-0 space-y-3">
             <h1
-              className="text-[5rem] sm:text-[6rem] md:text-[7rem] lg:text-[8rem] font-black leading-none tracking-tighter"
+              className="text-[5rem] sm:text-[6rem] md:text-[7rem] lg:text-[8.5rem] leading-none tracking-tight"
               style={{
-                fontFamily: `'Rubik Bubbles', sans-serif`,
+                fontFamily: `'DM Serif Display', serif`,
                 background:
                   'linear-gradient(135deg, #2d9ed4, #bf0052, #44bae9, #80c257, #a2d180)',
                 WebkitBackgroundClip: 'text',
