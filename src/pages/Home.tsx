@@ -1,11 +1,9 @@
-import ThemeToggle from '@/components/ThemeToggle';
-import Header from '@/components/sections/Header';
-import Footer from '@/components/sections/Footer';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import heroPortrait from '@/assets/hero-portrait.png';
+import logoPart from '@/assets/logo-icon.png'; // <-- update this to the real path
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -59,7 +57,7 @@ const HeroSection = () => {
 
         {/* Image */}
         <div ref={imageRef} className="relative opacity-0 z-10">
-         <img
+          <img
             src={heroPortrait}
             alt="Danrak Portrait"
             className="h-[80vh] w-auto max-w-none object-contain mx-auto"
@@ -67,68 +65,65 @@ const HeroSection = () => {
           />
         </div>
 
-        {/* Title & Subtitle Overlapping */}
+        {/* Logo Text Section */}
         <div className="flex flex-col items-center justify-center space-y-6 text-center mt-12">
-            {/* X Icon */}
-            <img
-              src= {logo-part}
-              alt="Danrak Icon"
-              className="w-24 sm:w-28 md:w-32 mb-4"
-            />
+          <img
+            src={logoPart}
+            alt="Danrak Icon"
+            className="w-24 sm:w-28 md:w-32 mb-4"
+          />
 
-            {/* DANRAK */}
-            <h1
-              className="text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] font-bold leading-none tracking-tight"
-              style={{
-                fontFamily: `'Poppins', sans-serif`,
-                color: '#bf0052',
-              }}
+          <h1
+            ref={titleRef}
+            className="text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] font-bold leading-none tracking-tight"
+            style={{
+              fontFamily: `'Poppins', sans-serif`,
+              color: '#bf0052',
+            }}
+          >
+            DANRAK
+          </h1>
+
+          <h2
+            className="text-[1.25rem] sm:text-[1.75rem] md:text-[2rem] uppercase tracking-[0.4em] font-medium"
+            style={{
+              fontFamily: `'Poppins', sans-serif`,
+              color: '#bf0052',
+            }}
+          >
+            PRODUCTIONS
+          </h2>
+
+          <p
+            ref={subtitleRef}
+            className="text-sm sm:text-base italic font-light mt-4"
+            style={{
+              color: '#44bae9',
+            }}
+          >
+            Communicating More<sup>™</sup>
+          </p>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row gap-6 justify-center mt-10">
+          <Link to="/showcase">
+            <Button
+              size="lg"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg font-semibold rounded-lg shadow-lg"
             >
-              DANRAK
-            </h1>
-
-            {/* PRODUCTIONS */}
-            <h2
-              className="text-[1.25rem] sm:text-[1.75rem] md:text-[2rem] uppercase tracking-[0.4em] font-medium"
-              style={{
-                fontFamily: `'Poppins', sans-serif`,
-                color: '#bf0052',
-              }}
+              Explore Our Work
+            </Button>
+          </Link>
+          <Link to="/contact">
+            <Button
+              variant="secondary"
+              size="lg"
+              className="bg-secondary text-secondary-foreground hover:bg-secondary/80 px-8 py-4 text-lg font-semibold rounded-lg shadow-lg"
             >
-              PRODUCTIONS
-            </h2>
-
-            {/* Slogan */}
-            <p
-              className="text-sm sm:text-base italic font-light mt-4"
-              style={{
-                color: '#44bae9',
-              }}
-            >
-              Communicating More<sup>™</sup>
-            </p>
-          </div>
-
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link to="/showcase">
-              <Button
-                size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg font-semibold rounded-lg shadow-lg"
-              >
-                Explore Our Work
-              </Button>
-            </Link>
-            <Link to="/contact">
-              <Button
-                variant="secondary"
-                size="lg"
-                className="bg-secondary text-secondary-foreground hover:bg-secondary/80 px-8 py-4 text-lg font-semibold rounded-lg shadow-lg"
-              >
-                Start Your Project
-              </Button>
-            </Link>
-          </div>
+              Start Your Project
+            </Button>
+          </Link>
         </div>
       </div>
 
@@ -157,13 +152,4 @@ const HeroSection = () => {
   );
 };
 
-const Home = () => (
-  <div className="relative min-h-screen overflow-hidden">
-    <ThemeToggle />
-    <Header />
-    <HeroSection />
-    <Footer />
-  </div>
-);
-
-export default Home;
+export default HeroSection;
