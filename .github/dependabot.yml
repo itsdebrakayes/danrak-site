@@ -1,0 +1,24 @@
+version: 2
+updates:
+  # NPM dependencies (package.json + package-lock.json / pnpm-lock.yaml / yarn.lock)
+  - package-ecosystem: "npm"
+    directory: "/"                 # Location of package.json
+    schedule:
+      interval: "weekly"          # Check for updates weekly
+      day: "sunday"               # Every Sunday
+      time: "05:00"               # 5 AM UTC
+    open-pull-requests-limit: 5
+    allow:
+      - dependency-type: "direct"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  # GitHub Actions (if you’re using CI/CD later)
+  - package-ecosystem: "github-actions"
+    directory: "/"                 # Location of workflow files
+    schedule:
+      interval: "monthly"         # Less frequent
+    commit-message:
+      prefix: "ci"
+      include: "scope"
