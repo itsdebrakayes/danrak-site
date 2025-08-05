@@ -82,15 +82,15 @@ const HeroSection = () => {
 
       {/* === Foreground Logo === */}
       <div
-          ref={imageRef}
-          className="relative z-20 flex flex-col items-center justify-center pt-10 translate-y-28"
+        ref={imageRef}
+        className="relative z-20 flex flex-col items-center justify-center pt-10 mt-[180px]"
       >
         <img
           src={danrakLogoFull}
           alt="Danrak Productions Logo"
-          className="w-[80%] max-w-5xl object-contain mx-auto"
+          className="w-[95%] max-w-5xl object-contain mx-auto"
           style={{
-            filter: 'drop-shadow(0 10px 25px rgba(0,0,0,0.4))'
+        filter: 'drop-shadow(0 10px 25px rgba(0,0,0,0.4))'
           }}
         />
       </div>
