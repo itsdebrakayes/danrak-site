@@ -73,15 +73,15 @@ const HeroSection = () => {
         {/* Logo Overlay - Text & Icon */}
         <div
           ref={titleRef}
-          className="absolute z-20 flex flex-col items-center justify-center text-center space-y-4"
-          style={{ bottom: '5rem' }}
+          className="absolute z-20 flex flex-col items-center justify-center text-center space-y-2"
+          style={{ bottom: '6rem' }}
         >
-          {/* Logo Text */}
-          <div className="flex items-center gap-4">
+          {/* Icon + DANRAK */}
+          <div className="flex items-center gap-6">
             <img
               src={logoIcon}
               alt="Logo Icon"
-              className="w-[6rem] sm:w-[6.5rem] md:w-[7rem] lg:w-[7.5rem] drop-shadow-xl"
+              className="w-[8rem] sm:w-[10rem] md:w-[12rem] lg:w-[14rem] drop-shadow-xl"
               style={{ filter: 'drop-shadow(0 2px 12px rgba(0,0,0,0.25))' }}
             />
             <h1
@@ -95,8 +95,9 @@ const HeroSection = () => {
             </h1>
           </div>
 
+          {/* PRODUCTIONS */}
           <h2
-            className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] uppercase tracking-[0.35em] font-medium -mt-3"
+            className="text-[1.75rem] sm:text-[2.25rem] md:text-[2.75rem] uppercase tracking-[0.35em] font-medium"
             style={{
               fontFamily: `'Poppins', sans-serif`,
               color: '#bf0052',
@@ -105,9 +106,10 @@ const HeroSection = () => {
             PRODUCTIONS
           </h2>
 
+          {/* Slogan */}
           <p
             ref={subtitleRef}
-            className="text-sm sm:text-base italic font-light -mt-2"
+            className="text-sm sm:text-base italic font-light"
             style={{
               color: '#44bae9',
             }}
@@ -115,8 +117,6 @@ const HeroSection = () => {
             Communicating More<sup>™</sup>
           </p>
         </div>
-
-
         {/* Buttons */}
         <div className="absolute bottom-12 z-30 flex flex-col sm:flex-row gap-6 justify-center">
           <Link to="/showcase">
