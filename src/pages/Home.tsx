@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import heroPortrait from '@/assets/hero-portrait.png';
-import logoPart from '@/assets/logo-icon.png'; // <-- update this to the real path
+import logoPart from '@/assets/logo-part.png'; // <-- update this to the real path
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
