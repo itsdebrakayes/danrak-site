@@ -1,150 +1,115 @@
-## 🌟 DanraK Productions Website — Full Vision Overview
+# Danrak Productions – Official Website
 
-### 🎬 **Purpose:**
-
-The website showcases the creative work and services of **DanraK Productions**, run by your mom. It’s built with a **cinematic, Apple-style aesthetic** to reflect a high-end production company with flair, elegance, and visual impact.
+Welcome to the official codebase for the **Danrak Productions** website — a bold, cinematic, and interactive online presence built to showcase the creative brilliance of Danrak’s founder and work. This site blends modern design with smooth animations to deliver a premium first impression that reflects the company's tagline: _"Communicating More™"_.
 
 ---
 
-## 🧭 Structure & Navigation
+## 🔥 Key Features
 
-### 🧩 **Website Sections (in scroll order):**
+- 🎬 **Immersive Hero Section**  
+  A full-screen cinematic introduction featuring:
+  - Backlit hero portrait with dynamic radial glow
+  - Animated brand logo layered above the portrait
+  - Scroll-based entrance effects using GSAP
+  - On-brand visual storytelling
 
-1. **Hero / Landing Page**
-2. **About Section**
-3. **Showcase Section**
-4. **Contact Section**
+- 💡 **Cinematic Brand Identity**  
+  - Text overlays mimic modern film title sequences  
+  - Animated burst glow highlights the Danrak 'X' logo  
+  - Typography and layout echo the professionalism of the brand
 
-Each section:
+- 🌘 **Dark/Light Mode Toggle**  
+  Visitors can switch between light and dark mode for comfort and personalization.
 
-* Occupies **100% of the viewport height**.
-* Has **smooth scroll snapping** and transitions.
-* Uses **GSAP animations** for immersive entrance effects.
-* Features a **section glow** effect when scrolled to (color-coded).
+- 📱 **Fully Responsive Design**  
+  Optimized across mobile, tablet, and desktop with careful attention to spacing and scale at every breakpoint.
 
----
+- 📎 **Simple Navigation**  
+  A sticky navigation bar with smooth anchor scrolling to guide users through the site.
 
-## 🖼️ 1. **Hero Section** – *“The Cinematic Entrance”*
+- 📞 **Call-to-Action Driven**  
+  Strategically placed buttons for “Explore Our Work” and “Start Your Project” funnel visitors toward engagement.
 
-**Inspiration**: Apple product pages + dynamic 3D hero effects.
-
-### 💡 Design:
-
-* **Centered composition**: Your mother’s **portrait image** appears slightly **to the right**.
-* On the **left side**, the **DanraK Productions logo or name** is displayed boldly.
-* A **burst of business brand colors** radiates behind her (colors: `#2d9ed4`, `#bf0052`, `#44bae9`, `#80c257`, `#a2d180`).
-* Her image appears to **emerge from the screen**, giving a 3D depth feel, as if she’s stepping forward into the spotlight.
-
-### 🌈 Light/Dark Mode:
-
-* In **dark mode**, the background is deep black with luminous neon accents.
-* In **light mode**, the design switches to crisp white backgrounds with black text and softened highlight bursts.
+- 🪄 **Floating Visual Effects**  
+  Softly animated colored orbs subtly float in the background, adding depth without distraction.
 
 ---
 
-## 👤 2. **About Section** – *“The Story Behind the Production”*
+## 🎨 Tech & Design Stack
 
-### 💡 Design:
-
-* Minimalist and elegant.
-* Her image shifts from the hero section to a **new pose** or layout (like a cinematic scene change).
-* Includes:
-
-  * A short bio.
-  * The mission or vision of DanraK Productions.
-  * Brief highlight of services.
-
-### 🌀 Animation:
-
-* GSAP entrance effects animate the section in as the user scrolls.
-* Slight background movement (parallax or fade-in) to enhance visual flow.
+| Tool / Library      | Purpose                                 |
+|---------------------|------------------------------------------|
+| **React**           | JavaScript library for UI components     |
+| **TypeScript**      | Strongly typed JavaScript for safety     |
+| **Tailwind CSS**    | Utility-first CSS for responsive design  |
+| **GSAP**            | Animation framework powering transitions |
+| **React Router**    | Page navigation and internal linking     |
+| **Custom Assets**   | Hero portrait, logos, and brand visuals  |
 
 ---
 
-## 🎥 3. **Showcase Section** – *“Where Past Events Come to Life”*
+## 📁 Project Structure Overview
 
-**Inspiration**: The video you shared of the scrolling events showcase (exact replica requested).
+src/
+├── assets/ # Hero images, logos, backgrounds
 
-### 💡 Design:
+├── components/
 
-* **Horizontally scrollable section** where events flow from **right to left**.
-* **Start centered** on the most current event.
-* Each event has:
+│ ├── ui/ # Reusable UI elements like buttons
 
-  * A **rounded-rectangle thumbnail** (not circular).
-  * Thumbnail floats in front of a **fullscreen background** version of that same image.
-* When a thumbnail is **clicked**:
+│ ├── ThemeToggle.tsx # Dark/light mode switch
 
-  * It **expands** to show a short write-up and a **“Read Full Article”** button that links to the full event page.
+│ └── sections/
 
-### 🌀 Animation:
+│ ├── Header.tsx # Navigation bar
 
-* GSAP-powered **entrance animations** on each thumbnail.
-* Smooth scroll with snappy transitions and fade effects.
-* Background dynamically updates as the user scrolls horizontally.
+│ ├── Footer.tsx # Footer with social links
 
----
+│ └── Hero.tsx # Main hero section with animations
 
-## 📬 4. **Contact Section** – *“Get in Touch”*
+├── pages/
 
-### 💡 Design:
+│ └── Home.tsx # Homepage layout and structure
 
-* A **modern, glowing form** over a blurred gradient background (uses your brand colors).
-* Form fields:
+├── App.tsx # Entry point for routing
 
-  * Name
-  * Email
-  * Message
-* Styled with **frosted glass effect** (`backdrop-blur`), elegant spacing, and soft shadows.
-* Below the form: **clickable social icons** (Instagram, LinkedIn, YouTube).
+└── main.tsx # Vite + React DOM entry
+
 
 ---
 
-## 🧭 Floating Footer Nav – *“Elegant Navigation”*
+## 📸 Branding Guidelines
 
-**Inspiration**: iPhone swipe-up handle + interactive section marker.
-
-### 💡 Design:
-
-* A **floating, oval-shaped transparent nav bar** fixed slightly above the screen bottom.
-* Contains **four colored bars**, each representing one section:
-
-  * Hero: `#2d9ed4`
-  * About: `#bf0052`
-  * Showcase: `#44bae9`
-  * Contact: `#80c257` (or black/white depending on mode)
-* Bars are **long and thin**, like the iPhone home indicator.
-
-### 🔄 Functionality:
-
-* Clicking a nav bar:
-
-  * Scrolls smoothly to its section.
-  * Triggers a **soft neon glow** around that section (matching its color).
-* On **hover**, the nav bar reveals a **tooltip name** of the section.
+- The **Danrak Productions** logo is integrated inline with the wordmark and should never be separated or stacked.
+- Color usage across the site is inspired directly by the official palette:
+  - `#2d9ed4` (Danrak Blue)
+  - `#bf0052` (Magenta)
+  - `#44bae9` (Light Blue)
+  - `#80c257` (Bright Green)
+  - `#a2d180` (Muted Green)
 
 ---
 
-## 🌗 Theme Switching – *“Light & Dark Personality”*
+## 🚀 Deployment
 
-### 💡 Design:
+This website is hosted via **WordPress with a custom domain**, utilizing either:
+- Embedded React frontend
+- Static React build hosted on a subdomain with WordPress as a CMS/backend
 
-* A **sun/moon toggle button** floats in the top-right corner.
-* On click:
-
-  * Light mode = sun icon → bright white background, black text.
-  * Dark mode = moon icon → deep black background, white text.
-* Glow and nav colors adapt to the current theme.
+If deploying a static version, ensure assets are optimized and hosted via CDN or external storage.
 
 ---
 
-## 🧰 Tech Stack Summary
+## 👩🏽‍💻 Created By
 
-| Technology           | Purpose                                        |
-| -------------------- | ---------------------------------------------- |
-| **React**            | Frontend UI library                            |
-| **GSAP**             | Advanced scroll + animation handling           |
-| **Tailwind CSS**     | Utility-first styling + responsive layout      |
-| **React Router**     | Handles page links (e.g., full event articles) |
-| **React Icons**      | Sun/Moon toggle, social icons                  |
-| **Create React App** | Base framework                                 |
+**Debra-Kaye Smith**  
+Frontend Developer & Creative Lead  
+_Deputy Chairperson, CEAC @ UWI Mona | Tech Entrepreneur_
+Contact: debrakayesam@gmail.com or (876)572-3625
+
+---
+
+## 📄 License
+
+All branding assets, content, and source code are the intellectual property of **Danrak Productions**. Redistribution or reuse is prohibited without explicit permission.
+
