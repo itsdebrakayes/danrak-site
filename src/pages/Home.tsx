@@ -1,13 +1,16 @@
+import ThemeToggle from '@/components/ThemeToggle';
+import Header from '@/components/sections/Header';
+import Footer from '@/components/sections/Footer';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import heroPortrait from '@/assets/hero-portrait.png';
-import logoPart from '@/assets/logo-part.png'; // <-- update this to the real path
+import logoIcon from '@/assets/logo-part.png'; // this should be the green-blue "X"
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const burstRef = useRef<HTMLDivElement>(null);
@@ -28,14 +31,14 @@ const HeroSection = () => {
       )
       .fromTo(
         titleRef.current,
-        { x: -100, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.8, ease: 'power2.out' },
+        { y: 100, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: 'power2.out' },
         '-=0.6'
       )
       .fromTo(
         subtitleRef.current,
-        { x: -50, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out' },
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' },
         '-=0.4'
       );
 
@@ -55,37 +58,45 @@ const HeroSection = () => {
           <div className="w-[600px] h-[600px] rounded-full bg-gradient-to-br from-brand-ocean via-brand-sky to-brand-crimson opacity-60 blur-3xl" />
         </div>
 
-        {/* Image */}
+        {/* Hero Image */}
         <div ref={imageRef} className="relative opacity-0 z-10">
           <img
             src={heroPortrait}
             alt="Danrak Portrait"
-            className="h-[80vh] w-auto max-w-none object-contain mx-auto"
-            style={{ filter: 'drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3))' }}
+            className="h-[90vh] w-auto object-contain mx-auto"
+            style={{
+              filter: 'drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3))',
+            }}
           />
         </div>
 
-        {/* Logo Text Section */}
-        <div className="flex flex-col items-center justify-center space-y-6 text-center mt-12">
-          <img
-            src={logoPart}
-            alt="Danrak Icon"
-            className="w-24 sm:w-28 md:w-32 mb-4"
-          />
-
-          <h1
-            ref={titleRef}
-            className="text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] font-bold leading-none tracking-tight"
-            style={{
-              fontFamily: `'Poppins', sans-serif`,
-              color: '#bf0052',
-            }}
-          >
-            DANRAK
-          </h1>
+        {/* Logo Overlay - Text & Icon */}
+        <div
+          ref={titleRef}
+          className="absolute z-20 flex flex-col items-center justify-center text-center space-y-4"
+          style={{ bottom: '5rem' }}
+        >
+          {/* Logo Text */}
+          <div className="flex items-center gap-4">
+            <img
+              src={logoIcon}
+              alt="Logo Icon"
+              className="w-[3.5rem] sm:w-[4.5rem] md:w-[5rem] lg:w-[5.5rem] drop-shadow-xl"
+              style={{ filter: 'drop-shadow(0 2px 12px rgba(0,0,0,0.25))' }}
+            />
+            <h1
+              className="text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] font-extrabold tracking-tight"
+              style={{
+                fontFamily: `'Poppins', sans-serif`,
+                color: '#bf0052',
+              }}
+            >
+              DANRAK
+            </h1>
+          </div>
 
           <h2
-            className="text-[1.25rem] sm:text-[1.75rem] md:text-[2rem] uppercase tracking-[0.4em] font-medium"
+            className="text-lg sm:text-xl md:text-2xl uppercase tracking-[0.4em] font-medium"
             style={{
               fontFamily: `'Poppins', sans-serif`,
               color: '#bf0052',
@@ -96,7 +107,7 @@ const HeroSection = () => {
 
           <p
             ref={subtitleRef}
-            className="text-sm sm:text-base italic font-light mt-4"
+            className="text-sm sm:text-base italic font-light"
             style={{
               color: '#44bae9',
             }}
@@ -106,7 +117,7 @@ const HeroSection = () => {
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center mt-10">
+        <div className="absolute bottom-12 z-30 flex flex-col sm:flex-row gap-6 justify-center">
           <Link to="/showcase">
             <Button
               size="lg"
@@ -140,7 +151,7 @@ const HeroSection = () => {
 
       {/* Scroll Indicator */}
       <div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 animate-fade-in-up"
+        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 animate-fade-in-up"
         style={{ animationDelay: '2.5s', animationFillMode: 'forwards' }}
       >
         <div className="flex flex-col items-center gap-2 text-muted-foreground">
@@ -152,4 +163,13 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+const Home = () => (
+  <div className="relative min-h-screen overflow-hidden">
+    <ThemeToggle />
+    <Header />
+    <HeroSection />
+    <Footer />
+  </div>
+);
+
+export default Home;
