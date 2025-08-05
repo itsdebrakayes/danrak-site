@@ -49,18 +49,30 @@ Welcome to the official codebase for the **Danrak Productions** website — a bo
 ---
 
 ## 📁 Project Structure Overview
+
 src/
 ├── assets/ # Hero images, logos, backgrounds
+
 ├── components/
+
 │ ├── ui/ # Reusable UI elements like buttons
+
 │ ├── ThemeToggle.tsx # Dark/light mode switch
+
 │ └── sections/
+
 │ ├── Header.tsx # Navigation bar
+
 │ ├── Footer.tsx # Footer with social links
+
 │ └── Hero.tsx # Main hero section with animations
+
 ├── pages/
+
 │ └── Home.tsx # Homepage layout and structure
+
 ├── App.tsx # Entry point for routing
+
 └── main.tsx # Vite + React DOM entry
 
 
@@ -94,6 +106,7 @@ If deploying a static version, ensure assets are optimized and hosted via CDN or
 Frontend Developer & Creative Lead  
 _Deputy Chairperson, CEAC @ UWI Mona | Tech Entrepreneur_
 Contact: debrakayesam@gmail.com or (876)572-3625
+
 ---
 
 ## 📄 License
