@@ -81,11 +81,11 @@ const HeroSection = () => {
             <img
               src={logoIcon}
               alt="Logo Icon"
-              className="w-[3.5rem] sm:w-[4.5rem] md:w-[5rem] lg:w-[5.5rem] drop-shadow-xl"
+              className="w-[6rem] sm:w-[6.5rem] md:w-[7rem] lg:w-[7.5rem] drop-shadow-xl"
               style={{ filter: 'drop-shadow(0 2px 12px rgba(0,0,0,0.25))' }}
             />
             <h1
-              className="text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] font-extrabold tracking-tight"
+              className="text-[3.5rem] sm:text-[5.5rem] md:text-[7rem] lg:text-[8rem] font-extrabold tracking-tight"
               style={{
                 fontFamily: `'Poppins', sans-serif`,
                 color: '#bf0052',
@@ -96,7 +96,7 @@ const HeroSection = () => {
           </div>
 
           <h2
-            className="text-lg sm:text-xl md:text-2xl uppercase tracking-[0.4em] font-medium"
+            className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] uppercase tracking-[0.35em] font-medium -mt-3"
             style={{
               fontFamily: `'Poppins', sans-serif`,
               color: '#bf0052',
@@ -107,7 +107,7 @@ const HeroSection = () => {
 
           <p
             ref={subtitleRef}
-            className="text-sm sm:text-base italic font-light"
+            className="text-sm sm:text-base italic font-light -mt-2"
             style={{
               color: '#44bae9',
             }}
@@ -115,6 +115,7 @@ const HeroSection = () => {
             Communicating More<sup>™</sup>
           </p>
         </div>
+
 
         {/* Buttons */}
         <div className="absolute bottom-12 z-30 flex flex-col sm:flex-row gap-6 justify-center">
