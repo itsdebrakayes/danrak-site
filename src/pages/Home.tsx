@@ -59,42 +59,53 @@ const HeroSection = () => {
 
         {/* Image */}
         <div ref={imageRef} className="relative opacity-0 z-10">
-          <img
+         <img
             src={heroPortrait}
             alt="Danrak Portrait"
-            className="w-[320px] sm:w-[420px] md:w-[480px] xl:w-[520px] max-h-[75vh] object-contain mx-auto"
+            className="h-[80vh] w-auto max-w-none object-contain mx-auto"
             style={{ filter: 'drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3))' }}
           />
         </div>
 
         {/* Title & Subtitle Overlapping */}
-        <div
-          className="absolute left-1/2 transform -translate-x-1/2 text-center space-y-8 z-20"
-          style={{ bottom: '6rem' }}
-        >
-          <div ref={titleRef} className="opacity-0 space-y-3">
+        <div className="flex flex-col items-center justify-center space-y-6 text-center mt-12">
+            {/* X Icon */}
+            <img
+              src= {logo-part}
+              alt="Danrak Icon"
+              className="w-24 sm:w-28 md:w-32 mb-4"
+            />
+
+            {/* DANRAK */}
             <h1
-              className="text-[5rem] sm:text-[6rem] md:text-[7rem] lg:text-[8.5rem] leading-none tracking-tight"
+              className="text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] font-bold leading-none tracking-tight"
               style={{
-                fontFamily: `'DM Serif Display', serif`,
-                background:
-                  'linear-gradient(135deg, #2d9ed4, #bf0052, #44bae9, #80c257, #a2d180)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                filter: 'drop-shadow(0 8px 32px rgba(0,0,0,0.25))',
+                fontFamily: `'Poppins', sans-serif`,
+                color: '#bf0052',
               }}
             >
               DANRAK
             </h1>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-[0.05em] text-black dark:text-white mt-2">
+
+            {/* PRODUCTIONS */}
+            <h2
+              className="text-[1.25rem] sm:text-[1.75rem] md:text-[2rem] uppercase tracking-[0.4em] font-medium"
+              style={{
+                fontFamily: `'Poppins', sans-serif`,
+                color: '#bf0052',
+              }}
+            >
               PRODUCTIONS
             </h2>
-          </div>
 
-          <div ref={subtitleRef} className="opacity-0">
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed">
-              Cinematic experiences that transcend the ordinary
+            {/* Slogan */}
+            <p
+              className="text-sm sm:text-base italic font-light mt-4"
+              style={{
+                color: '#44bae9',
+              }}
+            >
+              Communicating More<sup>™</sup>
             </p>
           </div>
 
