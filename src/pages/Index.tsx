@@ -14,12 +14,22 @@ const Index = () => (
     direction="horizontal"
     slidesPerView={1}
     spaceBetween={0}
-    mousewheel
-    keyboard
+    mousewheel={{
+      forceToAxis: true,
+      sensitivity: 1,
+      releaseOnEdges: true,
+    }}
+    keyboard={{
+      enabled: true,
+      onlyInViewport: true,
+    }}
     pagination={{ clickable: true }}
     navigation
     modules={[Navigation, Pagination, Mousewheel, Keyboard]}
     className="h-screen w-screen"
+    allowTouchMove={true}
+    simulateTouch={true}
+    touchStartPreventDefault={false}
   >
     <SwiperSlide>
       <Home />
