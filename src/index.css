@@ -135,27 +135,101 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply bg-background text-foreground;
     background: hsl(var(--background));
-    scroll-behavior: smooth;
   }
 
-  html {
-    scroll-snap-type: y mandatory;
-  }
-
-  /* Ensure sections are visible */
+  /* Ensure sections are visible and scrollable */
   section {
     position: relative;
     z-index: 1;
+  }
+
+  /* Root container fixes */
+  #root {
+    min-height: 100vh;
   }
 }
 
 @layer components {
   /* Section Styling */
   .section {
-    @apply min-h-screen flex items-center justify-center relative;
-    scroll-snap-align: start;
+    @apply min-h-screen relative;
+  }
+
+  .about-section {
+    min-height: calc(200vh);
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Swiper slide content scrolling */
+  .swiper-slide {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: 100vh !important;
+  }
+
+  .swiper-wrapper {
+    height: 100vh !important;
+  }
+
+  .swiper {
+    height: 100vh !important;
+  }
+
+  /* Ensure About page content can scroll */
+  .swiper-slide:has(.about-section) {
+    overflow-y: scroll !important;
+  }
+
+  /* Alternative selector for About content */
+  .swiper-slide > div:has(#about) {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Swiper navigation fixes */
+  .swiper-button-next,
+  .swiper-button-prev {
+    z-index: 50 !important;
+    color: hsl(var(--brand-crimson)) !important;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+
+  .swiper-button-next:hover,
+  .swiper-button-prev:hover {
+    opacity: 1;
+  }
+
+  /* Ensure Swiper navigation doesn't fall off on About page */
+  .swiper-button-next {
+    right: 20px !important;
+    left: auto !important;
+  }
+
+  .swiper-button-prev {
+    left: 20px !important;
+    right: auto !important;
+  }
+
+  /* Swiper pagination positioning */
+  .swiper-pagination {
+    z-index: 50 !important;
+    bottom: 20px !important;
+  }
+
+  .swiper-pagination-bullet {
+    background: hsl(var(--brand-ocean)) !important;
+    opacity: 0.6;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: hsl(var(--brand-crimson)) !important;
+    opacity: 1;
   }
 
   .section-glow {
@@ -218,5 +292,29 @@ All colors MUST be HSL.
   background-clip: text;
   filter: drop-shadow(0 8px 32px hsl(var(--brand-ocean) / 0.3));
 }
+
+  /* About page specific styles */
+  .about-image {
+    height: 150vh;
+    width: auto;
+    object-fit: contain;
+    margin-top: -160px;
+    margin-right: -200px;
+    transform: translateX(150px);
+    filter: drop-shadow(0 0 30px hsl(var(--brand-crimson) / 0.2));
+  }
+
+  .about-image-container {
+    position: absolute;
+    top: 0;
+    right: -200px;
+    bottom: 0;
+    width: 70%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    z-index: 2;
+    pointer-events: none;
+  }
 
 }
