@@ -112,7 +112,7 @@ const Showcase = () => {
       {/* Content */}
       <div className="relative z-10 h-full flex">
         {/* Left Side - Featured Project Details */}
-        <div className="w-3/5 p-12 flex flex-col justify-center text-white">
+        <div className="w-1/2 p-12 flex flex-col justify-center text-white">
           <motion.div
             key={activeProject.id}
             initial={{ opacity: 0, x: -50 }}
@@ -141,8 +141,8 @@ const Showcase = () => {
         </div>
 
         {/* Right Side - Upcoming Projects Carousel */}
-        <div className="w-2/5 flex items-center justify-center p-8">
-          <div className="w-full max-w-2xl">
+        <div className="w-1/2 flex items-center justify-center p-8">
+          <div className="w-full">
             <motion.h2 
               className="text-xl font-bold text-white mb-8 text-center"
               initial={{ opacity: 0, y: -20 }}
@@ -153,13 +153,13 @@ const Showcase = () => {
             </motion.h2>
             
             {/* Horizontal Card Container */}
-            <div className="flex gap-6 justify-center items-center">
+            <div className="flex gap-6 justify-center items-center overflow-visible">
               {displayedProjects.map((project, index) => {
                 const isVisible = visibleSlides.includes(index);
                 return (
                   <motion.div
                     key={`${project.id}-${currentIndex}-${index}`} // Force re-render on project change
-                    className="relative bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl border border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer w-64 h-80"
+                    className="relative bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl border border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer w-[700px] h-[450px]"
                     initial={{ 
                       opacity: 0, 
                       scale: 0.9, 
