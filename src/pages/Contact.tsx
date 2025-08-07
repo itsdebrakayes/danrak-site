@@ -80,7 +80,7 @@ const ContactSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="contact" className="section relative overflow-hidden min-h-screen">
+    <section ref={sectionRef} id="contact" className="relative py-20 pb-32">
       <div
         className="absolute inset-0"
         style={{
@@ -93,7 +93,7 @@ const ContactSection = () => {
 
       <div className="section-glow" />
 
-      <div className="relative z-10 container mx-auto px-6 py-20">
+      <div className="relative z-10 container mx-auto px-6 py-20 pb-32">
         <div className="text-center mb-16">
           <h2 className="contact-title text-5xl md:text-6xl font-black text-brand-forest mb-4">
             Get in Touch
@@ -179,7 +179,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <div className="font-semibold">Email</div>
-                    <div className="text-muted-foreground">hello@danrakproductions.com</div>
+                    <div className="text-muted-foreground">danrakproductions@gmail.com</div>
                   </div>
                 </div>
 
@@ -189,7 +189,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <div className="font-semibold">Phone</div>
-                    <div className="text-muted-foreground">+1 (555) 123-4567</div>
+                    <div className="text-muted-foreground">(876) 564-7057</div>
                   </div>
                 </div>
               </div>
@@ -239,10 +239,12 @@ const ContactSection = () => {
 };
 
 const Contact = () => (
-  <div className="relative min-h-screen overflow-hidden">
+  <div className="min-h-screen bg-background">
     <Header />
-    <ContactSection />
-    <Footer />
+    <main className="w-full">
+      <ContactSection />
+    </main>
+    <Footer variant="static" />
   </div>
 );
 
