@@ -191,6 +191,41 @@ All colors MUST be HSL.
     overflow-x: hidden;
   }
 
+  /* Showcase page specific styles */
+  .project-carousel {
+    height: 400px !important;
+  }
+
+  .project-carousel .swiper-slide {
+    height: auto !important;
+    overflow: visible !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .project-carousel .swiper-slide-active {
+    transform: scale(1.1) !important;
+    z-index: 10 !important;
+  }
+
+  .project-carousel .swiper-slide:not(.swiper-slide-active) {
+    transform: scale(0.9) !important;
+    opacity: 0.7 !important;
+  }
+
+  /* Enhanced navigation visibility */
+  header nav {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  header nav a {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  header nav a.active {
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.3);
+  }
+
   /* Swiper navigation fixes */
   .swiper-button-next,
   .swiper-button-prev {
@@ -262,8 +297,10 @@ All colors MUST be HSL.
 
   /* Theme Toggle */
   .theme-toggle {
-    @apply fixed top-6 right-6 z-50 p-3 rounded-full;
+    @apply fixed top-6 right-6 z-[60] p-3 rounded-full;
     @apply glass hover:scale-110 transition-transform duration-300;
+    pointer-events: auto;
+    cursor: pointer;
   }
 
   /* Scrollbar Hide */

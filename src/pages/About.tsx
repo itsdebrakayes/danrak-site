@@ -1,4 +1,3 @@
-import ThemeToggle from '@/components/ThemeToggle';
 import Header from '@/components/sections/Header';
 import Footer from '@/components/sections/Footer';
 import { useEffect, useRef } from 'react';
@@ -220,7 +219,6 @@ const StatBlock = ({ number, label, color }: { number: string; label: string; co
 
 const About = () => (
   <div className="relative">
-    <ThemeToggle />
     <Header />
     <AboutSection />
     <Footer />

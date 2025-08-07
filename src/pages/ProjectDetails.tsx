@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { projects } from "../data/projects";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import ThemeToggle from "@/components/ThemeToggle";
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -25,11 +24,6 @@ const ProjectDetails = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <div className="fixed top-6 left-6 z-50">
-        <ThemeToggle />
-      </div>
-
       <div className="container mx-auto px-6 py-20">
         {/* Back Button */}
         <motion.div

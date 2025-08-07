@@ -1,4 +1,3 @@
-import ThemeToggle from '@/components/ThemeToggle';
 import Header from '@/components/sections/Header';
 import Footer from '@/components/sections/Footer';
 import { useState, useEffect, useRef } from 'react';
@@ -241,7 +240,6 @@ const ContactSection = () => {
 
 const Contact = () => (
   <div className="relative min-h-screen overflow-hidden">
-    <ThemeToggle />
     <Header />
     <ContactSection />
     <Footer />

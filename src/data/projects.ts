@@ -74,5 +74,70 @@ export const projects: Project[] = [
     ],
     category: "Education",
     date: "2024"
+  },
+  {
+    id: "creative-summit",
+    title: "Creative Summit",
+    image: "/src/assets/showcase-2.jpg",
+    excerpt: "Design conference branding",
+    fullText: "Creative Summit brought together designers, artists, and innovators from across the Caribbean. Our comprehensive branding approach created a unified visual identity that celebrated creativity while maintaining professional appeal for industry leaders.",
+    gallery: [
+      "/src/assets/showcase-2.jpg",
+      "/src/assets/showcase-3.jpg"
+    ],
+    category: "Conference",
+    date: "2024"
+  },
+  {
+    id: "urban-renewal",
+    title: "Urban Renewal Project",
+    image: "/src/assets/showcase-3.jpg",
+    excerpt: "Community transformation",
+    fullText: "The Urban Renewal Project focused on revitalizing downtown areas through strategic design interventions. This comprehensive initiative included wayfinding systems, public art installations, and community engagement platforms.",
+    gallery: [
+      "/src/assets/showcase-3.jpg",
+      "/src/assets/showcase-4.jpg"
+    ],
+    category: "Urban Design",
+    date: "2024"
+  },
+  {
+    id: "digital-wellness",
+    title: "Digital Wellness Initiative",
+    image: "/src/assets/showcase-4.jpg",
+    excerpt: "Health tech branding",
+    fullText: "Digital Wellness Initiative combined healthcare expertise with cutting-edge technology to create accessible wellness solutions. The branding emphasized trust, innovation, and human-centered design principles.",
+    gallery: [
+      "/src/assets/showcase-4.jpg",
+      "/src/assets/showcase-1.jpg"
+    ],
+    category: "Healthcare",
+    date: "2024"
+  },
+  {
+    id: "eco-innovation",
+    title: "Eco Innovation Hub",
+    image: "/src/assets/showcase-1.jpg",
+    excerpt: "Sustainable design showcase",
+    fullText: "Eco Innovation Hub demonstrates how sustainable practices can be integrated into modern design workflows. This project showcased environmental responsibility while maintaining high aesthetic standards and functional excellence.",
+    gallery: [
+      "/src/assets/showcase-1.jpg",
+      "/src/assets/showcase-2.jpg"
+    ],
+    category: "Sustainability",
+    date: "2024"
+  },
+  {
+    id: "global-connect",
+    title: "Global Connect Platform",
+    image: "/src/assets/showcase-2.jpg",
+    excerpt: "International collaboration",
+    fullText: "Global Connect Platform facilitated international partnerships and cultural exchange through thoughtful design systems. The project emphasized accessibility, inclusivity, and cross-cultural communication in its visual approach.",
+    gallery: [
+      "/src/assets/showcase-2.jpg",
+      "/src/assets/showcase-3.jpg"
+    ],
+    category: "Platform Design",
+    date: "2024"
   }
 ];
