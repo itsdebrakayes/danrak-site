@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const navItems = [
   { label: 'Home', path: '/home' },
@@ -13,6 +13,7 @@ interface HeaderProps {
 
 const Header = ({ variant = 'glass' }: HeaderProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navStyles = variant === 'glass' 
     ? "bg-white/10 dark:bg-black/10 backdrop-blur-lg shadow-xl px-8 py-3 rounded-full flex gap-4 text-sm font-semibold text-foreground dark:text-white transition-all"
@@ -22,7 +23,7 @@ const Header = ({ variant = 'glass' }: HeaderProps) => {
     if (variant === 'glass') {
       return `text-sm font-medium px-4 py-2 rounded-full transition-all duration-300 ${
         isActive 
-          ? 'text-brand-crimson font-semibold' 
+          ? 'bg-white/20 backdrop-blur-sm shadow-md border border-white/30' 
           : 'hover:bg-white/20 hover:border-2 hover:border-white/60 hover:shadow-lg'
       }`;
     } else {
@@ -38,13 +39,13 @@ const Header = ({ variant = 'glass' }: HeaderProps) => {
     <header className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
       <nav className={navStyles}>
         {navItems.map((item) => (
-          <Link
+          <button
             key={item.path}
-            to={item.path}
+            onClick={() => navigate(item.path)}
             className={linkStyles(location.pathname === item.path)}
           >
             {item.label}
-          </Link>
+          </button>
         ))}
       </nav>
     </header>
