@@ -1,4 +1,3 @@
-import ThemeToggle from '@/components/ThemeToggle';
 import Header from '@/components/sections/Header';
 import Footer from '@/components/sections/Footer';
 import { useEffect, useRef } from 'react';
@@ -131,7 +130,6 @@ const HeroSection = () => {
 
 const Home = () => (
   <div className="relative min-h-screen overflow-hidden">
-    <ThemeToggle />
     <Header />
     <HeroSection />
     <Footer />

@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { projects } from "../data/projects";
 import { Button } from "@/components/ui/button";
-import ThemeToggle from "@/components/ThemeToggle";
 import Header from '@/components/sections/Header';
 import Footer from '@/components/sections/Footer';
 import "swiper/css";
@@ -13,13 +12,13 @@ const Showcase = () => {
   const [activeProject, setActiveProject] = useState(projects[0]);
 
   const handleSlideChange = (swiper: any) => {
-    const activeIndex = swiper.activeIndex;
+    const activeIndex = swiper.realIndex; // Use realIndex for looped slides
     setActiveProject(projects[activeIndex]);
   };
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
-      <Header />
+      <Header variant="solid" />
       {/* Dynamic Background */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -39,11 +38,6 @@ const Showcase = () => {
 
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/60 z-[1]" />
-
-      {/* Navigation */}
-      <div className="absolute top-6 left-6 z-50">
-        <ThemeToggle />
-      </div>
 
       {/* Content */}
       <div className="relative z-10 h-full flex">
@@ -88,6 +82,11 @@ const Showcase = () => {
               centeredSlides={true}
               loop={true}
               onSlideChange={handleSlideChange}
+              onSwiper={(swiper) => {
+                // Initialize with the center slide
+                const centerIndex = swiper.realIndex;
+                setActiveProject(projects[centerIndex]);
+              }}
               className="project-carousel"
             >
               {projects.map((project) => (
