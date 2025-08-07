@@ -17,8 +17,9 @@ export const projects: Project[] = [
     excerpt: "Access Financial's 25th Anniversary Launch Event",
     fullText: "Accesss Financial's 25th Anniversary Launch Event was a celebration of their journey and achievements. The event featured a blend of traditional and modern design elements, reflecting the company's commitment to innovation while honoring its roots.",
     gallery: [
-      "/src/assets/access-launch-cover.jpg",
-      "/src/assets/honors-awards-cover.jpg"
+      "/src/assets/access-launch-content1.jpg",
+      "/src/assets/access-launch-content2.jpg",
+      "/src/assets/access-launch-content3.jpg"
     ],
     category: "Launch Event",
     date: "2025"
@@ -30,8 +31,9 @@ export const projects: Project[] = [
     excerpt: "Honors & Awards Ceremony",
     fullText: "The National Honors and Awards Ceremony, held every year to honor the achievements of individuals and organizations, was a significant event that required a sophisticated visual identity. The design focused on elegance and prestige, using gold accents and classic typography to convey the importance of the occasion.",
     gallery: [
-      "/src/assets/honors-awards-cover.jpg",
-      "/src/assets/port-authority-cover.jpeg"
+      "/src/assets/honors-awards-content1.jpg",
+      "/src/assets/honors-awards-content2.jpg",
+      "/src/assets/honors-awards-content3.jpg"
     ],
     category: "Awards Ceremony",
     date: "2024"
@@ -43,8 +45,9 @@ export const projects: Project[] = [
     excerpt: "Event Planning and Hosting",
     fullText: "Port Authority's groundbreaking ceremony with prestigious guests invited such as the Prime Minister of Jamaica and the Governor General, required a complete brand overhaul that captured the essence of Caribbean culture while appealing to a global audience. The project involved creating immersive experiences that celebrated local talent and international collaboration.",
     gallery: [
-      "/src/assets/port-authority-cover.jpeg",
-      "/src/assets/faith-moves-cover.jpg"
+      "/src/assets/port-authority-content1.jpeg",
+      "/src/assets/port-authority-content2.jpeg",
+      "/src/assets/port-authority-content3.jpeg"
     ],
     category: "Event Planning",
     date: "2025"
@@ -56,8 +59,10 @@ export const projects: Project[] = [
     excerpt: "Faith Movies Production",
     fullText: "Faith Movies, a new TV show sorrounded the success stories of business people across the island and their take on how faith brought them here.",
     gallery: [
-      "/src/assets/faith-moves-cover.jpg",
-      "/src/assets/access-launch-cover.jpg"
+      "/src/assets/faith-moves-content1.jpg",
+      "/src/assets/faith-moves-content2.jpg",
+      "/src/assets/faith-moves-content4.MOV",
+      "/src/assets/faith-moves-content5.MOV"
     ],
     category: "TV Show Production",
     date: "2025"
