@@ -74,9 +74,9 @@ const ContactSection = () => {
   };
 
   const socialLinks = [
-    { icon: BsInstagram, label: 'Instagram', href: '#', color: 'brand-crimson' },
-    { icon: BsLinkedin, label: 'LinkedIn', href: '#', color: 'brand-ocean' },
-    { icon: BsYoutube, label: 'YouTube', href: '#', color: 'brand-sky' }
+    { icon: BsInstagram, label: 'Instagram', href: 'https://www.instagram.com/danrakproductions?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', color: 'brand-crimson' },
+    { icon: BsLinkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/stacy-ann-williams-smith-039242b4/', color: 'brand-ocean' },
+    { icon: BsYoutube, label: 'YouTube', href: 'https://www.youtube.com/@danrakproductions2241', color: 'brand-sky' }
   ];
 
   return (

@@ -221,17 +221,26 @@ All colors MUST be HSL.
     opacity: 0.8 !important;
   }
 
-  /* Enhanced navigation visibility */
-  header nav {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  /* Force header visibility */
+  header {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 9999 !important;
+    position: fixed !important;
   }
 
-  header nav a {
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  /* Ensure Swiper doesn't interfere with header */
+  .swiper {
+    z-index: 1 !important;
   }
 
-  header nav a.active {
-    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.3);
+  .swiper-wrapper {
+    z-index: 1 !important;
+  }
+
+  .swiper-slide {
+    z-index: 1 !important;
   }
 
   /* Swiper navigation fixes */
