@@ -5,6 +5,7 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
 import { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useHeaderVisibility } from '@/hooks/use-header-visibility';
 
 import Home from './Home';
 import About from './About';
@@ -15,6 +16,9 @@ const Index = () => {
   const swiperRef = useRef<any>(null);
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Monitor header visibility
+  useHeaderVisibility();
 
   // Map paths to slide indices and vice versa
   const pathToSlide: { [key: string]: number } = {

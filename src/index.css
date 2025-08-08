@@ -221,13 +221,17 @@ All colors MUST be HSL.
     opacity: 0.8 !important;
   }
 
-  /* Force header visibility */
+  /* Clean header visibility - monitor compatible */
   header {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     z-index: 9999 !important;
     position: fixed !important;
+    top: 1.5rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    pointer-events: auto !important;
   }
 
   /* Ensure Swiper doesn't interfere with header */
