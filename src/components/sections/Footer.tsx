@@ -2,9 +2,9 @@ import { FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import logo from '@/assets/DanRak Prod Logo.png';
 
 const socials = [
-  { icon: <FaInstagram />, url: 'https://instagram.com' },
-  { icon: <FaLinkedin />, url: 'https://linkedin.com' },
-  { icon: <FaYoutube />, url: 'https://youtube.com' },
+  { icon: <FaInstagram />, url: 'https://instagram.com/danrakproductions?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==' },
+  { icon: <FaLinkedin />, url: 'https://www.linkedin.com/in/stacy-ann-williams-smith-039242b4/' },
+  { icon: <FaYoutube />, url: 'https://www.youtube.com/@danrakproductions2241' },
 ];
 
 interface FooterProps {

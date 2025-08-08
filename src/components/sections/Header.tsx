@@ -16,7 +16,7 @@ const Header = ({ variant = 'glass' }: HeaderProps) => {
   const navigate = useNavigate();
 
   const navStyles = variant === 'glass' 
-    ? "bg-white/10 dark:bg-black/10 backdrop-blur-lg shadow-xl px-8 py-3 rounded-full flex gap-4 text-sm font-semibold text-foreground dark:text-white transition-all"
+    ? "bg-white/5 dark:bg-black/5 backdrop-blur-lg shadow-xl px-8 py-3 rounded-full flex gap-4 text-sm font-semibold text-foreground dark:text-white transition-all"
     : "bg-black/30 backdrop-blur-md border border-white/20 rounded-full px-6 py-3 flex gap-2 shadow-2xl";
 
   const linkStyles = (isActive: boolean) => {
@@ -36,7 +36,7 @@ const Header = ({ variant = 'glass' }: HeaderProps) => {
   };
 
   return (
-    <header className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
+    <header className="fixed top-6 left-1/2 transform -translate-x-1/2 z-[9999]">
       <nav className={navStyles}>
         {navItems.map((item) => (
           <button
