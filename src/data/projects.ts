@@ -12,10 +12,10 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "access-fin",
-    title: "Access Financial 25th Aniversary Launch",
+    title: "Access Financial 25th Anniversary Launch",
     image: "/src/assets/access-launch-cover.jpg",
     excerpt: "Access Financial's 25th Anniversary Launch Event",
-    fullText: "Accesss Financial's 25th Anniversary Launch Event was a celebration of their journey and achievements. The event featured a blend of traditional and modern design elements, reflecting the company's commitment to innovation while honoring its roots.",
+    fullText: "Access Financial's 25th Anniversary Launch Event was a celebration of their journey and achievements. The event featured a blend of traditional and modern design elements, reflecting the company's commitment to innovation while honoring its roots.",
     gallery: [
       "/src/assets/access-launch-content1.jpg",
       "/src/assets/access-launch-content2.jpg",
@@ -57,7 +57,7 @@ export const projects: Project[] = [
     title: "Faith Moves",
     image: "/src/assets/faith-moves-cover.jpg",
     excerpt: "Faith Movies Production",
-    fullText: "Faith Movies, a new TV show sorrounded the success stories of business people across the island and their take on how faith brought them here.",
+    fullText: "Faith Movies, a new TV show surrounded the success stories of business people across the island and their take on how faith brought them here.",
     gallery: [
       "/src/assets/faith-moves-content1.jpg",
       "/src/assets/faith-moves-content2.jpg",
