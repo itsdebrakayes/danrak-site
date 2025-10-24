@@ -15,15 +15,15 @@ const Showcase = () => {
   const [displayedProjects, setDisplayedProjects] = useState(projects.slice(1, 4));
 
   const triggerCardAnimation = () => {
+    // lighter stagger to reduce perceived lag
     setVisibleSlides([]);
     setTimeout(() => {
-      // Show 3 upcoming slides with faster staggered animation
       for (let i = 0; i < 3; i++) {
         setTimeout(() => {
           setVisibleSlides(prev => [...prev, i]);
-        }, i * 200); // Faster 200ms delay between each card
+        }, i * 90); // reduced stagger
       }
-    }, 20); // Minimal delay
+    }, 8); // minimal delay
   };
 
   const updateDisplayedProjects = (newIndex: number) => {
@@ -52,10 +52,10 @@ const Showcase = () => {
     }, 100);
   };
 
-  // Preload images for smooth transitions
+  // Preload only the first few images to avoid heavy initial work
   useEffect(() => {
     const preloadImages = () => {
-      projects.forEach(project => {
+      projects.slice(0, 4).forEach(project => {
         const img = new Image();
         img.src = project.image;
       });
@@ -70,10 +70,49 @@ const Showcase = () => {
       for (let i = 0; i < 3; i++) {
         setTimeout(() => {
           setVisibleSlides(prev => [...prev, i]);
-        }, i * 200); // Faster initial animation
+        }, i * 90); // reduced initial stagger
       }
-    }, 300); // Reduced initial delay
+    }, 120); // shorter initial delay
   }, [currentIndex]);
+
+  // Auto-advance carousel every 15 seconds; pause on hover and reset after user action
+  const pauseRef = useRef(false);
+  const timeoutRef = useRef<number | null>(null);
+
+  const advance = (manual = false) => {
+    setCurrentIndex(prev => {
+      const newIdx = (prev + 1) % projects.length;
+      setActiveProject(projects[newIdx]);
+      updateDisplayedProjects(newIdx);
+      setTimeout(() => triggerCardAnimation(), 60);
+      return newIdx;
+    });
+    // if manual interaction, we'll restart the timer outside
+    if (manual) {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+    }
+  };
+
+  const scheduleNext = (delay = 15000) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = window.setTimeout(() => {
+      if (!pauseRef.current) {
+        advance();
+      }
+      scheduleNext();
+    }, delay);
+  };
+
+  useEffect(() => {
+    scheduleNext();
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
@@ -97,11 +136,12 @@ const Showcase = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
+          transition={{ duration: 0.22, ease: "easeOut" }}
           style={{
             backgroundImage: `url(${activeProject.image})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
+            willChange: "opacity",
           }}
         />
       </AnimatePresence>
@@ -115,9 +155,9 @@ const Showcase = () => {
         <div className="w-1/2 p-12 flex flex-col justify-center text-white">
           <motion.div
             key={activeProject.id}
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
+            transition={{ duration: 0.36, delay: 0.06 }}
             className="max-w-lg"
           >
             <div className="text-sm uppercase tracking-wider text-white/80 mb-4">
@@ -141,13 +181,26 @@ const Showcase = () => {
         </div>
 
         {/* Right Side - Upcoming Projects Carousel */}
-        <div className="w-1/2 flex items-center justify-center p-8">
+        <div
+          className="w-1/2 flex items-center justify-center p-8"
+          onMouseEnter={() => {
+            pauseRef.current = true;
+            if (timeoutRef.current) {
+              clearTimeout(timeoutRef.current);
+              timeoutRef.current = null;
+            }
+          }}
+          onMouseLeave={() => {
+            pauseRef.current = false;
+            scheduleNext();
+          }}
+        >
           <div className="w-full">
             <motion.h2 
               className="text-xl font-bold text-white mb-8 text-center"
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.38, delay: 0.08 }}
             >
               Up Next
             </motion.h2>
@@ -159,41 +212,39 @@ const Showcase = () => {
                 return (
                   <motion.div
                     key={`${project.id}-${currentIndex}-${index}`} // Force re-render on project change
-                    className="relative bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl border border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer w-[700px] h-[450px]"
+                    className="relative bg-white/10 rounded-2xl overflow-hidden shadow-xl border border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer w-[700px] h-[450px]"
                     initial={{ 
                       opacity: 0, 
-                      scale: 0.9, 
-                      y: 30,
-                      filter: "blur(4px)"
+                      scale: 0.94, 
+                      y: 24
                     }}
                     animate={isVisible ? { 
                       opacity: 1, 
                       scale: 1, 
-                      y: 0,
-                      filter: "blur(0px)"
+                      y: 0
                     } : {
                       opacity: 0, 
-                      scale: 0.9, 
-                      y: 30,
-                      filter: "blur(4px)"
+                      scale: 0.94, 
+                      y: 24
                     }}
                     transition={{ 
-                      duration: 0.4, 
-                      ease: [0.25, 0.46, 0.45, 0.94] // Custom easing curve
+                      duration: 0.42, 
+                      ease: [0.22, 0.8, 0.2, 1] // slightly snappier curve
                     }}
-                    whileHover={{ 
-                      scale: 1.05,
-                      boxShadow: "0 25px 50px rgba(0,0,0,0.3)"
-                    }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => handleSlideClick(index)}
+                    // removed hover/tap animations to reduce repaints
+                    onClick={() => { handleSlideClick(index); scheduleNext(); }}
+                    onMouseEnter={() => { pauseRef.current = true; if (timeoutRef.current) { clearTimeout(timeoutRef.current); timeoutRef.current = null; } }}
+                    onMouseLeave={() => { pauseRef.current = false; scheduleNext(); }}
+                    style={{ willChange: "transform, opacity" }}
                   >
                     {/* Background Image */}
                     <div className="absolute inset-0 z-0">
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
                       />
                     </div>
                     
@@ -212,11 +263,7 @@ const Showcase = () => {
                     </div>
                     
                     {/* Floating glow effect */}
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 rounded-2xl"
-                      whileHover={{ opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 rounded-2xl group-hover:opacity-80 transition-opacity duration-200" />
                   </motion.div>
                 );
               })}
