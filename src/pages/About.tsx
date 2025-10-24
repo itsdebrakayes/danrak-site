@@ -71,31 +71,28 @@ const AboutSection = () => {
                   Whether it's corporate events, brand campaigns, or artistic productions,
                   we approach each project with the same dedication to craftsmanship and innovation.
                 </p>
-              </div>
+                
+                <p>
+                  Our team blends storytelling with technical excellence — from script development
+                  and storyboarding to on-set execution and finishing. We partner with clients to
+                  ensure every asset is faithful to the original creative intent and optimized for
+                  its ultimate audience.
+                </p>
 
-              <div className="grid md:grid-cols-2 gap-4 pt-6 border-t border-muted-foreground/10">
-                <FeatureCard icon="🎬" title="Event Production" color="brand-ocean" />
-                <FeatureCard icon="📱" title="Brand Campaigns" color="brand-crimson" />
-                <FeatureCard icon="🎨" title="Creative Direction" color="brand-sky" />
-                <FeatureCard icon="✨" title="Post-Production" color="brand-forest" />
-              </div>
+                <p>
+                  Collaboration is at the heart of our process. We work closely with creative
+                  directors, producers, and brand teams to iterate quickly and deliver polished
+                  content on schedule. Our flexible workflows scale from intimate shoots to large
+                  multi-day productions.
+                </p>
 
-              <div className="grid grid-cols-3 gap-6 pt-6 border-t border-muted-foreground/10">
-                <StatBlock number="20+" label="Years" color="brand-ocean" />
-                <StatBlock number="500+" label="Projects" color="brand-crimson" />
-                <StatBlock number="50+" label="Awards" color="brand-forest" />
+                <p>
+                  Beyond production, we emphasize measurable results — tracking reach, engagement,
+                  and performance to inform future creative strategy and ensure each project drives
+                  real business outcomes.
+                </p>
               </div>
-
-              <div className="glass p-6 mt-10 rounded-2xl bg-gradient-to-br from-brand-ocean/5 to-brand-sky/5 max-w-md">
-                <div className="text-center space-y-3">
-                  <div className="text-sm font-semibold text-brand-ocean tracking-wider">
-                    OUR PHILOSOPHY
-                  </div>
-                  <p className="text-sm text-muted-foreground italic">
-                    "Every frame tells a story, every story deserves perfection."
-                  </p>
-                </div>
-              </div>
+              {/* simplified: left column contains only textual content per request */}
             </div>
           </div>
 
@@ -114,19 +111,27 @@ const AboutSection = () => {
           <p className="text-muted-foreground">Scroll down to see more...</p>
           
           <div className="space-y-8">
-            <h3 className="text-2xl font-bold text-brand-ocean">Our Process</h3>
-            <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl font-bold text-brand-ocean">Pillars of the Business</h3>
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6 max-w-5xl mx-auto">
               <div className="glass p-6 rounded-xl">
                 <h4 className="font-semibold mb-2 text-brand-crimson">Conceptualization</h4>
-                <p className="text-sm text-muted-foreground">We start with your vision and transform it into a comprehensive creative brief.</p>
+                <p className="text-sm text-muted-foreground">We form the creative brief and strong foundations for every project.</p>
+              </div>
+              <div className="glass p-6 rounded-xl">
+                <h4 className="font-semibold mb-2 text-brand-ocean">Strategy</h4>
+                <p className="text-sm text-muted-foreground">Research, planning and distribution strategy that reaches your audience.</p>
               </div>
               <div className="glass p-6 rounded-xl">
                 <h4 className="font-semibold mb-2 text-brand-sky">Production</h4>
-                <p className="text-sm text-muted-foreground">Our expert team brings your project to life with cutting-edge technology.</p>
+                <p className="text-sm text-muted-foreground">On-set direction, crew management and technical execution.</p>
               </div>
               <div className="glass p-6 rounded-xl">
-                <h4 className="font-semibold mb-2 text-brand-forest">Delivery</h4>
-                <p className="text-sm text-muted-foreground">We deliver exceptional results that exceed expectations and drive impact.</p>
+                <h4 className="font-semibold mb-2 text-brand-forest">Post-Production</h4>
+                <p className="text-sm text-muted-foreground">Editing, color, sound design and finishing that elevate the story.</p>
+              </div>
+              <div className="glass p-6 rounded-xl">
+                <h4 className="font-semibold mb-2 text-brand-crimson">Delivery</h4>
+                <p className="text-sm text-muted-foreground">Final delivery, formats and support to ensure successful launch.</p>
               </div>
             </div>
           </div>
@@ -156,66 +161,27 @@ const AboutSection = () => {
           <p className="text-muted-foreground">This is the end of the About section.</p>
         </div>
       </div>
+      {/* Full-width CTA Banner */}
+      <section className="w-full bg-gradient-to-br from-primary/10 to-primary/5 border-t border-primary/20 mt-12">
+        <div className="container mx-auto px-6 py-12">
+          <div className="rounded-2xl overflow-hidden shadow-xl">
+            <div className="p-8 text-center">
+              <h3 className="text-3xl md:text-4xl font-bold mb-3">Ready to Start Your Project?</h3>
+              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                Have a vision in mind? Let's collaborate and bring your ideas to life with exceptional design and execution.
+              </p>
+              <a href="/contact" className="inline-block">
+                <button className="px-6 py-3 bg-primary text-white rounded-lg font-medium">Start Your Project</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </section>
   );
 };
 
-const FeatureCard = ({ icon, title, color }: { icon: string; title: string; color: string }) => {
-  const colorClasses = {
-    'brand-ocean': {
-      bg: 'bg-gradient-to-br from-brand-ocean to-brand-sky',
-      text: 'group-hover:text-brand-ocean',
-      dot: 'bg-brand-ocean'
-    },
-    'brand-crimson': {
-      bg: 'bg-gradient-to-br from-brand-crimson to-brand-sky',
-      text: 'group-hover:text-brand-crimson',
-      dot: 'bg-brand-crimson'
-    },
-    'brand-sky': {
-      bg: 'bg-gradient-to-br from-brand-sky to-brand-ocean',
-      text: 'group-hover:text-brand-sky',
-      dot: 'bg-brand-sky'
-    },
-    'brand-forest': {
-      bg: 'bg-gradient-to-br from-brand-forest to-brand-sage',
-      text: 'group-hover:text-brand-forest',
-      dot: 'bg-brand-forest'
-    }
-  };
-
-  const classes = colorClasses[color as keyof typeof colorClasses] || colorClasses['brand-ocean'];
-
-  return (
-    <div className="flex items-center gap-4 p-4 rounded-xl glass hover:scale-105 transition-all duration-300 group">
-      <div className={`w-12 h-12 ${classes.bg} rounded-xl flex items-center justify-center text-lg`}>
-        {icon}
-      </div>
-      <div className="flex-1">
-        <h3 className={`font-semibold ${classes.text} transition-colors`}>{title}</h3>
-      </div>
-      <div className={`w-2 h-2 ${classes.dot} rounded-full opacity-60 group-hover:opacity-100 transition-opacity`} />
-    </div>
-  );
-};
-
-const StatBlock = ({ number, label, color }: { number: string; label: string; color: string }) => {
-  const colorClasses = {
-    'brand-ocean': 'text-brand-ocean',
-    'brand-crimson': 'text-brand-crimson',
-    'brand-sky': 'text-brand-sky',
-    'brand-forest': 'text-brand-forest'
-  };
-
-  const textColor = colorClasses[color as keyof typeof colorClasses] || 'text-brand-ocean';
-
-  return (
-    <div className="text-center">
-      <div className={`text-3xl font-bold ${textColor} mb-1`}>{number}</div>
-      <div className="text-sm text-muted-foreground">{label}</div>
-    </div>
-  );
-};
+// FeatureCard and StatBlock removed — left column simplified per design request
 
 const About = () => (
   <div className="relative">
