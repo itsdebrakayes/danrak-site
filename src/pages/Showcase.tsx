@@ -140,7 +140,7 @@ const Showcase = () => {
           style={{
             backgroundImage: `url(${activeProject.image})`,
             backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundPosition: activeProject.backgroundPosition || "center",
             willChange: "opacity",
           }}
         />
@@ -237,14 +237,14 @@ const Showcase = () => {
                     onMouseLeave={() => { pauseRef.current = false; scheduleNext(); }}
                     style={{ willChange: "transform, opacity" }}
                   >
-                    {/* Background Image */}
-                    <div className="absolute inset-0 z-0">
+                    {/* Background Image - using contain to show full image */}
+                    <div className="absolute inset-0 z-0 bg-gradient-to-br from-black/80 via-black/60 to-black/80">
                       <img
                         src={project.image}
                         alt={project.title}
                         loading="lazy"
                         decoding="async"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
                       />
                     </div>
                     
