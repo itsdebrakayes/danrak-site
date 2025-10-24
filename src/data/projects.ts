@@ -7,6 +7,7 @@ export interface Project {
   gallery: string[];
   category: string;
   date: string;
+  backgroundPosition?: string; // e.g., "center top", "center 30%", "50% 20%"
 }
 
 export const projects: Project[] = [
@@ -22,7 +23,8 @@ export const projects: Project[] = [
       "/src/assets/access-launch-content3.jpg"
     ],
     category: "Launch Event",
-    date: "2025"
+    date: "2025",
+    backgroundPosition: "center"
   },
   {
     id: "honors-awards",
@@ -36,7 +38,8 @@ export const projects: Project[] = [
       "/src/assets/honors-awards-content3.jpg"
     ],
     category: "Awards Ceremony",
-    date: "2024"
+    date: "2024",
+    backgroundPosition: "center"
   },
   {
     id: "port-authority",
@@ -50,7 +53,8 @@ export const projects: Project[] = [
       "/src/assets/port-authority-content3.jpeg"
     ],
     category: "Event Planning",
-    date: "2025"
+    date: "2025",
+    backgroundPosition: "center"
   },
   {
     id: "faith-moves",
@@ -65,7 +69,8 @@ export const projects: Project[] = [
       "/src/assets/faith-moves-content5.MOV"
     ],
     category: "TV Show Production",
-    date: "2025"
+    date: "2025",
+    backgroundPosition: "center"
   },
   /* {
     id: "tech-connect",
