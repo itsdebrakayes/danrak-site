@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { projects } from "../data/projects";
@@ -10,6 +10,15 @@ const ProjectDetails = () => {
   const { id } = useParams();
   const project = projects.find((p) => p.id === id);
   const relatedProjects = projects.filter((p) => p.id !== id).slice(0, 4);
+  const [lightbox, setLightbox] = useState<null | { type: 'image' | 'video'; src: string }>(null);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   if (!project) {
     return (
@@ -72,10 +81,12 @@ const ProjectDetails = () => {
               className="w-full"
             >
               <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/50 to-muted/20 shadow-2xl">
+                {/* smaller image so article is visible; click to open full-size lightbox */}
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto max-h-[420px] object-contain cursor-zoom-in"
+                  onClick={() => setLightbox({ type: 'image', src: project.image })}
                 />
               </div>
             </motion.div>
@@ -148,13 +159,17 @@ const ProjectDetails = () => {
                         <video
                           src={item}
                           controls
-                          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                          playsInline
+                          preload="metadata"
+                          className="w-full h-full object-contain"
+                          onClick={() => setLightbox({ type: 'video', src: item })}
                         />
                       ) : (
                         <img
                           src={item}
                           alt={`${project.title} - Gallery image ${index + 1}`}
-                          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                          className="w-full h-full object-contain"
+                          onClick={() => setLightbox({ type: 'image', src: item })}
                         />
                       )}
                       <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -164,27 +179,7 @@ const ProjectDetails = () => {
               </div>
             </motion.div>
 
-            {/* CTA Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="pt-12"
-            >
-              <Card className="bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
-                <CardContent className="p-8 text-center">
-                  <h3 className="text-2xl font-bold mb-3">Ready to Start Your Project?</h3>
-                  <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-                    Have a vision in mind? Let's collaborate and bring your ideas to life with exceptional design and execution.
-                  </p>
-                  <Link to="/contact">
-                    <Button size="lg" className="gap-2">
-                      Start Your Project
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            </motion.div>
+            {/* CTA removed from column to render full-bleed at page bottom */}
           </div>
 
           {/* Related Projects Sidebar */}
@@ -244,6 +239,62 @@ const ProjectDetails = () => {
           </aside>
         </div>
       </div>
+
+      {/* Full-width CTA Banner spanning bottom of page */}
+      <section className="w-full bg-gradient-to-br from-primary/10 to-primary/5 border-t border-primary/20">
+        <div className="container mx-auto px-6 py-12">
+          <div className="rounded-2xl overflow-hidden shadow-xl">
+            <Card className="bg-transparent border-0">
+              <CardContent className="p-8 text-center">
+                <h3 className="text-3xl md:text-4xl font-bold mb-3">Ready to Start Your Project?</h3>
+                <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                  Have a vision in mind? Let's collaborate and bring your ideas to life with exceptional design and execution.
+                </p>
+                <Link to="/contact">
+                  <Button size="lg" className="gap-2">
+                    Start Your Project
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Lightbox for hero/gallery */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            aria-label="Close"
+            className="absolute top-6 right-6 text-white text-3xl leading-none"
+            onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
+          >
+            ×
+          </button>
+          {lightbox.type === 'image' ? (
+            <img
+              src={lightbox.src}
+              alt="Preview"
+              className="max-w-[92%] max-h-[92%] object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          ) : (
+            <video
+              src={lightbox.src}
+              controls
+              autoPlay
+              muted={false}
+              playsInline
+              className="max-w-[92%] max-h-[92%] object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          )}
+        </div>
+      )}
+
     </div>
   );
 };
