@@ -39,7 +39,7 @@ const AboutSection = () => {
         <div className="text-center mb-8 lg:mb-12">
           <h2 className="text-6xl md:text-7xl lg:text-8xl font-black text-brand-crimson mb-6 tracking-tight">
             THE STORY BEHIND
-            <span className="block text-foreground mt-2">THE PRODUCTION</span>
+            <span className="block text-foreground mt-2">THE COMPANY</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-brand-crimson via-brand-sky to-brand-forest rounded-full mx-auto" />
         </div>
