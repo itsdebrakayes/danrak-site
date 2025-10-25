@@ -26,7 +26,7 @@ const ContactSection = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: 'top 80%',
+        start: 'top 90%',
         end: 'bottom 20%',
         toggleActions: 'play none none reverse'
       }
@@ -80,7 +80,7 @@ const ContactSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="contact" className="relative py-20 pb-32">
+    <section ref={sectionRef} id="contact" className="relative py-20">
       <div
         className="absolute inset-0"
         style={{
@@ -93,7 +93,7 @@ const ContactSection = () => {
 
       <div className="section-glow" />
 
-      <div className="relative z-10 container mx-auto px-6 py-20 pb-32">
+      <div className="relative z-10 container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="contact-title text-5xl md:text-6xl font-black text-brand-forest mb-4">
             Get in Touch

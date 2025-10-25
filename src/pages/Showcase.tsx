@@ -10,21 +10,8 @@ import "swiper/css";
 
 const Showcase = () => {
   const [activeProject, setActiveProject] = useState(projects[0]);
-  const [visibleSlides, setVisibleSlides] = useState<number[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [displayedProjects, setDisplayedProjects] = useState(projects.slice(1, 4));
-
-  const triggerCardAnimation = () => {
-    // lighter stagger to reduce perceived lag
-    setVisibleSlides([]);
-    setTimeout(() => {
-      for (let i = 0; i < 3; i++) {
-        setTimeout(() => {
-          setVisibleSlides(prev => [...prev, i]);
-        }, i * 90); // reduced stagger
-      }
-    }, 8); // minimal delay
-  };
 
   const updateDisplayedProjects = (newIndex: number) => {
     const upcoming = [];
@@ -36,20 +23,10 @@ const Showcase = () => {
   };
 
   const handleSlideClick = (clickedIndex: number) => {
-    // Calculate the new active project index
     const newActiveIndex = (currentIndex + clickedIndex + 1) % projects.length;
-    
-    // Update the active project immediately
     setCurrentIndex(newActiveIndex);
     setActiveProject(projects[newActiveIndex]);
-    
-    // Update displayed projects for carousel effect
     updateDisplayedProjects(newActiveIndex);
-    
-    // Trigger animation after a brief delay
-    setTimeout(() => {
-      triggerCardAnimation();
-    }, 100);
   };
 
   // Preload only the first few images to avoid heavy initial work
@@ -63,16 +40,8 @@ const Showcase = () => {
     preloadImages();
   }, []);
 
-  // Initialize visible slides and displayed projects on mount
   useEffect(() => {
     updateDisplayedProjects(currentIndex);
-    setTimeout(() => {
-      for (let i = 0; i < 3; i++) {
-        setTimeout(() => {
-          setVisibleSlides(prev => [...prev, i]);
-        }, i * 90); // reduced initial stagger
-      }
-    }, 120); // shorter initial delay
   }, [currentIndex]);
 
   // Auto-advance carousel every 15 seconds; pause on hover and reset after user action
@@ -84,10 +53,8 @@ const Showcase = () => {
       const newIdx = (prev + 1) % projects.length;
       setActiveProject(projects[newIdx]);
       updateDisplayedProjects(newIdx);
-      setTimeout(() => triggerCardAnimation(), 60);
       return newIdx;
     });
-    // if manual interaction, we'll restart the timer outside
     if (manual) {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -136,12 +103,11 @@ const Showcase = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.22, ease: "easeOut" }}
+          transition={{ duration: 0.15, ease: "easeOut" }}
           style={{
             backgroundImage: `url(${activeProject.image})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            willChange: "opacity",
           }}
         />
       </AnimatePresence>
@@ -208,34 +174,23 @@ const Showcase = () => {
             {/* Horizontal Card Container */}
             <div className="flex gap-6 justify-center items-center overflow-visible">
               {displayedProjects.map((project, index) => {
-                const isVisible = visibleSlides.includes(index);
                 return (
                   <motion.div
-                    key={`${project.id}-${currentIndex}-${index}`} // Force re-render on project change
-                    className="relative bg-white/10 rounded-2xl overflow-hidden shadow-xl border border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer w-[700px] h-[450px]"
-                    initial={{ 
-                      opacity: 0, 
-                      scale: 0.94, 
-                      y: 24
-                    }}
-                    animate={isVisible ? { 
-                      opacity: 1, 
-                      scale: 1, 
-                      y: 0
-                    } : {
-                      opacity: 0, 
-                      scale: 0.94, 
-                      y: 24
-                    }}
+                    key={project.id}
+                    className="relative bg-white/10 rounded-2xl overflow-hidden shadow-xl border border-white/20 hover:bg-white/20 cursor-pointer w-[700px] h-[450px]"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ 
-                      duration: 0.42, 
-                      ease: [0.22, 0.8, 0.2, 1] // slightly snappier curve
+                      duration: 0.3,
+                      delay: index * 0.05,
+                      ease: "easeOut"
                     }}
-                    // removed hover/tap animations to reduce repaints
                     onClick={() => { handleSlideClick(index); scheduleNext(); }}
                     onMouseEnter={() => { pauseRef.current = true; if (timeoutRef.current) { clearTimeout(timeoutRef.current); timeoutRef.current = null; } }}
                     onMouseLeave={() => { pauseRef.current = false; scheduleNext(); }}
-                    style={{ willChange: "transform, opacity" }}
+                    style={{ 
+                      transition: "all 0.3s ease"
+                    }}
                   >
                     {/* Background Image */}
                     <div className="absolute inset-0 z-0">
