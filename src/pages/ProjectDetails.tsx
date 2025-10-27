@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { projects } from "../data/projects";
+import { testimonials } from "../data/testimonials";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Quote, Play } from "lucide-react";
 
 const ProjectDetails = () => {
   const { id } = useParams();
   const project = projects.find((p) => p.id === id);
-  const relatedProjects = projects.filter((p) => p.id !== id).slice(0, 4);
-  const [lightbox, setLightbox] = useState<null | { type: 'image' | 'video'; src: string }>(null);
+  const projectTestimonials = testimonials.filter(t => !t.projectId || t.projectId === id);
+  const [lightbox, setLightbox] = useState<null | { type: 'image' | 'video'; src: string; eventTitle?: string }>(null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -73,7 +74,7 @@ const ProjectDetails = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Main Content Column */}
           <div className="lg:col-span-8 space-y-12">
-            {/* Hero Image - Native Size */}
+            {/* Main Service Header Image */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -81,17 +82,16 @@ const ProjectDetails = () => {
               className="w-full"
             >
               <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/50 to-muted/20 shadow-2xl">
-                {/* smaller image so article is visible; click to open full-size lightbox */}
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-auto max-h-[420px] object-contain cursor-zoom-in"
+                  className="w-full h-auto max-h-[500px] object-contain cursor-zoom-in"
                   onClick={() => setLightbox({ type: 'image', src: project.image })}
                 />
               </div>
             </motion.div>
 
-            {/* Article Content */}
+            {/* Service Description Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -104,85 +104,40 @@ const ProjectDetails = () => {
               
               <div className="prose prose-lg dark:prose-invert max-w-none">
                 <p className="text-lg leading-relaxed text-foreground/90">
-                  {project.fullText}
+                  {project.serviceDescription}
                 </p>
               </div>
-
-              {/* Project Metadata */}
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 pt-6 border-t border-border">
-                <div>
-                  <span className="text-sm font-medium text-muted-foreground block mb-1">
-                    Category
-                  </span>
-                  <p className="font-semibold text-foreground">{project.category}</p>
-                </div>
-                <div>
-                  <span className="text-sm font-medium text-muted-foreground block mb-1">
-                    Year
-                  </span>
-                  <p className="font-semibold text-foreground">{project.date}</p>
-                </div>
-                <div>
-                  <span className="text-sm font-medium text-muted-foreground block mb-1">
-                    Services
-                  </span>
-                  <p className="font-semibold text-foreground">{project.excerpt}</p>
-                </div>
-              </div>
             </motion.div>
 
-            {/* Gallery - Bento Box Layout */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="space-y-6"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold">Gallery</h2>
-              
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[200px] md:auto-rows-[250px]">
-                {project.gallery.map((item, index) => {
-                  const spanClass = 
-                    index === 0 ? "col-span-2 row-span-2" : 
-                    index === 2 ? "col-span-2" : 
-                    "";
-                  
-                  return (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                      className={`group relative rounded-xl overflow-hidden bg-gradient-to-br from-muted/30 to-muted/10 shadow-lg hover:shadow-2xl transition-all duration-300 ${spanClass}`}
-                    >
-                      {isVideo(item) ? (
-                        <video
-                          src={item}
-                          controls
-                          playsInline
-                          preload="metadata"
-                          className="w-full h-full object-contain"
-                          onClick={() => setLightbox({ type: 'video', src: item })}
-                        />
-                      ) : (
-                        <img
-                          src={item}
-                          alt={`${project.title} - Gallery image ${index + 1}`}
-                          className="w-full h-full object-contain"
-                          onClick={() => setLightbox({ type: 'image', src: item })}
-                        />
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </motion.div>
+            {/* Event Sections */}
+            {project.events.map((event, index) => (
+              <motion.div
+                key={event.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                className="space-y-6 py-8 border-t border-border"
+              >
+                {/* Event Header Image */}
+                <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/50 to-muted/20 shadow-xl">
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="w-full h-auto max-h-[400px] object-contain cursor-zoom-in"
+                    onClick={() => setLightbox({ type: 'image', src: event.image, eventTitle: event.title })}
+                  />
+                </div>
 
-            {/* CTA removed from column to render full-bleed at page bottom */}
+                {/* Event Title and Description */}
+                <h3 className="text-3xl font-bold">{event.title}</h3>
+                <p className="text-lg leading-relaxed text-foreground/90">
+                  {event.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
 
-          {/* Related Projects Sidebar */}
+          {/* Testimonials Sidebar */}
           <aside className="lg:col-span-4">
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -190,57 +145,121 @@ const ProjectDetails = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="lg:sticky lg:top-24 space-y-6"
             >
-              <h3 className="text-2xl font-bold">Related Projects</h3>
+              <h3 className="text-2xl font-bold">Testimonials</h3>
               
-              <div className="space-y-4">
-                {relatedProjects.map((relatedProject, index) => (
+              <div className="max-h-[calc(100vh-8rem)] overflow-y-auto space-y-4 pr-2 custom-scrollbar">
+                {projectTestimonials.map((testimonial, index) => (
                   <motion.div
-                    key={relatedProject.id}
+                    key={testimonial.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
                   >
-                    <Link to={`/project/${relatedProject.id}`}>
-                      <Card className="group cursor-pointer hover:bg-accent/50 transition-all duration-300 border-border/50 hover:border-primary/50 hover:shadow-lg">
-                        <CardContent className="p-4">
-                          <div className="flex gap-4">
-                            <div className="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-muted">
-                              <img
-                                src={relatedProject.image}
-                                alt={relatedProject.title}
-                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                              />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="text-xs uppercase tracking-wider text-muted-foreground mb-1">
-                                {relatedProject.category}
+                    {testimonial.videoUrl ? (
+                      // Video Testimonial Card
+                      <Card className="group cursor-pointer hover:bg-accent/50 transition-all duration-300 border-border/50 hover:border-primary/50 hover:shadow-lg overflow-hidden"
+                        onClick={() => setLightbox({ type: 'video', src: testimonial.videoUrl! })}
+                      >
+                        <CardContent className="p-0">
+                          <div className="relative">
+                            <img
+                              src={testimonial.thumbnailUrl || "/placeholder.svg"}
+                              alt={testimonial.clientName}
+                              className="w-full h-40 object-cover"
+                            />
+                            <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/30 transition-colors">
+                              <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center">
+                                <Play className="w-6 h-6 text-primary ml-1" />
                               </div>
-                              <h4 className="font-semibold text-sm line-clamp-2 group-hover:text-primary transition-colors mb-1">
-                                {relatedProject.title}
-                              </h4>
-                              <p className="text-xs text-muted-foreground">
-                                {relatedProject.date}
-                              </p>
                             </div>
+                          </div>
+                          <div className="p-4">
+                            <h4 className="font-semibold text-sm mb-1">{testimonial.clientName}</h4>
+                            {testimonial.clientTitle && (
+                              <p className="text-xs text-muted-foreground">{testimonial.clientTitle}</p>
+                            )}
                           </div>
                         </CardContent>
                       </Card>
-                    </Link>
+                    ) : (
+                      // Text Testimonial Card
+                      <Card className="hover:bg-accent/30 transition-all duration-300 border-border/50">
+                        <CardContent className="p-4 space-y-3">
+                          <Quote className="w-8 h-8 text-primary/40" />
+                          <p className="text-sm italic leading-relaxed text-foreground/90">
+                            "{testimonial.content}"
+                          </p>
+                          <div className="pt-2 border-t border-border/50">
+                            <h4 className="font-semibold text-sm">{testimonial.clientName}</h4>
+                            {testimonial.clientTitle && (
+                              <p className="text-xs text-muted-foreground">{testimonial.clientTitle}</p>
+                            )}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )}
                   </motion.div>
                 ))}
               </div>
-
-              <Link to="/showcase" className="block">
-                <Button variant="outline" className="w-full">
-                  View All Projects
-                </Button>
-              </Link>
             </motion.div>
           </aside>
         </div>
       </div>
 
-      {/* Full-width CTA Banner spanning bottom of page */}
+      {/* Gallery Section - Full Width */}
+      <section className="w-full bg-muted/20 py-16">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-8"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold">Gallery</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {project.events.map((event, eventIndex) => (
+                <div key={event.id} className="space-y-4">
+                  <h3 className="text-xl font-bold text-primary">{event.title}</h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {event.galleryImages.map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.4, delay: eventIndex * 0.1 + index * 0.05 }}
+                        className="group relative rounded-xl overflow-hidden bg-gradient-to-br from-muted/30 to-muted/10 shadow-lg hover:shadow-2xl transition-all duration-300 aspect-square cursor-pointer"
+                        onClick={() => setLightbox({ type: isVideo(item) ? 'video' : 'image', src: item, eventTitle: event.title })}
+                      >
+                        {isVideo(item) ? (
+                          <div className="relative w-full h-full">
+                            <video
+                              src={item}
+                              preload="metadata"
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                              <Play className="w-8 h-8 text-white" />
+                            </div>
+                          </div>
+                        ) : (
+                          <img
+                            src={item}
+                            alt={`${event.title} - Gallery ${index + 1}`}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          />
+                        )}
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Full-width CTA Banner */}
       <section className="w-full bg-gradient-to-br from-primary/10 to-primary/5 border-t border-primary/20">
         <div className="container mx-auto px-6 py-12">
           <div className="rounded-2xl overflow-hidden shadow-xl">
@@ -261,19 +280,24 @@ const ProjectDetails = () => {
         </div>
       </section>
 
-      {/* Lightbox for hero/gallery */}
+      {/* Lightbox */}
       {lightbox && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
           onClick={() => setLightbox(null)}
         >
           <button
             aria-label="Close"
-            className="absolute top-6 right-6 text-white text-3xl leading-none"
+            className="absolute top-6 right-6 text-white text-4xl leading-none hover:scale-110 transition-transform"
             onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
           >
             ×
           </button>
+          {lightbox.eventTitle && (
+            <div className="absolute top-6 left-6 text-white text-lg font-semibold">
+              {lightbox.eventTitle}
+            </div>
+          )}
           {lightbox.type === 'image' ? (
             <img
               src={lightbox.src}
@@ -286,7 +310,6 @@ const ProjectDetails = () => {
               src={lightbox.src}
               controls
               autoPlay
-              muted={false}
               playsInline
               className="max-w-[92%] max-h-[92%] object-contain"
               onClick={(e) => e.stopPropagation()}
@@ -295,6 +318,22 @@ const ProjectDetails = () => {
         </div>
       )}
 
+      <style>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: hsl(var(--muted) / 0.3);
+          border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: hsl(var(--primary) / 0.5);
+          border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: hsl(var(--primary) / 0.7);
+        }
+      `}</style>
     </div>
   );
 };
