@@ -63,6 +63,9 @@ const HeroSection = () => {
         <img
           src={heroPortrait}
           alt="Danrak Portrait"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           className="object-contain object-bottom opacity-95"
           style={{
             maxHeight: '100vh',
@@ -87,6 +90,9 @@ const HeroSection = () => {
         <img
           src={danrakLogoFull}
           alt="Danrak Productions Logo"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           className="w-[95%] max-w-5xl object-contain mx-auto"
           style={{
         filter: 'drop-shadow(0 10px 25px rgba(0,0,0,0.4))'

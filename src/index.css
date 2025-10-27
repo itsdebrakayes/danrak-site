@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* DanraK Productions Cinematic Design System 
+/* Danrak Productions Cinematic Design System 
 All colors MUST be HSL.
 */
 
@@ -39,7 +39,7 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
 
-    /* DanraK Brand Colors */
+  /* Danrak Brand Colors */
     --brand-ocean: 195 83% 51%;      /* #2d9ed4 */
     --brand-crimson: 340 100% 55%;   /* #bf0052 */
     --brand-sky: 197 75% 59%;        /* #44bae9 */
@@ -201,6 +201,7 @@ All colors MUST be HSL.
   /* Showcase page specific styles */
   .project-carousel {
     height: 700px !important;
+    overflow: visible !important;
   }
 
   .project-carousel .swiper-slide {
@@ -301,9 +302,11 @@ All colors MUST be HSL.
   /* Glass Morphism */
   .glass {
     background: var(--glass-light);
-    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    contain: layout paint;
   }
 
   /* Cinematic Text */

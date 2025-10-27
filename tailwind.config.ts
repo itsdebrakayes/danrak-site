@@ -62,7 +62,7 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// DanraK Brand Colors
+				// Danrak Brand Colors
 				brand: {
 					ocean: 'hsl(var(--brand-ocean))',
 					crimson: 'hsl(var(--brand-crimson))',

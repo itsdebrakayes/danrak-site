@@ -59,9 +59,32 @@ const Showcase = () => {
         const img = new Image();
         img.src = project.image;
       });
+      // Also add a preload link for the primary background image to improve LCP
+      try {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = projects[0].image;
+        link.crossOrigin = 'anonymous';
+        document.head.appendChild(link);
+      } catch (e) {
+        // ignore if DOM not available or insertion fails
+      }
     };
     preloadImages();
   }, []);
+
+  // Load dynamic background only after image decoded to avoid jank
+  const [bgSrc, setBgSrc] = useState<string | null>(projects[0].image);
+  useEffect(() => {
+    let mounted = true;
+    const img = new Image();
+    img.src = activeProject.image;
+    img.onload = () => {
+      if (mounted) setBgSrc(activeProject.image);
+    };
+    return () => { mounted = false; };
+  }, [activeProject]);
 
   // Initialize visible slides and displayed projects on mount
   useEffect(() => {
@@ -138,7 +161,7 @@ const Showcase = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.22, ease: "easeOut" }}
           style={{
-            backgroundImage: `url(${activeProject.image})`,
+            backgroundImage: bgSrc ? `url(${bgSrc})` : undefined,
             backgroundSize: "cover",
             backgroundPosition: "center",
             willChange: "opacity",
@@ -242,7 +265,8 @@ const Showcase = () => {
                       <img
                         src={project.image}
                         alt={project.title}
-                        loading="lazy"
+                        loading={index === 0 ? 'eager' : 'lazy'}
+                        fetchPriority={index === 0 ? 'high' : undefined}
                         decoding="async"
                         className="w-full h-full object-cover"
                       />
