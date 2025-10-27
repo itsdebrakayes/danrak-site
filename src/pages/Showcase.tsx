@@ -43,19 +43,28 @@ const Showcase = () => {
     updateDisplayedProjects(newActiveIndex);
   };
 
-  // Preload only the first few images to avoid heavy initial work
+  // Preload all three image types for each project
   useEffect(() => {
     const preloadImages = () => {
       showcaseProjects.forEach(project => {
-        const img = new Image();
-        img.src = project.image;
+        // Preload carousel image
+        const carouselImg = new Image();
+        carouselImg.src = project.carouselImage;
+        
+        // Preload background image
+        const bgImg = new Image();
+        bgImg.src = project.backgroundImage;
+        
+        // Preload detail page image
+        const detailImg = new Image();
+        detailImg.src = project.image;
       });
       // Also add a preload link for the primary background image to improve LCP
       try {
         const link = document.createElement('link');
         link.rel = 'preload';
         link.as = 'image';
-        link.href = showcaseProjects[0].image;
+        link.href = showcaseProjects[0].backgroundImage;
         link.crossOrigin = 'anonymous';
         document.head.appendChild(link);
       } catch (e) {
@@ -72,13 +81,13 @@ const Showcase = () => {
   }, []);
 
   // Load dynamic background only after image decoded to avoid jank
-  const [bgSrc, setBgSrc] = useState<string | null>(showcaseProjects[0].image);
+  const [bgSrc, setBgSrc] = useState<string | null>(showcaseProjects[0].backgroundImage);
   useEffect(() => {
     let mounted = true;
     const img = new Image();
-    img.src = activeProject.image;
+    img.src = activeProject.backgroundImage;
     img.onload = () => {
-      if (mounted) setBgSrc(activeProject.image);
+      if (mounted) setBgSrc(activeProject.backgroundImage);
     };
     return () => { mounted = false; };
   }, [activeProject]);
@@ -131,7 +140,7 @@ const Showcase = () => {
       <div 
         className="absolute inset-0 z-[-1]"
         style={{
-          backgroundImage: `url(${projects[0].image})`,
+          backgroundImage: `url(${projects[0].backgroundImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -237,7 +246,7 @@ const Showcase = () => {
                     {/* Background Image */}
                     <div className="absolute inset-0 z-0">
                       <img
-                        src={project.image}
+                        src={project.carouselImage}
                         alt={project.title}
                         loading={index === 0 ? 'eager' : 'lazy'}
                         fetchPriority={index === 0 ? 'high' : undefined}

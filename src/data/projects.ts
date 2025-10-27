@@ -10,6 +10,8 @@ export interface Project {
   id: string;
   title: string;
   image: string;
+  carouselImage: string;
+  backgroundImage: string;
   excerpt: string;
   serviceDescription: string;
   events: Event[];
@@ -26,7 +28,9 @@ export const projects: Project[] = [
     id: "corporate-communications",
     serviceId: "corporate-communications",
     title: "Corporate Communications & Public Relations",
-    image: "/src/assets/access-launch-cover.jpg",
+    image: "/src/assets/corporate-comms-cover.jpg",
+    carouselImage: "/src/assets/corporate-comms-carousel.jpg",
+    backgroundImage: "/src/assets/corporate-comms-background.jpg",
     excerpt: "Strategic communications, PR storytelling, and corporate events.",
     serviceDescription: "Corporate communications and PR for major launches, reputation management, and stakeholder engagement.",
     events: [
@@ -66,7 +70,9 @@ export const projects: Project[] = [
     id: "campaign-development",
     serviceId: "campaign-development",
     title: "Campaign Development & Execution",
-    image: "/src/assets/honors-awards-cover.jpg",
+    image: "/src/assets/campaign-dev-cover.jpg",
+    carouselImage: "/src/assets/campaign-dev-carousel.jpg",
+    backgroundImage: "/src/assets/campaign-dev-background.jpg",
     excerpt: "End-to-end campaign strategy, creative and activation.",
     serviceDescription: "From concept to execution we design campaigns that move audiences and deliver results.",
     events: [
@@ -93,7 +99,9 @@ export const projects: Project[] = [
     id: "project-event-planning",
     serviceId: "project-event-planning",
     title: "Project & Event Planning",
-    image: "/src/assets/port-authority-cover.jpeg",
+    image: "/src/assets/event-planning-cover.jpg",
+    carouselImage: "/src/assets/event-planning-carousel.jpg",
+    backgroundImage: "/src/assets/event-planning-background.jpg",
     excerpt: "Large scale event production and logistics.",
     serviceDescription: "Full-service event management from ideation to on-site production.",
     events: [
@@ -120,7 +128,9 @@ export const projects: Project[] = [
     id: "video-tv-production",
     serviceId: "video-tv-production",
     title: "Video & Television Production",
-    image: "/src/assets/faith-moves-cover.jpg",
+    image: "/src/assets/video-production-cover.jpg",
+    carouselImage: "/src/assets/video-production-carousel.jpg",
+    backgroundImage: "/src/assets/video-production-background.jpg",
     excerpt: "TV shows, documentaries and branded video content.",
     serviceDescription: "Cinematic storytelling and broadcast production for TV and digital platforms.",
     events: [
@@ -147,7 +157,9 @@ export const projects: Project[] = [
     id: "on-air-talent",
     serviceId: "on-air-talent",
     title: "On-Air Talent & Event Hosting",
-    image: "/src/assets/faith-moves-cover.jpg",
+    image: "/src/assets/on-air-talent-cover.jpg",
+    carouselImage: "/src/assets/on-air-talent-carousel.jpg",
+    backgroundImage: "/src/assets/on-air-talent-background.jpg",
     excerpt: "Professional hosts, anchors and event talent.",
     serviceDescription: "Experienced on-air talent for broadcasts, corporate events and national ceremonies.",
     events: [
