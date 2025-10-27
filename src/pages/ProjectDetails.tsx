@@ -11,15 +11,41 @@ const ProjectDetails = () => {
   const { id } = useParams();
   const project = projects.find((p) => p.id === id);
   const projectTestimonials = testimonials.filter(t => !t.projectId || t.projectId === id);
-  const [lightbox, setLightbox] = useState<null | { type: 'image' | 'video'; src: string; eventTitle?: string }>(null);
+  const [lightbox, setLightbox] = useState<null | { 
+    type: 'image' | 'video'; 
+    src: string; 
+    eventTitle?: string;
+    allItems?: string[];
+    currentIndex?: number;
+  }>(null);
+
+  // Navigation handler for gallery
+  const navigateGallery = (direction: 'prev' | 'next') => {
+    if (!lightbox || !lightbox.allItems || lightbox.currentIndex === undefined) return;
+    
+    const newIndex = direction === 'next' 
+      ? (lightbox.currentIndex + 1) % lightbox.allItems.length
+      : (lightbox.currentIndex - 1 + lightbox.allItems.length) % lightbox.allItems.length;
+    
+    const newSrc = lightbox.allItems[newIndex];
+    
+    setLightbox({
+      ...lightbox,
+      src: newSrc,
+      type: isVideo(newSrc) ? 'video' : 'image',
+      currentIndex: newIndex
+    });
+  };
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setLightbox(null);
+      if (e.key === "ArrowLeft") navigateGallery('prev');
+      if (e.key === "ArrowRight") navigateGallery('next');
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [lightbox]);
 
   if (!project) {
     return (
@@ -229,7 +255,13 @@ const ProjectDetails = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.4, delay: eventIndex * 0.1 + index * 0.05 }}
                         className="group relative rounded-xl overflow-hidden bg-gradient-to-br from-muted/30 to-muted/10 shadow-lg hover:shadow-2xl transition-all duration-300 aspect-square cursor-pointer"
-                        onClick={() => setLightbox({ type: isVideo(item) ? 'video' : 'image', src: item, eventTitle: event.title })}
+                        onClick={() => setLightbox({ 
+                          type: isVideo(item) ? 'video' : 'image', 
+                          src: item, 
+                          eventTitle: event.title,
+                          allItems: event.galleryImages,
+                          currentIndex: index
+                        })}
                       >
                         {isVideo(item) ? (
                           <div className="relative w-full h-full">
@@ -280,41 +312,81 @@ const ProjectDetails = () => {
         </div>
       </section>
 
-      {/* Lightbox */}
+      {/* Enhanced Lightbox with Navigation */}
       {lightbox && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm"
           onClick={() => setLightbox(null)}
         >
+          {/* Close Button (X) - Top Right */}
           <button
-            aria-label="Close"
-            className="absolute top-6 right-6 text-white text-4xl leading-none hover:scale-110 transition-transform"
+            aria-label="Close gallery"
+            className="absolute top-6 right-6 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-light transition-all hover:scale-110 border border-white/30"
             onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
           >
-            ×
+            ✕
           </button>
+          
+          {/* Event Title & Counter - Top Left */}
           {lightbox.eventTitle && (
-            <div className="absolute top-6 left-6 text-white text-lg font-semibold">
-              {lightbox.eventTitle}
+            <div className="absolute top-6 left-6 z-10 text-white">
+              <p className="text-sm text-white/70">Event Gallery</p>
+              <p className="text-lg font-semibold">{lightbox.eventTitle}</p>
+              {lightbox.allItems && lightbox.currentIndex !== undefined && (
+                <p className="text-sm text-white/70 mt-1">
+                  {lightbox.currentIndex + 1} / {lightbox.allItems.length}
+                </p>
+              )}
             </div>
           )}
-          {lightbox.type === 'image' ? (
-            <img
-              src={lightbox.src}
-              alt="Preview"
-              className="max-w-[92%] max-h-[92%] object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
-          ) : (
-            <video
-              src={lightbox.src}
-              controls
-              autoPlay
-              playsInline
-              className="max-w-[92%] max-h-[92%] object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
+          
+          {/* Previous Arrow - Left Side */}
+          {lightbox.allItems && lightbox.allItems.length > 1 && (
+            <button
+              aria-label="Previous image"
+              className="absolute left-6 z-10 w-14 h-14 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-all hover:scale-110 border border-white/30"
+              onClick={(e) => { e.stopPropagation(); navigateGallery('prev'); }}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
           )}
+          
+          {/* Next Arrow - Right Side */}
+          {lightbox.allItems && lightbox.allItems.length > 1 && (
+            <button
+              aria-label="Next image"
+              className="absolute right-6 z-10 w-14 h-14 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-all hover:scale-110 border border-white/30"
+              onClick={(e) => { e.stopPropagation(); navigateGallery('next'); }}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          )}
+          
+          {/* Main Content (Image or Video) */}
+          <div className="relative max-w-[85%] max-h-[85%]">
+            {lightbox.type === 'image' ? (
+              <img
+                src={lightbox.src}
+                alt="Gallery preview"
+                className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              />
+            ) : (
+              <video
+                key={lightbox.src}
+                src={lightbox.src}
+                controls
+                autoPlay
+                playsInline
+                className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              />
+            )}
+          </div>
         </div>
       )}
 
