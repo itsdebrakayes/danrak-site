@@ -9,30 +9,44 @@ import Footer from '@/components/sections/Footer';
 import "swiper/css";
 
 const Showcase = () => {
-  const [activeProject, setActiveProject] = useState(projects[0]);
+  // Canonical service order (must match the suite of services)
+  const servicesOrder = [
+    'corporate-communications',
+    'campaign-development',
+    'project-event-planning',
+    'video-tv-production',
+    'on-air-talent'
+  ];
+
+  // Pick one representative project per service (fall back to first project if not found)
+  const showcaseProjects = servicesOrder.map((svcId) => projects.find(p => p.serviceId === svcId) || projects[0]);
+
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [displayedProjects, setDisplayedProjects] = useState(projects.slice(1, 4));
+  const [activeProject, setActiveProject] = useState(showcaseProjects[0]);
+  // show the next 3 projects as the small cards on the right (preserve original layout)
+  const [displayedProjects, setDisplayedProjects] = useState(showcaseProjects.slice(1, 4));
 
   const updateDisplayedProjects = (newIndex: number) => {
-    const upcoming = [];
+    const upcoming: typeof showcaseProjects = [] as any;
     for (let i = 1; i <= 3; i++) {
-      const index = (newIndex + i) % projects.length;
-      upcoming.push(projects[index]);
+      const idx = (newIndex + i) % showcaseProjects.length;
+      upcoming.push(showcaseProjects[idx]);
     }
     setDisplayedProjects(upcoming);
   };
 
   const handleSlideClick = (clickedIndex: number) => {
-    const newActiveIndex = (currentIndex + clickedIndex + 1) % projects.length;
+    // clickedIndex refers to index within displayedProjects (0..2)
+    const newActiveIndex = (currentIndex + clickedIndex + 1) % showcaseProjects.length;
     setCurrentIndex(newActiveIndex);
-    setActiveProject(projects[newActiveIndex]);
+    setActiveProject(showcaseProjects[newActiveIndex]);
     updateDisplayedProjects(newActiveIndex);
   };
 
   // Preload only the first few images to avoid heavy initial work
   useEffect(() => {
     const preloadImages = () => {
-      projects.slice(0, 4).forEach(project => {
+      showcaseProjects.forEach(project => {
         const img = new Image();
         img.src = project.image;
       });
@@ -41,7 +55,7 @@ const Showcase = () => {
         const link = document.createElement('link');
         link.rel = 'preload';
         link.as = 'image';
-        link.href = projects[0].image;
+        link.href = showcaseProjects[0].image;
         link.crossOrigin = 'anonymous';
         document.head.appendChild(link);
       } catch (e) {
@@ -49,10 +63,16 @@ const Showcase = () => {
       }
     };
     preloadImages();
+  }, [showcaseProjects]);
+
+  // Initialize displayedProjects on mount to keep the 1-feature + 3-upcoming layout
+  useEffect(() => {
+    updateDisplayedProjects(currentIndex);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Load dynamic background only after image decoded to avoid jank
-  const [bgSrc, setBgSrc] = useState<string | null>(projects[0].image);
+  const [bgSrc, setBgSrc] = useState<string | null>(showcaseProjects[0].image);
   useEffect(() => {
     let mounted = true;
     const img = new Image();
@@ -64,9 +84,7 @@ const Showcase = () => {
   }, [activeProject]);
 
   // Initialize visible slides and displayed projects on mount
-  useEffect(() => {
-    updateDisplayedProjects(currentIndex);
-  }, [currentIndex]);
+  // displayedProjects is derived from showcaseProjects and kept in sync by handlers
 
   // Auto-advance carousel every 15 seconds; pause on hover and reset after user action
   const pauseRef = useRef(false);
@@ -74,8 +92,8 @@ const Showcase = () => {
 
   const advance = (manual = false) => {
     setCurrentIndex(prev => {
-      const newIdx = (prev + 1) % projects.length;
-      setActiveProject(projects[newIdx]);
+      const newIdx = (prev + 1) % showcaseProjects.length;
+      setActiveProject(showcaseProjects[newIdx]);
       updateDisplayedProjects(newIdx);
       return newIdx;
     });
@@ -201,7 +219,10 @@ const Showcase = () => {
                 return (
                   <motion.div
                     key={project.id}
-                    className="relative bg-white/10 rounded-2xl overflow-hidden shadow-xl border border-white/20 hover:bg-white/20 cursor-pointer w-[700px] h-[450px]"
+                    className="relative bg-white/10 rounded-2xl overflow-hidden shadow-xl border border-white/20 cursor-pointer w-[700px] h-[450px]"
+                    whileHover={{ scale: 1.05, y: -8 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ 
@@ -212,9 +233,6 @@ const Showcase = () => {
                     onClick={() => { handleSlideClick(index); scheduleNext(); }}
                     onMouseEnter={() => { pauseRef.current = true; if (timeoutRef.current) { clearTimeout(timeoutRef.current); timeoutRef.current = null; } }}
                     onMouseLeave={() => { pauseRef.current = false; scheduleNext(); }}
-                    style={{ 
-                      transition: "all 0.3s ease"
-                    }}
                   >
                     {/* Background Image */}
                     <div className="absolute inset-0 z-0">
@@ -242,8 +260,7 @@ const Showcase = () => {
                       </div>
                     </div>
                     
-                    {/* Floating glow effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 rounded-2xl group-hover:opacity-80 transition-opacity duration-200" />
+                    {/* subtle hover should scale + raise (no tint overlay) */}
                   </motion.div>
                 );
               })}

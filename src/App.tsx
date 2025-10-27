@@ -29,7 +29,29 @@ const App = () => (
         <Sonner />
         <ThemeToggle />
         <BrowserRouter>
-          <Suspense fallback={<div aria-hidden className="min-h-screen flex items-center justify-center">Loading…</div>}>
+          <Suspense
+            fallback={
+              <div aria-hidden className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-black/80 to-black text-white">
+                <div className="container mx-auto px-6">
+                  <div className="flex flex-col lg:flex-row gap-8 items-start">
+                    {/* Left skeleton */}
+                    <div className="w-full lg:w-1/2 space-y-4">
+                      <div className="h-8 bg-white/10 rounded-full w-3/5 animate-pulse" />
+                      <div className="h-12 bg-white/8 rounded-lg w-full animate-pulse" />
+                      <div className="h-6 bg-white/6 rounded w-5/6 animate-pulse" />
+                      <div className="h-6 bg-white/6 rounded w-2/3 animate-pulse" />
+                    </div>
+                    {/* Right skeleton - row of cards */}
+                    <div className="w-full lg:w-1/2 flex gap-4 overflow-hidden">
+                      {Array.from({ length: 3 }).map((_, i) => (
+                        <div key={i} className="flex-1 h-40 sm:h-48 md:h-56 bg-white/6 rounded-2xl animate-pulse" />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+          >
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/project/:id" element={<ProjectDetails />} />

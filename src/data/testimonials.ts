@@ -16,7 +16,6 @@ export const testimonials: Testimonial[] = [
     clientTitle: "CEO, Access Financial",
     content: "DanRak Productions delivered an exceptional event that exceeded all our expectations. Their attention to detail and creative vision brought our 25th anniversary celebration to life.",
     date: "2025",
-    projectId: "access-fin"
   },
   {
     id: "testimonial-2",
@@ -31,7 +30,6 @@ export const testimonials: Testimonial[] = [
     clientTitle: "Marketing Director, Port Authority",
     content: "The groundbreaking ceremony was a huge success thanks to DanRak Productions. They created an atmosphere that honored our heritage while celebrating our future.",
     date: "2025",
-    projectId: "port-authority"
   },
   {
     id: "testimonial-4",
@@ -39,6 +37,5 @@ export const testimonials: Testimonial[] = [
     clientTitle: "Producer, Faith Moves",
     content: "DanRak's production expertise transformed our vision into reality. The quality and storytelling were exceptional.",
     date: "2025",
-    projectId: "faith-moves"
   },
 ];
