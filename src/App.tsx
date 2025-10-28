@@ -55,11 +55,11 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/project/:id" element={<ProjectDetails />} />
-              {/* Redirect all main page routes to Index with hash navigation */}
-              <Route path="/home" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/showcase" element={<Showcase />} />
+              {/* Render main page routes via Index (Swiper) */}
+              <Route path="/home" element={<Index />} />
+              <Route path="/about" element={<Index />} />
+              <Route path="/contact" element={<Index />} />
+              <Route path="/showcase" element={<Index />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
