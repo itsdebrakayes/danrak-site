@@ -76,7 +76,10 @@ Clients Served and Related Projects:
         title: "Ministry of Education, Skills, Youth and Information",
         galleryImages: [
           "/src/assets/ministry-education-gallery-1.jpg",
-          "/src/assets/ministry-education-gallery-2.jpg"
+          "/src/assets/ministry-education-gallery-2.jpg",
+          "/src/assets/ministry-education-gallery-3.jpg",
+          "/src/assets/ministry-education-gallery-4.jpg",
+          "/src/assets/ministry-education-gallery-5.jpg"
         ]
       },
       {
@@ -86,7 +89,8 @@ Clients Served and Related Projects:
           "/src/assets/port-authority-content1.jpeg",
           "/src/assets/port-authority-content2.jpeg",
           "/src/assets/port-authority-content3.jpeg",
-          "/src/assets/port-authority-gallery-1.jpg"
+          "/src/assets/port-authority-gallery-1.jpg",
+          "/src/assets/port-authority-gallery-2.jpg"
         ]
       }
     ],
@@ -265,8 +269,8 @@ Clients Served and Related Projects:
         id: "its-a-womans-world-featured",
         title: "It's A Woman's World",
         featured: true,
-        headerImage: "/src/assets/IAWW-cover.jpg",
-        description: `It's A Woman's World – TV Done Right!
+        headerImage: "/src/assets/faith-moves-content1.jpg",
+        description: `**It's A Woman's World – TV Done Right!**
 This syndicated TV talk show enchanted audiences across the Caribbean for two seasons. Six months after its premier in Jamaica in February 2019, the show was picked up across more than 20 Caribbean markets and 8 North American cities, including New York, Boston, Washington DC, Toronto and Vancouver. Riding that momentum, Season 2 did not disappoint in 2020, consistently securing a Top 10 ranking across all 21 Caribbean territories on the FLOW platform.
 
 Described as fresh, first-world and fun, this Danrak exclusive television presentation generated conversation online and among TV audiences, focusing on issues that affect women and families. Co-hosts Stacy-Ann Smith, Ty Williams and Kerine Muir enchanted viewers with their natural delivery and easy conversations. Besides the content, It's A Woman's World created a reputation for set design that was simple, yet sophisticated and as aesthetically pleasing as the hosts!`,
