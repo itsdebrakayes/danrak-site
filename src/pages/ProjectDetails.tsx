@@ -202,7 +202,7 @@ const ProjectDetails = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="lg:sticky lg:top-24 space-y-8"
             >
-              {/* Testimonials Section */}
+              {/* ========== TESTIMONIALS SECTION - COMMENTED OUT ==========
               <div>
                 <h3 className="text-2xl font-bold mb-6">Testimonials</h3>
                 
@@ -261,6 +261,7 @@ const ProjectDetails = () => {
                   ))}
                 </div>
               </div>
+              ========== END TESTIMONIALS SECTION ========== */}
 
               {/* Breaking News Section */}
               {project.newspaperClippings && project.newspaperClippings.length > 0 && (
@@ -270,7 +271,7 @@ const ProjectDetails = () => {
                     <h3 className="text-2xl font-bold">Breaking News</h3>
                   </div>
                   
-                  <div className="max-h-[calc(50vh-4rem)] overflow-y-auto space-y-4 pr-2 custom-scrollbar">
+                  <div className="max-h-[calc(50vh-4rem)] overflow-y-auto space-y-6 pr-2 custom-scrollbar">
                     {project.newspaperClippings.map((clipping, index) => (
                       <motion.a
                         key={index}
@@ -280,25 +281,44 @@ const ProjectDetails = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                        className="block group"
+                        className="block group relative"
                       >
-                        <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 border-border/50 hover:border-primary/50 cursor-pointer">
-                          <CardContent className="p-0 relative">
-                            <img
-                              src={clipping.image}
-                              alt={clipping.title || "Newspaper clipping"}
-                              className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-end p-4">
-                              <ExternalLink className="w-6 h-6 text-white" />
-                            </div>
-                            {clipping.title && (
-                              <div className="p-3 bg-muted/50">
-                                <p className="text-xs font-medium line-clamp-2">{clipping.title}</p>
+                        {/* Neon Glow Effect Container */}
+                        <div className="relative rounded-xl overflow-hidden">
+                          {/* Animated Neon Border Glow */}
+                          <div className="absolute -inset-1 bg-gradient-to-r from-primary via-primary/50 to-primary rounded-xl opacity-0 group-hover:opacity-75 blur-lg transition-all duration-500 group-hover:duration-300 animate-pulse" />
+                          
+                          {/* Card with Image */}
+                          <Card className="relative overflow-hidden border-2 border-border/50 group-hover:border-primary/80 transition-all duration-300 shadow-lg group-hover:shadow-2xl">
+                            <CardContent className="p-0 relative">
+                              {/* Newspaper Clipping Image */}
+                              <div className="relative overflow-hidden bg-muted/20">
+                                <img
+                                  src={clipping.image}
+                                  alt={clipping.title || "Newspaper clipping"}
+                                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                                />
+                                
+                                {/* Dark Overlay on Hover with External Link Icon */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                  <div className="flex flex-col items-center gap-2">
+                                    <ExternalLink className="w-8 h-8 text-white drop-shadow-lg" />
+                                    <span className="text-white text-sm font-medium">Read Article</span>
+                                  </div>
+                                </div>
                               </div>
-                            )}
-                          </CardContent>
-                        </Card>
+                              
+                              {/* Title Badge (if available) */}
+                              {clipping.title && (
+                                <div className="p-3 bg-gradient-to-r from-muted/80 to-muted/50 backdrop-blur-sm">
+                                  <p className="text-sm font-medium line-clamp-2 text-foreground/90">
+                                    {clipping.title}
+                                  </p>
+                                </div>
+                              )}
+                            </CardContent>
+                          </Card>
+                        </div>
                       </motion.a>
                     ))}
                   </div>
