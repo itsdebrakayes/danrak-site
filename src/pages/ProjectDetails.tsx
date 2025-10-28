@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { projects } from "../data/projects";
@@ -23,6 +23,8 @@ const ProjectDetails = () => {
     allItems?: string[];
     currentIndex?: number;
   }>(null);
+
+  const videoRef = useRef<HTMLIFrameElement>(null);
 
   // Navigation handler for gallery
   const navigateGallery = (direction: 'prev' | 'next') => {
@@ -51,6 +53,37 @@ const ProjectDetails = () => {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [lightbox]);
+
+  // Intersection Observer for YouTube autoplay
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (!videoElement) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Video is in view - autoplay by updating src with autoplay parameter
+            const currentSrc = videoElement.src;
+            if (!currentSrc.includes('autoplay=1')) {
+              videoElement.src = currentSrc.includes('?') 
+                ? `${currentSrc}&autoplay=1&mute=1`
+                : `${currentSrc}?autoplay=1&mute=1`;
+            }
+          }
+        });
+      },
+      { threshold: 0.5 } // Trigger when 50% of video is visible
+    );
+
+    observer.observe(videoElement);
+
+    return () => {
+      if (videoElement) {
+        observer.unobserve(videoElement);
+      }
+    };
+  }, [project?.events]);
 
   if (!project) {
     return (
@@ -183,8 +216,9 @@ const ProjectDetails = () => {
                         <div className="rounded-2xl overflow-hidden shadow-2xl bg-black">
                           <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                             <iframe
+                              ref={videoRef}
                               className="absolute top-0 left-0 w-full h-full"
-                              src={`https://www.youtube.com/embed/${event.youtubeUrl}?rel=0`}
+                              src={`https://www.youtube.com/embed/${event.youtubeUrl}?rel=0&enablejsapi=1`}
                               title={event.title}
                               frameBorder="0"
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -286,43 +320,23 @@ const ProjectDetails = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                        className="block group relative"
+                        className="block group relative rounded-xl overflow-hidden"
                       >
-                        {/* Neon Glow Effect Container */}
-                        <div className="relative rounded-xl overflow-hidden">
-                          {/* Animated Neon Border Glow */}
-                          <div className="absolute -inset-1 bg-gradient-to-r from-primary via-primary/50 to-primary rounded-xl opacity-0 group-hover:opacity-75 blur-lg transition-all duration-500 group-hover:duration-300 animate-pulse" />
+                        {/* Image Container */}
+                        <div className="relative overflow-hidden">
+                          <img
+                            src={clipping.image}
+                            alt={clipping.title || "Newspaper clipping"}
+                            className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
+                          />
                           
-                          {/* Card with Image */}
-                          <Card className="relative overflow-hidden border-2 border-border/50 group-hover:border-primary/80 transition-all duration-300 shadow-lg group-hover:shadow-2xl">
-                            <CardContent className="p-0 relative">
-                              {/* Newspaper Clipping Image */}
-                              <div className="relative overflow-hidden bg-muted/20">
-                                <img
-                                  src={clipping.image}
-                                  alt={clipping.title || "Newspaper clipping"}
-                                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
-                                />
-                                
-                                {/* Dark Overlay on Hover with External Link Icon */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                  <div className="flex flex-col items-center gap-2">
-                                    <ExternalLink className="w-8 h-8 text-white drop-shadow-lg" />
-                                    <span className="text-white text-sm font-medium">Read Article</span>
-                                  </div>
-                                </div>
-                              </div>
-                              
-                              {/* Title Badge (if available) */}
-                              {clipping.title && (
-                                <div className="p-3 bg-gradient-to-r from-muted/80 to-muted/50 backdrop-blur-sm">
-                                  <p className="text-sm font-medium line-clamp-2 text-foreground/90">
-                                    {clipping.title}
-                                  </p>
-                                </div>
-                              )}
-                            </CardContent>
-                          </Card>
+                          {/* Dark Overlay on Hover with External Link Icon */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <div className="flex flex-col items-center gap-2">
+                              <ExternalLink className="w-8 h-8 text-white drop-shadow-lg" />
+                              <span className="text-white text-sm font-medium">Read Article</span>
+                            </div>
+                          </div>
                         </div>
                       </motion.a>
                     ))}
