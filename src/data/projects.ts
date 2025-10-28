@@ -76,7 +76,8 @@ Clients Served and Related Projects:
         title: "Ministry of Education, Skills, Youth and Information",
         galleryImages: [
           "/src/assets/ministry-education-gallery-1.jpg",
-          "/src/assets/ministry-education-gallery-2.jpg"
+          "/src/assets/ministry-education-gallery-2.jpg",
+          "/src/assets/ministry-education-gallery-3.jpg"
         ]
       },
       {
@@ -86,7 +87,8 @@ Clients Served and Related Projects:
           "/src/assets/port-authority-content1.jpeg",
           "/src/assets/port-authority-content2.jpeg",
           "/src/assets/port-authority-content3.jpeg",
-          "/src/assets/port-authority-gallery-1.jpg"
+          "/src/assets/port-authority-gallery-1.jpg",
+          "/src/assets/port-authority-gallery-2.jpg"
         ]
       }
     ],
