@@ -134,33 +134,6 @@ const ProjectDetails = () => {
                 </p>
               </div>
             </motion.div>
-
-            {/* Event Sections */}
-            {project.events.map((event, index) => (
-              <motion.div
-                key={event.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                className="space-y-6 py-8 border-t border-border"
-              >
-                {/* Event Header Image */}
-                <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/50 to-muted/20 shadow-xl">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-auto max-h-[400px] object-contain cursor-zoom-in"
-                    onClick={() => setLightbox({ type: 'image', src: event.image, eventTitle: event.title })}
-                  />
-                </div>
-
-                {/* Event Title and Description */}
-                <h3 className="text-3xl font-bold">{event.title}</h3>
-                <p className="text-lg leading-relaxed text-foreground/90">
-                  {event.description}
-                </p>
-              </motion.div>
-            ))}
           </div>
 
           {/* Testimonials Sidebar */}
