@@ -251,15 +251,32 @@ All colors MUST be HSL.
   /* Swiper navigation fixes */
   .swiper-button-next,
   .swiper-button-prev {
-    z-index: 50 !important;
+    z-index: 9998 !important;
     color: hsl(var(--brand-crimson)) !important;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
+    opacity: 1 !important;
+    transition: all 0.3s ease;
+    background: hsl(var(--background) / 0.8) !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    backdrop-filter: blur(10px);
+    border: 2px solid hsl(var(--brand-crimson) / 0.5) !important;
   }
 
   .swiper-button-next:hover,
   .swiper-button-prev:hover {
     opacity: 1;
+    background: hsl(var(--brand-crimson) / 0.2) !important;
+    border-color: hsl(var(--brand-crimson)) !important;
+    transform: scale(1.1);
+  }
+
+  /* Ensure arrow icons are visible */
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 20px !important;
+    font-weight: bold !important;
+    color: hsl(var(--brand-crimson)) !important;
   }
 
   /* Ensure Swiper navigation doesn't fall off on About page */
