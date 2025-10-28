@@ -32,7 +32,26 @@ export const projects: Project[] = [
     carouselImage: "/src/assets/corporate-comms-carousel.png",
     backgroundImage: "/src/assets/corporate-comms-background.png",
     excerpt: "Strategic communications, PR storytelling, and corporate events.",
-    serviceDescription: "Corporate communications and PR for major launches, reputation management, and stakeholder engagement.",
+    serviceDescription: `With the weight of more than 20 years of experience, we offer a full suite of corporate communications services to provide our clients with insights and support the advancement of their goals, developing and effectively deploying strategic communications and PR storytelling.
+
+Our range of services includes strategy development, tailored action plans that support marketing and improve brand visibility, strategic counselling, crisis communications and the production of annual reports that meet the exacting regulatory standards of the Jamaica Stock Exchange and the Bank of Jamaica.
+
+Services at a glance:
+• Strategic Communications
+• Public Relations
+• Media Relations
+• Internal Communications
+• Crisis Communications
+• Change and Comms
+• Stakeholder Management
+• Government Engagement
+• Copy writing and editing
+
+Clients Served and Related Projects:
+• Access Financial Services – Full Service
+• Port Authority of Jamaica – PAJ Media Open Day
+• Wisynco Group Limited – 2025 Annual Report
+• Dunlop Corbin Communications – EU Citizens Security Plan`,
     events: [
       {
         id: "access-fin-launch",
