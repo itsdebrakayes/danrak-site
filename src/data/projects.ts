@@ -89,6 +89,61 @@ Clients Served and Related Projects:
         image: "/src/assets/breaking-news2.png",
         url: "https://www.jamaicaobserver.com/2025/05/25/nine-childrens-homes-benefit-access-financials-6-5m-social-responsibility-initiative/",
         title: "Port Authority Groundbreaking News"
+      },
+      {
+        image: "/src/assets/breaking-news3.png",
+        url: "https://jamaica-gleaner.com/article/lifestyle/20250913/goodheart-selling-sweets-higher-purpose-and-education",
+        title: "Goodheart Selling Sweets for a Higher Purpose"
+      },
+      {
+        image: "/src/assets/breaking-news4.png",
+        url: "https://jamaica-gleaner.com/article/lead-stories/20240605/shirley-projects-us20m-yearlong-repair-timeline-ocho-rios-cruise",
+        title: "Shirley Projects US$20M Yearlong Repair Timeline for Ocho Rios Cruise"
+      },
+      {
+        image: "/src/assets/breaking-news5.png",
+        url: "https://jis.gov.jm/disney-treasure-makes-inaugural-call-at-falmouth-cruise-port/",
+        title: "Disney Treasure Makes Inaugural Call at Falmouth Cruise Port"
+      },
+      {
+        image: "/src/assets/breaking-news6.png",
+        url: "https://jamaica-gleaner.com/article/lead-stories/20250201/new-learning-development-policy-aimed-public-sector-transformation",
+        title: "New Learning & Development Policy Aimed at Public Sector Transformation"
+      },
+      {
+        image: "/src/assets/breaking-news7.png",
+        url: "https://jis.gov.jm/new-policy-a-game-changer-for-public-sector-professional-development/",
+        title: "New Policy a Game Changer for Public Sector Professional Development"
+      },
+      {
+        image: "/src/assets/breaking-news8.png",
+        url: "https://jamaica-gleaner.com/article/news/20231123/working-mom-urges-parents-invest-their-childrens-education",
+        title: "Working Mom Urges Parents to Invest in Their Children's Education"
+      },
+      {
+        image: "/src/assets/breaking-news9.png",
+        url: "https://jamaica-gleaner.com/article/news/20240628/jbdc-and-access-financial-services-sign-mou",
+        title: "JBDC and Access Financial Services Sign MOU"
+      },
+      {
+        image: "/src/assets/breaking-news10.png",
+        url: "https://www.jamaicaobserver.com/allwoman/2024/10/27/take-nothing-granted/",
+        title: "Take Nothing for Granted"
+      },
+      {
+        image: "/src/assets/breaking-news11.png",
+        url: "https://jamaica-gleaner.com/article/news/20231109/students-role-education-sectors-transformation-underscored",
+        title: "Students' Role in Education Sector's Transformation Underscored"
+      },
+      {
+        image: "/src/assets/breaking-news12.png",
+        url: "https://jamaica-gleaner.com/article/news/20231020/ministry-launch-communication-campaign-education-transformation",
+        title: "Ministry Launch Communication Campaign for Education Transformation"
+      },
+      {
+        image: "/src/assets/breaking-news13.png",
+        url: "https://jamaica-gleaner.com/article/news/20230701/mckenzie-hails-access-financials-poverty-reduction-initiative",
+        title: "McKenzie Hails Access Financial's Poverty Reduction Initiative"
       }
     ]
   },
