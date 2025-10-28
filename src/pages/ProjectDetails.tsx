@@ -129,7 +129,7 @@ const ProjectDetails = () => {
               </div>
               
               <div className="prose prose-lg dark:prose-invert max-w-none">
-                <p className="text-lg leading-relaxed text-foreground/90">
+                <p className="text-lg leading-relaxed text-foreground/90 whitespace-pre-line">
                   {project.serviceDescription}
                 </p>
               </div>
