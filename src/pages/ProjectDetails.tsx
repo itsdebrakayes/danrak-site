@@ -288,9 +288,6 @@ const ProjectDetails = () => {
                         transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
                         className="block group relative rounded-xl overflow-hidden"
                       >
-                        {/* Animated Neon Border Glow */}
-                        <div className="absolute -inset-1 bg-gradient-to-r from-primary via-primary/50 to-primary rounded-xl opacity-0 group-hover:opacity-75 blur-lg transition-all duration-500 group-hover:duration-300 animate-pulse" />
-                        
                         {/* Image Container */}
                         <div className="relative overflow-hidden">
                           <img
