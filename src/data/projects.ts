@@ -246,16 +246,29 @@ Clients Served and Related Projects:
 • Access Financial Services – 25th Anniversary Celebrations
 • Port Authority of Jamaica – Diplomatic Week 2025
 • Dunlop Corbin Communications – Opening of St. James Child & Adolescent Wellness Centre`,
-    events: [
-      {
-        id: "major-gala-production",
-        title: "Major Gala Production",
-        galleryImages: [
-          "/src/assets/port-authority-content1.jpeg",
-          "/src/assets/port-authority-content2.jpeg"
-        ]
-      }
-    ],
+      events: [
+        {
+          id: "afs-marcus-james-scholarship",
+          title: "AFS Marcus James Scholarship for Entrepreneurship Ceremony",
+          galleryImages: [
+            "/src/assets/afs-marcus-1.jpg",
+            "/src/assets/afs-marcus-2.jpg",
+            "/src/assets/afs-marcus-3.jpg",
+            "/src/assets/afs-marcus-4.jpg",
+            "/src/assets/afs-marcus-5.jpg",
+            "/src/assets/afs-marcus-6.jpg",
+            "/src/assets/afs-marcus-7.jpg",
+            "/src/assets/afs-marcus-8.jpg"
+          ]
+        },
+        {
+          id: "afs-25th-anniversary-gala",
+          title: "AFS 25th Anniversary Gala and Awards Ceremony",
+          galleryImages: [
+            "/src/assets/afs-25th-1.jpg"
+          ]
+        }
+      ],
     category: "Event Management",
     date: "2024-2025"
   },
