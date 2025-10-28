@@ -201,7 +201,7 @@ Clients Served and Related Projects:
 This syndicated TV talk show enchanted audiences across the Caribbean for two seasons. Six months after its premier in Jamaica in February 2019, the show was picked up across more than 20 Caribbean markets and 8 North American cities, including New York, Boston, Washington DC, Toronto and Vancouver. Riding that momentum, Season 2 did not disappoint in 2020, consistently securing a Top 10 ranking across all 21 Caribbean territories on the FLOW platform.
 
 Described as fresh, first-world and fun, this Danrak exclusive television presentation generated conversation online and among TV audiences, focusing on issues that affect women and families. Co-hosts Stacy-Ann Smith, Ty Williams and Kerine Muir enchanted viewers with their natural delivery and easy conversations. Besides the content, It's A Woman's World created a reputation for set design that was simple, yet sophisticated and as aesthetically pleasing as the hosts!`,
-        youtubeUrl: "https://youtu.be/A4vjboa60DA?si=lhx5M-PwpeOP-icd",
+        youtubeUrl: "A4vjboa60DA",
         galleryImages: []
       },
       {
