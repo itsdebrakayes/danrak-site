@@ -11,6 +11,11 @@ const ProjectDetails = () => {
   const { id } = useParams();
   const project = projects.find((p) => p.id === id);
   const projectTestimonials = testimonials.filter(t => !t.projectId || t.projectId === id);
+  
+  // Collect all newspaper clippings from all projects
+  const allNewspaperClippings = projects
+    .filter(p => p.newspaperClippings && p.newspaperClippings.length > 0)
+    .flatMap(p => p.newspaperClippings || []);
   const [lightbox, setLightbox] = useState<null | { 
     type: 'image' | 'video'; 
     src: string; 
@@ -264,7 +269,7 @@ const ProjectDetails = () => {
               ========== END TESTIMONIALS SECTION ========== */}
 
               {/* Breaking News Section */}
-              {project.newspaperClippings && project.newspaperClippings.length > 0 && (
+              {allNewspaperClippings.length > 0 && (
                 <div>
                   <div className="flex items-center gap-2 mb-6">
                     <Newspaper className="w-6 h-6 text-primary" />
@@ -272,7 +277,7 @@ const ProjectDetails = () => {
                   </div>
                   
                   <div className="max-h-[calc(50vh-4rem)] overflow-y-auto space-y-6 pr-2 custom-scrollbar">
-                    {project.newspaperClippings.map((clipping, index) => (
+                    {allNewspaperClippings.map((clipping, index) => (
                       <motion.a
                         key={index}
                         href={clipping.url}
