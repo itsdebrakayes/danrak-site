@@ -86,8 +86,8 @@ Clients Served and Related Projects:
         title: "Access Financial 25th Anniversary Coverage"
       },
       {
-        image: "/src/assets/port-authority-content1.jpeg",
-        url: "https://example.com/article2",
+        image: "/src/assets/breaking-news2.png",
+        url: "https://www.jamaicaobserver.com/2025/05/25/nine-childrens-homes-benefit-access-financials-6-5m-social-responsibility-initiative/",
         title: "Port Authority Groundbreaking News"
       }
     ]
