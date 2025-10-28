@@ -134,6 +134,64 @@ const ProjectDetails = () => {
                 </p>
               </div>
             </motion.div>
+
+            {/* Featured Events Section */}
+            {project.events.some(event => event.featured) && (
+              <>
+                {project.events
+                  .filter(event => event.featured)
+                  .map((event, index) => (
+                    <motion.div
+                      key={event.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                      className="space-y-6 border-t border-border/50 pt-12"
+                    >
+                      {/* Featured Event Header */}
+                      <h2 className="text-3xl md:text-4xl font-bold text-primary">
+                        {event.title}
+                      </h2>
+                      
+                      {/* Featured Event Header Image */}
+                      {event.headerImage && (
+                        <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-muted/50 to-muted/20 shadow-2xl">
+                          <img
+                            src={event.headerImage}
+                            alt={event.title}
+                            className="w-full h-auto max-h-[400px] object-cover"
+                          />
+                        </div>
+                      )}
+                      
+                      {/* Featured Event Description */}
+                      {event.description && (
+                        <div className="prose prose-lg dark:prose-invert max-w-none">
+                          <p className="text-lg leading-relaxed text-foreground/90 whitespace-pre-line">
+                            {event.description}
+                          </p>
+                        </div>
+                      )}
+                      
+                      {/* Featured Event YouTube Embed */}
+                      {event.youtubeUrl && (
+                        <div className="rounded-2xl overflow-hidden shadow-2xl bg-black">
+                          <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                            <iframe
+                              className="absolute top-0 left-0 w-full h-full"
+                              src={`https://www.youtube.com/embed/${event.youtubeUrl}?rel=0`}
+                              title={event.title}
+                              frameBorder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </motion.div>
+                  ))}
+              </>
+            )}
           </div>
 
           {/* Testimonials Sidebar */}
@@ -217,7 +275,7 @@ const ProjectDetails = () => {
             <h2 className="text-3xl md:text-4xl font-bold">Gallery</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {project.events.map((event, eventIndex) => (
+              {project.events.filter(event => !event.featured).map((event, eventIndex) => (
                 <div key={event.id} className="space-y-4">
                   <h3 className="text-xl font-bold text-primary">{event.title}</h3>
                   <div className="grid grid-cols-2 gap-3">
