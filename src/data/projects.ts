@@ -265,7 +265,7 @@ Clients Served and Related Projects:
         id: "its-a-womans-world-featured",
         title: "It's A Woman's World",
         featured: true,
-        headerImage: "/src/assets/faith-moves-content1.jpg",
+        headerImage: "/src/assets/IAWW-cover.jpg",
         description: `It's A Woman's World – TV Done Right!
 This syndicated TV talk show enchanted audiences across the Caribbean for two seasons. Six months after its premier in Jamaica in February 2019, the show was picked up across more than 20 Caribbean markets and 8 North American cities, including New York, Boston, Washington DC, Toronto and Vancouver. Riding that momentum, Season 2 did not disappoint in 2020, consistently securing a Top 10 ranking across all 21 Caribbean territories on the FLOW platform.
 
