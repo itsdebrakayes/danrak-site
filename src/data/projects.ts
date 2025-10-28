@@ -214,14 +214,6 @@ Clients Served and Related Projects:
           "/src/assets/eu-jamaica-gallery-3.jpg",
           "/src/assets/eu-jamaica-gallery-4.jpg"
         ]
-      },
-      {
-        id: "national-honors-campaign",
-        title: "National Honors Campaign",
-        galleryImages: [
-          "/src/assets/honors-awards-content2.jpg",
-          "/src/assets/honors-awards-content3.mp4"
-        ]
       }
     ],
     category: "Campaigns",
