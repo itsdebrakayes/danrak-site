@@ -321,7 +321,7 @@ const ProjectDetails = () => {
           {/* Close Button (X) - Top Right */}
           <button
             aria-label="Close gallery"
-            className="absolute top-6 right-6 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-light transition-all hover:scale-110 border border-white/30"
+            className="absolute top-20 right-6 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-light transition-all hover:scale-110 border border-white/30"
             onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
           >
             ✕
