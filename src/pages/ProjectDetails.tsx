@@ -67,8 +67,8 @@ const ProjectDetails = () => {
             const currentSrc = videoElement.src;
             if (!currentSrc.includes('autoplay=1')) {
               videoElement.src = currentSrc.includes('?') 
-                ? `${currentSrc}&autoplay=1&mute=1`
-                : `${currentSrc}?autoplay=1&mute=1`;
+                ? `${currentSrc}&autoplay=1&mute=0`
+                : `${currentSrc}?autoplay=1&mute=0`;
             }
           }
         });
