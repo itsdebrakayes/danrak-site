@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { projects } from "../data/projects";
 import { Button } from "@/components/ui/button";
-import Header from '@/components/sections/Header';
 import Footer from '@/components/sections/Footer';
 import "swiper/css";
 
@@ -134,7 +133,6 @@ const Showcase = () => {
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
-      <Header variant="solid" />
       
       {/* Static Background Layer to prevent gray flash */}
       <div 

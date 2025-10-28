@@ -1,4 +1,3 @@
-import Header from '@/components/sections/Header';
 import Footer from '@/components/sections/Footer';
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -219,7 +218,6 @@ const AboutSection = () => {
 
 const About = () => (
   <div className="relative">
-    <Header /> 
     <AboutSection />
     <Footer />
   </div>

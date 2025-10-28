@@ -1,4 +1,3 @@
-import Header from '@/components/sections/Header';
 import Footer from '@/components/sections/Footer';
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
@@ -240,7 +239,6 @@ const ContactSection = () => {
 
 const Contact = () => (
   <div className="min-h-screen bg-background">
-    <Header />
     <main className="w-full">
       <ContactSection />
     </main>

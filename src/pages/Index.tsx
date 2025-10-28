@@ -7,6 +7,7 @@ import { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useHeaderVisibility } from '@/hooks/use-header-visibility';
 
+import Header from '@/components/sections/Header';
 import Home from './Home';
 import About from './About';
 import Showcase from './Showcase';
@@ -56,42 +57,45 @@ const Index = () => {
   };
 
   return (
-    <Swiper
-      ref={swiperRef}
-      direction="horizontal"
-      slidesPerView={1}
-      spaceBetween={0}
-      mousewheel={{
-        forceToAxis: true,
-        sensitivity: 1,
-        releaseOnEdges: true,
-      }}
-      keyboard={{
-        enabled: true,
-        onlyInViewport: true,
-      }}
-      pagination={{ clickable: true }}
-      navigation
-      modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-      className="h-screen w-screen"
-      allowTouchMove={true}
-      simulateTouch={true}
-      touchStartPreventDefault={false}
-      onSlideChange={handleSlideChange}
-    >
-      <SwiperSlide>
-        <Home />
-      </SwiperSlide>
-      <SwiperSlide>
-        <About />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Showcase />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Contact />
-      </SwiperSlide>
-    </Swiper>
+    <>
+      <Header />
+      <Swiper
+        ref={swiperRef}
+        direction="horizontal"
+        slidesPerView={1}
+        spaceBetween={0}
+        mousewheel={{
+          forceToAxis: true,
+          sensitivity: 1,
+          releaseOnEdges: true,
+        }}
+        keyboard={{
+          enabled: true,
+          onlyInViewport: true,
+        }}
+        pagination={{ clickable: true }}
+        navigation
+        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+        className="h-screen w-screen"
+        allowTouchMove={true}
+        simulateTouch={true}
+        touchStartPreventDefault={false}
+        onSlideChange={handleSlideChange}
+      >
+        <SwiperSlide>
+          <Home />
+        </SwiperSlide>
+        <SwiperSlide>
+          <About />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Showcase />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Contact />
+        </SwiperSlide>
+      </Swiper>
+    </>
   );
 };
 

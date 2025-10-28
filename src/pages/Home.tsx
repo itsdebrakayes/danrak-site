@@ -1,4 +1,3 @@
-import Header from '@/components/sections/Header';
 import Footer from '@/components/sections/Footer';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
@@ -136,7 +135,6 @@ const HeroSection = () => {
 
 const Home = () => (
   <div className="relative min-h-screen overflow-hidden">
-    <Header />
     <HeroSection />
     <Footer />
   </div>
