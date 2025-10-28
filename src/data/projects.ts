@@ -187,12 +187,13 @@ Services include:
 
 Clients Served and Related Projects:
 • Ministry of Education, Skills, Youth and Information - TREND
-• Dunlop Corbin Communications – EU/Jamaica Citizen Security Plan`,
+• EU/Jamaica Citizen Security Plan`,
     events: [
       {
         id: "trend-campaign",
         title: "Ministry of Education, Skills, Youth and Information - T.R.E.N.D Campaign",
         galleryImages: [
+          "/src/assets/trend-gallery-10.png",
           "/src/assets/trend-gallery-1.jpg",
           "/src/assets/trend-gallery-2.jpg",
           "/src/assets/trend-gallery-3.jpg",
@@ -201,8 +202,7 @@ Clients Served and Related Projects:
           "/src/assets/trend-gallery-6.jpg",
           "/src/assets/trend-gallery-7.jpg",
           "/src/assets/trend-gallery-8.jpg",
-          "/src/assets/trend-gallery-9.jpg",
-          "/src/assets/trend-gallery-10.png"
+          "/src/assets/trend-gallery-9.jpg"
         ]
       },
       {
