@@ -78,10 +78,11 @@ Clients Served and Related Projects:
     ],
     category: "Corporate Communications",
     date: "2024-2025",
+
     newspaperClippings: [
       {
-        image: "/src/assets/access-launch-content1.jpg",
-        url: "https://example.com/article1",
+        image: "/src/assets/breaking-news1.png",
+        url: "https://jamaica-gleaner.com/article/lead-stories/20250425/living-room-start-expanding-enterprise",
         title: "Access Financial 25th Anniversary Coverage"
       },
       {
