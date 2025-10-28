@@ -1,8 +1,6 @@
 export interface Event {
   id: string;
   title: string;
-  image: string;
-  description: string;
   galleryImages: string[];
 }
 
@@ -17,11 +15,7 @@ export interface Project {
   events: Event[];
   category: string;
   date: string;
-  // The canonical service this project represents (one of the five suite services)
   serviceId?: string;
-  // Deprecated - kept for backward compatibility
-  fullText?: string;
-  gallery?: string[];
 }
 export const projects: Project[] = [
   {
@@ -56,8 +50,6 @@ Clients Served and Related Projects:
       {
         id: "access-fin-launch",
         title: "Access Financial 25th Anniversary Launch",
-        image: "/src/assets/access-launch-cover.jpg",
-        description: "A milestone launch for Access Financial featuring a curated guest experience and branded production.",
         galleryImages: [
           "/src/assets/access-launch-content1.jpg",
           "/src/assets/access-launch-content2.jpg",
@@ -67,8 +59,6 @@ Clients Served and Related Projects:
       {
         id: "port-authority-groundbreaking",
         title: "Port Authority Groundbreaking Ceremony",
-        image: "/src/assets/port-authority-cover.jpeg",
-        description: "A high-profile ceremony with national leaders — careful protocol and immersive storytelling.",
         galleryImages: [
           "/src/assets/port-authority-content1.jpeg",
           "/src/assets/port-authority-content2.jpeg",
@@ -77,12 +67,7 @@ Clients Served and Related Projects:
       }
     ],
     category: "Corporate Communications",
-    date: "2024-2025",
-    fullText: "Our corporate communications work includes large-scale launches, reputation campaigns and executive communications.",
-    gallery: [
-      "/src/assets/access-launch-content1.jpg",
-      "/src/assets/access-launch-content2.jpg"
-    ]
+    date: "2024-2025"
   },
 
   {
@@ -98,8 +83,6 @@ Clients Served and Related Projects:
       {
         id: "national-honors-campaign",
         title: "National Honors Campaign",
-        image: "/src/assets/honors-awards-cover.jpg",
-        description: "A strategic campaign supporting an annual national honors & awards program.",
         galleryImages: [
           "/src/assets/honors-awards-content2.jpg",
           "/src/assets/honors-awards-content3.mp4"
@@ -107,11 +90,7 @@ Clients Served and Related Projects:
       }
     ],
     category: "Campaigns",
-    date: "2024",
-    fullText: "Campaign strategy and creative execution for public-facing initiatives.",
-    gallery: [
-      "/src/assets/honors-awards-content2.jpg"
-    ]
+    date: "2024"
   },
 
   {
@@ -127,8 +106,6 @@ Clients Served and Related Projects:
       {
         id: "major-gala-production",
         title: "Major Gala Production",
-        image: "/src/assets/port-authority-cover.jpeg",
-        description: "Full production and logistics for large gala and awards ceremonies.",
         galleryImages: [
           "/src/assets/port-authority-content1.jpeg",
           "/src/assets/port-authority-content2.jpeg"
@@ -136,11 +113,7 @@ Clients Served and Related Projects:
       }
     ],
     category: "Event Management",
-    date: "2024-2025",
-    fullText: "Production, logistics and execution for large-scale events and ceremonies.",
-    gallery: [
-      "/src/assets/port-authority-content1.jpeg"
-    ]
+    date: "2024-2025"
   },
 
   {
@@ -156,8 +129,6 @@ Clients Served and Related Projects:
       {
         id: "faith-moves-series",
         title: "Faith Moves TV Series",
-        image: "/src/assets/faith-moves-cover.jpg",
-        description: "A TV series highlighting business leaders and personal stories of resilience.",
         galleryImages: [
           "/src/assets/faith-moves-content1.jpg",
           "/src/assets/faith-moves-content2.jpg"
@@ -165,11 +136,7 @@ Clients Served and Related Projects:
       }
     ],
     category: "Media Production",
-    date: "2025",
-    fullText: "Production services for television, documentary and branded video content.",
-    gallery: [
-      "/src/assets/faith-moves-content1.jpg"
-    ]
+    date: "2025"
   },
 
   {
@@ -185,8 +152,6 @@ Clients Served and Related Projects:
       {
         id: "its-a-womans-world",
         title: "It's A Woman's World (TV)",
-        image: "/src/assets/faith-moves-content1.jpg",
-        description: "A long-running talk show hosted by Stacy-Ann showcasing women leaders and stories.",
         galleryImages: [
           "/src/assets/faith-moves-content1.jpg",
           "/src/assets/faith-moves-content2.jpg"
@@ -194,10 +159,6 @@ Clients Served and Related Projects:
       }
     ],
     category: "Talent & Hosting",
-    date: "2020-2025",
-    fullText: "On-air talent and professional hosts for live and recorded broadcast events.",
-    gallery: [
-      "/src/assets/faith-moves-content1.jpg"
-    ]
+    date: "2020-2025"
   }
 ];

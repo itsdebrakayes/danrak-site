@@ -182,7 +182,7 @@ const Showcase = () => {
               {activeProject.title}
             </h1>
             <p className="text-xl text-white/90 mb-8 leading-relaxed">
-              {activeProject.fullText.substring(0, 200)}...
+              {activeProject.excerpt}
             </p>
             <Link to={`/project/${activeProject.id}`}>
               <Button 
