@@ -63,7 +63,20 @@ Clients Served and Related Projects:
         galleryImages: [
           "/src/assets/access-launch-content1.jpg",
           "/src/assets/access-launch-content2.jpg",
-          "/src/assets/access-launch-content3.jpg"
+          "/src/assets/access-launch-content3.jpg",
+          "/src/assets/access-gallery-1.jpg",
+          "/src/assets/access-gallery-2.jpg",
+          "/src/assets/access-gallery-3.jpg",
+          "/src/assets/access-gallery-4.jpg",
+          "/src/assets/access-gallery-5.jpg"
+        ]
+      },
+      {
+        id: "ministry-education",
+        title: "Ministry of Education, Skills, Youth and Information",
+        galleryImages: [
+          "/src/assets/ministry-education-gallery-1.jpg",
+          "/src/assets/ministry-education-gallery-2.jpg"
         ]
       },
       {
@@ -72,7 +85,8 @@ Clients Served and Related Projects:
         galleryImages: [
           "/src/assets/port-authority-content1.jpeg",
           "/src/assets/port-authority-content2.jpeg",
-          "/src/assets/port-authority-content3.jpeg"
+          "/src/assets/port-authority-content3.jpeg",
+          "/src/assets/port-authority-gallery-1.jpg"
         ]
       }
     ],
