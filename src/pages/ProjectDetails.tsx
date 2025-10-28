@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { projects } from "../data/projects";
@@ -23,6 +23,8 @@ const ProjectDetails = () => {
     allItems?: string[];
     currentIndex?: number;
   }>(null);
+
+  const videoRef = useRef<HTMLIFrameElement>(null);
 
   // Navigation handler for gallery
   const navigateGallery = (direction: 'prev' | 'next') => {
@@ -51,6 +53,37 @@ const ProjectDetails = () => {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [lightbox]);
+
+  // Intersection Observer for YouTube autoplay
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (!videoElement) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Video is in view - autoplay by updating src with autoplay parameter
+            const currentSrc = videoElement.src;
+            if (!currentSrc.includes('autoplay=1')) {
+              videoElement.src = currentSrc.includes('?') 
+                ? `${currentSrc}&autoplay=1&mute=1`
+                : `${currentSrc}?autoplay=1&mute=1`;
+            }
+          }
+        });
+      },
+      { threshold: 0.5 } // Trigger when 50% of video is visible
+    );
+
+    observer.observe(videoElement);
+
+    return () => {
+      if (videoElement) {
+        observer.unobserve(videoElement);
+      }
+    };
+  }, [project?.events]);
 
   if (!project) {
     return (
@@ -183,8 +216,9 @@ const ProjectDetails = () => {
                         <div className="rounded-2xl overflow-hidden shadow-2xl bg-black">
                           <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                             <iframe
+                              ref={videoRef}
                               className="absolute top-0 left-0 w-full h-full"
-                              src={`https://www.youtube.com/embed/${event.youtubeUrl}?rel=0`}
+                              src={`https://www.youtube.com/embed/${event.youtubeUrl}?rel=0&enablejsapi=1`}
                               title={event.title}
                               frameBorder="0"
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
