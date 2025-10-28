@@ -59,7 +59,7 @@ Clients Served and Related Projects:
     events: [
       {
         id: "access-fin-launch",
-        title: "Access Financial 25th Anniversary Launch",
+        title: "Access Financial Services Limited",
         galleryImages: [
           "/src/assets/access-launch-content1.jpg",
           "/src/assets/access-launch-content2.jpg",
@@ -81,7 +81,7 @@ Clients Served and Related Projects:
       },
       {
         id: "port-authority-groundbreaking",
-        title: "Port Authority Groundbreaking Ceremony",
+        title: "Port Authority of Jamaica",
         galleryImages: [
           "/src/assets/port-authority-content1.jpeg",
           "/src/assets/port-authority-content2.jpeg",
