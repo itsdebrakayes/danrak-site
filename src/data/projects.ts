@@ -77,7 +77,9 @@ Clients Served and Related Projects:
         galleryImages: [
           "/src/assets/ministry-education-gallery-1.jpg",
           "/src/assets/ministry-education-gallery-2.jpg",
-          "/src/assets/ministry-education-gallery-3.jpg"
+          "/src/assets/ministry-education-gallery-3.jpg",
+          "/src/assets/ministry-education-gallery-4.jpg",
+          "/src/assets/ministry-education-gallery-5.jpg"
         ]
       },
       {
