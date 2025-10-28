@@ -190,6 +190,22 @@ Clients Served and Related Projects:
 • Dunlop Corbin Communications – EU Citizens Security Plan`,
     events: [
       {
+        id: "trend-campaign",
+        title: "Ministry of Education, Skills, Youth and Information - T.R.E.N.D Campaign",
+        galleryImages: [
+          "/src/assets/trend-gallery-1.jpg",
+          "/src/assets/trend-gallery-2.jpg",
+          "/src/assets/trend-gallery-3.jpg",
+          "/src/assets/trend-gallery-4.jpg",
+          "/src/assets/trend-gallery-5.jpg",
+          "/src/assets/trend-gallery-6.jpg",
+          "/src/assets/trend-gallery-7.jpg",
+          "/src/assets/trend-gallery-8.jpg",
+          "/src/assets/trend-gallery-9.jpg",
+          "/src/assets/trend-gallery-10.png"
+        ]
+      },
+      {
         id: "national-honors-campaign",
         title: "National Honors Campaign",
         galleryImages: [
