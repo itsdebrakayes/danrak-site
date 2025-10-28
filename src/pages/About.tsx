@@ -1,6 +1,7 @@
 import Header from '@/components/sections/Header';
 import Footer from '@/components/sections/Footer';
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import aboutLeaning from '@/assets/about-leaning.png';
@@ -8,6 +9,7 @@ import aboutLeaning from '@/assets/about-leaning.png';
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutSection = () => {
+  const navigate = useNavigate();
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -90,7 +92,7 @@ const AboutSection = () => {
           <div ref={contentRef} className="lg:w-3/5 xl:w-2/3 space-y-12 opacity-100 relative z-10">
             <div className="glass p-8 lg:p-12 rounded-3xl transition-all duration-700">
               <div className="space-y-8 text-lg leading-relaxed text-muted-foreground">
-                <p className="text-xl font-bold text-black">
+                <p className="text-xl font-bold text-foreground">
                   Danrak Productions is a Jamaican communications and media production business, built on the power of great storytelling and the fervent belief that everyone has a story worth telling.
                 </p>
 
@@ -122,7 +124,7 @@ const AboutSection = () => {
         <div className="mt-8">
           <div className="glass p-6 rounded-2xl lg:w-[75%] lg:mr-8 w-full">
             <h3 className="text-2xl font-semibold mb-4 text-brand-crimson">Our Chief Strategist</h3>
-            <p className="mb-4 text-black">An award-winning entrepreneur and communications specialist, Stacy-Ann is the Chief Strategist and CEO at <b>Danrak Productions</b>, a Jamaican media production and communications consulting business. An accomplished storyteller and award-winning writer, Stacy-Ann has built a professional career as a public relations and corporate communications specialist, writer and producer of television content.</p>
+            <p className="mb-4 text-foreground">An award-winning entrepreneur and communications specialist, Stacy-Ann is the Chief Strategist and CEO at <b>Danrak Productions</b>, a Jamaican media production and communications consulting business. An accomplished storyteller and award-winning writer, Stacy-Ann has built a professional career as a public relations and corporate communications specialist, writer and producer of television content.</p>
 
             {/* Grid of items — adjusted to 3 columns on large screens so items are wider */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -144,25 +146,40 @@ const AboutSection = () => {
           <p className="text-muted-foreground">Scroll down to see more...</p>
           
           <div className="space-y-8">
-            <h2 className="text-3xl lg:text-4xl font-extrabold text-black">Our Suite of Services</h2>
+            <h2 className="text-3xl lg:text-4xl font-extrabold text-foreground">Our Suite of Services</h2>
             <div className="grid grid-cols-1 md:grid-cols-5 gap-6 w-full mt-6">
-              <div className="glass p-6 rounded-xl">
+              <div 
+                className="glass p-6 rounded-xl service-box-crimson cursor-pointer"
+                onClick={() => navigate('/project/corporate-communications')}
+              >
                 <h4 className="font-semibold mb-2 text-brand-crimson">Corporate Communications & Public Relations</h4>
                 <p className="text-sm text-muted-foreground">We deliver strategic communications, PR storytelling, and tailored solutions — from marketing and brand visibility to crisis management and regulatory reporting for JSE and BOJ standards, helping brands communicate with purpose and impact.</p>
               </div>
-              <div className="glass p-6 rounded-xl">
+              <div 
+                className="glass p-6 rounded-xl service-box-ocean cursor-pointer"
+                onClick={() => navigate('/project/campaign-development')}
+              >
                 <h4 className="font-semibold mb-2 text-brand-ocean">Campaign Development & Execution</h4>
                 <p className="text-sm text-muted-foreground">From concept to launch, we craft and execute impactful marketing, communications, and PR campaigns, delivering results on time and within budget while keeping clients at the heart of every project to ensure meaningful, measurable outcomes.</p>
               </div>
-              <div className="glass p-6 rounded-xl">
+              <div 
+                className="glass p-6 rounded-xl service-box-forest cursor-pointer"
+                onClick={() => navigate('/project/project-event-planning')}
+              >
                 <h4 className="font-semibold mb-2 text-brand-forest">Project & Event Planning</h4>
                 <p className="text-sm text-muted-foreground">We bring your ideas to life through strategic planning, creative execution, and flawless management — delivering events and projects that inspire, engage, and leave a lasting impact, while ensuring every detail aligns seamlessly with your goals and vision.</p>
               </div>
-              <div className="glass p-6 rounded-xl">
+              <div 
+                className="glass p-6 rounded-xl service-box-sky cursor-pointer"
+                onClick={() => navigate('/project/video-tv-production')}
+              >
                 <h4 className="font-semibold mb-2 text-brand-sky">Video & Television Production</h4>
                 <p className="text-sm text-muted-foreground">With almost 25 years of experience, we craft powerful visual stories that connect. From commercials and documentaries to TV shows, our team blends creativity, strategy, and technical excellence to deliver captivating, high-quality content across Jamaica and the Caribbean.</p>
               </div>
-              <div className="glass p-6 rounded-xl">
+              <div 
+                className="glass p-6 rounded-xl service-box-crimson cursor-pointer"
+                onClick={() => navigate('/project/on-air-talent')}
+              >
                 <h4 className="font-semibold mb-2 text-brand-crimson">On-Air Talent & Event Hosting</h4>
                 <p className="text-sm text-muted-foreground">A seasoned media professional and sought-after event anchor, Stacy-Ann Smith has two decades of broadcast experience. Known for her poise and versatility, she brings the perfect balance of charm, professionalism, and protocol to every event — from national ceremonies to corporate functions.</p>
               </div>

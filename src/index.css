@@ -416,4 +416,41 @@ All colors MUST be HSL.
     pointer-events: none;
   }
 
+  /* Service box hover effects with neon glow */
+  .service-box-crimson {
+    transition: all 0.3s ease;
+  }
+
+  .service-box-crimson:hover {
+    box-shadow: 0 0 30px rgba(220, 38, 38, 0.6);
+    transform: translateY(-4px);
+  }
+
+  .service-box-ocean {
+    transition: all 0.3s ease;
+  }
+
+  .service-box-ocean:hover {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+    transform: translateY(-4px);
+  }
+
+  .service-box-forest {
+    transition: all 0.3s ease;
+  }
+
+  .service-box-forest:hover {
+    box-shadow: 0 0 30px rgba(34, 197, 94, 0.6);
+    transform: translateY(-4px);
+  }
+
+  .service-box-sky {
+    transition: all 0.3s ease;
+  }
+
+  .service-box-sky:hover {
+    box-shadow: 0 0 30px rgba(14, 165, 233, 0.6);
+    transform: translateY(-4px);
+  }
+
 }
