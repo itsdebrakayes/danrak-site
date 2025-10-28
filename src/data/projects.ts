@@ -21,6 +21,11 @@ export interface Project {
   category: string;
   date: string;
   serviceId?: string;
+  newspaperClippings?: Array<{
+    image: string;
+    url: string;
+    title?: string;
+  }>;
 }
 export const projects: Project[] = [
   {
@@ -72,7 +77,19 @@ Clients Served and Related Projects:
       }
     ],
     category: "Corporate Communications",
-    date: "2024-2025"
+    date: "2024-2025",
+    newspaperClippings: [
+      {
+        image: "/src/assets/access-launch-content1.jpg",
+        url: "https://example.com/article1",
+        title: "Access Financial 25th Anniversary Coverage"
+      },
+      {
+        image: "/src/assets/port-authority-content1.jpeg",
+        url: "https://example.com/article2",
+        title: "Port Authority Groundbreaking News"
+      }
+    ]
   },
 
   {

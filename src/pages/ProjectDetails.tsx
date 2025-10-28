@@ -5,7 +5,7 @@ import { projects } from "../data/projects";
 import { testimonials } from "../data/testimonials";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, Quote, Play } from "lucide-react";
+import { ArrowLeft, Quote, Play, ExternalLink, Newspaper } from "lucide-react";
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -200,64 +200,110 @@ const ProjectDetails = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="lg:sticky lg:top-24 space-y-6"
+              className="lg:sticky lg:top-24 space-y-8"
             >
-              <h3 className="text-2xl font-bold">Testimonials</h3>
-              
-              <div className="max-h-[calc(100vh-8rem)] overflow-y-auto space-y-4 pr-2 custom-scrollbar">
-                {projectTestimonials.map((testimonial, index) => (
-                  <motion.div
-                    key={testimonial.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                  >
-                    {testimonial.videoUrl ? (
-                      // Video Testimonial Card
-                      <Card className="group cursor-pointer hover:bg-accent/50 transition-all duration-300 border-border/50 hover:border-primary/50 hover:shadow-lg overflow-hidden"
-                        onClick={() => setLightbox({ type: 'video', src: testimonial.videoUrl! })}
-                      >
-                        <CardContent className="p-0">
-                          <div className="relative">
-                            <img
-                              src={testimonial.thumbnailUrl || "/placeholder.svg"}
-                              alt={testimonial.clientName}
-                              className="w-full h-40 object-cover"
-                            />
-                            <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/30 transition-colors">
-                              <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center">
-                                <Play className="w-6 h-6 text-primary ml-1" />
+              {/* Testimonials Section */}
+              <div>
+                <h3 className="text-2xl font-bold mb-6">Testimonials</h3>
+                
+                <div className="max-h-[calc(50vh-4rem)] overflow-y-auto space-y-4 pr-2 custom-scrollbar">
+                  {projectTestimonials.map((testimonial, index) => (
+                    <motion.div
+                      key={testimonial.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+                    >
+                      {testimonial.videoUrl ? (
+                        // Video Testimonial Card
+                        <Card className="group cursor-pointer hover:bg-accent/50 transition-all duration-300 border-border/50 hover:border-primary/50 hover:shadow-lg overflow-hidden"
+                          onClick={() => setLightbox({ type: 'video', src: testimonial.videoUrl! })}
+                        >
+                          <CardContent className="p-0">
+                            <div className="relative">
+                              <img
+                                src={testimonial.thumbnailUrl || "/placeholder.svg"}
+                                alt={testimonial.clientName}
+                                className="w-full h-40 object-cover"
+                              />
+                              <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/30 transition-colors">
+                                <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center">
+                                  <Play className="w-6 h-6 text-primary ml-1" />
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          <div className="p-4">
-                            <h4 className="font-semibold text-sm mb-1">{testimonial.clientName}</h4>
-                            {testimonial.clientTitle && (
-                              <p className="text-xs text-muted-foreground">{testimonial.clientTitle}</p>
-                            )}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ) : (
-                      // Text Testimonial Card
-                      <Card className="hover:bg-accent/30 transition-all duration-300 border-border/50">
-                        <CardContent className="p-4 space-y-3">
-                          <Quote className="w-8 h-8 text-primary/40" />
-                          <p className="text-sm italic leading-relaxed text-foreground/90">
-                            "{testimonial.content}"
-                          </p>
-                          <div className="pt-2 border-t border-border/50">
-                            <h4 className="font-semibold text-sm">{testimonial.clientName}</h4>
-                            {testimonial.clientTitle && (
-                              <p className="text-xs text-muted-foreground">{testimonial.clientTitle}</p>
-                            )}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    )}
-                  </motion.div>
-                ))}
+                            <div className="p-4">
+                              <h4 className="font-semibold text-sm mb-1">{testimonial.clientName}</h4>
+                              {testimonial.clientTitle && (
+                                <p className="text-xs text-muted-foreground">{testimonial.clientTitle}</p>
+                              )}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ) : (
+                        // Text Testimonial Card
+                        <Card className="hover:bg-accent/30 transition-all duration-300 border-border/50">
+                          <CardContent className="p-4 space-y-3">
+                            <Quote className="w-8 h-8 text-primary/40" />
+                            <p className="text-sm italic leading-relaxed text-foreground/90">
+                              "{testimonial.content}"
+                            </p>
+                            <div className="pt-2 border-t border-border/50">
+                              <h4 className="font-semibold text-sm">{testimonial.clientName}</h4>
+                              {testimonial.clientTitle && (
+                                <p className="text-xs text-muted-foreground">{testimonial.clientTitle}</p>
+                              )}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
               </div>
+
+              {/* Breaking News Section */}
+              {project.newspaperClippings && project.newspaperClippings.length > 0 && (
+                <div>
+                  <div className="flex items-center gap-2 mb-6">
+                    <Newspaper className="w-6 h-6 text-primary" />
+                    <h3 className="text-2xl font-bold">Breaking News</h3>
+                  </div>
+                  
+                  <div className="max-h-[calc(50vh-4rem)] overflow-y-auto space-y-4 pr-2 custom-scrollbar">
+                    {project.newspaperClippings.map((clipping, index) => (
+                      <motion.a
+                        key={index}
+                        href={clipping.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+                        className="block group"
+                      >
+                        <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 border-border/50 hover:border-primary/50 cursor-pointer">
+                          <CardContent className="p-0 relative">
+                            <img
+                              src={clipping.image}
+                              alt={clipping.title || "Newspaper clipping"}
+                              className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-end p-4">
+                              <ExternalLink className="w-6 h-6 text-white" />
+                            </div>
+                            {clipping.title && (
+                              <div className="p-3 bg-muted/50">
+                                <p className="text-xs font-medium line-clamp-2">{clipping.title}</p>
+                              </div>
+                            )}
+                          </CardContent>
+                        </Card>
+                      </motion.a>
+                    ))}
+                  </div>
+                </div>
+              )}
             </motion.div>
           </aside>
         </div>
