@@ -212,7 +212,9 @@ Clients Served and Related Projects:
           "/src/assets/eu-jamaica-gallery-1.jpg",
           "/src/assets/eu-jamaica-gallery-2.jpg",
           "/src/assets/eu-jamaica-gallery-3.jpg",
-          "/src/assets/eu-jamaica-gallery-4.jpg"
+          "/src/assets/eu-jamaica-gallery-4.jpg",
+          "/src/assets/eu-jamaica-gallery-5.jpg",
+          "/src/assets/eu-jamaica-gallery-6.jpg"
         ]
       }
     ],
