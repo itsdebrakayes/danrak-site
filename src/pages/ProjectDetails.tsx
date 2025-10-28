@@ -307,7 +307,7 @@ const ProjectDetails = () => {
                 <div>
                   <div className="flex items-center gap-2 mb-6">
                     <Newspaper className="w-6 h-6 text-primary" />
-                    <h3 className="text-2xl font-bold">Breaking News</h3>
+                    <h3 className="text-2xl font-bold">Effective PR Storytelling</h3>
                   </div>
                   
                   <div className="max-h-[calc(50vh-4rem)] overflow-y-auto space-y-6 pr-2 custom-scrollbar">
