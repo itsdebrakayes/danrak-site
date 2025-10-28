@@ -55,7 +55,7 @@ Clients Served and Related Projects:
 • Access Financial Services – Full Service
 • Port Authority of Jamaica – PAJ Media Open Day
 • Wisynco Group Limited – 2025 Annual Report
-• Dunlop Corbin Communications – EU Citizens Security Plan`,
+• Dunlop Corbin Communications – EU/Jamaica Citizen Security Plan`,
     events: [
       {
         id: "access-fin-launch",
@@ -187,7 +187,7 @@ Services include:
 
 Clients Served and Related Projects:
 • Ministry of Education, Skills, Youth and Information - TREND
-• Dunlop Corbin Communications – EU Citizens Security Plan`,
+• Dunlop Corbin Communications – EU/Jamaica Citizen Security Plan`,
     events: [
       {
         id: "trend-campaign",
@@ -203,6 +203,16 @@ Clients Served and Related Projects:
           "/src/assets/trend-gallery-8.jpg",
           "/src/assets/trend-gallery-9.jpg",
           "/src/assets/trend-gallery-10.png"
+        ]
+      },
+      {
+        id: "eu-jamaica-citizen-security",
+        title: "EU/Jamaica Citizen Security Plan",
+        galleryImages: [
+          "/src/assets/eu-jamaica-gallery-1.jpg",
+          "/src/assets/eu-jamaica-gallery-2.jpg",
+          "/src/assets/eu-jamaica-gallery-3.jpg",
+          "/src/assets/eu-jamaica-gallery-4.jpg"
         ]
       },
       {
