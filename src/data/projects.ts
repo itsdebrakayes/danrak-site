@@ -194,7 +194,6 @@ Clients Served and Related Projects:
         title: "Ministry of Education, Skills, Youth and Information - T.R.E.N.D Campaign",
         galleryImages: [
           "/src/assets/trend-gallery-10.png",
-          "/src/assets/MOEY-Trend-Content.mp4",
           "/src/assets/trend-gallery-1.jpg",
           "/src/assets/trend-gallery-2.jpg",
           "/src/assets/trend-gallery-3.jpg",
@@ -247,7 +246,7 @@ Services include:
 Clients Served and Related Projects:
 • Access Financial Services – 25th Anniversary Celebrations
 • Port Authority of Jamaica – Diplomatic Week 2025
-• Dunlop Corbin Communications – Opening of St. James Child & Adolescent Wellness Centre`,
+• EU/Jamaica Citizens Security Plan - Closing Ceremony and Impact Showcase`,
     events: [
       {
         id: "afs-marcus-james-scholarship",
