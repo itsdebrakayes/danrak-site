@@ -371,10 +371,13 @@ Clients Served and Related Projects:
         id: "on-air-hosting-gallery",
         title: "Event Hosting Gallery",
         galleryImages: [
+          "/src/assets/on-air-talent3.mp4",
+          "/src/assets/on-air-talent-10.mp4",
           "/src/assets/on-air-hosting-1.jpg",
           "/src/assets/on-air-hosting-2.jpg",
           "/src/assets/on-air-hosting-3.jpg",
           "/src/assets/on-air-hosting-4.jpg",
+          "/src/assets/on-air-talent-9.mp4",
           "/src/assets/on-air-hosting-5.jpg",
           "/src/assets/on-air-hosting-6.jpg",
           "/src/assets/on-air-hosting-7.jpg",
@@ -382,15 +385,10 @@ Clients Served and Related Projects:
           "/src/assets/on-air-hosting-9.jpg",
           "/src/assets/on-air-hosting-10.jpg",
           "/src/assets/on-air-hosting-11.jpg",
-          "/src/assets/on-air-talent-10.mp4",
           "/src/assets/on-air-talent-2.mp4",
-          "/src/assets/on-air-talent3.mp4",
           "/src/assets/on-air-talent-4.mp4",
           "/src/assets/on-air-talent-5.mp4",
-          "/src/assets/on-air-talent-6.mp4",
-          "/src/assets/on-air-talent-7.mp4",
-          "/src/assets/on-air-talent-8.mp4",
-          "/src/assets/on-air-talent-9.mp4"
+          "/src/assets/on-air-talent-7.mp4"
         ]
       }
     ],
