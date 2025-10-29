@@ -91,7 +91,7 @@ const ProjectDetails = () => {
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Project not found</h1>
           <Link to="/showcase">
-            <Button>← Back to Showcase</Button>
+            <Button>← Back to Services</Button>
           </Link>
         </div>
       </div>
@@ -114,7 +114,7 @@ const ProjectDetails = () => {
           <Link to="/showcase">
             <Button variant="ghost" className="gap-2">
               <ArrowLeft className="w-4 h-4" />
-              Back to Showcase
+              Back to Services
             </Button>
           </Link>
         </motion.div>
