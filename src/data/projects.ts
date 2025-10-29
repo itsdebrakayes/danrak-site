@@ -380,7 +380,8 @@ Clients Served and Related Projects:
           "/src/assets/on-air-hosting-7.jpg",
           "/src/assets/on-air-hosting-8.jpg",
           "/src/assets/on-air-hosting-9.jpg",
-          "/src/assets/on-air-hosting-10.jpg"
+          "/src/assets/on-air-hosting-10.jpg",
+          "/src/assets/on-air-hosting-11.jpg"
         ]
       }
     ],
