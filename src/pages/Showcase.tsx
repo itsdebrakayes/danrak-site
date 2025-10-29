@@ -243,6 +243,8 @@ const Showcase = () => {
                         <img
                           src={project.carouselImage}
                           alt={project.title}
+                          width="800"
+                          height="600"
                           loading="lazy"
                           decoding="async"
                           className="w-full h-full object-cover"
@@ -294,6 +296,8 @@ const Showcase = () => {
                       <img
                         src={project.carouselImage}
                         alt={project.title}
+                        width="800"
+                        height="600"
                         loading={index === 0 ? 'eager' : 'lazy'}
                         fetchPriority={index === 0 ? 'high' : undefined}
                         decoding="async"

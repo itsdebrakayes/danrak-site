@@ -21,7 +21,7 @@ const Footer = ({ variant = 'fixed' }: FooterProps) => {
   return (
     <footer className={footerClass}>
       <div className={contentClass}>
-  <img src={logo} alt="Danrak logo" loading="lazy" decoding="async" className="w-12 h-12 object-contain" />
+  <img src={logo} alt="Danrak logo" width="48" height="48" loading="lazy" decoding="async" className="w-12 h-12 object-contain" />
       </div>
       <div className={`flex gap-4 ${contentClass}`}>
         {socials.map((s, i) => (

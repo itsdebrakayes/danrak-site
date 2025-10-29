@@ -62,6 +62,8 @@ const HeroSection = () => {
         <img
           src={heroPortrait}
           alt="Danrak Portrait"
+          width="1200"
+          height="1600"
           loading="eager"
           fetchPriority="high"
           decoding="async"
@@ -88,6 +90,8 @@ const HeroSection = () => {
         <img
           src={danrakLogoFull}
           alt="Danrak Productions Logo"
+          width="2000"
+          height="800"
           loading="eager"
           fetchPriority="high"
           decoding="async"

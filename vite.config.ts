@@ -19,6 +19,11 @@ export default defineConfig(() => ({
   build: {
     rollupOptions: {
       output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'animation-vendor': ['gsap', 'framer-motion'],
+          'ui-vendor': ['swiper'],
+        },
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name?.split('.');
           const ext = info?.[info.length - 1];
@@ -30,6 +35,14 @@ export default defineConfig(() => ({
           }
           return `assets/[name]-[hash][extname]`;
         },
+      },
+    },
+    cssCodeSplit: true,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
       },
     },
   },
