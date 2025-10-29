@@ -35,7 +35,7 @@ export const projects: Project[] = [
     image: "/src/assets/corporate-comms-image.png",
     carouselImage: "/src/assets/corporate-comms-carousel.png",
     backgroundImage: "/src/assets/corporate-comms-background.png",
-    excerpt: "Strategic communications, PR storytelling, and corporate events.",
+    excerpt: "With the weight of more than 20 years of experience, we offer a full suite of corporate communications services to provide our clients with insights and support the advancement of their goals, developing and effectively deploying strategic communications and PR storytelling.",
     serviceDescription: `With the weight of more than 20 years of experience, we offer a full suite of corporate communications services to provide our clients with insights and support the advancement of their goals, developing and effectively deploying strategic communications and PR storytelling.
 
 Our range of services includes strategy development, tailored action plans that support marketing and improve brand visibility, strategic counselling, crisis communications and the production of annual reports that meet the exacting regulatory standards of the Jamaica Stock Exchange and the Bank of Jamaica.
@@ -173,7 +173,7 @@ Clients Served and Related Projects:
     image: "/src/assets/campaign-dev-image.png",
     carouselImage: "/src/assets/campaign-dev-carousel.png",
     backgroundImage: "/src/assets/campaign-dev-background.png",
-    excerpt: "End-to-end campaign strategy, creative and activation.",
+    excerpt: "We plan and deliver market, communications and public relations campaigns that create impact. From concept development to the production of campaign assets and executing your launch event with precision, we curate campaigns that help you achieve strategic goals - on time and within budget.",
     serviceDescription: `We plan and deliver market, communications and public relations campaigns that create impact. From concept development to the production of campaign assets and executing your launch event with precision, we curate campaigns that help you achieve strategic goals - on time and within budget.
 
 With a commitment to excellence and a collaborative approach, we keep our clients at the centre of the project to ensure we bring your vision to life. Our experience covers brand campaigns, marketing and public education campaigns across the public and private sectors.
@@ -230,7 +230,7 @@ Clients Served and Related Projects:
     image: "/src/assets/project-event-mngmt-image.png",
     carouselImage: "/src/assets/project-event-mngmt-carousel.png",
     backgroundImage: "/src/assets/project-event-mngmt-background.png",
-    excerpt: "Large scale event production and logistics.",
+    excerpt: "Let's bring your idea to life! Through strategic planning, seamless execution, and creative excellence, we take your vision and create moments that inspire and occasions that leave a lasting impact. With experience managing a wide range of projects and events - from corporate functions and community initiatives to brand activations and private celebrations - we ensure every detail aligns with your goals and vision.",
     serviceDescription: `Let's bring your idea to life! Through strategic planning, seamless execution, and creative excellence, we take your vision and create moments that inspire and occasions that leave a lasting impact. With experience managing a wide range of projects and events - from corporate functions and community initiatives to brand activations and private celebrations - we ensure every detail aligns with your goals and vision.
 
 Our approach combines precision and creativity. We handle budgeting, vendor coordination, logistics, and on-site management whether it's a one-day event or a long-term project.
@@ -294,7 +294,7 @@ Clients Served and Related Projects:
     image: "/src/assets/video-and-television-image.png",
     carouselImage: "/src/assets/video-and-television-carousel.png",
     backgroundImage: "/src/assets/video-and-television-background.png",
-    excerpt: "TV shows, documentaries and branded video content.",
+    excerpt: "For more than 20 years, we've been turning ideas into powerful visual stories. Our team of video and television production professionals has created captivating content for TV audiences across Jamaica and the Caribbean – from corporate brands to government agencies and multi-national institutions.",
     serviceDescription: `For more than 20 years, we've been turning ideas into powerful visual stories. Our team of video and television production professionals has created captivating content for TV audiences across Jamaica and the Caribbean – from corporate brands to government agencies and multi-national institutions.
 
 We don't just produce videos we curate content that connects. Whether it's a commercial, documentary or a TV talk show, we combine creativity, strategy, and technical excellence to deliver content that informs, inspires, and engages.
@@ -352,7 +352,7 @@ Described as fresh, first-world and fun, this Danrak exclusive television presen
     image: "/src/assets/on-air-talent-event-host-image.png",
     carouselImage: "/src/assets/on-air-talent-event-host-carousel.png",
     backgroundImage: "/src/assets/on-air-talent-event-host-background.png",
-    excerpt: "Professional hosts, anchors and event talent.",
+    excerpt: "Broadcaster and orator Stacy-Ann Smith has been anchoring live television events for the better part of 25 years. Building on her years on set presenting the nightly news, this media maven has been the go-to anchor for several state events including the annual Ceremony of Investiture and Presentation of National Honours and Awards for more than 12 years.",
     serviceDescription: `Broadcaster and orator Stacy-Ann Smith has been anchoring live television events for the better part of 25 years. Building on her years on set presenting the nightly news, this media maven has been the go-to anchor for several state events including the annual Ceremony of Investiture and Presentation of National Honours and Awards for more than 12 years.
 
 This versatile communications practitioner bridges the gap between official and corporate events to bring the right energy and charm to engage and captivate your guests. More than just an MC, Stacy-Ann understands protocol and possesses the kind of flexibility to connect with any audiences - be they formal or not.
