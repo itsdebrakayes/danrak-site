@@ -276,7 +276,8 @@ Clients Served and Related Projects:
           "/src/assets/afs-25th-8.jpg",
           "/src/assets/afs-25th-9.jpg",
           "/src/assets/afs-25th-10.jpg",
-          "/src/assets/afs-25th-11.jpg"
+          "/src/assets/afs-25th-11.jpg",
+          "/src/assets/afs-25th-12.jpg"
         ]
       }
     ],
