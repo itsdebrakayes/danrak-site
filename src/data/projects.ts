@@ -194,6 +194,7 @@ Clients Served and Related Projects:
         title: "Ministry of Education, Skills, Youth and Information - T.R.E.N.D Campaign",
         galleryImages: [
           "/src/assets/trend-gallery-10.png",
+          "/src/assets/MOEY-Trend-Content.mp4",
           "/src/assets/trend-gallery-1.jpg",
           "/src/assets/trend-gallery-2.jpg",
           "/src/assets/trend-gallery-3.jpg",
@@ -202,7 +203,6 @@ Clients Served and Related Projects:
           "/src/assets/trend-gallery-6.jpg",
           "/src/assets/trend-gallery-7.jpg",
           "/src/assets/trend-gallery-8.jpg",
-          "/src/assets/trend-gallery-9.jpg"
           "/src/assets/trend-gallery-9.jpg"
         ]
       },
