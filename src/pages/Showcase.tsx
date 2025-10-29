@@ -135,7 +135,7 @@ const Showcase = () => {
   }, []);
 
   return (
-    <div className="relative w-full min-h-screen overflow-y-auto md:h-screen md:overflow-hidden">
+    <div className="relative w-full min-h-screen overflow-y-auto pb-20 md:pb-0 md:h-screen md:overflow-hidden">
       
       {/* Static Background Layer to prevent gray flash */}
       <div 
@@ -200,7 +200,7 @@ const Showcase = () => {
 
         {/* Right Side - Upcoming Projects Carousel */}
         <div
-          className="w-full md:w-1/2 flex items-center justify-center p-4 pb-12 md:p-8"
+          className="w-full md:w-1/2 flex items-center justify-center p-4 pb-24 md:p-8"
           onMouseEnter={() => {
             pauseRef.current = true;
             if (timeoutRef.current) {

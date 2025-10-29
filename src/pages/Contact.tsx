@@ -101,7 +101,7 @@ const ContactSection = () => {
           <div className="w-20 h-1 bg-gradient-to-r from-brand-forest to-brand-sage rounded-full mx-auto" />
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+        <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
           <div className="contact-form">
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               <div className="glass p-8 rounded-3xl space-y-6">
@@ -238,7 +238,7 @@ const ContactSection = () => {
 };
 
 const Contact = () => (
-  <div className="min-h-screen bg-background">
+  <div className="min-h-screen bg-background overflow-y-auto">
     <main className="w-full">
       <ContactSection />
     </main>
