@@ -1,11 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from 'swiper/modules';
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { projects } from "../data/projects";
 import { Button } from "@/components/ui/button";
 import Footer from '@/components/sections/Footer';
 import "swiper/css";
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const Showcase = () => {
   // Canonical service order (must match the suite of services)
@@ -165,9 +168,9 @@ const Showcase = () => {
       <div className="absolute inset-0 bg-black/60 z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 h-full flex">
+      <div className="relative z-10 h-full flex flex-col md:flex-row">
         {/* Left Side - Featured Project Details */}
-        <div className="w-1/2 p-12 flex flex-col justify-center text-white">
+        <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-center text-white">
           <motion.div
             key={activeProject.id}
             initial={{ opacity: 0, x: -40 }}
@@ -197,7 +200,7 @@ const Showcase = () => {
 
         {/* Right Side - Upcoming Projects Carousel */}
         <div
-          className="w-1/2 flex items-center justify-center p-8"
+          className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8"
           onMouseEnter={() => {
             pauseRef.current = true;
             if (timeoutRef.current) {
@@ -211,66 +214,166 @@ const Showcase = () => {
           }}
         >
           <div className="w-full">
-            <motion.h2 
-              className="text-xl font-bold text-white mb-8 text-center"
-              initial={{ opacity: 0, y: -12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.38, delay: 0.08 }}
-            >
-              Up Next
-            </motion.h2>
-            
-            {/* Horizontal Card Container */}
-            <div className="flex gap-6 justify-center items-center overflow-visible">
-              {displayedProjects.map((project, index) => {
-                return (
-                  <motion.div
-                    key={project.id}
-                    className="relative bg-white/10 rounded-2xl overflow-hidden shadow-xl border border-white/20 cursor-pointer w-[700px] h-[450px]"
-                    whileHover={{ scale: 1.05, y: -8 }}
-                    whileTap={{ scale: 0.98 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ 
-                      type: 'spring', 
-                      stiffness: 300, 
-                      damping: 20,
-                      delay: index * 0.05
-                    }}
-                    onClick={() => { handleSlideClick(index); scheduleNext(); }}
-                    onMouseEnter={() => { pauseRef.current = true; if (timeoutRef.current) { clearTimeout(timeoutRef.current); timeoutRef.current = null; } }}
-                    onMouseLeave={() => { pauseRef.current = false; scheduleNext(); }}
-                  >
-                    {/* Background Image */}
-                    <div className="absolute inset-0 z-0">
-                      <img
-                        src={project.carouselImage}
-                        alt={project.title}
-                        loading={index === 0 ? 'eager' : 'lazy'}
-                        fetchPriority={index === 0 ? 'high' : undefined}
-                        decoding="async"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-1" />
-                    
-                    {/* Text Content Overlay */}
-                    <div className="relative z-10 p-4 h-full flex flex-col justify-end text-white">
-                      <h3 className="text-lg font-bold mb-2 line-clamp-2 drop-shadow-lg">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm text-white/80 mb-2 line-clamp-2 drop-shadow-md">{project.excerpt}</p>
-                      <div className="text-xs uppercase tracking-wider text-white/70 font-medium">
-                        {project.category}
+            {/* Mobile: Single Card Swiper - ONLY visible on mobile */}
+            <div className="block md:hidden w-full">
+              <motion.h2 
+                className="text-xl font-bold text-white mb-6 text-center"
+                initial={{ opacity: 0, y: -12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.38, delay: 0.08 }}
+              >
+                Up Next
+              </motion.h2>
+              
+              <Swiper
+                modules={[Navigation, Pagination]}
+                navigation={true}
+                pagination={{ clickable: true, dynamicBullets: true }}
+                spaceBetween={0}
+                slidesPerView={1}
+                onSlideChange={(swiper) => {
+                  const newIndex = swiper.realIndex;
+                  handleSlideClick(newIndex);
+                  scheduleNext();
+                }}
+                className="mobile-showcase-swiper"
+              >
+                {displayedProjects.map((project, index) => (
+                  <SwiperSlide key={project.id}>
+                    <div className="relative bg-white/10 rounded-2xl overflow-hidden shadow-xl border border-white/20 h-[450px] mx-4">
+                      {/* Background Image */}
+                      <div className="absolute inset-0 z-0">
+                        <img
+                          src={project.carouselImage}
+                          alt={project.title}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      
+                      {/* Darker gradient for better text contrast at top */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-1" />
+                      
+                      {/* Content - Top aligned */}
+                      <div className="relative z-10 h-full flex flex-col justify-start pt-8 pb-4 px-6 text-white">
+                        {/* Service Name - Prominently at top */}
+                        <h3 className="text-2xl font-bold mb-4 leading-tight">
+                          {project.title}
+                        </h3>
+                        
+                        {/* Read More Button */}
+                        <Link to={`/project/${project.id}`}>
+                          <Button 
+                            size="sm" 
+                            className="mb-4 bg-white text-black hover:bg-white/90 w-fit"
+                          >
+                            Read More →
+                          </Button>
+                        </Link>
+                        
+                        {/* Category - Up Next label */}
+                        <div className="text-sm uppercase tracking-wider text-white/90 font-medium">
+                          {project.category}
+                        </div>
                       </div>
                     </div>
-                    
-                    {/* subtle hover should scale + raise (no tint overlay) */}
-                  </motion.div>
-                );
-              })}
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+              
+              {/* Custom Swiper Styles for Mobile */}
+              <style>{`
+                .mobile-showcase-swiper .swiper-button-next,
+                .mobile-showcase-swiper .swiper-button-prev {
+                  color: white !important;
+                  background: rgba(0,0,0,0.6);
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 50%;
+                }
+                .mobile-showcase-swiper .swiper-button-next:after,
+                .mobile-showcase-swiper .swiper-button-prev:after {
+                  font-size: 18px;
+                  font-weight: bold;
+                }
+                .mobile-showcase-swiper .swiper-pagination {
+                  bottom: 10px;
+                }
+                .mobile-showcase-swiper .swiper-pagination-bullet {
+                  background: white;
+                  opacity: 0.6;
+                  width: 8px;
+                  height: 8px;
+                }
+                .mobile-showcase-swiper .swiper-pagination-bullet-active {
+                  opacity: 1;
+                  width: 24px;
+                  border-radius: 4px;
+                }
+              `}</style>
+            </div>
+
+            {/* Desktop: 3 Horizontal Cards - ONLY visible on desktop */}
+            <div className="hidden md:block w-full">
+              <motion.h2 
+                className="text-xl font-bold text-white mb-8 text-center"
+                initial={{ opacity: 0, y: -12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.38, delay: 0.08 }}
+              >
+                Up Next
+              </motion.h2>
+              
+              <div className="flex gap-6 justify-center items-center overflow-visible">
+                {displayedProjects.map((project, index) => {
+                  return (
+                    <motion.div
+                      key={project.id}
+                      className="relative bg-white/10 rounded-2xl overflow-hidden shadow-xl border border-white/20 cursor-pointer w-[700px] h-[450px]"
+                      whileHover={{ scale: 1.05, y: -8 }}
+                      whileTap={{ scale: 0.98 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ 
+                        type: 'spring', 
+                        stiffness: 300, 
+                        damping: 20,
+                        delay: index * 0.05
+                      }}
+                      onClick={() => { handleSlideClick(index); scheduleNext(); }}
+                      onMouseEnter={() => { pauseRef.current = true; if (timeoutRef.current) { clearTimeout(timeoutRef.current); timeoutRef.current = null; } }}
+                      onMouseLeave={() => { pauseRef.current = false; scheduleNext(); }}
+                    >
+                      {/* Background Image */}
+                      <div className="absolute inset-0 z-0">
+                        <img
+                          src={project.carouselImage}
+                          alt={project.title}
+                          loading={index === 0 ? 'eager' : 'lazy'}
+                          fetchPriority={index === 0 ? 'high' : undefined}
+                          decoding="async"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-1" />
+                      
+                      {/* Text Content Overlay - Bottom aligned (original) */}
+                      <div className="relative z-10 p-4 h-full flex flex-col justify-end text-white">
+                        <h3 className="text-lg font-bold mb-2 line-clamp-2 drop-shadow-lg">
+                          {project.title}
+                        </h3>
+                        <p className="text-sm text-white/80 mb-2 line-clamp-2 drop-shadow-md">{project.excerpt}</p>
+                        <div className="text-xs uppercase tracking-wider text-white/70 font-medium">
+                          {project.category}
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

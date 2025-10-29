@@ -99,24 +99,26 @@ const HeroSection = () => {
         />
       </div>
       {/* === Buttons === */}
-      <div className="absolute bottom-12 z-30 flex flex-col sm:flex-row gap-6 justify-center w-full">
-        <Link to="/showcase">
-          <Button
-            size="lg"
-            className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg font-semibold rounded-lg shadow-lg"
-          >
-            Explore Our Work
-          </Button>
-        </Link>
-        <Link to="/contact">
-          <Button
-            variant="secondary"
-            size="lg"
-            className="bg-secondary text-secondary-foreground hover:bg-secondary/80 px-8 py-4 text-lg font-semibold rounded-lg shadow-lg"
-          >
-            Start Your Project
-          </Button>
-        </Link>
+      <div className="absolute bottom-12 z-30 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full px-4">
+        <div className="flex flex-row gap-3 sm:gap-6 w-full justify-center">
+          <Link to="/showcase" className="flex-1 sm:flex-initial max-w-[200px] sm:max-w-none">
+            <Button
+              size="lg"
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 px-4 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg font-semibold rounded-lg shadow-lg"
+            >
+              Explore Our Work
+            </Button>
+          </Link>
+          <Link to="/contact" className="flex-1 sm:flex-initial max-w-[200px] sm:max-w-none">
+            <Button
+              variant="secondary"
+              size="lg"
+              className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/80 px-4 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg font-semibold rounded-lg shadow-lg"
+            >
+              Start Your Project
+            </Button>
+          </Link>
+        </div>
       </div>
 
       {/* Floating Effects */}

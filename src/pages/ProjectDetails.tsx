@@ -393,7 +393,7 @@ const ProjectDetails = () => {
                           <div className="relative w-full h-full">
                             <video
                               src={item}
-                              preload="metadata"
+                              preload="none"
                               className="w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
@@ -404,6 +404,8 @@ const ProjectDetails = () => {
                           <img
                             src={item}
                             alt={`${event.title} - Gallery ${index + 1}`}
+                            loading="lazy"
+                            decoding="async"
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                           />
                         )}
