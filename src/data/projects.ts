@@ -19,7 +19,6 @@ export interface Project {
   serviceDescription: string;
   events: Event[];
   category: string;
-  date: string;
   serviceId?: string;
   newspaperClippings?: Array<{
     image: string;
@@ -40,7 +39,7 @@ export const projects: Project[] = [
 
 Our range of services includes strategy development, tailored action plans that support marketing and improve brand visibility, strategic counselling, crisis communications and the production of annual reports that meet the exacting regulatory standards of the Jamaica Stock Exchange and the Bank of Jamaica.
 
-Services at a glance:
+**Services Include:**
 • Strategic Communications
 • Public Relations
 • Media Relations
@@ -51,7 +50,7 @@ Services at a glance:
 • Government Engagement
 • Copy writing and editing
 
-Clients Served and Related Projects:
+**Clients Served and Related Projects:**
 • Access Financial Services – Full Service
 • Port Authority of Jamaica – PAJ Media Open Day
 • Wisynco Group Limited – 2025 Annual Report
@@ -95,7 +94,6 @@ Clients Served and Related Projects:
       }
     ],
     category: "Corporate Communications",
-    date: "2024-2025",
 
     newspaperClippings: [
       {
@@ -178,14 +176,14 @@ Clients Served and Related Projects:
 
 With a commitment to excellence and a collaborative approach, we keep our clients at the centre of the project to ensure we bring your vision to life. Our experience covers brand campaigns, marketing and public education campaigns across the public and private sectors.
 
-Services include:
+**Services Include:**
 • Insight-led Campaign Development
 • Budget crafting and management
 • Production of Campaign Assets
 • Media Strategy and Resource Allocation
 • Effective Comms for Successful Events
 
-Clients Served and Related Projects:
+**Clients Served and Related Projects:**
 • Ministry of Education, Skills, Youth and Information - TREND
 • EU/Jamaica Citizen Security Plan`,
     events: [
@@ -219,8 +217,7 @@ Clients Served and Related Projects:
         ]
       }
     ],
-    category: "Campaigns",
-    date: "2024"
+    category: "Campaigns"
   },
 
   {
@@ -235,7 +232,7 @@ Clients Served and Related Projects:
 
 Our approach combines precision and creativity. We handle budgeting, vendor coordination, logistics, and on-site management whether it's a one-day event or a long-term project.
 
-Services include:
+**Services Include:**
 • Comprehensive project and event planning
 • Budget and resource management
 • Vendor sourcing and coordination
@@ -243,7 +240,7 @@ Services include:
 • Stakeholder and team management
 • Post-event evaluation and reporting
 
-Clients Served and Related Projects:
+**Clients Served and Related Projects:**
 • Access Financial Services – 25th Anniversary Celebrations
 • Port Authority of Jamaica – Diplomatic Week 2025
 • EU/Jamaica Citizens Security Plan - Closing Ceremony and Impact Showcase`,
@@ -283,8 +280,7 @@ Clients Served and Related Projects:
         ]
       }
     ],
-    category: "Event Management",
-    date: "2024-2025"
+    category: "Event Management"
   },
 
   {
@@ -301,14 +297,14 @@ We don't just produce videos we curate content that connects. Whether it's a com
 
 With 2+ decades of hands-on experience in broadcast production, we understand what it takes to deliver professional, high-quality results so your message hits the target every time.
 
-Services include:
+**Services Include:**
 • Television and video production
 • Creative concept development and scripting
 • Studio and on-location filming
 • Post-production and editing
 • Corporate and promotional videos
 
-Clients Served and Related Projects:
+**Clients Served and Related Projects:**
 • Port Authority of Jamaica – 50th Anniversary Videos Series, Kingston Logistics Park, Caymanas Special Economic Zone
 • Management Institute for National Development (MIND) – GOJ Learning & Development Policy Movie`,
     events: [
@@ -341,8 +337,7 @@ Described as fresh, first-world and fun, this Danrak exclusive television presen
         ]
       },
     ],
-    category: "Media Production",
-    date: "2025"
+    category: "Media Production"
   },
 
   {
@@ -357,7 +352,7 @@ Described as fresh, first-world and fun, this Danrak exclusive television presen
 
 This versatile communications practitioner bridges the gap between official and corporate events to bring the right energy and charm to engage and captivate your guests. More than just an MC, Stacy-Ann understands protocol and possesses the kind of flexibility to connect with any audiences - be they formal or not.
 
-Clients Served and Related Projects:
+**Clients Served and Related Projects:**
 • Jamaica Information Service – Ceremony of Investiture and Presentation of National Honours and Awards; Ceremonial Opening of Parliament; Swearing-In Ceremony of Prime Minister Dr. Andrew Holness
 • Women Centre Foundation of Jamaica
 • Access Financial Services – 25th Anniversary Gala & Awards Ceremony
@@ -395,7 +390,6 @@ Clients Served and Related Projects:
         ]
       }
     ],
-    category: "Talent & Hosting",
-    date: "2020-2025"
+    category: "Talent & Hosting"
   }
 ];
