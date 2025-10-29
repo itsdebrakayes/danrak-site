@@ -5,3 +5,4 @@ src/assets/1.[[:space:]]Give[[:space:]]each[[:space:]]other[[:space:]]space-[[:s
 src/assets/stronger-together-content1.mp4 filter=lfs diff=lfs merge=lfs -text
 src/assets/stronger-together-content2.mp4 filter=lfs diff=lfs merge=lfs -text
 src/assets/stronger-together-content3.mp4 filter=lfs diff=lfs merge=lfs -text
+src/assets/on-air-talent-2.mp4 filter=lfs diff=lfs merge=lfs -text
