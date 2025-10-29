@@ -258,7 +258,10 @@ Clients Served and Related Projects:
           "/src/assets/afs-marcus-4.jpg",
           "/src/assets/afs-marcus-6.jpg",
           "/src/assets/afs-marcus-7.jpg",
-          "/src/assets/afs-marcus-8.jpg"
+          "/src/assets/afs-marcus-8.jpg",
+          "/src/assets/afs-marcus-9.jpg",
+          "/src/assets/afs-marcus-10.jpg",
+          "/src/assets/afs-marcus-11.jpg"
         ]
       },
       {
