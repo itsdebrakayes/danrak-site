@@ -366,7 +366,24 @@ Clients Served and Related Projects:
 • UNICEF Jamaica – 2024 Strategic Moment of Reflection
 • Port Authority of Jamaica – Launch of Westlands Expansion Project 2025
 • National Health Fund – 20th Anniversary Gala`,
-    events: [],
+    events: [
+      {
+        id: "on-air-hosting-gallery",
+        title: "Event Hosting Gallery",
+        galleryImages: [
+          "/src/assets/on-air-hosting-1.jpg",
+          "/src/assets/on-air-hosting-2.jpg",
+          "/src/assets/on-air-hosting-3.jpg",
+          "/src/assets/on-air-hosting-4.jpg",
+          "/src/assets/on-air-hosting-5.jpg",
+          "/src/assets/on-air-hosting-6.jpg",
+          "/src/assets/on-air-hosting-7.jpg",
+          "/src/assets/on-air-hosting-8.jpg",
+          "/src/assets/on-air-hosting-9.jpg",
+          "/src/assets/on-air-hosting-10.jpg"
+        ]
+      }
+    ],
     category: "Talent & Hosting",
     date: "2020-2025"
   }
