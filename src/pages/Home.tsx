@@ -65,7 +65,7 @@ const HeroSection = () => {
           loading="eager"
           fetchPriority="high"
           decoding="async"
-          className="object-contain object-bottom opacity-95"
+          className="object-contain object-bottom opacity-95 hidden md:block"
           style={{
             maxHeight: '100vh',
             width: 'auto',
@@ -84,7 +84,7 @@ const HeroSection = () => {
       {/* === Foreground Logo === */}
       <div
         ref={imageRef}
-        className="relative z-20 flex flex-col items-center justify-center pt-10 mt-[220px]"
+        className="relative z-20 flex flex-col items-center justify-center pt-10 mt-[120px] md:mt-[220px]"
       >
         <img
           src={danrakLogoFull}
@@ -99,20 +99,20 @@ const HeroSection = () => {
         />
       </div>
       {/* === Buttons === */}
-      <div className="absolute bottom-12 z-30 flex flex-col sm:flex-row gap-6 justify-center w-full">
-        <Link to="/showcase">
+      <div className="absolute bottom-12 z-30 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center w-full px-4">
+        <Link to="/showcase" className="w-full sm:w-auto">
           <Button
             size="lg"
-            className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg font-semibold rounded-lg shadow-lg"
+            className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-lg shadow-lg"
           >
             Explore Our Work
           </Button>
         </Link>
-        <Link to="/contact">
+        <Link to="/contact" className="w-full sm:w-auto">
           <Button
             variant="secondary"
             size="lg"
-            className="bg-secondary text-secondary-foreground hover:bg-secondary/80 px-8 py-4 text-lg font-semibold rounded-lg shadow-lg"
+            className="w-full sm:w-auto bg-secondary text-secondary-foreground hover:bg-secondary/80 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-lg shadow-lg"
           >
             Start Your Project
           </Button>

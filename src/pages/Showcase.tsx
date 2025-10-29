@@ -165,9 +165,9 @@ const Showcase = () => {
       <div className="absolute inset-0 bg-black/60 z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 h-full flex">
+      <div className="relative z-10 h-full flex flex-col md:flex-row">
         {/* Left Side - Featured Project Details */}
-        <div className="w-1/2 p-12 flex flex-col justify-center text-white">
+        <div className="w-full md:w-1/2 p-4 sm:p-6 md:p-12 flex flex-col justify-center text-white">
           <motion.div
             key={activeProject.id}
             initial={{ opacity: 0, x: -40 }}
@@ -175,19 +175,19 @@ const Showcase = () => {
             transition={{ duration: 0.36, delay: 0.06 }}
             className="max-w-lg"
           >
-            <div className="text-sm uppercase tracking-wider text-white/80 mb-4">
+            <div className="text-xs sm:text-sm uppercase tracking-wider text-white/80 mb-2 sm:mb-4">
               {activeProject.category}
             </div>
-            <h1 className="text-5xl font-bold mb-6 leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-6 leading-tight">
               {activeProject.title}
             </h1>
-            <p className="text-xl text-white/90 mb-8 leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-4 sm:mb-8 leading-relaxed">
               {activeProject.excerpt}
             </p>
             <Link to={`/project/${activeProject.id}`}>
               <Button 
                 size="lg" 
-                className="bg-white text-black hover:bg-white/90 transition-all duration-300"
+                className="bg-white text-black hover:bg-white/90 transition-all duration-300 text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-3"
               >
                 Read More →
               </Button>
@@ -197,7 +197,7 @@ const Showcase = () => {
 
         {/* Right Side - Upcoming Projects Carousel */}
         <div
-          className="w-1/2 flex items-center justify-center p-8"
+          className="w-full md:w-1/2 flex items-center justify-center p-4 sm:p-6 md:p-8 hidden md:flex"
           onMouseEnter={() => {
             pauseRef.current = true;
             if (timeoutRef.current) {
@@ -212,7 +212,7 @@ const Showcase = () => {
         >
           <div className="w-full">
             <motion.h2 
-              className="text-xl font-bold text-white mb-8 text-center"
+              className="text-base sm:text-lg md:text-xl font-bold text-white mb-4 sm:mb-6 md:mb-8 text-center"
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.38, delay: 0.08 }}
@@ -221,12 +221,12 @@ const Showcase = () => {
             </motion.h2>
             
             {/* Horizontal Card Container */}
-            <div className="flex gap-6 justify-center items-center overflow-visible">
+            <div className="flex gap-3 sm:gap-4 md:gap-6 justify-center items-center overflow-visible">
               {displayedProjects.map((project, index) => {
                 return (
                   <motion.div
                     key={project.id}
-                    className="relative bg-white/10 rounded-2xl overflow-hidden shadow-xl border border-white/20 cursor-pointer w-[700px] h-[450px]"
+                    className="relative bg-white/10 rounded-xl md:rounded-2xl overflow-hidden shadow-xl border border-white/20 cursor-pointer w-full sm:w-[300px] md:w-[400px] lg:w-[700px] h-[200px] sm:h-[250px] md:h-[350px] lg:h-[450px]"
                     whileHover={{ scale: 1.05, y: -8 }}
                     whileTap={{ scale: 0.98 }}
                     initial={{ opacity: 0, y: 20 }}
@@ -257,11 +257,11 @@ const Showcase = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-1" />
                     
                     {/* Text Content Overlay */}
-                    <div className="relative z-10 p-4 h-full flex flex-col justify-end text-white">
-                      <h3 className="text-lg font-bold mb-2 line-clamp-2 drop-shadow-lg">
+                    <div className="relative z-10 p-2 sm:p-3 md:p-4 h-full flex flex-col justify-end text-white">
+                      <h3 className="text-sm sm:text-base md:text-lg font-bold mb-1 sm:mb-2 line-clamp-2 drop-shadow-lg">
                         {project.title}
                       </h3>
-                      <p className="text-sm text-white/80 mb-2 line-clamp-2 drop-shadow-md">{project.excerpt}</p>
+                      <p className="text-xs sm:text-sm text-white/80 mb-1 sm:mb-2 line-clamp-2 drop-shadow-md hidden sm:block">{project.excerpt}</p>
                       <div className="text-xs uppercase tracking-wider text-white/70 font-medium">
                         {project.category}
                       </div>
