@@ -1,3 +1,5 @@
+import { images } from '@/assets/images';
+
 export interface Event {
   id: string;
   title: string;
@@ -31,9 +33,9 @@ export const projects: Project[] = [
     id: "corporate-communications",
     serviceId: "corporate-communications",
     title: "Corporate Communications & Public Relations",
-    image: "/src/assets/corporate-comms-image.png",
-    carouselImage: "/src/assets/corporate-comms-carousel.png",
-    backgroundImage: "/src/assets/corporate-comms-background.png",
+    image: images.corporateComms.image,
+    carouselImage: images.corporateComms.carousel,
+    backgroundImage: images.corporateComms.background,
     excerpt: "With the weight of more than 20 years of experience, we offer a full suite of corporate communications services to provide our clients with insights and support the advancement of their goals, developing and effectively deploying strategic communications and PR storytelling.",
     serviceDescription: `With the weight of more than 20 years of experience, we offer a full suite of corporate communications services to provide our clients with insights and support the advancement of their goals, developing and effectively deploying strategic communications and PR storytelling.
 
@@ -60,117 +62,65 @@ Our range of services includes strategy development, tailored action plans that 
         id: "access-fin-launch",
         title: "Access Financial Services Limited",
         galleryImages: [
-          "/src/assets/access-launch-content1.jpg",
-          "/src/assets/access-launch-content2.jpg",
-          "/src/assets/access-launch-content3.jpg",
-          "/src/assets/access-gallery-1.jpg",
-          "/src/assets/access-gallery-2.jpg",
-          "/src/assets/access-gallery-3.jpg",
-          "/src/assets/access-gallery-4.jpg",
-          "/src/assets/access-gallery-5.jpg"
+          ...images.corporateComms.accessLaunch,
+          ...images.corporateComms.accessGallery
         ]
       },
       {
         id: "ministry-education",
         title: "Ministry of Education, Skills, Youth and Information",
-        galleryImages: [
-          "/src/assets/ministry-education-gallery-1.jpg",
-          "/src/assets/ministry-education-gallery-2.jpg",
-          "/src/assets/ministry-education-gallery-3.jpg",
-          "/src/assets/ministry-education-gallery-4.jpg",
-          "/src/assets/ministry-education-gallery-5.jpg"
-        ]
+        galleryImages: images.corporateComms.ministryEducation
       },
       {
         id: "port-authority-groundbreaking",
         title: "Port Authority of Jamaica",
-        galleryImages: [
-          "/src/assets/port-authority-content1.jpeg",
-          "/src/assets/port-authority-content2.jpeg",
-          "/src/assets/port-authority-content3.jpeg",
-          "/src/assets/port-authority-gallery-1.jpg",
-          "/src/assets/port-authority-gallery-2.jpg"
-        ]
+        galleryImages: images.corporateComms.portAuthority
       }
     ],
     category: "Corporate Communications",
 
-    newspaperClippings: [
-      {
-        image: "/src/assets/breaking-news1.png",
-        url: "https://jamaica-gleaner.com/article/lead-stories/20250425/living-room-start-expanding-enterprise",
-        title: "Access Financial 25th Anniversary Coverage"
-      },
-      {
-        image: "/src/assets/breaking-news2.png",
-        url: "https://www.jamaicaobserver.com/2025/05/25/nine-childrens-homes-benefit-access-financials-6-5m-social-responsibility-initiative/",
-        title: "Port Authority Groundbreaking News"
-      },
-      {
-        image: "/src/assets/breaking-news3.png",
-        url: "https://jamaica-gleaner.com/article/lifestyle/20250913/goodheart-selling-sweets-higher-purpose-and-education",
-        title: "Goodheart Selling Sweets for a Higher Purpose"
-      },
-      {
-        image: "/src/assets/breaking-news4.png",
-        url: "https://jamaica-gleaner.com/article/lead-stories/20240605/shirley-projects-us20m-yearlong-repair-timeline-ocho-rios-cruise",
-        title: "Shirley Projects US$20M Yearlong Repair Timeline for Ocho Rios Cruise"
-      },
-      {
-        image: "/src/assets/breaking-news5.png",
-        url: "https://jis.gov.jm/disney-treasure-makes-inaugural-call-at-falmouth-cruise-port/",
-        title: "Disney Treasure Makes Inaugural Call at Falmouth Cruise Port"
-      },
-      {
-        image: "/src/assets/breaking-news6.png",
-        url: "https://jamaica-gleaner.com/article/lead-stories/20250201/new-learning-development-policy-aimed-public-sector-transformation",
-        title: "New Learning & Development Policy Aimed at Public Sector Transformation"
-      },
-      {
-        image: "/src/assets/breaking-news7.png",
-        url: "https://jis.gov.jm/new-policy-a-game-changer-for-public-sector-professional-development/",
-        title: "New Policy a Game Changer for Public Sector Professional Development"
-      },
-      {
-        image: "/src/assets/breaking-news8.png",
-        url: "https://jamaica-gleaner.com/article/news/20231123/working-mom-urges-parents-invest-their-childrens-education",
-        title: "Working Mom Urges Parents to Invest in Their Children's Education"
-      },
-      {
-        image: "/src/assets/breaking-news9.png",
-        url: "https://jamaica-gleaner.com/article/news/20240628/jbdc-and-access-financial-services-sign-mou",
-        title: "JBDC and Access Financial Services Sign MOU"
-      },
-      {
-        image: "/src/assets/breaking-news10.png",
-        url: "https://www.jamaicaobserver.com/allwoman/2024/10/27/take-nothing-granted/",
-        title: "Take Nothing for Granted"
-      },
-      {
-        image: "/src/assets/breaking-news11.png",
-        url: "https://jamaica-gleaner.com/article/news/20231109/students-role-education-sectors-transformation-underscored",
-        title: "Students' Role in Education Sector's Transformation Underscored"
-      },
-      {
-        image: "/src/assets/breaking-news12.png",
-        url: "https://jamaica-gleaner.com/article/news/20231020/ministry-launch-communication-campaign-education-transformation",
-        title: "Ministry Launch Communication Campaign for Education Transformation"
-      },
-      {
-        image: "/src/assets/breaking-news13.png",
-        url: "https://jamaica-gleaner.com/article/news/20230701/mckenzie-hails-access-financials-poverty-reduction-initiative",
-        title: "McKenzie Hails Access Financial's Poverty Reduction Initiative"
-      }
-    ]
+    newspaperClippings: images.corporateComms.breakingNews.map((img, idx) => ({
+      image: img,
+      url: [
+        "https://jamaica-gleaner.com/article/lead-stories/20250425/living-room-start-expanding-enterprise",
+        "https://www.jamaicaobserver.com/2025/05/25/nine-childrens-homes-benefit-access-financials-6-5m-social-responsibility-initiative/",
+        "https://jamaica-gleaner.com/article/lifestyle/20250913/goodheart-selling-sweets-higher-purpose-and-education",
+        "https://jamaica-gleaner.com/article/lead-stories/20240605/shirley-projects-us20m-yearlong-repair-timeline-ocho-rios-cruise",
+        "https://jis.gov.jm/disney-treasure-makes-inaugural-call-at-falmouth-cruise-port/",
+        "https://jamaica-gleaner.com/article/lead-stories/20250201/new-learning-development-policy-aimed-public-sector-transformation",
+        "https://jis.gov.jm/new-policy-a-game-changer-for-public-sector-professional-development/",
+        "https://jamaica-gleaner.com/article/news/20231123/working-mom-urges-parents-invest-their-childrens-education",
+        "https://jamaica-gleaner.com/article/news/20240628/jbdc-and-access-financial-services-sign-mou",
+        "https://www.jamaicaobserver.com/allwoman/2024/10/27/take-nothing-granted/",
+        "https://jamaica-gleaner.com/article/news/20231109/students-role-education-sectors-transformation-underscored",
+        "https://jamaica-gleaner.com/article/news/20231020/ministry-launch-communication-campaign-education-transformation",
+        "https://jamaica-gleaner.com/article/news/20230701/mckenzie-hails-access-financials-poverty-reduction-initiative"
+      ][idx],
+      title: [
+        "Access Financial 25th Anniversary Coverage",
+        "Port Authority Groundbreaking News",
+        "Goodheart Selling Sweets for a Higher Purpose",
+        "Shirley Projects US$20M Yearlong Repair Timeline for Ocho Rios Cruise",
+        "Disney Treasure Makes Inaugural Call at Falmouth Cruise Port",
+        "New Learning & Development Policy Aimed at Public Sector Transformation",
+        "New Policy a Game Changer for Public Sector Professional Development",
+        "Working Mom Urges Parents to Invest in Their Children's Education",
+        "JBDC and Access Financial Services Sign MOU",
+        "Take Nothing for Granted",
+        "Students' Role in Education Sector's Transformation Underscored",
+        "Ministry Launch Communication Campaign for Education Transformation",
+        "McKenzie Hails Access Financial's Poverty Reduction Initiative"
+      ][idx]
+    }))
   },
 
   {
     id: "campaign-development",
     serviceId: "campaign-development",
     title: "Campaign Development & Execution",
-    image: "/src/assets/campaign-dev-image.png",
-    carouselImage: "/src/assets/campaign-dev-carousel.png",
-    backgroundImage: "/src/assets/campaign-dev-background.png",
+    image: images.campaignDev.image,
+    carouselImage: images.campaignDev.carousel,
+    backgroundImage: images.campaignDev.background,
     excerpt: "We plan and deliver marketing, communications and public relations campaigns that create impact. From concept development to the production of campaign assets and executing your launch event with precision, we curate campaigns that help you achieve strategic goals - on time and within budget.",
     serviceDescription: `We plan and deliver marketing, communications and public relations campaigns that create impact. From concept development to the production of campaign assets and executing your launch event with precision, we curate campaigns that help you achieve strategic goals - on time and within budget.
 
@@ -190,31 +140,12 @@ With a commitment to excellence and a collaborative approach, we keep our client
       {
         id: "trend-campaign",
         title: "Ministry of Education, Skills, Youth and Information - T.R.E.N.D Campaign",
-        galleryImages: [
-          "/src/assets/trend-gallery-10.png",
-          "/src/assets/MOEY-Trend-Content.mp4",
-          "/src/assets/trend-gallery-1.jpg",
-          "/src/assets/trend-gallery-2.jpg",
-          "/src/assets/trend-gallery-3.jpg",
-          "/src/assets/trend-gallery-4.jpg",
-          "/src/assets/trend-gallery-5.jpg",
-          "/src/assets/trend-gallery-6.jpg",
-          "/src/assets/trend-gallery-7.jpg",
-          "/src/assets/trend-gallery-8.jpg",
-          "/src/assets/trend-gallery-9.jpg"
-        ]
+        galleryImages: images.campaignDev.trend
       },
       {
         id: "eu-jamaica-citizen-security",
         title: "EU/Jamaica Citizen Security Plan",
-        galleryImages: [
-          "/src/assets/eu-jamaica-gallery-1.jpg",
-          "/src/assets/eu-jamaica-gallery-2.jpg",
-          "/src/assets/eu-jamaica-gallery-3.jpg",
-          "/src/assets/eu-jamaica-gallery-4.jpg",
-          "/src/assets/eu-jamaica-gallery-5.jpg",
-          "/src/assets/eu-jamaica-gallery-6.jpg"
-        ]
+        galleryImages: images.campaignDev.euJamaica
       }
     ],
     category: "Campaigns"
@@ -224,9 +155,9 @@ With a commitment to excellence and a collaborative approach, we keep our client
     id: "project-event-planning",
     serviceId: "project-event-planning",
     title: "Project & Event Planning",
-    image: "/src/assets/project-event-mngmt-image.png",
-    carouselImage: "/src/assets/project-event-mngmt-carousel.png",
-    backgroundImage: "/src/assets/project-event-mngmt-background.png",
+    image: images.projectEvent.image,
+    carouselImage: images.projectEvent.carousel,
+    backgroundImage: images.projectEvent.background,
     excerpt: "Let's bring your idea to life! Through strategic planning, seamless execution, and creative excellence, we take your vision and create moments that inspire and occasions that leave a lasting impact. With experience managing a wide range of projects and events - from corporate functions and community initiatives to brand activations and private celebrations - we ensure every detail aligns with your goals and vision.",
     serviceDescription: `Let's bring your idea to life! Through strategic planning, seamless execution, and creative excellence, we take your vision and create moments that inspire and occasions that leave a lasting impact. With experience managing a wide range of projects and events - from corporate functions and community initiatives to brand activations and private celebrations - we ensure every detail aligns with your goals and vision.
 
@@ -248,36 +179,12 @@ Our approach combines precision and creativity. We handle budgeting, vendor coor
       {
         id: "afs-marcus-james-scholarship",
         title: "AFS Marcus James Scholarship for Entrepreneurship Ceremony",
-        galleryImages: [
-          "/src/assets/afs-marcus-2.jpg",
-          "/src/assets/afs-marcus-1.jpg",
-          "/src/assets/afs-marcus-3.jpg",
-          "/src/assets/afs-marcus-4.jpg",
-          "/src/assets/afs-marcus-6.jpg",
-          "/src/assets/afs-marcus-7.jpg",
-          "/src/assets/afs-marcus-8.jpg",
-          "/src/assets/afs-marcus-9.jpg",
-          "/src/assets/afs-marcus-10.jpg",
-          "/src/assets/afs-marcus-11.jpg"
-        ]
+        galleryImages: images.projectEvent.afsMarcus
       },
       {
         id: "afs-25th-anniversary-gala",
         title: "AFS 25th Anniversary Gala and Awards Ceremony",
-        galleryImages: [
-          "/src/assets/afs-25th-1.jpg",
-          "/src/assets/afs-25th-2.jpg",
-          "/src/assets/afs-25th-3.jpg",
-          "/src/assets/afs-25th-4.jpg",
-          "/src/assets/afs-25th-5.jpg",
-          "/src/assets/afs-25th-6.jpg",
-          "/src/assets/afs-25th-7.jpg",
-          "/src/assets/afs-25th-8.jpg",
-          "/src/assets/afs-25th-9.jpg",
-          "/src/assets/afs-25th-10.jpg",
-          "/src/assets/afs-25th-11.jpg",
-          "/src/assets/afs-25th-12.jpg"
-        ]
+        galleryImages: images.projectEvent.afs25th
       }
     ],
     category: "Event Management"
@@ -287,9 +194,9 @@ Our approach combines precision and creativity. We handle budgeting, vendor coor
     id: "video-tv-production",
     serviceId: "video-tv-production",
     title: "Video & Television Production",
-    image: "/src/assets/video-and-television-image.png",
-    carouselImage: "/src/assets/video-and-television-carousel.png",
-    backgroundImage: "/src/assets/video-and-television-background.png",
+    image: images.videoTv.image,
+    carouselImage: images.videoTv.carousel,
+    backgroundImage: images.videoTv.background,
     excerpt: "For more than 20 years, we've been turning ideas into powerful visual stories. Our team of video and television production professionals has created captivating content for TV audiences across Jamaica and the Caribbean – from corporate brands to government agencies and multi-national institutions.",
     serviceDescription: `For more than 20 years, we've been turning ideas into powerful visual stories. Our team of video and television production professionals has created captivating content for TV audiences across Jamaica and the Caribbean – from corporate brands to government agencies and multi-national institutions.
 
@@ -312,7 +219,7 @@ With 2+ decades of hands-on experience in broadcast production, we understand wh
         id: "its-a-womans-world-featured",
         title: "It's A Woman's World",
         featured: true,
-        headerImage: "/src/assets/IAWW-cover.jpg",
+        headerImage: images.videoTv.iawwCover,
         description: `**It's A Woman's World – TV Done Right!**
 This syndicated TV talk show enchanted audiences across the Caribbean for two seasons. Six months after its premier in Jamaica in February 2019, the show was picked up across more than 20 Caribbean markets and 8 North American cities, including New York, Boston, Washington DC, Toronto and Vancouver. Riding that momentum, Season 2 did not disappoint in 2020, consistently securing a Top 10 ranking across all 21 Caribbean territories on the FLOW platform.
 
@@ -323,18 +230,12 @@ Described as fresh, first-world and fun, this Danrak exclusive television presen
       {
         id: "MOEY-learning-development-policy-video",
         title: "MOEY Trend Campaign",
-        galleryImages: [
-          "/src/assets/MOEY_FINAL.mp4"
-        ]
+        galleryImages: [images.videoTv.moeyFinal]
       },
       {
         id: "stronger-together-documentary",
         title: "Stronger Together Web-Series",
-        galleryImages: [
-          "/src/assets/stronger-together-content1.mp4",
-          "/src/assets/stronger-together-content2.mp4",
-          "/src/assets/stronger-together-content3.mp4"
-        ]
+        galleryImages: images.videoTv.strongerTogether
       },
     ],
     category: "Media Content Production"
@@ -344,9 +245,9 @@ Described as fresh, first-world and fun, this Danrak exclusive television presen
     id: "on-air-talent",
     serviceId: "on-air-talent",
     title: "On-Air Talent & Event Hosting",
-    image: "/src/assets/on-air-talent-event-host-image.png",
-    carouselImage: "/src/assets/on-air-talent-event-host-carousel.png",
-    backgroundImage: "/src/assets/on-air-talent-event-host-background.png",
+    image: images.onAirTalent.image,
+    carouselImage: images.onAirTalent.carousel,
+    backgroundImage: images.onAirTalent.background,
     excerpt: "Broadcaster and orator Stacy-Ann Smith has been anchoring live television events for the better part of 25 years. Building on her years on set presenting the nightly news, this media maven has been the go-to anchor for several state events including the annual Ceremony of Investiture and Presentation of National Honours and Awards for more than 12 years.",
     serviceDescription: `Broadcaster and orator Stacy-Ann Smith has been anchoring live television events for the better part of 25 years. Building on her years on set presenting the nightly news, this media maven has been the go-to anchor for several state events including the annual Ceremony of Investiture and Presentation of National Honours and Awards for more than 12 years.
 
@@ -365,27 +266,7 @@ This versatile communications practitioner bridges the gap between official and 
       {
         id: "on-air-hosting-gallery",
         title: "Event Hosting Gallery",
-        galleryImages: [
-          "/src/assets/on-air-talent.mp4",
-          "/src/assets/on-air-talent-11.mp4",
-          "/src/assets/on-air-t.mp4",
-          "/src/assets/on-air-talent-2.mp4",
-          "/src/assets/on-air-talent-10.mp4",
-          "/src/assets/on-air-hosting-1.jpg",
-          "/src/assets/on-air-hosting-2.jpg",
-          "/src/assets/on-air-hosting-3.jpg",
-          "/src/assets/on-air-hosting-4.jpg",
-          "/src/assets/on-air-talent-9.mp4",
-          "/src/assets/on-air-hosting-5.jpg",
-          "/src/assets/on-air-hosting-6.jpg",
-          "/src/assets/on-air-hosting-7.jpg",
-          "/src/assets/on-air-talent.jpg",
-          "/src/assets/on-air-hosting-8.jpg",
-          "/src/assets/on-air-hosting-9.jpg",
-          "/src/assets/on-air-hosting-10.jpg",
-          "/src/assets/on-air-hosting-11.jpg",
-          "/src/assets/on-air-talent-7.mp4"
-        ]
+        galleryImages: images.onAirTalent.allGallery
       }
     ],
     category: "Talent & Hosting"
