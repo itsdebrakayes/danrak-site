@@ -93,19 +93,19 @@ const ContactSection = () => {
       <div className="section-glow" />
 
       <div className="relative z-10 container mx-auto px-6">
-        <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h2 className="contact-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-brand-forest mb-4">
+        <div className="text-center mb-16">
+          <h2 className="contact-title text-5xl md:text-6xl font-black text-brand-forest mb-4">
             Get in Touch
             <span className="block text-foreground">Let's Create Together</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-brand-forest to-brand-sage rounded-full mx-auto" />
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
           <div className="contact-form">
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-              <div className="glass p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl space-y-4 sm:space-y-6">
-                <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Send us a message</h3>
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+              <div className="glass p-8 rounded-3xl space-y-6">
+                <h3 className="text-2xl font-bold mb-6">Send us a message</h3>
 
                 <div className="space-y-4">
                   <div>
@@ -167,9 +167,9 @@ const ContactSection = () => {
             </form>
           </div>
 
-          <div className="contact-info space-y-4 sm:space-y-6 md:space-y-8">
-            <div className="glass p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl">
-              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Contact Information</h3>
+          <div className="contact-info space-y-8">
+            <div className="glass p-8 rounded-3xl">
+              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
 
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
@@ -194,8 +194,8 @@ const ContactSection = () => {
               </div>
             </div>
 
-            <div className="glass p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl">
-              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Follow Us</h3>
+            <div className="glass p-8 rounded-3xl">
+              <h3 className="text-2xl font-bold mb-6">Follow Us</h3>
 
               <div className="flex gap-4">
                 {socialLinks.map((social) => (
@@ -212,8 +212,8 @@ const ContactSection = () => {
               </div>
             </div>
 
-            <div className="glass p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl">
-              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Business Hours</h3>
+            <div className="glass p-8 rounded-3xl">
+              <h3 className="text-2xl font-bold mb-6">Business Hours</h3>
 
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">

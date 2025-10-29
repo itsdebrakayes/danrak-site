@@ -62,13 +62,12 @@ const HeroSection = () => {
         <img
           src={heroPortrait}
           alt="Danrak Portrait"
-          width="1200"
-          height="1600"
           loading="eager"
           fetchPriority="high"
           decoding="async"
-          className="object-contain object-bottom opacity-95 max-h-[75vh] md:max-h-[100vh]"
+          className="object-contain object-bottom opacity-95"
           style={{
+            maxHeight: '100vh',
             width: 'auto',
             height: 'auto',
             filter: 'brightness(1.05) contrast(1.1)',
@@ -79,19 +78,17 @@ const HeroSection = () => {
 
       {/* === Burst Glow === */}
      <div ref={burstRef} className="absolute inset-0 flex items-center justify-center z-[5] pointer-events-none">
-      <div className="w-[350px] h-[350px] md:w-[600px] md:h-[600px] rounded-full bg-gradient-to-br from-brand-ocean via-brand-sky to-brand-crimson opacity-60 blur-3xl" />
+      <div className="w-[600px] h-[600px] rounded-full bg-gradient-to-br from-brand-ocean via-brand-sky to-brand-crimson opacity-60 blur-3xl" />
     </div>
 
       {/* === Foreground Logo === */}
       <div
         ref={imageRef}
-        className="relative z-20 flex flex-col items-center justify-center pt-10 mt-[60px] md:mt-[220px]"
+        className="relative z-20 flex flex-col items-center justify-center pt-10 mt-[220px]"
       >
         <img
           src={danrakLogoFull}
           alt="Danrak Productions Logo"
-          width="2000"
-          height="800"
           loading="eager"
           fetchPriority="high"
           decoding="async"
@@ -102,20 +99,20 @@ const HeroSection = () => {
         />
       </div>
       {/* === Buttons === */}
-      <div className="absolute bottom-12 z-30 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center w-full px-4">
-        <Link to="/showcase" className="w-full sm:w-auto">
+      <div className="absolute bottom-12 z-30 flex flex-col sm:flex-row gap-6 justify-center w-full">
+        <Link to="/showcase">
           <Button
             size="lg"
-            className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-lg shadow-lg"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg font-semibold rounded-lg shadow-lg"
           >
             Explore Our Work
           </Button>
         </Link>
-        <Link to="/contact" className="w-full sm:w-auto">
+        <Link to="/contact">
           <Button
             variant="secondary"
             size="lg"
-            className="w-full sm:w-auto bg-secondary text-secondary-foreground hover:bg-secondary/80 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-lg shadow-lg"
+            className="bg-secondary text-secondary-foreground hover:bg-secondary/80 px-8 py-4 text-lg font-semibold rounded-lg shadow-lg"
           >
             Start Your Project
           </Button>
