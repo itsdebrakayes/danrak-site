@@ -50,7 +50,7 @@ Our range of services includes strategy development, tailored action plans that 
 • Government Engagement
 • Copy writing and editing
 
-Clients Served and Related Projects:
+**Clients Served and Related Projects:**
 • Access Financial Services – Full Service Communications and PR
 • Port Authority of Jamaica – PAJ Media Open Day 2024
 • Wisynco Group Limited – 2025 Annual Report
