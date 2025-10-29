@@ -177,15 +177,15 @@ Our range of services includes strategy development, tailored action plans that 
 With a commitment to excellence and a collaborative approach, we keep our clients at the centre of the project to ensure we bring your vision to life. Our experience covers brand campaigns, marketing and public education campaigns across the public and private sectors.
 
 **Services Include:**
-• Insight-led Campaign Development
+• Insight-led campaign development
 • Budget crafting and management
-• Production of Campaign Assets
-• Media Strategy and Resource Allocation
-• Effective Comms for Successful Events
+• Production of campaign assets
+• Media strategy and resource allocation
+• Effective comms for successful events
 
 **Clients Served and Related Projects:**
-• Ministry of Education, Skills, Youth and Information - TREND
-• EU/Jamaica Citizen Security Plan`,
+• Ministry of Education, Skills, Youth and Information - TREND Public Education Campaign
+• Dunlop Corbin Communications – EU/Jamaica Citizen Security Plan`,
     events: [
       {
         id: "trend-campaign",
@@ -305,7 +305,7 @@ With 2+ decades of hands-on experience in broadcast production, we understand wh
 • Corporate and promotional videos
 
 **Clients Served and Related Projects:**
-• Port Authority of Jamaica – 50th Anniversary Videos Series, Kingston Logistics Park, Caymanas Special Economic Zone
+• Port Authority of Jamaica – 50th Anniversary Videos, Kingston Logistics Park, Caymanas Special Economic Zone
 • Management Institute for National Development (MIND) – GOJ Learning & Development Policy Movie`,
     events: [
       {
@@ -337,7 +337,7 @@ Described as fresh, first-world and fun, this Danrak exclusive television presen
         ]
       },
     ],
-    category: "Media Production"
+    category: "Media Content Production"
   },
 
   {
@@ -350,31 +350,32 @@ Described as fresh, first-world and fun, this Danrak exclusive television presen
     excerpt: "Broadcaster and orator Stacy-Ann Smith has been anchoring live television events for the better part of 25 years. Building on her years on set presenting the nightly news, this media maven has been the go-to anchor for several state events including the annual Ceremony of Investiture and Presentation of National Honours and Awards for more than 12 years.",
     serviceDescription: `Broadcaster and orator Stacy-Ann Smith has been anchoring live television events for the better part of 25 years. Building on her years on set presenting the nightly news, this media maven has been the go-to anchor for several state events including the annual Ceremony of Investiture and Presentation of National Honours and Awards for more than 12 years.
 
-This versatile communications practitioner bridges the gap between official and corporate events to bring the right energy and charm to engage and captivate your guests. More than just an MC, Stacy-Ann understands protocol and possesses the kind of flexibility to connect with any audiences - be they formal or not.
+This versatile communications practitioner bridges the gap between official and corporate events to bring the right energy and charm to engage and captivate your guests. More than just an MC, Stacy-Ann understands protocol and possesses the kind of flexibility to connect with audiences - be they formal or not.
 
 **Clients Served and Related Projects:**
 • Jamaica Information Service – Ceremony of Investiture and Presentation of National Honours and Awards; Ceremonial Opening of Parliament; Swearing-In Ceremony of Prime Minister Dr. Andrew Holness
-• Women Centre Foundation of Jamaica
+• Women Centre Foundation of Jamaica Documentary
 • Access Financial Services – 25th Anniversary Gala & Awards Ceremony
-• BARITA Wealth – Wealth Brunch
+• BARITA Wealth – 2025 Wealth Brunch
 • Child Protection & Family Services Agency – Annual Education Achievement Awards
 • UNICEF Jamaica – 2024 Strategic Moment of Reflection
-• Port Authority of Jamaica – Launch of Westlands Expansion Project 2025
+• Port Authority of Jamaica – Launch of Westlands Expansion Project 2025; Launch of Caymanas Special Economic Zone
 • National Health Fund – 20th Anniversary Gala`,
     events: [
       {
         id: "on-air-hosting-gallery",
         title: "Event Hosting Gallery",
         galleryImages: [
-          "/src/assets/on-air-talent3.mp4",
-          "/src/assets/on-air-talent-10.mp4",
+          "/src/assets/on-air-talent.mp4",
           "/src/assets/on-air-talent-11.mp4",
+          "/src/assets/on-air-t.mp4",
+          "/src/assets/on-air-talent-2.mp4",
+          "/src/assets/on-air-talent-10.mp4",
           "/src/assets/on-air-hosting-1.jpg",
           "/src/assets/on-air-hosting-2.jpg",
           "/src/assets/on-air-hosting-3.jpg",
           "/src/assets/on-air-hosting-4.jpg",
           "/src/assets/on-air-talent-9.mp4",
-          "/src/assets/on-air-talent.mp4",
           "/src/assets/on-air-hosting-5.jpg",
           "/src/assets/on-air-hosting-6.jpg",
           "/src/assets/on-air-hosting-7.jpg",
@@ -383,9 +384,6 @@ This versatile communications practitioner bridges the gap between official and 
           "/src/assets/on-air-hosting-9.jpg",
           "/src/assets/on-air-hosting-10.jpg",
           "/src/assets/on-air-hosting-11.jpg",
-          "/src/assets/on-air-talent-2.mp4",
-          "/src/assets/on-air-talent-4.mp4",
-          "/src/assets/on-air-talent-5.mp4",
           "/src/assets/on-air-talent-7.mp4"
         ]
       }
