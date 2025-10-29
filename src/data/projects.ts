@@ -266,7 +266,17 @@ Clients Served and Related Projects:
         id: "afs-25th-anniversary-gala",
         title: "AFS 25th Anniversary Gala and Awards Ceremony",
         galleryImages: [
-          "/src/assets/afs-25th-1.jpg"
+          "/src/assets/afs-25th-1.jpg",
+          "/src/assets/afs-25th-2.jpg",
+          "/src/assets/afs-25th-3.jpg",
+          "/src/assets/afs-25th-4.jpg",
+          "/src/assets/afs-25th-5.jpg",
+          "/src/assets/afs-25th-6.jpg",
+          "/src/assets/afs-25th-7.jpg",
+          "/src/assets/afs-25th-8.jpg",
+          "/src/assets/afs-25th-9.jpg",
+          "/src/assets/afs-25th-10.jpg",
+          "/src/assets/afs-25th-11.jpg"
         ]
       }
     ],
