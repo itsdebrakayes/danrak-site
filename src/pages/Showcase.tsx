@@ -165,9 +165,9 @@ const Showcase = () => {
       <div className="absolute inset-0 bg-black/60 z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col">
+      <div className="relative z-10 h-full flex flex-col md:flex-row">
         {/* Left Side - Featured Project Details */}
-        <div className="w-full p-6 md:p-12 flex flex-col justify-center text-white flex-1">
+        <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-center text-white">
           <motion.div
             key={activeProject.id}
             initial={{ opacity: 0, x: -40 }}
@@ -197,7 +197,7 @@ const Showcase = () => {
 
         {/* Right Side - Upcoming Projects Carousel */}
         <div
-          className="w-full p-4 sm:p-6 md:p-8 flex items-center justify-center"
+          className="w-full md:w-1/2 p-4 sm:p-6 md:p-8 flex items-center justify-center"
           onMouseEnter={() => {
             pauseRef.current = true;
             if (timeoutRef.current) {
@@ -276,7 +276,7 @@ const Showcase = () => {
                 return (
                   <motion.div
                     key={project.id}
-                    className="relative bg-white/10 rounded-xl md:rounded-2xl overflow-hidden shadow-xl border border-white/20 cursor-pointer w-full sm:w-[300px] md:w-[400px] lg:w-[700px] h-[200px] sm:h-[250px] md:h-[350px] lg:h-[450px]"
+                    className="relative bg-white/10 rounded-xl md:rounded-2xl overflow-hidden shadow-xl border border-white/20 cursor-pointer w-full sm:w-[280px] md:w-[280px] lg:w-[280px] h-[200px] sm:h-[320px] md:h-[320px] lg:h-[320px]"
                     whileHover={{ scale: 1.05, y: -8 }}
                     whileTap={{ scale: 0.98 }}
                     initial={{ opacity: 0, y: 20 }}
