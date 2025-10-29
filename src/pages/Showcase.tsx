@@ -135,7 +135,7 @@ const Showcase = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative w-full min-h-screen overflow-y-auto md:h-screen md:overflow-hidden">
       
       {/* Static Background Layer to prevent gray flash */}
       <div 
@@ -168,9 +168,9 @@ const Showcase = () => {
       <div className="absolute inset-0 bg-black/60 z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col md:flex-row">
+      <div className="relative z-10 min-h-screen md:h-full flex flex-col md:flex-row">
         {/* Left Side - Featured Project Details */}
-        <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-center text-white">
+        <div className="w-full md:w-1/2 p-6 pb-8 md:p-12 flex flex-col justify-center text-white">
           <motion.div
             key={activeProject.id}
             initial={{ opacity: 0, x: -40 }}
@@ -200,7 +200,7 @@ const Showcase = () => {
 
         {/* Right Side - Upcoming Projects Carousel */}
         <div
-          className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8"
+          className="w-full md:w-1/2 flex items-center justify-center p-4 pb-12 md:p-8"
           onMouseEnter={() => {
             pauseRef.current = true;
             if (timeoutRef.current) {
@@ -284,19 +284,6 @@ const Showcase = () => {
               
               {/* Custom Swiper Styles for Mobile */}
               <style>{`
-                .mobile-showcase-swiper .swiper-button-next,
-                .mobile-showcase-swiper .swiper-button-prev {
-                  color: white !important;
-                  background: rgba(0,0,0,0.6);
-                  width: 40px;
-                  height: 40px;
-                  border-radius: 50%;
-                }
-                .mobile-showcase-swiper .swiper-button-next:after,
-                .mobile-showcase-swiper .swiper-button-prev:after {
-                  font-size: 18px;
-                  font-weight: bold;
-                }
                 .mobile-showcase-swiper .swiper-pagination {
                   bottom: 10px;
                 }
