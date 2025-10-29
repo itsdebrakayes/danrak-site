@@ -252,11 +252,10 @@ Clients Served and Related Projects:
         id: "afs-marcus-james-scholarship",
         title: "AFS Marcus James Scholarship for Entrepreneurship Ceremony",
         galleryImages: [
-          "/src/assets/afs-marcus-1.jpg",
           "/src/assets/afs-marcus-2.jpg",
+          "/src/assets/afs-marcus-1.jpg",
           "/src/assets/afs-marcus-3.jpg",
           "/src/assets/afs-marcus-4.jpg",
-          "/src/assets/afs-marcus-5.jpg",
           "/src/assets/afs-marcus-6.jpg",
           "/src/assets/afs-marcus-7.jpg",
           "/src/assets/afs-marcus-8.jpg"
