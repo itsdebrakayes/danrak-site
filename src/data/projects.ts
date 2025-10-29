@@ -171,8 +171,8 @@ Our range of services includes strategy development, tailored action plans that 
     image: "/src/assets/campaign-dev-image.png",
     carouselImage: "/src/assets/campaign-dev-carousel.png",
     backgroundImage: "/src/assets/campaign-dev-background.png",
-    excerpt: "We plan and deliver market, communications and public relations campaigns that create impact. From concept development to the production of campaign assets and executing your launch event with precision, we curate campaigns that help you achieve strategic goals - on time and within budget.",
-    serviceDescription: `We plan and deliver market, communications and public relations campaigns that create impact. From concept development to the production of campaign assets and executing your launch event with precision, we curate campaigns that help you achieve strategic goals - on time and within budget.
+    excerpt: "We plan and deliver marketing, communications and public relations campaigns that create impact. From concept development to the production of campaign assets and executing your launch event with precision, we curate campaigns that help you achieve strategic goals - on time and within budget.",
+    serviceDescription: `We plan and deliver marketing, communications and public relations campaigns that create impact. From concept development to the production of campaign assets and executing your launch event with precision, we curate campaigns that help you achieve strategic goals - on time and within budget.
 
 With a commitment to excellence and a collaborative approach, we keep our clients at the centre of the project to ensure we bring your vision to life. Our experience covers brand campaigns, marketing and public education campaigns across the public and private sectors.
 
