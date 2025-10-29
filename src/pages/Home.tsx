@@ -65,9 +65,8 @@ const HeroSection = () => {
           loading="eager"
           fetchPriority="high"
           decoding="async"
-          className="object-contain object-bottom opacity-95 hidden md:block"
+          className="object-contain object-bottom opacity-95 max-h-[75vh] md:max-h-[100vh]"
           style={{
-            maxHeight: '100vh',
             width: 'auto',
             height: 'auto',
             filter: 'brightness(1.05) contrast(1.1)',
@@ -78,13 +77,13 @@ const HeroSection = () => {
 
       {/* === Burst Glow === */}
      <div ref={burstRef} className="absolute inset-0 flex items-center justify-center z-[5] pointer-events-none">
-      <div className="w-[600px] h-[600px] rounded-full bg-gradient-to-br from-brand-ocean via-brand-sky to-brand-crimson opacity-60 blur-3xl" />
+      <div className="w-[350px] h-[350px] md:w-[600px] md:h-[600px] rounded-full bg-gradient-to-br from-brand-ocean via-brand-sky to-brand-crimson opacity-60 blur-3xl" />
     </div>
 
       {/* === Foreground Logo === */}
       <div
         ref={imageRef}
-        className="relative z-20 flex flex-col items-center justify-center pt-10 mt-[120px] md:mt-[220px]"
+        className="relative z-20 flex flex-col items-center justify-center pt-10 mt-[60px] md:mt-[220px]"
       >
         <img
           src={danrakLogoFull}

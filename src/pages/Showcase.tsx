@@ -165,9 +165,9 @@ const Showcase = () => {
       <div className="absolute inset-0 bg-black/60 z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col md:flex-row">
+      <div className="relative z-10 h-full flex flex-col">
         {/* Left Side - Featured Project Details */}
-        <div className="w-full md:w-1/2 p-4 sm:p-6 md:p-12 flex flex-col justify-center text-white">
+        <div className="w-full p-6 md:p-12 flex flex-col justify-center text-white flex-1">
           <motion.div
             key={activeProject.id}
             initial={{ opacity: 0, x: -40 }}
@@ -181,7 +181,7 @@ const Showcase = () => {
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-6 leading-tight">
               {activeProject.title}
             </h1>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-4 sm:mb-8 leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-4 sm:mb-8 leading-relaxed line-clamp-3 md:line-clamp-none">
               {activeProject.excerpt}
             </p>
             <Link to={`/project/${activeProject.id}`}>
@@ -197,7 +197,7 @@ const Showcase = () => {
 
         {/* Right Side - Upcoming Projects Carousel */}
         <div
-          className="w-full md:w-1/2 flex items-center justify-center p-4 sm:p-6 md:p-8 hidden md:flex"
+          className="w-full p-4 sm:p-6 md:p-8 flex items-center justify-center"
           onMouseEnter={() => {
             pauseRef.current = true;
             if (timeoutRef.current) {
@@ -210,9 +210,9 @@ const Showcase = () => {
             scheduleNext();
           }}
         >
-          <div className="w-full">
+          <div className="w-full max-w-6xl">
             <motion.h2 
-              className="text-base sm:text-lg md:text-xl font-bold text-white mb-4 sm:mb-6 md:mb-8 text-center"
+              className="text-base sm:text-lg md:text-xl font-bold text-white mb-4 sm:mb-6 text-center"
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.38, delay: 0.08 }}
@@ -220,8 +220,56 @@ const Showcase = () => {
               Up Next
             </motion.h2>
             
-            {/* Horizontal Card Container */}
-            <div className="flex gap-3 sm:gap-4 md:gap-6 justify-center items-center overflow-visible">
+            {/* Mobile: Single Card Swiper */}
+            <div className="md:hidden">
+              <Swiper
+                slidesPerView={1}
+                spaceBetween={16}
+                loop={true}
+                className="w-full"
+              >
+                {displayedProjects.map((project, index) => (
+                  <SwiperSlide key={project.id}>
+                    <motion.div
+                      className="relative bg-white/10 rounded-xl overflow-hidden shadow-xl border border-white/20 cursor-pointer w-full h-[350px]"
+                      whileTap={{ scale: 0.98 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
+                      onClick={() => { handleSlideClick(index); scheduleNext(); }}
+                    >
+                      {/* Background Image */}
+                      <div className="absolute inset-0 z-0">
+                        <img
+                          src={project.carouselImage}
+                          alt={project.title}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-1" />
+                      
+                      {/* Text Content Overlay */}
+                      <div className="relative z-10 p-4 h-full flex flex-col justify-end text-white">
+                        <h3 className="text-lg font-bold mb-2 line-clamp-2 drop-shadow-lg">
+                          {project.title}
+                        </h3>
+                        <p className="text-sm text-white/80 mb-2 line-clamp-2 drop-shadow-md">{project.excerpt}</p>
+                        <div className="text-xs uppercase tracking-wider text-white/70 font-medium">
+                          {project.category}
+                        </div>
+                      </div>
+                    </motion.div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+
+            {/* Desktop: Horizontal Card Container */}
+            <div className="hidden md:flex gap-3 sm:gap-4 md:gap-6 justify-center items-center overflow-visible">
               {displayedProjects.map((project, index) => {
                 return (
                   <motion.div
