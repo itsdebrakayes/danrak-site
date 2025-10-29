@@ -333,7 +333,7 @@ Described as fresh, first-world and fun, this Danrak exclusive television presen
       },
       {
         id: "stronger-together-documentary",
-        title: "Stronger Together Documentary",
+        title: "Stronger Together Web-Series",
         galleryImages: [
           "/src/assets/stronger-together-content1.mp4",
           "/src/assets/stronger-together-content2.mp4",
