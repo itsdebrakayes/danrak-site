@@ -325,13 +325,30 @@ Described as fresh, first-world and fun, this Danrak exclusive television presen
         galleryImages: []
       },
       {
-        id: "faith-moves-series",
-        title: "Faith Moves TV Series",
+        id: "MOEY-learning-development-policy-video",
+        title: "MOEY Trend Campaign",
         galleryImages: [
-          "/src/assets/faith-moves-content1.jpg",
-          "/src/assets/faith-moves-content2.jpg"
+          "/src/assets/MOEY_FINAL.mp4"
         ]
-      }
+      },
+      {
+        id: "stronger-together-documentary",
+        title: "Stronger Together Documentary",
+        galleryImages: [
+          "/src/assets/stronger-together-content1.mp4",
+          "/src/assets/stronger-together-content2.mp4",
+          "/src/assets/stronger-together-content3.mp4"
+        ]
+      },
+      {
+        id: "stronger-together-documentary",
+        title: "Stronger Together Documentary",
+        galleryImages: [
+          "/src/assets/stronger-together-1.jpg",
+          "/src/assets/stronger-together-2.jpg",
+          "/src/assets/stronger-together-3.jpg"
+        ]
+      },
     ],
     category: "Media Production",
     date: "2025"
