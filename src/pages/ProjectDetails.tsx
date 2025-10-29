@@ -359,11 +359,11 @@ const ProjectDetails = () => {
           >
             <h2 className="text-3xl md:text-4xl font-bold">Gallery</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className={project.events.filter(event => !event.featured).length === 1 ? "w-full" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"}>
               {project.events.filter(event => !event.featured).map((event, eventIndex) => (
                 <div key={event.id} className="space-y-4">
                   <h3 className="text-xl font-bold text-primary">{event.title}</h3>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className={project.events.filter(event => !event.featured).length === 1 ? "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" : "grid grid-cols-2 gap-3"}>
                     {event.galleryImages.map((item, index) => (
                       <motion.div
                         key={index}
