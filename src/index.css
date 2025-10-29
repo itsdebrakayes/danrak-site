@@ -468,4 +468,21 @@ All colors MUST be HSL.
     transform: translateY(-4px);
   }
 
+  /* Mobile-only Swiper scroll fix */
+  @media (max-width: 768px) {
+    .swiper,
+    .swiper-wrapper,
+    .swiper-slide {
+      height: auto !important;
+      min-height: 100vh !important;
+    }
+    
+    .swiper-slide {
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y !important;
+      overscroll-behavior-y: contain;
+    }
+  }
+
 }

@@ -92,7 +92,7 @@ const ContactSection = () => {
 
       <div className="section-glow" />
 
-      <div className="relative z-10 container mx-auto px-6">
+      <div className="relative z-10 container mx-auto px-6 pb-24 md:pb-0">
         <div className="text-center mb-16">
           <h2 className="contact-title text-5xl md:text-6xl font-black text-brand-forest mb-4">
             Get in Touch
@@ -167,8 +167,8 @@ const ContactSection = () => {
             </form>
           </div>
 
-          <div className="contact-info space-y-8">
-            <div className="glass p-8 rounded-3xl">
+          <div className="contact-info space-y-8 flex flex-col">
+            <div className="glass p-8 rounded-3xl order-1 lg:order-1">
               <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
 
               <div className="space-y-6">
@@ -194,25 +194,7 @@ const ContactSection = () => {
               </div>
             </div>
 
-            <div className="glass p-8 rounded-3xl">
-              <h3 className="text-2xl font-bold mb-6">Follow Us</h3>
-
-              <div className="flex gap-4">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    className="w-12 h-12 rounded-xl glass flex items-center justify-center hover:scale-110 transition-all duration-300 group"
-                    style={{ backgroundColor: `hsl(var(--${social.color}) / 0.1)` }}
-                    aria-label={social.label}
-                  >
-                    <social.icon className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" style={{ color: `hsl(var(--${social.color}))` }} />
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <div className="glass p-8 rounded-3xl">
+            <div className="glass p-8 rounded-3xl order-2 lg:order-3">
               <h3 className="text-2xl font-bold mb-6">Business Hours</h3>
 
               <div className="space-y-2 text-sm">
@@ -228,6 +210,24 @@ const ContactSection = () => {
                   <span>Sunday</span>
                   <span className="text-muted-foreground">Closed</span>
                 </div>
+              </div>
+            </div>
+
+            <div className="glass p-8 rounded-3xl order-3 lg:order-2">
+              <h3 className="text-2xl font-bold mb-6">Follow Us</h3>
+
+              <div className="flex gap-4">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    className="w-12 h-12 rounded-xl glass flex items-center justify-center hover:scale-110 transition-all duration-300 group"
+                    style={{ backgroundColor: `hsl(var(--${social.color}) / 0.1)` }}
+                    aria-label={social.label}
+                  >
+                    <social.icon className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" style={{ color: `hsl(var(--${social.color}))` }} />
+                  </a>
+                ))}
               </div>
             </div>
           </div>
