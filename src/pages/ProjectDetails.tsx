@@ -167,9 +167,14 @@ const ProjectDetails = () => {
               </div>
               
               <div className="prose prose-lg dark:prose-invert max-w-none">
-                <p className="text-lg leading-relaxed text-foreground/90 whitespace-pre-line">
-                  {project.serviceDescription}
-                </p>
+                <div 
+                  className="text-lg leading-relaxed text-foreground/90 whitespace-pre-line"
+                  dangerouslySetInnerHTML={{
+                    __html: project.serviceDescription
+                      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                      .replace(/\n/g, '<br />')
+                  }}
+                />
               </div>
             </motion.div>
 
@@ -203,11 +208,16 @@ const ProjectDetails = () => {
                       )}
                       
                       {/* Featured Event Description */}
-                      {event.description && (
+                       {event.description && (
                         <div className="prose prose-lg dark:prose-invert max-w-none">
-                          <p className="text-lg leading-relaxed text-foreground/90 whitespace-pre-line">
-                            {event.description}
-                          </p>
+                          <div 
+                            className="text-lg leading-relaxed text-foreground/90 whitespace-pre-line"
+                            dangerouslySetInnerHTML={{
+                              __html: event.description
+                                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                                .replace(/\n/g, '<br />')
+                            }}
+                          />
                         </div>
                       )}
                       
