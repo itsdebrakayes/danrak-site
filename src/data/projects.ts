@@ -52,8 +52,8 @@ Services at a glance:
 • Copy writing and editing
 
 Clients Served and Related Projects:
-• Access Financial Services – Full Service
-• Port Authority of Jamaica – PAJ Media Open Day
+• Access Financial Services – Full Service Communications and PR
+• Port Authority of Jamaica – PAJ Media Open Day 2024
 • Wisynco Group Limited – 2025 Annual Report
 • Dunlop Corbin Communications – EU/Jamaica Citizen Security Plan`,
     events: [
