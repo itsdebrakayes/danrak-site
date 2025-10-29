@@ -381,7 +381,16 @@ Clients Served and Related Projects:
           "/src/assets/on-air-hosting-8.jpg",
           "/src/assets/on-air-hosting-9.jpg",
           "/src/assets/on-air-hosting-10.jpg",
-          "/src/assets/on-air-hosting-11.jpg"
+          "/src/assets/on-air-hosting-11.jpg",
+          "/src/assets/on-air-talent-10.mp4",
+          "/src/assets/on-air-talent-2.mp4",
+          "/src/assets/on-air-talent3.mp4",
+          "/src/assets/on-air-talent-4.mp4",
+          "/src/assets/on-air-talent-5.mp4",
+          "/src/assets/on-air-talent-6.mp4",
+          "/src/assets/on-air-talent-7.mp4",
+          "/src/assets/on-air-talent-8.mp4",
+          "/src/assets/on-air-talent-9.mp4"
         ]
       }
     ],
