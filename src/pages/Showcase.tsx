@@ -176,7 +176,7 @@ const Showcase = () => {
             className="max-w-lg"
           >
             <div className="text-sm uppercase tracking-wider text-white/80 mb-4">
-              {activeProject.category} • {activeProject.date}
+              {activeProject.category}
             </div>
             <h1 className="text-5xl font-bold mb-6 leading-tight">
               {activeProject.title}

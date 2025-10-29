@@ -127,7 +127,7 @@ const ProjectDetails = () => {
           className="mb-8"
         >
           <div className="text-sm uppercase tracking-wider text-muted-foreground mb-3">
-            {project.category} • {project.date}
+            {project.category}
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-4 leading-tight">
             {project.title}
