@@ -340,15 +340,6 @@ Described as fresh, first-world and fun, this Danrak exclusive television presen
           "/src/assets/stronger-together-content3.mp4"
         ]
       },
-      {
-        id: "stronger-together-documentary",
-        title: "Stronger Together Documentary",
-        galleryImages: [
-          "/src/assets/stronger-together-1.jpg",
-          "/src/assets/stronger-together-2.jpg",
-          "/src/assets/stronger-together-3.jpg"
-        ]
-      },
     ],
     category: "Media Production",
     date: "2025"
