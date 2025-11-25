@@ -21,8 +21,14 @@ const Footer = ({ variant = 'fixed' }: FooterProps) => {
   return (
     <footer className={footerClass}>
       <div className={contentClass}>
-  <img src={logo} alt="Danrak logo" loading="lazy" decoding="async" className="w-12 h-12 object-contain" />
+        <img src={logo} alt="Danrak logo" loading="lazy" decoding="async" className="w-12 h-12 object-contain" />
       </div>
+      
+      {/* Built by DS Technologies - Center bottom */}
+      <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 pointer-events-none">
+        <span className="text-xs text-muted-foreground/60">Built by DS Technologies</span>
+      </div>
+      
       <div className={`flex gap-4 ${contentClass}`}>
         {socials.map((s, i) => (
           <a

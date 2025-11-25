@@ -4,6 +4,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { BsInstagram, BsLinkedin, BsYoutube, BsEnvelope, BsPhone } from 'react-icons/bs';
 import { useToast } from '@/hooks/use-toast';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,6 +13,7 @@ const ContactSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -63,12 +66,25 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    toast({
-      title: 'Message Sent!',
-      description: "Thank you for reaching out. We'll get back to you soon."
-    });
-
+    
+    // Create submission object
+    const submission = {
+      ...formData,
+      timestamp: new Date().toISOString(),
+      id: Date.now().toString()
+    };
+    
+    // Get existing submissions from localStorage
+    const existingSubmissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
+    
+    // Add new submission and save
+    existingSubmissions.push(submission);
+    localStorage.setItem('contactSubmissions', JSON.stringify(existingSubmissions));
+    
+    // Show success dialog
+    setShowSuccess(true);
+    
+    // Reset form
     setFormData({ name: '', email: '', message: '' });
   };
 
@@ -79,16 +95,17 @@ const ContactSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="contact" className="relative py-20">
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(ellipse at center,
-            hsl(var(--brand-forest) / 0.1) 0%,
-            hsl(var(--brand-ocean) / 0.05) 50%,
-            transparent 100%)`
-        }}
-      />
+    <>
+      <section ref={sectionRef} id="contact" className="relative py-20 overflow-y-auto md:overflow-y-scroll max-h-screen">
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `radial-gradient(ellipse at center,
+              hsl(var(--brand-forest) / 0.1) 0%,
+              hsl(var(--brand-ocean) / 0.05) 50%,
+              transparent 100%)`
+          }}
+        />
 
       <div className="section-glow" />
 
@@ -233,7 +250,21 @@ const ContactSection = () => {
           </div>
         </div>
       </div>
-    </section>
+      </section>
+
+      {/* Success Dialog */}
+      <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Thank You!</DialogTitle>
+            <DialogDescription>
+              Thank you for submitting! We will be in contact soon.
+            </DialogDescription>
+          </DialogHeader>
+          <Button onClick={() => setShowSuccess(false)}>Close</Button>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 
