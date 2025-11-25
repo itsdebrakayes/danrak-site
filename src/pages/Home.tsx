@@ -84,7 +84,7 @@ const HeroSection = () => {
       {/* === Foreground Logo === */}
       <div
         ref={imageRef}
-        className="relative z-20 flex flex-col items-center justify-center pt-10 mt-[220px]"
+        className="relative z-20 flex flex-col items-center justify-center pt-10 mt-[120px] sm:mt-[180px] md:mt-[220px]"
       >
         <img
           src={danrakLogoFull}

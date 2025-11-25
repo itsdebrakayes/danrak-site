@@ -45,6 +45,22 @@ const Showcase = () => {
     updateDisplayedProjects(newActiveIndex);
   };
 
+  const goToNext = () => {
+    const newIndex = (currentIndex + 1) % showcaseProjects.length;
+    setCurrentIndex(newIndex);
+    setActiveProject(showcaseProjects[newIndex]);
+    updateDisplayedProjects(newIndex);
+    scheduleNext();
+  };
+
+  const goToPrev = () => {
+    const newIndex = (currentIndex - 1 + showcaseProjects.length) % showcaseProjects.length;
+    setCurrentIndex(newIndex);
+    setActiveProject(showcaseProjects[newIndex]);
+    updateDisplayedProjects(newIndex);
+    scheduleNext();
+  };
+
   // Preload all three image types for each project
   useEffect(() => {
     const preloadImages = () => {
@@ -214,7 +230,7 @@ const Showcase = () => {
           }}
         >
           <div className="w-full">
-            {/* Mobile: Single Card Swiper - ONLY visible on mobile */}
+            {/* Mobile: Single "Up Next" Card with Prev/Next Buttons */}
             <div className="block md:hidden w-full">
               <motion.h2 
                 className="text-xl font-bold text-white mb-6 text-center"
@@ -225,80 +241,74 @@ const Showcase = () => {
                 Up Next
               </motion.h2>
               
-              <Swiper
-                modules={[Navigation, Pagination]}
-                navigation={true}
-                pagination={{ clickable: true, dynamicBullets: true }}
-                spaceBetween={0}
-                slidesPerView={1}
-                onSlideChange={(swiper) => {
-                  const newIndex = swiper.realIndex;
-                  handleSlideClick(newIndex);
-                  scheduleNext();
-                }}
-                className="mobile-showcase-swiper"
-              >
-                {displayedProjects.map((project, index) => (
-                  <SwiperSlide key={project.id}>
-                    <div className="relative bg-white/10 rounded-2xl overflow-hidden shadow-xl border border-white/20 h-[450px] mx-4">
-                      {/* Background Image */}
-                      <div className="absolute inset-0 z-0">
-                        <img
-                          src={project.carouselImage}
-                          alt={project.title}
-                          loading="lazy"
-                          decoding="async"
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      
-                      {/* Darker gradient for better text contrast at top */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-1" />
-                      
-                      {/* Content - Top aligned */}
-                      <div className="relative z-10 h-full flex flex-col justify-start pt-8 pb-4 px-6 text-white">
-                        {/* Service Name - Prominently at top */}
-                        <h3 className="text-2xl font-bold mb-4 leading-tight">
-                          {project.title}
-                        </h3>
-                        
-                        {/* Read More Button */}
-                        <Link to={`/project/${project.id}`}>
-                          <Button 
-                            size="sm" 
-                            className="mb-4 bg-white text-black hover:bg-white/90 w-fit"
-                          >
-                            Read More →
-                          </Button>
-                        </Link>
-                        
-                        {/* Category - Up Next label */}
-                        <div className="text-sm uppercase tracking-wider text-white/90 font-medium">
-                          {project.category}
-                        </div>
-                      </div>
+              <div className="relative">
+                {/* Single "Up Next" Card showing displayedProjects[0] */}
+                <motion.div
+                  key={displayedProjects[0].id}
+                  className="relative bg-white/10 rounded-2xl overflow-hidden shadow-xl border border-white/20 h-[450px] mx-4"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Background Image */}
+                  <div className="absolute inset-0 z-0">
+                    <img
+                      src={displayedProjects[0].carouselImage}
+                      alt={displayedProjects[0].title}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  
+                  {/* Darker gradient for better text contrast at top */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-1" />
+                  
+                  {/* Content - Top aligned */}
+                  <div className="relative z-10 h-full flex flex-col justify-start pt-8 pb-4 px-6 text-white">
+                    {/* Service Name - Prominently at top */}
+                    <h3 className="text-2xl font-bold mb-4 leading-tight">
+                      {displayedProjects[0].title}
+                    </h3>
+                    
+                    {/* Read More Button */}
+                    <Link to={`/project/${displayedProjects[0].id}`}>
+                      <Button 
+                        size="sm" 
+                        className="mb-4 bg-white text-black hover:bg-white/90 w-fit"
+                      >
+                        Read More →
+                      </Button>
+                    </Link>
+                    
+                    {/* Category */}
+                    <div className="text-sm uppercase tracking-wider text-white/90 font-medium">
+                      {displayedProjects[0].category}
                     </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-              
-              {/* Custom Swiper Styles for Mobile */}
-              <style>{`
-                .mobile-showcase-swiper .swiper-pagination {
-                  bottom: 10px;
-                }
-                .mobile-showcase-swiper .swiper-pagination-bullet {
-                  background: white;
-                  opacity: 0.6;
-                  width: 8px;
-                  height: 8px;
-                }
-                .mobile-showcase-swiper .swiper-pagination-bullet-active {
-                  opacity: 1;
-                  width: 24px;
-                  border-radius: 4px;
-                }
-              `}</style>
+                  </div>
+                </motion.div>
+
+                {/* Navigation Buttons */}
+                <button
+                  onClick={goToPrev}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 text-white p-3 rounded-r-lg transition-all duration-300 backdrop-blur-sm"
+                  aria-label="Previous project"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                
+                <button
+                  onClick={goToNext}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 text-white p-3 rounded-l-lg transition-all duration-300 backdrop-blur-sm"
+                  aria-label="Next project"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
             </div>
 
             {/* Desktop: 3 Horizontal Cards - ONLY visible on desktop */}

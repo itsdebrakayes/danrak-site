@@ -52,7 +52,7 @@ const Index = () => {
     const currentSlide = swiper.activeIndex;
     const newPath = slideToPath[currentSlide];
     if (newPath && location.pathname !== newPath) {
-      navigate(newPath, { replace: true });
+      navigate(newPath);
     }
   };
 
