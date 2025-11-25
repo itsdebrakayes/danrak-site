@@ -24,11 +24,9 @@ const Footer = ({ variant = 'fixed' }: FooterProps) => {
         <img src={logo} alt="Danrak logo" loading="lazy" decoding="async" className="w-12 h-12 object-contain" />
       </div>
       
-      {/* Built by DS Technologies - Bottom right */}
-      <div className="absolute bottom-2 right-4 pointer-events-none">
-        <span className="text-xs font-medium text-[hsl(142,76%,60%)] [text-shadow:0_0_8px_hsl(142,76%,60%),0_0_12px_hsl(142,76%,50%)]">
-          Built by DS Technologies
-        </span>
+      {/* Built by DS Technologies - Center bottom */}
+      <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 pointer-events-none">
+        <span className="text-xs text-muted-foreground/60">Built by DS Technologies</span>
       </div>
       
       <div className={`flex gap-4 ${contentClass}`}>
