@@ -22,12 +22,7 @@ const Footer = ({ variant = 'fixed' }: FooterProps) => {
     <footer className={footerClass}>
       <div className={`flex flex-col gap-1 ${contentClass}`}>
         <img src={logo} alt="Danrak logo" loading="lazy" decoding="async" className="w-12 h-12 object-contain" />
-        <span 
-          className="text-xs font-bold text-black font-playfair" 
-          style={{ 
-            textShadow: '0 0 4px rgba(162, 209, 128, 0.4)' 
-          }}
-        >
+        <span className="text-xs font-bold text-black font-playfair">
           Built by DS Technologies
         </span>
       </div>
