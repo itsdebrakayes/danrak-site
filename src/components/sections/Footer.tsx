@@ -20,13 +20,16 @@ const Footer = ({ variant = 'fixed' }: FooterProps) => {
 
   return (
     <footer className={footerClass}>
-      <div className={contentClass}>
+      <div className={`flex flex-col gap-1 ${contentClass}`}>
         <img src={logo} alt="Danrak logo" loading="lazy" decoding="async" className="w-12 h-12 object-contain" />
-      </div>
-      
-      {/* Built by DS Technologies - Center bottom */}
-      <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 pointer-events-none">
-        <span className="text-xs text-muted-foreground/60">Built by DS Technologies</span>
+        <span 
+          className="text-xs font-bold text-brand-sage" 
+          style={{ 
+            textShadow: '0 0 8px rgba(162, 209, 128, 0.8), 0 0 2px rgba(0,0,0,0.5)' 
+          }}
+        >
+          Built by DS Technologies
+        </span>
       </div>
       
       <div className={`flex gap-4 ${contentClass}`}>
