@@ -23,9 +23,9 @@ const Footer = ({ variant = 'fixed' }: FooterProps) => {
       <div className={`flex flex-col gap-1 ${contentClass}`}>
         <img src={logo} alt="Danrak logo" loading="lazy" decoding="async" className="w-12 h-12 object-contain" />
         <span 
-          className="text-xs font-bold text-brand-sage" 
+          className="text-xs font-bold text-black font-playfair" 
           style={{ 
-            textShadow: '0 0 8px rgba(162, 209, 128, 0.8), 0 0 2px rgba(0,0,0,0.5)' 
+            textShadow: '0 0 4px rgba(162, 209, 128, 0.4)' 
           }}
         >
           Built by DS Technologies
