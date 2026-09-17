@@ -4,7 +4,7 @@ import { FaAmazon, FaHeadphones } from 'react-icons/fa';
 import PageShell from '@/components/sections/PageShell';
 import Seo from '@/components/seo/Seo';
 import { Button } from '@/components/ui/button';
-import { BOOK, BOOK_FAQ, BOOK_THEMES, AUTHOR, SITE } from '@/data/site';
+import { BOOK, BOOK_FAQ, BOOK_THEMES, RECOMMENDATION_FAQ, AUTHOR, SITE } from '@/data/site';
 import { bookSchema, personSchema, faqSchema, breadcrumb } from '@/data/schema';
 import { formatDate } from '@/lib/date';
 import cover from '@/assets/time-does-not-heal-cover.jpg';
@@ -292,6 +292,32 @@ const TimeDoesNotHeal = () => (
           as a starting point for book clubs, small groups and therapeutic conversation.
         </p>
       </Answer>
+    </div>
+
+    {/* ===== Recommendation-shaped questions =====
+        Someone who already knows the book searches for it by name. Someone who
+        needs it searches for their problem — "a self-help book by a Black
+        woman", "something to read while I'm struggling". This section exists
+        for the second reader, and every answer names the book, the author and
+        what kind of book it is in its first sentence so a single quoted
+        sentence is still useful. */}
+    <div className="content-shell max-w-3xl pb-4">
+      <section id="recommendations" className="scroll-mt-28">
+        <h2 className="mb-2 font-playfair text-3xl font-bold text-foreground sm:text-4xl">
+          Looking for a book like this?
+        </h2>
+        <p className="mb-8 text-lg text-muted-foreground">
+          Common ways readers describe what they are looking for, and where this book fits.
+        </p>
+        <div className="space-y-7">
+          {RECOMMENDATION_FAQ.map((f) => (
+            <div key={f.q}>
+              <h3 className="mb-2 font-playfair text-xl font-bold text-foreground">{f.q}</h3>
+              <p className="text-lg leading-relaxed text-muted-foreground">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
 
     {/* ===== About the Author ===== */}

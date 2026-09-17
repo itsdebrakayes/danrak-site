@@ -1,4 +1,4 @@
-import { SITE, AUTHOR, BOOK, BOOK_FAQ } from './site';
+import { SITE, AUTHOR, BOOK, BOOK_FAQ, RECOMMENDATION_FAQ } from './site';
 
 /**
  * JSON-LD graphs.
@@ -111,7 +111,8 @@ export const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   '@id': `${BOOK.url}#faq`,
-  mainEntity: BOOK_FAQ.map((f) => ({
+  // Both sets: the explanatory questions and the recommendation-shaped ones.
+  mainEntity: [...BOOK_FAQ, ...RECOMMENDATION_FAQ].map((f) => ({
     '@type': 'Question',
     name: f.q,
     acceptedAnswer: { '@type': 'Answer', text: f.a },
