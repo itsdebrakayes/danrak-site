@@ -495,11 +495,13 @@ All colors MUST be HSL.
   --memoir-lilac-strong: 326 73% 66%;
   --memoir-panel: 326 70% 97%;
   --memoir-splash: 326 73% 80%;
+    --memoir-note: 326 73% 94%;
 }
 
 .dark {
   --memoir-panel: 326 45% 12%;
   --memoir-splash: 326 55% 34%;
+  --memoir-note: 326 38% 18%;
 }
 
 .memoir-editorial-hero {
@@ -515,24 +517,24 @@ All colors MUST be HSL.
 .memoir-splash {
   position: absolute;
   border-radius: 46% 54% 63% 37% / 53% 42% 58% 47%;
-  background: hsl(var(--memoir-splash) / 0.42);
-  filter: blur(28px);
+  background: hsl(var(--memoir-splash) / 0.54);
+  filter: blur(22px);
   pointer-events: none;
 }
 
 .memoir-splash-left {
-  width: 28rem;
-  height: 24rem;
-  left: -10rem;
-  top: 18%;
+  width: 24rem;
+  height: 20rem;
+  left: calc(50% - 25rem);
+  top: 38%;
   transform: rotate(18deg);
 }
 
 .memoir-splash-right {
-  width: 32rem;
-  height: 28rem;
-  right: -12rem;
-  top: 42%;
+  width: 26rem;
+  height: 22rem;
+  right: calc(50% - 27rem);
+  top: 48%;
   transform: rotate(-14deg);
 }
 
@@ -542,6 +544,39 @@ All colors MUST be HSL.
   border-radius: 42% 58% 52% 48% / 58% 38% 62% 42%;
   background: hsl(var(--memoir-splash) / 0.48);
   filter: blur(34px);
+}
+
+.memoir-cover-splash {
+  position: absolute;
+  z-index: 0;
+  background: hsl(var(--memoir-splash) / 0.72);
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+.memoir-cover-splash-left {
+  width: 68%;
+  height: 42%;
+  left: -30%;
+  top: 16%;
+  border-radius: 64% 36% 48% 52% / 47% 58% 42% 53%;
+  transform: rotate(-18deg);
+}
+
+.memoir-cover-splash-right {
+  width: 72%;
+  height: 48%;
+  right: -34%;
+  bottom: 10%;
+  border-radius: 39% 61% 55% 45% / 62% 43% 57% 38%;
+  transform: rotate(14deg);
+}
+
+.memoir-quote-note {
+  z-index: 20;
+  background: hsl(var(--memoir-note));
+  border: 1px solid hsl(var(--memoir-splash) / 0.75);
+  box-shadow: 0 1rem 2rem hsl(var(--foreground) / 0.14);
 }
 
 .memoir-cover-wrap img {

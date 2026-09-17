@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { FaStar, FaAmazon } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 import cover from '@/assets/time-does-not-heal-cover.jpg';
-import authorPortrait from '@/assets/about-leaning.png';
+import authorPortrait from '@/assets/hero-arms-folded.jpg';
 
 const amazonUrl = 'https://www.amazon.com/Time-Does-Heal-Stacy-Ann-Smith-ebook/dp/B08ZXVVMGV';
 
@@ -72,6 +72,8 @@ const Memoir = () => {
             transition={{ duration: 0.9, ease: 'easeOut', delay: 0.2 }}
             className="memoir-cover-wrap relative mt-10 sm:mt-14"
           >
+            <div className="memoir-cover-splash memoir-cover-splash-left" aria-hidden="true" />
+            <div className="memoir-cover-splash memoir-cover-splash-right" aria-hidden="true" />
             <div className="memoir-cover-glow" aria-hidden="true" />
             <img
               src={cover}
@@ -113,8 +115,12 @@ const Memoir = () => {
       <section id="about-the-book" className="relative overflow-hidden px-6 py-24 lg:py-36">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-brand-crimson/3 to-brand-forest/5" />
         <motion.div {...fadeIn} className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-5">
+          <div className="relative lg:col-span-5">
             <img src={cover} alt="Time Does Not Heal memoir" loading="lazy" width="500" height="500" className="w-full object-cover shadow-2xl" />
+            <blockquote className="memoir-quote-note absolute -right-3 top-4 max-w-[15rem] rotate-2 p-5 text-left sm:-right-8 sm:top-6">
+              <p className="font-playfair text-xl font-bold leading-snug text-foreground">“You have to be intentional about your healing.”</p>
+              <footer className="mt-3 text-xs font-semibold uppercase text-[hsl(var(--memoir-violet))]">— Stacy-Ann Smith</footer>
+            </blockquote>
           </div>
           <div className="glass p-8 lg:col-span-7 lg:p-12 rounded-3xl">
             <h2 className="font-playfair text-4xl font-bold text-foreground sm:text-5xl">About the Book</h2>
@@ -140,21 +146,17 @@ const Memoir = () => {
           <p className="mb-3 text-sm font-semibold uppercase text-[hsl(var(--memoir-violet))]">Reflections from the memoir</p>
           <h2 className="font-playfair text-4xl font-bold text-foreground sm:text-6xl">Inside the Pages</h2>
         </motion.div>
-        <div className="scrollbar-hide relative mx-auto flex max-w-7xl snap-x snap-mandatory gap-6 overflow-x-auto pb-6">
+        <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3">
           {themes.map((t, i) => (
             <motion.div
               key={t.title}
               {...fadeIn}
               transition={{ ...fadeIn.transition, delay: i * 0.12 }}
-              className="group relative h-[30rem] min-w-[85vw] snap-start overflow-hidden rounded-2xl border border-border shadow-xl sm:min-w-[24rem] lg:min-w-0 lg:flex-1"
+              className={`glass rounded-xl p-6 ${i === 0 ? 'service-box-crimson' : i === 1 ? 'service-box-ocean' : 'service-box-forest'}`}
             >
-              <img src={cover} alt="" aria-hidden="true" loading="lazy" width="500" height="500" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/65 to-transparent" />
-              <div className="relative z-10 flex h-full flex-col justify-end p-7 text-background sm:p-9">
-                <span className="mb-auto text-sm font-bold uppercase text-[hsl(var(--memoir-lilac))]">Chapter {String(i + 1).padStart(2, '0')}</span>
-                <h3 className="mb-4 font-playfair text-3xl font-bold">{t.title}</h3>
-                <p className="leading-relaxed opacity-90">{t.body}</p>
-              </div>
+              <p className="mb-3 text-xs font-semibold uppercase text-muted-foreground">Chapter {String(i + 1).padStart(2, '0')}</p>
+              <h3 className={`mb-3 font-playfair text-2xl font-bold ${i === 0 ? 'text-brand-crimson' : i === 1 ? 'text-brand-ocean' : 'text-brand-forest'}`}>{t.title}</h3>
+              <p className="leading-relaxed text-muted-foreground">{t.body}</p>
             </motion.div>
           ))}
         </div>
@@ -177,7 +179,7 @@ const Memoir = () => {
             </div>
           </div>
           <div className="order-1 lg:order-2 lg:col-span-5">
-            <img src={authorPortrait} alt="Stacy-Ann Smith" loading="lazy" className="mx-auto max-h-[44rem] w-full object-contain" />
+            <img src={authorPortrait} alt="Stacy-Ann Smith" loading="lazy" width="4672" height="7008" className="mx-auto aspect-[2/3] max-h-[44rem] w-full object-cover object-top shadow-2xl" />
           </div>
         </motion.div>
       </section>
