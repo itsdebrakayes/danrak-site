@@ -627,3 +627,40 @@ All colors MUST be HSL.
 /* Horizontal nav strips scroll without a visible bar on mobile. */
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* ==========================================================================
+   HERO ENTRANCE
+   Previously the hero was animated by a GSAP timeline that started at
+   opacity:0 with a 0.5s delay, so the portrait only reached full opacity
+   ~1.9s after React mounted. Worse, GSAP is requestAnimationFrame-driven:
+   in a backgrounded tab rAF throttles to ~2fps and the hero could still be
+   invisible when the visitor returned.
+
+   CSS animations are time-based rather than frame-based, need no JavaScript
+   to reach their final state, and are composited off the main thread.
+   ========================================================================== */
+@layer components {
+  .hero-in {
+    opacity: 0;
+    animation: hero-rise 620ms cubic-bezier(.22,.61,.36,1) both;
+  }
+  .hero-in-burst { animation: hero-bloom 900ms ease-out both; }
+  .hero-delay-1 { animation-delay: 80ms; }
+  .hero-delay-2 { animation-delay: 190ms; }
+  .hero-delay-3 { animation-delay: 300ms; }
+
+  @keyframes hero-rise {
+    from { opacity: 0; transform: translateY(26px) scale(.975); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes hero-bloom {
+    from { opacity: 0; transform: scale(.7); }
+    to   { opacity: .6; transform: scale(1); }
+  }
+
+  /* Guarantee the resting state for anyone who never sees the animation. */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-in, .hero-in-burst { opacity: 1 !important; transform: none !important; animation: none !important; }
+    .hero-in-burst { opacity: .6 !important; }
+  }
+}

@@ -4,7 +4,7 @@ import Seo from '@/components/seo/Seo';
 import { AUTHOR, BOOK, SITE } from '@/data/site';
 import { personSchema, organizationSchema, breadcrumb } from '@/data/schema';
 import { formatDate } from '@/lib/date';
-import authorPortrait from '@/assets/about-leaning.webp';
+import { aboutLeaning } from '@/assets/responsive';
 
 /**
  * Author entity page.
@@ -52,7 +52,9 @@ const AboutAuthor = () => (
             </div>
             <div className="relative mx-auto w-full max-w-xs md:max-w-none">
               <img
-                src={authorPortrait}
+                src={aboutLeaning.src}
+                srcSet={aboutLeaning.srcSet}
+                sizes={aboutLeaning.sizes}
                 alt={`${AUTHOR.name}, Jamaican author and broadcaster`}
                 loading="eager"
                 decoding="async"

@@ -20,6 +20,7 @@ export default {
 		extend: {
 			fontFamily: {
 				'playfair': ['Playfair Display', 'serif'],
+				'signature': ['Passions Conflict', 'Snell Roundhand', 'Brush Script MT', 'cursive'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

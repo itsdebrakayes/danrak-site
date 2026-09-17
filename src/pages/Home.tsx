@@ -1,55 +1,11 @@
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import heroPortrait from '@/assets/hero-portrait.webp';
+import { heroPortrait } from '@/assets/responsive';
 import danrakLogoFull from '@/assets/DanRak Prod Logo.webp';
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-  const burstRef = useRef<HTMLDivElement>(null);
-  const portraitRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const tl = gsap.timeline({ delay: 0.5 });
-
-    tl.fromTo(
-      burstRef.current,
-      { scale: 0, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 1.2, ease: 'power2.out' }
-    ) 
-      .fromTo(
-        portraitRef.current,
-        { scale: 0.8, y: 100, opacity: 0 },
-        { scale: 1, y: 0, opacity: 1, duration: 1, ease: 'power2.out' },
-        '-=0.8'
-      )
-      .fromTo(
-        imageRef.current,
-        { scale: 0.8, y: 100, opacity: 0 },
-        { scale: 1, y: 0, opacity: 1, duration: 1, ease: 'power2.out' },
-        '-=0.8'
-      )
-      .fromTo(
-        titleRef.current,
-        { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: 'power2.out' },
-        '-=0.6'
-      )
-      .fromTo(
-        subtitleRef.current,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' },
-        '-=0.4'
-      );
-
-    return () => {
-      tl.kill();
-    };
-  }, []);
 
   return (
     <section ref={sectionRef} id="hero" className="section relative overflow-hidden">
@@ -57,10 +13,14 @@ const HeroSection = () => {
       <div className="section-glow" />
 
       {/* === Background Portrait === */}
-      <div ref={portraitRef} className="absolute inset-0 z-10 flex items-end justify-center">
+      <div className="absolute inset-0 z-10 flex items-end justify-center hero-in hero-delay-1">
         <img
-          src={heroPortrait}
-          alt="Danrak Portrait"
+          src={heroPortrait.src}
+          srcSet={heroPortrait.srcSet}
+          sizes={heroPortrait.sizes}
+          width={heroPortrait.width}
+          height={heroPortrait.height}
+          alt="Stacy-Ann Smith, Founder and CEO of Danrak Productions"
           loading="eager"
           fetchPriority="high"
           decoding="async"
@@ -76,14 +36,17 @@ const HeroSection = () => {
       </div>
 
       {/* === Burst Glow === */}
-     <div ref={burstRef} className="absolute inset-0 flex items-center justify-center z-[5] pointer-events-none">
+     <div className="absolute inset-0 flex items-center justify-center z-[5] pointer-events-none hero-in-burst">
       <div className="w-[600px] h-[600px] rounded-full bg-gradient-to-br from-brand-ocean via-brand-sky to-brand-crimson opacity-60 blur-3xl" />
     </div>
 
       {/* === Foreground Logo === */}
       <div
-        ref={imageRef}
-        className="relative z-20 flex flex-col items-center justify-center pt-10 mt-[120px] sm:mt-[180px] md:mt-[220px]"
+        className="relative z-20 flex flex-col items-center justify-center pt-10 hero-in hero-delay-2"
+        // Fixed pixel offsets put the wordmark over her face on shorter and
+        // narrower viewports. Tying it to viewport height keeps the logo on
+        // her torso — the composition in the approved design — at every size.
+        style={{ marginTop: 'clamp(140px, 42vh, 520px)' }}
       >
         <img
           src={danrakLogoFull}

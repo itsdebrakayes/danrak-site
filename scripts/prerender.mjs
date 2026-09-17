@@ -130,6 +130,30 @@ async function main() {
         // The inline loader is a pre-hydration affordance; it must not be
         // baked into the static HTML or crawlers would read it as content.
         document.getElementById('app-loader')?.remove();
+
+        // Animation libraries write their intermediate state to inline styles.
+        // Serialising the DOM mid-tween bakes a half-faded, off-position
+        // element into the static HTML — and because React does not clear
+        // inline styles it did not author, the hero could stay invisible for
+        // real visitors. Normalise anything still transparent or displaced to
+        // its final resting state.
+        document.querySelectorAll('[style]').forEach((el) => {
+          const st = el.style;
+          const opacity = parseFloat(st.opacity);
+          const midTween = !Number.isNaN(opacity) && opacity < 1;
+          // GSAP's fingerprint: it always writes these three alongside transform.
+          const gsapOwned = st.translate === 'none' && st.rotate === 'none' && st.scale === 'none';
+
+          if (midTween || gsapOwned) {
+            st.removeProperty('opacity');
+            st.removeProperty('transform');
+            st.removeProperty('translate');
+            st.removeProperty('rotate');
+            st.removeProperty('scale');
+            if (!el.getAttribute('style')) el.removeAttribute('style');
+          }
+        });
+
         return '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
       });
 

@@ -86,7 +86,10 @@ const PageShell = ({ children, hero }: PageShellProps) => {
           </div>
           <div className="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row gap-2 sm:justify-between text-xs text-muted-foreground">
             <p>© {new Date().getFullYear()} {SITE.name}. {SITE.tagline}.</p>
-            <p className="font-playfair font-bold">Built by DS Technologies</p>
+<p className="text-xs text-muted-foreground">
+              Built by{' '}
+              <span className="font-signature text-xl leading-none align-middle text-brand-crimson">DKS Technologies</span>
+            </p>
           </div>
         </div>
       </footer>

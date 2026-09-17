@@ -4,7 +4,7 @@ import { FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 import { projects } from '@/data/projects';
 import { SITE, COMPANY_COPY } from '@/data/site';
-import heroPortrait from '@/assets/hero-portrait.webp';
+import { heroPortrait } from '@/assets/responsive';
 import danrakLogoFull from '@/assets/DanRak Prod Logo.webp';
 
 /**
@@ -109,7 +109,9 @@ const MobileHero = () => (
     />
 
     <img
-      src={heroPortrait}
+      src={heroPortrait.src}
+      srcSet={heroPortrait.srcSet}
+      sizes="100vw"
       alt="Stacy-Ann Smith, Founder and CEO of Danrak Productions"
       loading="eager"
       fetchPriority="high"
@@ -243,8 +245,9 @@ const MobileFooter = () => (
     <p className="text-center text-xs text-muted-foreground">
       © {new Date().getFullYear()} {SITE.name}. {SITE.tagline}.
     </p>
-    <p className="text-center text-[0.7rem] text-muted-foreground/70 mt-1 font-playfair font-bold">
-      Built by DS Technologies
+    <p className="text-center text-xs text-muted-foreground mt-2">
+      Built by{' '}
+      <span className="font-signature text-xl leading-none align-middle text-brand-crimson">DKS Technologies</span>
     </p>
   </footer>
 );
