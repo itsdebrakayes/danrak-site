@@ -17,8 +17,6 @@ foreach ($all as $p) {
 $usedTopics = array_keys($usedTopics);
 sort($usedTopics);
 
-$lead = $topic === '' ? ($posts[0] ?? null) : null;
-$rest = $lead ? array_slice($posts, 1) : $posts;
 
 render_head([
     'title'       => $topic !== ''
@@ -93,60 +91,78 @@ function meta_row(array $p, bool $light = false): void
   <?php endif; ?>
 
   <?php if (!$posts): ?>
-    <p class="py-20 text-center text-muted-foreground">No articles published yet. Check back soon.</p>
+    <div class="py-20 text-center">
+      <div aria-hidden="true" class="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-border text-2xl text-muted-foreground">✎</div>
+      <?php if ($topic !== ''): ?>
+        <h2 class="font-playfair text-2xl font-bold text-foreground">Nothing under <?= e($topic) ?> yet</h2>
+        <p class="mx-auto mt-3 max-w-sm leading-relaxed text-muted-foreground">
+          There are no articles filed under this topic at the moment.
+        </p>
+        <a href="/blog" class="mt-7 inline-flex items-center rounded-xl bg-foreground px-5 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90">See all articles</a>
+      <?php else: ?>
+        <h2 class="font-playfair text-2xl font-bold text-foreground">The first essay is on its way</h2>
+        <p class="mx-auto mt-3 max-w-md leading-relaxed text-muted-foreground">
+          Stacy-Ann is writing about trauma, grief, intentional healing and Caribbean storytelling.
+          In the meantime, there is the memoir that started it all.
+        </p>
+        <div class="mt-7 flex flex-wrap justify-center gap-3">
+          <a href="/time-does-not-heal" class="rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90">Read about the book</a>
+          <a href="/about-author" class="rounded-xl border border-border px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-brand-ocean hover:text-brand-ocean">About the author</a>
+        </div>
+      <?php endif; ?>
+    </div>
   <?php else: ?>
 
-    <?php if ($lead): ?>
-    <!-- Lead article -->
-    <article class="border-b border-border/70 py-12 sm:py-16">
-      <a href="/blog/<?= e((string) $lead['slug']) ?>" class="group block">
-        <?php if (!empty($lead['cover_image'])): ?>
-          <img src="<?= e($lead['cover_image']) ?>" alt="<?= e($lead['cover_alt'] ?? '') ?>"
-               loading="eager" decoding="async"
-               class="mb-9 aspect-[16/8] w-full rounded-xl object-cover">
-        <?php endif; ?>
-        <?php meta_row($lead); ?>
-        <h2 class="mt-4 font-playfair text-3xl font-bold leading-[1.15] tracking-tight text-foreground transition-colors group-hover:text-brand-ocean sm:text-[2.6rem]">
-          <?= e($lead['title'] ?? 'Untitled') ?>
-        </h2>
-        <?php if (!empty($lead['subtitle'])): ?>
-          <p class="mt-3 text-lg leading-relaxed text-muted-foreground sm:text-xl"><?= e($lead['subtitle']) ?></p>
-        <?php endif; ?>
-        <p class="mt-4 leading-relaxed text-muted-foreground"><?= e($lead['excerpt'] ?? '') ?></p>
-        <span class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-ocean">
-          Read <span class="transition-transform group-hover:translate-x-0.5" aria-hidden="true">→</span>
-        </span>
-      </a>
-    </article>
-    <?php endif; ?>
-
-    <?php if ($rest): ?>
-    <div class="divide-y divide-border/70">
-      <?php foreach ($rest as $p):
-        $slug  = (string) ($p['slug'] ?? '');
-        $cover = $p['cover_image'] ?? null;
+    <div class="space-y-8 py-10">
+      <?php foreach ($posts as $p):
+        $slug    = (string) ($p['slug'] ?? '');
+        $cover   = $p['cover_image'] ?? null;
+        $preview = preview_blocks((string) ($p['body_html'] ?? ''), 3);
       ?>
-      <article class="py-10">
-        <a href="/blog/<?= e($slug) ?>" class="group grid gap-6 <?= $cover ? 'sm:grid-cols-[1fr_9rem]' : '' ?> sm:items-start">
-          <div class="min-w-0">
-            <?php meta_row($p); ?>
-            <h2 class="mt-3 font-playfair text-[1.4rem] font-bold leading-snug tracking-tight text-foreground transition-colors group-hover:text-brand-ocean sm:text-2xl">
+      <article class="overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md">
+        <?php if ($cover): ?>
+          <a href="/blog/<?= e($slug) ?>" tabindex="-1" aria-hidden="true">
+            <img src="<?= e($cover) ?>" alt="" loading="lazy" decoding="async"
+                 class="aspect-[16/7] w-full object-cover">
+          </a>
+        <?php endif; ?>
+
+        <div class="px-6 pt-6 sm:px-8">
+          <?php meta_row($p); ?>
+          <h2 class="mt-3 font-playfair text-2xl font-bold leading-snug tracking-tight sm:text-[1.7rem]">
+            <a href="/blog/<?= e($slug) ?>" class="text-foreground transition-colors hover:text-brand-ocean">
               <?= e($p['title'] ?? 'Untitled') ?>
-            </h2>
-            <?php if (!empty($p['subtitle'])): ?>
-              <p class="mt-1.5 leading-relaxed text-muted-foreground"><?= e($p['subtitle']) ?></p>
-            <?php endif; ?>
-            <p class="mt-2.5 text-[0.95rem] leading-relaxed text-muted-foreground"><?= e($p['excerpt'] ?? '') ?></p>
-          </div>
-          <?php if ($cover): ?>
-            <img src="<?= e($cover) ?>" alt="<?= e($p['cover_alt'] ?? '') ?>" loading="lazy" decoding="async"
-                 class="aspect-[4/3] w-full rounded-lg object-cover">
+            </a>
+          </h2>
+          <?php if (!empty($p['subtitle'])): ?>
+            <p class="mt-1.5 leading-relaxed text-muted-foreground"><?= e($p['subtitle']) ?></p>
           <?php endif; ?>
+        </div>
+
+        <?php if ($preview !== ''): ?>
+          <!-- Preview clipped to a fixed height with the text fading into the
+               card, so the cut-off reads as intentional rather than broken. -->
+          <div class="relative mt-4 max-h-44 overflow-hidden px-6 sm:px-8">
+            <div class="prose prose-sm max-w-none dark:prose-invert
+                        prose-headings:font-playfair prose-headings:text-foreground
+                        prose-h2:mb-1.5 prose-h2:mt-3 prose-h2:text-base
+                        prose-p:my-2 prose-p:leading-relaxed prose-p:text-muted-foreground
+                        prose-strong:text-foreground prose-a:no-underline prose-a:text-muted-foreground">
+              <?= $preview ?>
+            </div>
+            <div aria-hidden="true"
+                 class="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-card via-card/85 to-transparent"></div>
+          </div>
+        <?php endif; ?>
+
+        <a href="/blog/<?= e($slug) ?>"
+           class="mt-1 flex items-center justify-center gap-1.5 border-t border-border py-3.5 text-sm font-semibold text-brand-ocean transition-colors hover:bg-muted/50">
+          Read more
+          <span aria-hidden="true">→</span>
         </a>
       </article>
       <?php endforeach; ?>
     </div>
-    <?php endif; ?>
 
   <?php endif; ?>
 </main>

@@ -119,6 +119,53 @@ function sanitize_html(string $html): string
     return $out;
 }
 
+
+/**
+ * First few block elements of a post body, as HTML.
+ *
+ * Used for the catalogue previews. Takes whole blocks rather than slicing the
+ * string at a character count, because cutting HTML mid-tag produces broken
+ * markup — and the fade-out at the bottom of the card is what signals
+ * truncation to the reader, so the text itself doesn't need an ellipsis.
+ */
+function preview_blocks(string $html, int $maxBlocks = 3): string
+{
+    $html = trim($html);
+    if ($html === '') {
+        return '';
+    }
+
+    $doc = new DOMDocument('1.0', 'UTF-8');
+    libxml_use_internal_errors(true);
+    $doc->loadHTML(
+        '<?xml encoding="UTF-8"><div id="__pv">' . $html . '</div>',
+        LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
+    );
+    libxml_clear_errors();
+
+    $xpath = new DOMXPath($doc);
+    $nodes = $xpath->query('//div[@id="__pv"]');
+    $root  = ($nodes && $nodes->length) ? $nodes->item(0) : null;
+    if (!$root) {
+        return '';
+    }
+
+    $out = '';
+    $taken = 0;
+    foreach ($root->childNodes as $child) {
+        if ($taken >= $maxBlocks) {
+            break;
+        }
+        // Skip whitespace-only text nodes and leading images.
+        if ($child->nodeType === XML_TEXT_NODE && trim($child->textContent) === '') {
+            continue;
+        }
+        $out .= $doc->saveHTML($child);
+        $taken++;
+    }
+    return $out;
+}
+
 /**
  * @param array $opts title, description, canonical, image, type, schema(array), noindex(bool)
  */
@@ -164,6 +211,22 @@ function render_head(array $opts): void
 <link rel="icon" href="/head-icon.ico" type="image/x-icon">
 <?php if ($css): ?><link rel="stylesheet" href="<?= e($css) ?>">
 <?php endif; ?>
+<script>
+  /* next-themes stores the choice in localStorage under "theme". Applying it
+     here, before the body parses, means a visitor in dark mode who clicks
+     through to the blog does not get a flash of the light theme. The viewport
+     stamp matches what index.html does for the React pages. */
+  (function () {
+    try {
+      var t = localStorage.getItem('theme');
+      var dark = t === 'dark' || ((!t || t === 'system') &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark');
+      var w = window.innerWidth || document.documentElement.clientWidth;
+      document.documentElement.setAttribute('data-vp', w < 768 ? 'mobile' : w < 1280 ? 'tablet' : 'desktop');
+    } catch (e) {}
+  })();
+</script>
 <?php foreach (($opts['schema'] ?? []) as $graph): ?>
 <script type="application/ld+json"><?= json_encode($graph, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 <?php endforeach; ?>
@@ -192,7 +255,7 @@ function render_nav(): void
         return $to === '/' ? $here === '/' : str_starts_with($here, $to);
     };
     ?>
-<header class="fixed inset-x-0 top-0 z-[9999]" style="padding-top: max(var(--safe-t), 0.75rem);">
+<header class="fixed inset-x-0 top-0 z-[9999]" style="padding-top: calc(max(var(--safe-t), 0px) + 1.25rem);">
   <div class="mx-auto flex max-w-[1680px] items-center justify-between gap-3 px-4 pb-3 sm:px-7">
     <a href="/" aria-label="Danrak Productions home" class="shrink-0 rounded-full px-3 py-2 <?= $glass ?>">
       <?php if ($logo): ?>
@@ -233,7 +296,7 @@ function render_nav(): void
   </div>
 </header>
 <!-- Reserve the fixed header's height. -->
-<div aria-hidden class="h-[4.25rem] sm:h-[4.75rem]"></div>
+<div aria-hidden class="h-[5rem] sm:h-[5.5rem]"></div>
 <script>
 (function () {
   var btn = document.getElementById('navToggle'),

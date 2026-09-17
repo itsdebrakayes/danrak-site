@@ -14,13 +14,18 @@ import logo from '@/assets/danrak-logo.webp';
  * scrolling strip of seven links is not usable with a thumb.
  */
 
+/**
+ * `server: true` marks a route Apache hands to PHP rather than React Router.
+ * These must be plain anchors: a <Link> navigates client-side, the request
+ * never reaches the server, and React falls through to its catch-all 404.
+ */
 const LINKS = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Services', to: '/showcase' },
   { label: 'The Book', to: '/time-does-not-heal' },
   { label: 'The Author', to: '/about-author' },
-  { label: 'Blog', to: '/blog' },
+  { label: 'Blog', to: '/blog', server: true },
   { label: 'Contact', to: '/contact' },
 ];
 
@@ -53,9 +58,11 @@ const PageShell = ({ children, hero }: PageShellProps) => {
     <div className="flex min-h-screen flex-col bg-background">
       <header
         className="fixed inset-x-0 top-0 z-[9999]"
-        style={{ paddingTop: 'max(var(--safe-t), 0.75rem)' }}
+        style={{ paddingTop: 'calc(max(var(--safe-t), 0px) + 1.25rem)' }}
       >
-        <div className="mx-auto flex max-w-[1680px] items-center justify-between gap-3 px-4 pb-3 sm:px-7">
+        {/* pr-* keeps the links pill clear of the fixed theme toggle, which
+            sits at top-6 right-6 outside this component. */}
+        <div className="mx-auto flex max-w-[1680px] items-center justify-between gap-3 px-4 pb-3 pr-16 sm:px-7 sm:pr-24">
           <Link
             to="/"
             aria-label="Danrak Productions home"
@@ -66,20 +73,20 @@ const PageShell = ({ children, hero }: PageShellProps) => {
 
           {/* Desktop: the same pill used across the site. */}
           <nav aria-label="Primary" className={`hidden rounded-full px-3 py-2 lg:flex lg:gap-1 ${GLASS}`}>
-            {LINKS.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                aria-current={isActive(l.to) ? 'page' : undefined}
-                className={`rounded-full px-4 py-2 text-sm font-medium text-foreground transition-all duration-300 ${
-                  isActive(l.to)
-                    ? 'border border-white/30 bg-white/25 shadow-md backdrop-blur-sm dark:bg-white/10'
-                    : 'hover:bg-white/25 hover:shadow-lg dark:hover:bg-white/10'
-                }`}
-              >
-                {l.label}
-              </Link>
-            ))}
+            {LINKS.map((l) => {
+              const cls = `rounded-full px-4 py-2 text-sm font-medium text-foreground transition-all duration-300 ${
+                isActive(l.to)
+                  ? 'border border-white/30 bg-white/25 shadow-md backdrop-blur-sm dark:bg-white/10'
+                  : 'hover:bg-white/25 hover:shadow-lg dark:hover:bg-white/10'
+              }`;
+              return l.server ? (
+                <a key={l.to} href={l.to} className={cls}>{l.label}</a>
+              ) : (
+                <Link key={l.to} to={l.to} aria-current={isActive(l.to) ? 'page' : undefined} className={cls}>
+                  {l.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Mobile: one glass button opening a sheet. */}
@@ -107,26 +114,29 @@ const PageShell = ({ children, hero }: PageShellProps) => {
         >
           <nav aria-label="Primary" className="p-2">
             <ul>
-              {LINKS.map((l) => (
-                <li key={l.to}>
-                  <Link
-                    to={l.to}
-                    aria-current={isActive(l.to) ? 'page' : undefined}
-                    className={`block rounded-2xl px-4 py-3 text-base font-medium transition-colors ${
-                      isActive(l.to) ? 'bg-white/30 text-foreground dark:bg-white/10' : 'text-foreground/85'
-                    }`}
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
+              {LINKS.map((l) => {
+                const cls = `block rounded-2xl px-4 py-3 text-base font-medium transition-colors ${
+                  isActive(l.to) ? 'bg-white/30 text-foreground dark:bg-white/10' : 'text-foreground/85'
+                }`;
+                return (
+                  <li key={l.to}>
+                    {l.server ? (
+                      <a href={l.to} className={cls}>{l.label}</a>
+                    ) : (
+                      <Link to={l.to} aria-current={isActive(l.to) ? 'page' : undefined} className={cls}>
+                        {l.label}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </div>
       </header>
 
       {/* Reserve the fixed header's height so heroes don't start underneath it. */}
-      <div aria-hidden className="h-[4.25rem] sm:h-[4.75rem]" />
+      <div aria-hidden className="h-[5rem] sm:h-[5.5rem]" />
 
       {hero}
 
