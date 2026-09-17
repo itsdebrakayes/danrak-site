@@ -12,6 +12,7 @@ const About = React.lazy(() => import("./pages/About"));
 const Contact = React.lazy(() => import("./pages/Contact"));
 const Showcase = React.lazy(() => import("./pages/Showcase"));
 const ProjectDetails = React.lazy(() => import("./pages/ProjectDetails"));
+const Memoir = React.lazy(() => import("./pages/Memoir"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();

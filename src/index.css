@@ -486,3 +486,26 @@ All colors MUST be HSL.
   }
 
 }
+
+/* ===== Memoir page (/timedoesnotheal) accent tokens ===== */
+:root {
+  --memoir-plum: 282 50% 14%;
+  --memoir-violet: 285 45% 42%;
+  --memoir-lilac: 288 45% 80%;
+}
+
+.memoir-hero-bg {
+  background: linear-gradient(160deg, hsl(var(--memoir-plum)) 0%, hsl(285 45% 22%) 55%, hsl(340 70% 24%) 100%);
+}
+
+.memoir-card {
+  background: hsl(var(--memoir-violet) / 0.06);
+  border: 1px solid hsl(var(--memoir-violet) / 0.25);
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.memoir-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px hsl(var(--memoir-violet) / 0.25);
+}
