@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaAmazon } from 'react-icons/fa';
+import { FaAmazon, FaHeadphones } from 'react-icons/fa';
 import PageShell from '@/components/sections/PageShell';
 import Seo from '@/components/seo/Seo';
 import { Button } from '@/components/ui/button';
@@ -111,9 +111,28 @@ const TimeDoesNotHeal = () => (
                 <FaAmazon /> Get the Book
               </a>
             </Button>
-            <Button asChild size="lg" variant="secondary" className="w-full px-8 py-4 text-lg font-semibold shadow-lg sm:w-auto">
-              <a href="#about-the-book">Read the Story</a>
-            </Button>
+            {BOOK.audiobookLive && BOOK.audiobookUrl ? (
+              <Button asChild size="lg" variant="secondary" className="w-full px-8 py-4 text-lg font-semibold shadow-lg sm:w-auto">
+                <a href={BOOK.audiobookUrl} target="_blank" rel="noopener noreferrer">
+                  <FaHeadphones /> Listen to the Book
+                </a>
+              </Button>
+            ) : (
+              <div className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  variant="secondary"
+                  disabled
+                  aria-disabled="true"
+                  className="w-full px-8 py-4 text-lg font-semibold shadow-lg sm:w-auto"
+                >
+                  <FaHeadphones /> Listen to the Book
+                </Button>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  Audiobook arrives {formatDate(BOOK.audiobookReleaseDate)} on {BOOK.audiobookPlatform}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>

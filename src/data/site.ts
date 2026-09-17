@@ -85,6 +85,14 @@ export const BOOK = {
   amazonPaperback: 'https://www.amazon.com/Time-Does-Heal-Stacy-Ann-Smith/dp/1735361062',
   amazonKindle: 'https://www.amazon.com/Time-Does-Heal-Stacy-Ann-Smith-ebook/dp/B08ZXVVMGV',
   amazonUk: 'https://www.amazon.co.uk/Time-Does-Heal-Stacy-Ann-Smith/dp/1735361062',
+  /**
+   * Audiobook goes live 28 September 2026. On launch day set `audiobookLive`
+   * to true and drop the listening URL in `audiobookUrl` — the CTA enables
+   * itself and the schema starts advertising availability. Nothing else to
+   * change.
+   */
+  audiobookLive: false,
+  audiobookUrl: '',
   /** The line the author uses to summarise the book's argument. */
   pullQuote: 'You have to be intentional about your healing.',
   /** Longer version, as given to the press at launch. */
