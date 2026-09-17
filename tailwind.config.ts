@@ -7,6 +7,9 @@ export default {
 		"./components/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
+		// The PHP blog shares this stylesheet, so its utility classes have to
+		// be discoverable here or they would be purged from the build.
+		"./public/blog-app/**/*.php",
 	],
 	prefix: "",
 	theme: {
@@ -151,5 +154,7 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	// @tailwindcss/typography powers the `prose` classes the blog article
+	// body relies on; it was already a dependency but never registered.
+	plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;

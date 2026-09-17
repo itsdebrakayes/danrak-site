@@ -34,8 +34,6 @@ const ROUTES = [
   '/contact',
   '/time-does-not-heal',
   '/about-author',
-  '/blog',
-  '/blog/does-time-heal-all-wounds',
   '/media-kit',
 ];
 

@@ -27,3 +27,7 @@ dist-ssr
 *.deb
 *.dmg
 *.pkg
+
+# Blog: real credentials and runtime data stay out of the repo
+public/blog-app/config.php
+public/blog-app/data/attempts.json

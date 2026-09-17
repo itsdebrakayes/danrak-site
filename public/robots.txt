@@ -64,3 +64,4 @@ User-agent: LinkedInBot
 Allow: /
 
 Sitemap: https://danrakprod.com/sitemap.xml
+Sitemap: https://danrakprod.com/blog-sitemap.xml

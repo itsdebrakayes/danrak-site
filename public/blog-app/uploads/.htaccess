@@ -1,0 +1,9 @@
+# Serve uploads as inert files. Even if something that looks like a script is
+# written here, it must never be handed to an interpreter.
+php_flag engine off
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phps
+RemoveType .php .phtml .php3 .php4 .php5 .php7 .php8 .phps
+<FilesMatch "\.(php|phtml|phar|cgi|pl|py|sh|htaccess)$">
+  Require all denied
+</FilesMatch>
+Options -ExecCGI -Indexes

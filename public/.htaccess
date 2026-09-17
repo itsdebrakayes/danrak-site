@@ -72,6 +72,19 @@
 
   RewriteRule ^index\.html$ - [L]
 
+  # --- Blog (PHP, server-rendered so posts are crawlable the moment they
+  #     are published) ---------------------------------------------------
+  RewriteRule ^blog/?$                    /blog-app/index.php   [L,QSA]
+  RewriteRule ^blog/([A-Za-z0-9._-]+)/?$  /blog-app/post.php?slug=$1 [L,QSA]
+  RewriteRule ^blog-sitemap\.xml$          /blog-app/sitemap.php [L]
+
+  # Author-only routes. Not linked anywhere public.
+  RewriteRule ^blog-login/?$              /blog-app/login.php   [L]
+  RewriteRule ^blog-logout/?$             /blog-app/logout.php  [L]
+  RewriteRule ^blog-admin/?$              /blog-app/admin.php   [L,QSA]
+  RewriteRule ^blog-admin/new/?$          /blog-app/editor.php  [L,QSA]
+  RewriteRule ^blog-admin/edit/([A-Za-z0-9._-]+)/?$ /blog-app/editor.php?slug=$1 [L,QSA]
+
   # Serve the prerendered /route/index.html directly for /route, without the
   # 301 to /route/ that mod_dir would otherwise issue. Keeps the served URL
   # identical to the <link rel="canonical"> on the page.
@@ -91,3 +104,12 @@
 <FilesMatch "\.map$">
   Require all denied
 </FilesMatch>
+
+
+# --- Blog internals are never served directly ------------------------------
+# config.php holds the password hash; data/ holds the posts and the rate-limit
+# file; lib/ and tools/ are includes, not pages.
+<FilesMatch "^config\.php$">
+  Require all denied
+</FilesMatch>
+RedirectMatch 404 ^/blog-app/(data|lib|tools)(/.*)?$
