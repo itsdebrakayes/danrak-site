@@ -55,6 +55,32 @@ $schema = [[
 ]];
 $schema[0] = array_filter($schema[0], static fn($v) => $v !== null && $v !== '');
 
+// The BlogPosting above points at the author by @id. Define that Person here
+// too: a crawler that only ever sees this page would otherwise be following a
+// reference to an entity it has no description of.
+$schema[] = [
+    '@context'    => 'https://schema.org',
+    '@type'       => 'Person',
+    '@id'         => $site . '/#stacy-ann-smith',
+    'name'        => 'Stacy-Ann Smith',
+    'url'         => $site . '/about-author',
+    'jobTitle'    => 'Author, Broadcaster, Communications Specialist',
+    'nationality' => ['@type' => 'Country', 'name' => 'Jamaican'],
+    'description' => $authorBio !== '' ? $authorBio : null,
+    'worksFor'    => ['@id' => $site . '/#organization'],
+];
+$schema[1] = array_filter($schema[1], static fn($v) => $v !== null && $v !== '');
+
+$schema[] = [
+    '@context'        => 'https://schema.org',
+    '@type'           => 'BreadcrumbList',
+    'itemListElement' => [
+        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $site . '/'],
+        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Blog', 'item' => $site . '/blog'],
+        ['@type' => 'ListItem', 'position' => 3, 'name' => $post['title'] ?? '', 'item' => $url],
+    ],
+];
+
 render_head([
     'title'       => ($post['meta_title'] ?: $post['title']) . ' | Stacy-Ann Smith',
     'description' => $post['meta_description'] ?: ($post['excerpt'] ?? ''),

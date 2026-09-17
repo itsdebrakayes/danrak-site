@@ -179,7 +179,7 @@ function load_settings(): array
     return array_merge([
         'author_avatar' => null,
         'author_name'   => $cfg['author_name'] ?? 'Stacy-Ann Smith',
-        'author_bio'    => 'Jamaican author, journalist and broadcaster. Founder and CEO of Danrak Productions, creator and host of It’s A Woman’s World, and author of the memoir Time Does Not Heal.',
+        'author_bio'    => 'Stacy-Ann Smith is a Jamaican author, journalist and broadcaster, the founder and CEO of Danrak Productions, creator and host of It’s A Woman’s World, and the author of the memoir Time Does Not Heal.',
     ], is_array($data) ? $data : []);
 }
 
