@@ -247,7 +247,7 @@ const MobileFooter = () => (
     </p>
     <p className="text-center text-xs text-muted-foreground mt-2">
       Built by{' '}
-      <span className="font-signature text-xl leading-none align-middle text-brand-crimson">DKS Technologies</span>
+      <span className="font-signature text-2xl leading-none align-middle text-brand-crimson">DKS Technologies</span>
     </p>
   </footer>
 );

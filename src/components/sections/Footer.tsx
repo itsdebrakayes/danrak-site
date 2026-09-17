@@ -24,7 +24,7 @@ const Footer = ({ variant = 'fixed' }: FooterProps) => {
         <img src={logo} alt="Danrak logo" loading="lazy" decoding="async" className="w-12 h-12 object-contain" />
         <span className="text-xs text-foreground/80">
           Built by{' '}
-          <span className="font-signature text-xl leading-none align-middle text-brand-crimson">DKS Technologies</span>
+          <span className="font-signature text-2xl leading-none align-middle text-brand-crimson">DKS Technologies</span>
         </span>
       </div>
       

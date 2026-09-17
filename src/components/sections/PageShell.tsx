@@ -88,7 +88,7 @@ const PageShell = ({ children, hero }: PageShellProps) => {
             <p>© {new Date().getFullYear()} {SITE.name}. {SITE.tagline}.</p>
 <p className="text-xs text-muted-foreground">
               Built by{' '}
-              <span className="font-signature text-xl leading-none align-middle text-brand-crimson">DKS Technologies</span>
+              <span className="font-signature text-2xl leading-none align-middle text-brand-crimson">DKS Technologies</span>
             </p>
           </div>
         </div>
