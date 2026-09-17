@@ -117,7 +117,7 @@ const Memoir = () => {
         <motion.div {...fadeIn} className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="relative lg:col-span-5">
             <img src={cover} alt="Time Does Not Heal memoir" loading="lazy" width="500" height="500" className="w-full object-cover shadow-2xl" />
-            <blockquote className="memoir-quote-note absolute -right-3 -top-10 max-w-[15rem] rotate-2 p-5 text-left sm:-right-8 sm:-top-8">
+            <blockquote className="memoir-quote-note absolute -right-3 top-4 max-w-[15rem] rotate-2 p-5 text-left sm:-right-8 sm:top-6">
               <p className="font-playfair text-xl font-bold leading-snug text-foreground">“You have to be intentional about your healing.”</p>
               <footer className="mt-3 text-xs font-semibold uppercase text-[hsl(var(--memoir-violet))]">— Stacy-Ann Smith</footer>
             </blockquote>
