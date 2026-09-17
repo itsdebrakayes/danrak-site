@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { heroPortrait } from '@/assets/responsive';
-import danrakLogoFull from '@/assets/DanRak Prod Logo.webp';
+import danrakLogoFull from '@/assets/danrak-logo.webp';
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);

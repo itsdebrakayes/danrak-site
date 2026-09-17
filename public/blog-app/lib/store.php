@@ -155,3 +155,53 @@ function topics(): array
         'Behind the Book', 'Announcements',
     ];
 }
+
+/* ---------- Author profile ---------- */
+
+function settings_file(): string
+{
+    $dir = __DIR__ . '/../data';
+    if (!is_dir($dir)) {
+        mkdir($dir, 0755, true);
+    }
+    return $dir . '/settings.json';
+}
+
+/**
+ * Author profile she controls from the dashboard, kept apart from config.php
+ * so changing her photo or bio never means editing a PHP file.
+ */
+function load_settings(): array
+{
+    $f = settings_file();
+    $data = is_file($f) ? json_decode((string) file_get_contents($f), true) : null;
+    $cfg = config();
+    return array_merge([
+        'author_avatar' => null,
+        'author_name'   => $cfg['author_name'] ?? 'Stacy-Ann Smith',
+        'author_bio'    => 'Jamaican author, journalist and broadcaster. Founder and CEO of Danrak Productions, creator and host of It’s A Woman’s World, and author of the memoir Time Does Not Heal.',
+    ], is_array($data) ? $data : []);
+}
+
+function save_settings(array $settings): bool
+{
+    $json = json_encode($settings, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    if ($json === false) {
+        return false;
+    }
+    $f = settings_file();
+    $tmp = $f . '.tmp';
+    return file_put_contents($tmp, $json, LOCK_EX) !== false && rename($tmp, $f);
+}
+
+/** Initials fallback when no photo has been uploaded. */
+function author_initials(string $name): string
+{
+    $out = '';
+    foreach (preg_split('/[\s-]+/', trim($name)) ?: [] as $part) {
+        if ($part !== '') {
+            $out .= mb_strtoupper(mb_substr($part, 0, 1));
+        }
+    }
+    return mb_substr($out, 0, 2);
+}

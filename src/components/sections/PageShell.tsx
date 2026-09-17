@@ -1,15 +1,17 @@
 import { ReactNode, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { SITE } from '@/data/site';
-import logo from '@/assets/DanRak Prod Logo.webp';
+import logo from '@/assets/danrak-logo.webp';
 
 /**
- * Layout for standalone content pages (book, author, blog).
+ * Layout for standalone content pages (book, author, media kit).
  *
- * These sit outside the Swiper deck, so they use ordinary document flow: a
- * sticky header and a footer that ends the page instead of a fixed overlay.
- * No transformed ancestors means no containing-block surprises.
+ * The nav deliberately reuses the Swiper deck's liquid-glass pill so the site
+ * reads as one thing — it just sits to the right of the logo here, because
+ * these pages have a masthead the deck doesn't. On phones the pill collapses
+ * to a single glass button that opens a full-width sheet: a horizontally
+ * scrolling strip of seven links is not usable with a thumb.
  */
 
 const LINKS = [
@@ -22,6 +24,9 @@ const LINKS = [
   { label: 'Contact', to: '/contact' },
 ];
 
+const GLASS =
+  'bg-white/80 dark:bg-black/70 backdrop-blur-xl border border-black/5 dark:border-white/10 shadow-xl';
+
 interface PageShellProps {
   children: ReactNode;
   /** Rendered full-bleed above the content column. */
@@ -29,34 +34,87 @@ interface PageShellProps {
 }
 
 const PageShell = ({ children, hero }: PageShellProps) => {
-  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const location = useLocation();
 
+  // Close the sheet on navigation, and on Escape.
+  useEffect(() => setOpen(false), [location.pathname]);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
+
+  const isActive = (to: string) =>
+    to === '/' ? location.pathname === '/' : location.pathname.startsWith(to);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="flex min-h-screen flex-col bg-background">
       <header
-        className={`sticky top-0 z-50 w-full transition-colors duration-300 ${
-          scrolled ? 'bg-background/92 backdrop-blur-md border-b border-border' : 'bg-background/70 backdrop-blur-sm'
-        }`}
-        style={{ paddingTop: 'var(--safe-t)' }}
+        className="fixed inset-x-0 top-0 z-[9999]"
+        style={{ paddingTop: 'max(var(--safe-t), 0.75rem)' }}
       >
-        <div className="content-shell flex items-center gap-3 py-3">
-          <Link to="/" className="shrink-0" aria-label="Danrak Productions home">
-            <img src={logo} alt="Danrak Productions" className="h-9 w-auto object-contain" />
+        <div className="mx-auto flex max-w-[1680px] items-center justify-between gap-3 px-4 pb-3 sm:px-7">
+          <Link
+            to="/"
+            aria-label="Danrak Productions home"
+            className={`shrink-0 rounded-full px-3 py-2 ${GLASS}`}
+          >
+            <img src={logo} alt="Danrak Productions" className="h-7 w-auto object-contain sm:h-8" />
           </Link>
-          <nav aria-label="Primary" className="flex-1 overflow-x-auto no-scrollbar">
-            <ul className="flex items-center gap-1 min-w-max justify-end">
+
+          {/* Desktop: the same pill used across the site. */}
+          <nav aria-label="Primary" className={`hidden rounded-full px-3 py-2 lg:flex lg:gap-1 ${GLASS}`}>
+            {LINKS.map((l) => (
+              <Link
+                key={l.to}
+                to={l.to}
+                aria-current={isActive(l.to) ? 'page' : undefined}
+                className={`rounded-full px-4 py-2 text-sm font-medium text-foreground transition-all duration-300 ${
+                  isActive(l.to)
+                    ? 'border border-white/30 bg-white/25 shadow-md backdrop-blur-sm dark:bg-white/10'
+                    : 'hover:bg-white/25 hover:shadow-lg dark:hover:bg-white/10'
+                }`}
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Mobile: one glass button opening a sheet. */}
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full lg:hidden ${GLASS}`}
+          >
+            <span aria-hidden="true" className="relative block h-3.5 w-4">
+              <span className={`absolute left-0 h-[1.5px] w-4 bg-foreground transition-all duration-300 ${open ? 'top-1.5 rotate-45' : 'top-0'}`} />
+              <span className={`absolute left-0 top-1.5 h-[1.5px] w-4 bg-foreground transition-opacity duration-200 ${open ? 'opacity-0' : 'opacity-100'}`} />
+              <span className={`absolute left-0 h-[1.5px] w-4 bg-foreground transition-all duration-300 ${open ? 'top-1.5 -rotate-45' : 'top-3'}`} />
+            </span>
+          </button>
+        </div>
+
+        {/* Mobile sheet */}
+        <div
+          id="mobile-nav"
+          hidden={!open}
+          className={`mx-4 overflow-hidden rounded-3xl lg:hidden ${GLASS}`}
+        >
+          <nav aria-label="Primary" className="p-2">
+            <ul>
               {LINKS.map((l) => (
                 <li key={l.to}>
                   <Link
                     to={l.to}
-                    className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-brand-ocean whitespace-nowrap transition-colors"
+                    aria-current={isActive(l.to) ? 'page' : undefined}
+                    className={`block rounded-2xl px-4 py-3 text-base font-medium transition-colors ${
+                      isActive(l.to) ? 'bg-white/30 text-foreground dark:bg-white/10' : 'text-foreground/85'
+                    }`}
                   >
                     {l.label}
                   </Link>
@@ -67,28 +125,31 @@ const PageShell = ({ children, hero }: PageShellProps) => {
         </div>
       </header>
 
+      {/* Reserve the fixed header's height so heroes don't start underneath it. */}
+      <div aria-hidden className="h-[4.25rem] sm:h-[4.75rem]" />
+
       {hero}
 
-      <main className="flex-1 w-full">{children}</main>
+      <main className="w-full flex-1">{children}</main>
 
       <footer className="mt-20 border-t border-border bg-muted/30">
         <div className="content-shell py-10">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <img src={logo} alt="" className="h-10 w-auto object-contain mb-2" />
-              <p className="text-sm text-muted-foreground max-w-sm">{SITE.description}</p>
+              <img src={logo} alt="" className="mb-3 h-10 w-auto object-contain" />
+              <p className="max-w-sm text-sm text-muted-foreground">{SITE.description}</p>
             </div>
             <div className="flex gap-5 text-2xl">
-              <a href={SITE.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-foreground/70 hover:text-brand-crimson transition-colors"><FaInstagram /></a>
-              <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-foreground/70 hover:text-brand-ocean transition-colors"><FaLinkedin /></a>
-              <a href={SITE.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-foreground/70 hover:text-brand-forest transition-colors"><FaYoutube /></a>
+              <a href={SITE.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-foreground/70 transition-colors hover:text-brand-crimson"><FaInstagram /></a>
+              <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-foreground/70 transition-colors hover:text-brand-ocean"><FaLinkedin /></a>
+              <a href={SITE.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-foreground/70 transition-colors hover:text-brand-forest"><FaYoutube /></a>
             </div>
           </div>
-          <div className="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row gap-2 sm:justify-between text-xs text-muted-foreground">
+          <div className="mt-8 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:justify-between">
             <p>© {new Date().getFullYear()} {SITE.name}. {SITE.tagline}.</p>
-<p className="text-xs text-muted-foreground">
+            <p>
               Built by{' '}
-              <span className="font-signature text-2xl leading-none align-middle text-brand-crimson">DKS Technologies</span>
+              <span className="font-signature align-middle text-2xl leading-none text-brand-crimson">DKS Technologies</span>
             </p>
           </div>
         </div>

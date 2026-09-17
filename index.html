@@ -29,6 +29,26 @@
     <meta name="msapplication-TileImage" content="/head-icon.ico" />
 
     <!--
+      Viewport class, set before the body is parsed.
+
+      This runs synchronously in <head>, so `data-vp` is already correct on the
+      very first paint — CSS and the inline loader can branch on screen size
+      without waiting for the JS bundle. React's own layout switch reads
+      window.innerWidth synchronously too, so the mobile tree is chosen on the
+      first render rather than after a frame.
+    -->
+    <script>
+      (function () {
+        try {
+          var w = window.innerWidth || document.documentElement.clientWidth;
+          var el = document.documentElement;
+          el.setAttribute('data-vp', w < 768 ? 'mobile' : w < 1280 ? 'tablet' : 'desktop');
+          el.style.setProperty('--vw', w + 'px');
+        } catch (e) {}
+      })();
+    </script>
+
+    <!--
       Critical inline styles: this paints the moment the HTML arrives, with no
       dependency on the JS bundle or the external stylesheet. Without it the
       viewport stays blank until React mounts, which reads as a broken page.

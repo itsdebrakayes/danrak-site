@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { projects } from '@/data/projects';
 import { SITE, COMPANY_COPY } from '@/data/site';
 import { heroPortrait } from '@/assets/responsive';
-import danrakLogoFull from '@/assets/DanRak Prod Logo.webp';
+import danrakLogoFull from '@/assets/danrak-logo.webp';
 
 /**
  * Dedicated mobile experience.

@@ -23,6 +23,14 @@ function asset_url(string $ext): ?string
     return '/assets/' . basename($matches[0]);
 }
 
+/** Locates the hashed logo emitted by the last Vite build. */
+function logo_url(): ?string
+{
+    $root = $_SERVER['DOCUMENT_ROOT'] ?? dirname(__DIR__, 3);
+    $matches = glob(rtrim($root, '/') . '/assets/danrak-logo-*.webp') ?: [];
+    return $matches ? '/assets/' . basename($matches[0]) : null;
+}
+
 function e(?string $v): string
 {
     return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
@@ -167,44 +175,118 @@ function render_head(array $opts): void
 function render_nav(): void
 {
     $links = [
-        '/'                  => 'Home',
-        '/about'             => 'About',
-        '/showcase'          => 'Services',
-        '/time-does-not-heal'=> 'The Book',
-        '/about-author'      => 'The Author',
-        '/blog'              => 'Blog',
-        '/contact'           => 'Contact',
+        '/'                   => 'Home',
+        '/about'              => 'About',
+        '/showcase'           => 'Services',
+        '/time-does-not-heal' => 'The Book',
+        '/about-author'       => 'The Author',
+        '/blog'               => 'Blog',
+        '/contact'            => 'Contact',
     ];
+    // Matches the React site's pill so the blog doesn't look like a bolt-on.
+    $glass = 'bg-white/80 dark:bg-black/70 backdrop-blur-xl border border-black/5 dark:border-white/10 shadow-xl';
+    $here  = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+    $logo  = logo_url();
+
+    $active = static function (string $to) use ($here): bool {
+        return $to === '/' ? $here === '/' : str_starts_with($here, $to);
+    };
     ?>
-<header class="sticky top-0 z-50 w-full border-b border-border bg-background/92 backdrop-blur-md">
-  <div class="content-shell flex items-center gap-3 py-3">
-    <a href="/" class="shrink-0 font-playfair text-lg font-bold text-brand-crimson">DANRAK</a>
-    <nav aria-label="Primary" class="flex-1 overflow-x-auto no-scrollbar">
-      <ul class="flex min-w-max items-center justify-end gap-1">
+<header class="fixed inset-x-0 top-0 z-[9999]" style="padding-top: max(var(--safe-t), 0.75rem);">
+  <div class="mx-auto flex max-w-[1680px] items-center justify-between gap-3 px-4 pb-3 sm:px-7">
+    <a href="/" aria-label="Danrak Productions home" class="shrink-0 rounded-full px-3 py-2 <?= $glass ?>">
+      <?php if ($logo): ?>
+        <img src="<?= e($logo) ?>" alt="Danrak Productions" class="h-7 w-auto object-contain sm:h-8">
+      <?php else: ?>
+        <span class="font-playfair text-base font-bold text-brand-crimson">DANRAK</span>
+      <?php endif; ?>
+    </a>
+
+    <nav aria-label="Primary" class="hidden rounded-full px-3 py-2 lg:flex lg:gap-1 <?= $glass ?>">
+      <?php foreach ($links as $href => $label): ?>
+        <a href="<?= e($href) ?>"
+           <?= $active($href) ? 'aria-current="page"' : '' ?>
+           class="rounded-full px-4 py-2 text-sm font-medium text-foreground transition-all duration-300 <?= $active($href)
+               ? 'border border-white/30 bg-white/25 shadow-md backdrop-blur-sm dark:bg-white/10'
+               : 'hover:bg-white/25 hover:shadow-lg dark:hover:bg-white/10' ?>"><?= e($label) ?></a>
+      <?php endforeach; ?>
+    </nav>
+
+    <button type="button" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu"
+            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full lg:hidden <?= $glass ?>">
+      <span aria-hidden="true" class="relative block h-3.5 w-4">
+        <span id="navBar1" class="absolute left-0 top-0 h-[1.5px] w-4 bg-foreground transition-all duration-300"></span>
+        <span id="navBar2" class="absolute left-0 top-1.5 h-[1.5px] w-4 bg-foreground transition-opacity duration-200"></span>
+        <span id="navBar3" class="absolute left-0 top-3 h-[1.5px] w-4 bg-foreground transition-all duration-300"></span>
+      </span>
+    </button>
+  </div>
+
+  <div id="mobileNav" hidden class="mx-4 overflow-hidden rounded-3xl lg:hidden <?= $glass ?>">
+    <nav aria-label="Primary" class="p-2">
+      <ul>
         <?php foreach ($links as $href => $label): ?>
-        <li><a href="<?= e($href) ?>" class="block whitespace-nowrap px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-brand-ocean"><?= e($label) ?></a></li>
+          <li><a href="<?= e($href) ?>" class="block rounded-2xl px-4 py-3 text-base font-medium transition-colors <?= $active($href) ? 'bg-white/30 text-foreground dark:bg-white/10' : 'text-foreground/85' ?>"><?= e($label) ?></a></li>
         <?php endforeach; ?>
       </ul>
     </nav>
   </div>
 </header>
-<?php
+<!-- Reserve the fixed header's height. -->
+<div aria-hidden class="h-[4.25rem] sm:h-[4.75rem]"></div>
+<script>
+(function () {
+  var btn = document.getElementById('navToggle'),
+      panel = document.getElementById('mobileNav'),
+      b1 = document.getElementById('navBar1'),
+      b2 = document.getElementById('navBar2'),
+      b3 = document.getElementById('navBar3');
+  if (!btn || !panel) return;
+  function set(open) {
+    panel.hidden = !open;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    b1.style.transform = open ? 'translateY(6px) rotate(45deg)' : '';
+    b3.style.transform = open ? 'translateY(-6px) rotate(-45deg)' : '';
+    b2.style.opacity = open ? '0' : '1';
+  }
+  btn.addEventListener('click', function () { set(panel.hidden); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+})();
+</script>
+    <?php
 }
 
 function render_footer(): void
 {
+    $logo = logo_url();
+    // Inline SVG rather than the icon font the React side uses, so the blog
+    // carries no extra dependency for three glyphs.
+    $icons = [
+        'Instagram' => ['https://instagram.com/danrakproductions', 'M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 1.8.25 2.2.42.6.22 1 .5 1.4.9.4.4.7.8.9 1.4.17.4.36 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.06 1.2-.25 1.8-.42 2.2-.22.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.17-1 .36-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.06-1.8-.25-2.2-.42-.6-.22-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.17-.4-.36-1-.42-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.06-1.2.25-1.8.42-2.2.22-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.17 1-.36 2.2-.42C8.4 2.2 8.8 2.2 12 2.2zm0 5.1a4.7 4.7 0 100 9.4 4.7 4.7 0 000-9.4zm0 7.7a3 3 0 110-6 3 3 0 010 6zm6-7.9a1.1 1.1 0 11-2.2 0 1.1 1.1 0 012.2 0z'],
+        'LinkedIn'  => ['https://www.linkedin.com/in/stacy-ann-williams-smith-039242b4/', 'M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.35 4.78 5.4V21h-4v-5.7c0-1.36-.03-3.1-1.9-3.1-1.9 0-2.2 1.47-2.2 3v5.8h-4z'],
+        'YouTube'   => ['https://www.youtube.com/@danrakproductions2241', 'M23 12s0-3.2-.4-4.7a2.4 2.4 0 00-1.7-1.7C19.4 5.2 12 5.2 12 5.2s-7.4 0-8.9.4A2.4 2.4 0 001.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7c.2.9.9 1.5 1.7 1.7 1.5.4 8.9.4 8.9.4s7.4 0 8.9-.4a2.4 2.4 0 001.7-1.7c.4-1.5.4-4.7.4-4.7zM9.8 15.3V8.7l6.2 3.3z'],
+    ];
     ?>
 <footer class="mt-20 border-t border-border bg-muted/30">
-  <div class="content-shell py-10">
+  <div class="mx-auto w-full max-w-3xl px-5 py-10 sm:px-8">
     <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-      <p class="max-w-sm text-sm text-muted-foreground">
-        Danrak Productions is a Jamaican communications and media production business, built on the
-        power of great storytelling and the fervent belief that everyone has a story worth telling.
-      </p>
-      <div class="flex gap-5 text-2xl text-foreground/70">
-        <a href="https://instagram.com/danrakproductions" target="_blank" rel="noopener noreferrer" aria-label="Instagram">◎</a>
-        <a href="https://www.linkedin.com/in/stacy-ann-williams-smith-039242b4/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
-        <a href="https://www.youtube.com/@danrakproductions2241" target="_blank" rel="noopener noreferrer" aria-label="YouTube">▶</a>
+      <div>
+        <?php if ($logo): ?>
+          <img src="<?= e($logo) ?>" alt="" class="mb-3 h-10 w-auto object-contain">
+        <?php endif; ?>
+        <p class="max-w-sm text-sm leading-relaxed text-muted-foreground">
+          Danrak Productions is a Jamaican communications and media production business, built on the
+          power of great storytelling and the fervent belief that everyone has a story worth telling.
+        </p>
+      </div>
+      <div class="flex gap-4">
+        <?php foreach ($icons as $label => [$href, $path]): ?>
+          <a href="<?= e($href) ?>" target="_blank" rel="noopener noreferrer" aria-label="<?= e($label) ?>"
+             class="text-foreground/70 transition-colors hover:text-brand-ocean">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="<?= $path ?>"/></svg>
+          </a>
+        <?php endforeach; ?>
       </div>
     </div>
     <div class="mt-8 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:justify-between">

@@ -42,7 +42,7 @@ const Header = ({ variant = 'glass' }: HeaderProps) => {
   };
 
   return (
-    <header className="fixed top-6 left-1/2 transform -translate-x-1/2 z-[9999]">
+    <header data-pill-nav className="fixed top-6 left-1/2 transform -translate-x-1/2 z-[9999]">
       <nav className={navStyles}>
         {navItems.map((item) => (
           <button

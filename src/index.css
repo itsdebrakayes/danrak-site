@@ -226,8 +226,12 @@ All colors MUST be HSL.
      Scoped to >=768px: this is the centred desktop pill geometry, and when it
      applied to every <header> it also shrank the full-width mobile nav to a
      centred 188px strip. */
+  /* Scoped to the Swiper deck's pill nav via [data-pill-nav]. As a bare
+     `header` selector this hit every header on the site — the standalone
+     pages' sticky nav and the PHP blog's masthead included, stacking them
+     on top of each other at the same fixed coordinates. */
   @media (min-width: 768px) {
-    header {
+    header[data-pill-nav] {
       display: block !important;
       visibility: visible !important;
       opacity: 1 !important;
@@ -242,7 +246,7 @@ All colors MUST be HSL.
 
   /* Mobile nav spans the viewport and is never transformed. */
   @media (max-width: 767px) {
-    header {
+    header[data-pill-nav] {
       position: fixed;
       top: 0;
       left: 0;
