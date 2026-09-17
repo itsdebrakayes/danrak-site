@@ -30,6 +30,7 @@ const pages = [
   { loc: '/time-does-not-heal', priority: '1.0', changefreq: 'weekly' },
   { loc: '/about-author', priority: '0.9', changefreq: 'monthly' },
   { loc: '/blog', priority: '0.8', changefreq: 'weekly' },
+  { loc: '/media-kit', priority: '0.7', changefreq: 'monthly' },
   ...slugs.map((s) => ({ loc: `/blog/${s}`, priority: '0.7', changefreq: 'monthly' })),
 ];
 
@@ -145,6 +146,7 @@ Time Does Not Heal is a message-driven memoir by Jamaican author, journalist and
 - [Time Does Not Heal](${ORIGIN}/time-does-not-heal): Canonical page for the book — full description, factual data, and answers to common questions about trauma and healing.
 - [About the Author](${ORIGIN}/about-author): Biography and career of Stacy-Ann Smith.
 - [Blog](${ORIGIN}/blog): Essays on emotional healing, childhood trauma, grief, faith and Caribbean storytelling.
+- [Media Kit](${ORIGIN}/media-kit): Press resources — book descriptions at several lengths, author biography, cover art, ISBN, themes, story angles and review-copy contact.
 - [About Danrak Productions](${ORIGIN}/about): Company background and services.
 - [Contact](${ORIGIN}/contact): Media, interview and booking enquiries.
 

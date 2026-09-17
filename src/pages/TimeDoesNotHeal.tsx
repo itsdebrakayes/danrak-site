@@ -341,12 +341,20 @@ const TimeDoesNotHeal = () => (
         <p className="mb-4 text-muted-foreground">
           For review copies, interviews, podcast bookings or speaking requests, contact {SITE.name} directly.
         </p>
-        <a
-          href={`mailto:${SITE.email}?subject=Time%20Does%20Not%20Heal%20-%20media%20enquiry`}
-          className="inline-flex items-center rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-        >
-          {SITE.email}
-        </a>
+        <div className="flex flex-wrap gap-3">
+          <Link
+            to="/media-kit"
+            className="inline-flex items-center rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Open the media kit
+          </Link>
+          <a
+            href={`mailto:${SITE.email}?subject=Time%20Does%20Not%20Heal%20-%20media%20enquiry`}
+            className="inline-flex items-center rounded-xl bg-secondary px-6 py-3 font-semibold text-secondary-foreground transition-colors hover:bg-secondary/80"
+          >
+            {SITE.email}
+          </a>
+        </div>
       </div>
     </section>
 
