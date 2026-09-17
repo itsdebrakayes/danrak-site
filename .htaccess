@@ -72,6 +72,13 @@
 
   RewriteRule ^index\.html$ - [L]
 
+  # Serve the prerendered /route/index.html directly for /route, without the
+  # 301 to /route/ that mod_dir would otherwise issue. Keeps the served URL
+  # identical to the <link rel="canonical"> on the page.
+  DirectorySlash Off
+  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
+  RewriteRule ^(.+?)/?$ /$1/index.html [L]
+
   # Real files and directories are served as-is (this is what serves the
   # prerendered per-route index.html files).
   RewriteCond %{REQUEST_FILENAME} !-f
