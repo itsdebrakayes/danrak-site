@@ -170,7 +170,9 @@ const TimeDoesNotHeal = () => (
             height={500}
             className="w-full rounded-lg object-cover shadow-2xl"
           />
-          <blockquote className="memoir-quote-note absolute -right-3 top-4 max-w-[15rem] rotate-2 p-5 text-left sm:-right-8 sm:top-6">
+          {/* Overlaps the cover only where there is room for it; on a phone it
+              sits below instead of covering the book. */}
+          <blockquote className="memoir-quote-note relative mx-auto mt-5 max-w-[17rem] rotate-0 p-5 text-left sm:absolute sm:-right-8 sm:top-6 sm:mx-0 sm:mt-0 sm:max-w-[15rem] sm:rotate-2">
             <p className="font-playfair text-xl font-bold leading-snug text-foreground">“{BOOK.pullQuote}”</p>
             <footer className="mt-3 text-xs font-semibold uppercase text-[hsl(var(--memoir-violet))]">
               — {AUTHOR.name}
@@ -380,12 +382,15 @@ const TimeDoesNotHeal = () => (
     {/* ===== Closing CTA ===== */}
     <section className="relative px-6 pb-24 pt-8">
       <motion.div {...fadeIn} className="memoir-cta mx-auto max-w-4xl overflow-hidden rounded-3xl px-8 py-16 text-center">
-        <h2 className="font-playfair text-4xl font-bold text-background sm:text-5xl">Begin Your Healing</h2>
-        <p className="mx-auto mt-4 max-w-xl text-lg text-background/80">
+        <h2 className="font-playfair text-4xl font-bold text-white sm:text-5xl">Begin Your Healing</h2>
+        <p className="mx-auto mt-4 max-w-xl text-lg text-white/85">
           Time Does Not Heal is available now. Your healing won’t wait for time — start today.
         </p>
         <a href={BOOK.amazonPaperback} target="_blank" rel="noopener noreferrer" className="mt-8 inline-block">
-          <Button size="lg" variant="secondary" className="px-10 py-4 text-lg font-semibold shadow-lg">
+          <Button
+            size="lg"
+            className="bg-white px-10 py-4 text-lg font-semibold text-[hsl(var(--memoir-plum))] shadow-lg hover:bg-white/90"
+          >
             <FaAmazon className="mr-2" /> Get the Book on Amazon
           </Button>
         </a>

@@ -759,3 +759,17 @@ All colors MUST be HSL.
   background: hsl(var(--memoir-note));
   border: 1px solid hsl(var(--memoir-splash) / 0.6);
 }
+
+/* ==========================================================================
+   MOBILE CHROME
+   On phones the nav collapses to a single hamburger pinned top-right, so the
+   theme toggle moves directly beneath it instead of fighting it for the same
+   corner. Both keep clear of the notch via the safe-area inset.
+   ========================================================================== */
+@media (max-width: 767px) {
+  .theme-toggle {
+    top: calc(max(env(safe-area-inset-top, 0px), 0px) + 4.75rem) !important;
+    right: 1rem !important;
+    padding: 0.7rem;
+  }
+}

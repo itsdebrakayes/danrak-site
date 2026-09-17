@@ -26,15 +26,8 @@ const NAV = [
 ];
 
 const MobileNav = () => {
-  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
   const [active, setActive] = useState('#m-home');
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   // Highlight the section currently filling the viewport.
   useEffect(() => {
@@ -54,43 +47,67 @@ const MobileNav = () => {
     return () => io.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
+
+  const GLASS =
+    'bg-white/80 dark:bg-black/70 backdrop-blur-xl border border-black/5 dark:border-white/10 shadow-xl';
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-[9999] transition-colors duration-300 ${
-        scrolled ? 'bg-background/90 backdrop-blur-md border-b border-border' : 'bg-transparent'
-      }`}
-      style={{ paddingTop: 'var(--safe-t)' }}
+      className="fixed right-4 top-0 z-[9999]"
+      style={{ paddingTop: 'calc(max(var(--safe-t), 0px) + 1rem)' }}
     >
-      <nav aria-label="Primary" className="overflow-x-auto no-scrollbar">
-        <ul className="flex items-center gap-1 px-3 py-2 min-w-max">
-          {NAV.map((item) =>
-            item.route ? (
-              <li key={item.label}>
-                <Link
-                  to={item.href}
-                  className="block px-3 py-2 text-sm font-semibold rounded-full text-brand-crimson whitespace-nowrap"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ) : (
-              <li key={item.label}>
-                <a
-                  href={item.href}
-                  aria-current={active === item.href ? 'true' : undefined}
-                  className={`block px-3 py-2 text-sm font-medium rounded-full whitespace-nowrap transition-colors ${
-                    active === item.href
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-foreground/80'
-                  }`}
-                >
-                  {item.label}
-                </a>
-              </li>
-            )
-          )}
-        </ul>
-      </nav>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls="m-nav"
+        aria-label={open ? 'Close menu' : 'Open menu'}
+        className={`ml-auto flex h-11 w-11 items-center justify-center rounded-full ${GLASS}`}
+      >
+        <span aria-hidden className="relative block h-3.5 w-4">
+          <span className={`absolute left-0 h-[1.5px] w-4 bg-foreground transition-all duration-300 ${open ? 'top-1.5 rotate-45' : 'top-0'}`} />
+          <span className={`absolute left-0 top-1.5 h-[1.5px] w-4 bg-foreground transition-opacity duration-200 ${open ? 'opacity-0' : 'opacity-100'}`} />
+          <span className={`absolute left-0 h-[1.5px] w-4 bg-foreground transition-all duration-300 ${open ? 'top-1.5 -rotate-45' : 'top-3'}`} />
+        </span>
+      </button>
+
+      <div id="m-nav" hidden={!open} className={`mt-3 w-[62vw] max-w-[16rem] overflow-hidden rounded-3xl ${GLASS}`}>
+        <nav aria-label="Primary" className="p-2">
+          <ul>
+            {NAV.map((item) => {
+              const cls =
+                'block rounded-2xl px-4 py-3 text-base font-medium transition-colors';
+              if (item.route) {
+                return (
+                  <li key={item.label}>
+                    <Link to={item.href} onClick={() => setOpen(false)} className={`${cls} text-brand-crimson`}>
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              }
+              return (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={active === item.href ? 'true' : undefined}
+                    className={`${cls} ${active === item.href ? 'bg-white/30 text-foreground dark:bg-white/10' : 'text-foreground/85'}`}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 };
@@ -98,45 +115,52 @@ const MobileNav = () => {
 const MobileHero = () => (
   <section
     id="m-home"
-    className="relative flex flex-col items-center justify-end overflow-hidden"
+    className="relative flex flex-col overflow-hidden"
     style={{ minHeight: '100svh' }}
   >
     <div className="absolute inset-0 bg-gradient-to-br from-background via-brand-ocean/5 to-brand-sky/10" />
     {/* Brand glow, sized in viewport units so it can never overflow a phone. */}
     <div
       aria-hidden
-      className="absolute left-1/2 top-[38%] -translate-x-1/2 -translate-y-1/2 w-[85vw] h-[85vw] max-w-[420px] max-h-[420px] rounded-full bg-gradient-to-br from-brand-ocean via-brand-sky to-brand-crimson opacity-50 blur-3xl"
+      className="absolute left-1/2 top-[34%] h-[85vw] max-h-[420px] w-[85vw] max-w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-brand-ocean via-brand-sky to-brand-crimson opacity-50 blur-3xl"
     />
 
+    {/*
+      Anchored to the bottom of the section rather than sitting in flow. The
+      source portrait is cropped at her thighs, so wherever its lower edge
+      lands is a visible hard line — putting it exactly on the viewport edge
+      is what makes the crop read as intentional, the same way the desktop
+      hero does it. Horizontal overflow is clipped by the section.
+    */}
     <img
       src={heroPortrait.src}
       srcSet={heroPortrait.srcSet}
-      sizes="100vw"
+      sizes="(max-width: 767px) 190vw, 100vw"
       alt="Stacy-Ann Smith, Founder and CEO of Danrak Productions"
       loading="eager"
       fetchPriority="high"
       decoding="async"
-      className="relative z-10 w-auto max-w-none object-contain object-bottom"
-      style={{ height: 'min(68svh, 560px)' }}
+      className="absolute bottom-0 left-1/2 z-10 w-auto max-w-none -translate-x-1/2"
+      style={{ height: 'min(84svh, 680px)' }}
     />
 
-    <div className="relative z-20 w-full px-5 pb-8 -mt-12 flex flex-col items-center gap-5">
+    <div className="relative z-20 mt-auto flex w-full flex-col items-center gap-4 px-5 pb-8">
       <img
         src={danrakLogoFull}
         alt="Danrak Productions"
         loading="eager"
         decoding="async"
-        className="w-full max-w-[320px] object-contain drop-shadow-lg"
+        className="w-full max-w-[300px] object-contain drop-shadow-lg"
       />
-      <p className="text-xs tracking-[0.3em] uppercase text-brand-ocean font-semibold">
+      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-ocean drop-shadow">
         {SITE.tagline}
       </p>
-      <div className="grid grid-cols-2 gap-3 w-full max-w-sm">
+      <div className="grid w-full max-w-sm grid-cols-2 gap-3">
         <Link to="/showcase">
-          <Button size="lg" className="w-full rounded-xl font-semibold">Explore Our Work</Button>
+          <Button size="lg" className="w-full rounded-xl font-semibold shadow-lg">Explore Our Work</Button>
         </Link>
         <Link to="/contact">
-          <Button size="lg" variant="secondary" className="w-full rounded-xl font-semibold">
+          <Button size="lg" variant="secondary" className="w-full rounded-xl font-semibold shadow-lg">
             Start Your Project
           </Button>
         </Link>
