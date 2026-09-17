@@ -81,6 +81,15 @@ export const BOOK = {
   audiobookReleaseDate: '2026-09-28',
   audiobookPlatform: 'Odeo',
   url: `${SITE.url}/time-does-not-heal`,
+  /** Retail links. Paperback carries the ISBN; the Kindle edition has its own ASIN. */
+  amazonPaperback: 'https://www.amazon.com/Time-Does-Heal-Stacy-Ann-Smith/dp/1735361062',
+  amazonKindle: 'https://www.amazon.com/Time-Does-Heal-Stacy-Ann-Smith-ebook/dp/B08ZXVVMGV',
+  amazonUk: 'https://www.amazon.co.uk/Time-Does-Heal-Stacy-Ann-Smith/dp/1735361062',
+  /** The line the author uses to summarise the book's argument. */
+  pullQuote: 'You have to be intentional about your healing.',
+  /** Longer version, as given to the press at launch. */
+  authorStatement:
+    'There are so many people walking around, going through life in a state of brokenness, waiting on time to miraculously fix what ails them. But mental health professionals will tell you that time alone does not heal all wounds. You have to be intentional about your healing, and that\u2019s what this book is about.',
   themes: [
     'childhood trauma',
     'grief',
@@ -99,6 +108,26 @@ export const BOOK = {
   shortDescription:
     'A message-driven memoir by Jamaican broadcaster Stacy-Ann Smith challenging the belief that time heals all wounds, tracing childhood trauma, grief and divorce toward intentional emotional healing.',
 } as const;
+
+/** Themes the memoir works through, surfaced as readable prose rather than
+ *  locked inside cover art — crawlers and answer engines need the words. */
+export const BOOK_THEMES = [
+  {
+    title: 'The Valley & the Mountaintop',
+    body:
+      'Growing up in Maverley, Kingston, Stacy-Ann traces the struggle, pain and loss of her early years — and the climb back to the mountaintop.',
+  },
+  {
+    title: 'Lessons from My Clothespin',
+    body:
+      'A single childhood moment with a clothespin shaped years of negative self-perception — until she learned to rewrite the story she told herself.',
+  },
+  {
+    title: 'Faith, Family & Intentional Healing',
+    body:
+      'Through a failed marriage, the death of her father and seasons of brokenness, faith and the willingness to seek help became the path to wholeness.',
+  },
+] as const;
 
 /**
  * Answer-first Q&A. Each answer leads with a direct response in the first

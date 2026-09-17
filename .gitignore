@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Stray installers / archives
+*.deb
+*.dmg
+*.pkg

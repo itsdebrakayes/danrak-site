@@ -4,6 +4,9 @@ const navItems = [
   { label: 'Home', path: '/home' },
   { label: 'About', path: '/about' },
   { label: 'Services', path: '/showcase' },
+  // Leaves the Swiper deck for the standalone book page. Named "The Book"
+  // rather than "Book" so it reads as a destination, not a category.
+  { label: 'The Book', path: '/time-does-not-heal' },
   { label: 'Contact', path: '/contact' },
 ];
 

@@ -664,3 +664,94 @@ All colors MUST be HSL.
     .hero-in-burst { opacity: .6 !important; }
   }
 }
+
+/* ==========================================================================
+   MEMOIR PAGE — /time-does-not-heal
+   Accent palette and editorial treatments carried over from the approved
+   design: violet/lilac splashes against the existing brand system, glass
+   panels, and the paper-note pull quote.
+   ========================================================================== */
+:root {
+  --memoir-plum: 282 50% 14%;
+  --memoir-violet: 285 45% 42%;
+  --memoir-lilac: 288 45% 80%;
+  --memoir-lilac-strong: 326 73% 66%;
+  --memoir-panel: 326 70% 97%;
+  --memoir-splash: 326 73% 80%;
+  --memoir-note: 326 73% 94%;
+}
+
+.dark {
+  --memoir-panel: 326 45% 12%;
+  --memoir-splash: 326 55% 34%;
+  --memoir-note: 326 38% 18%;
+}
+
+.memoir-editorial-hero { background: hsl(var(--background)); }
+
+/* Fluid rather than the original fixed steps with white-space: nowrap, which
+   overflowed between 1024px and the point the title actually fits. */
+.memoir-display-title {
+  font-size: clamp(2.75rem, 1.2rem + 6.2vw, 6rem);
+  letter-spacing: 0;
+  max-width: 100%;
+}
+
+.memoir-splash {
+  position: absolute;
+  border-radius: 46% 54% 63% 37% / 53% 42% 58% 47%;
+  background: hsl(var(--memoir-splash) / 0.54);
+  filter: blur(22px);
+  pointer-events: none;
+}
+.memoir-splash-left {
+  width: min(24rem, 60vw); height: min(20rem, 45vw);
+  left: clamp(-6rem, 50% - 25rem, 50%); top: 38%;
+  transform: rotate(18deg);
+}
+.memoir-splash-right {
+  width: min(26rem, 64vw); height: min(22rem, 48vw);
+  right: clamp(-6rem, 50% - 27rem, 50%); top: 48%;
+  transform: rotate(-14deg);
+}
+
+.memoir-cover-glow {
+  position: absolute;
+  inset: 12% -10%;
+  border-radius: 42% 58% 52% 48% / 58% 38% 62% 42%;
+  background: hsl(var(--memoir-splash) / 0.48);
+  filter: blur(34px);
+}
+
+.memoir-cover-splash {
+  position: absolute;
+  z-index: 0;
+  background: hsl(var(--memoir-splash) / 0.72);
+  filter: blur(18px);
+  pointer-events: none;
+}
+.memoir-cover-splash-left {
+  width: 68%; height: 42%; left: -30%; top: 16%;
+  border-radius: 64% 36% 48% 52% / 47% 58% 42% 53%;
+  transform: rotate(-18deg);
+}
+.memoir-cover-splash-right {
+  width: 72%; height: 48%; right: -34%; bottom: 10%;
+  border-radius: 39% 61% 55% 45% / 62% 43% 57% 38%;
+  transform: rotate(14deg);
+}
+
+.memoir-quote-note {
+  z-index: 20;
+  background: hsl(var(--memoir-note));
+  border: 1px solid hsl(var(--memoir-splash) / 0.75);
+  box-shadow: 0 1rem 2rem hsl(var(--foreground) / 0.14);
+}
+
+.memoir-cover-wrap img { filter: drop-shadow(0 2rem 2.5rem hsl(var(--foreground) / 0.2)); }
+.memoir-pages-section { background: hsl(var(--memoir-panel)); }
+.memoir-cta { background: hsl(var(--memoir-plum)); }
+.memoir-card {
+  background: hsl(var(--memoir-note));
+  border: 1px solid hsl(var(--memoir-splash) / 0.6);
+}
