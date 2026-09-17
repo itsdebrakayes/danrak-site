@@ -20,10 +20,10 @@ const Footer = ({ variant = 'fixed' }: FooterProps) => {
 
   return (
     <footer className={footerClass}>
-      <div className={`flex flex-col gap-1 ${contentClass}`}>
+      <div className={`flex items-center gap-3 ${contentClass}`}>
         <img src={logo} alt="Danrak logo" loading="lazy" decoding="async" className="w-12 h-12 object-contain" />
-        <span className="text-xs font-bold text-black font-playfair">
-          Built by DS Technologies
+        <span className="text-xs font-bold text-black font-playfair tracking-wide border-l border-black/30 pl-3">
+          Built by <span className="uppercase">DKS</span> Technologies
         </span>
       </div>
       
