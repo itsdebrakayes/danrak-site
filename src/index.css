@@ -492,20 +492,79 @@ All colors MUST be HSL.
   --memoir-plum: 282 50% 14%;
   --memoir-violet: 285 45% 42%;
   --memoir-lilac: 288 45% 80%;
+  --memoir-lilac-strong: 326 73% 66%;
+  --memoir-panel: 326 70% 97%;
+  --memoir-splash: 326 73% 80%;
 }
 
-.memoir-hero-bg {
-  background: linear-gradient(160deg, hsl(var(--memoir-plum)) 0%, hsl(285 45% 22%) 55%, hsl(340 70% 24%) 100%);
+.dark {
+  --memoir-panel: 326 45% 12%;
+  --memoir-splash: 326 55% 34%;
 }
 
-.memoir-card {
-  background: hsl(var(--memoir-violet) / 0.06);
-  border: 1px solid hsl(var(--memoir-violet) / 0.25);
-  backdrop-filter: blur(8px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.memoir-editorial-hero {
+  background: hsl(var(--background));
 }
 
-.memoir-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px hsl(var(--memoir-violet) / 0.25);
+.memoir-display-title {
+  font-size: 3rem;
+  letter-spacing: 0;
+  max-width: 100%;
+}
+
+.memoir-splash {
+  position: absolute;
+  border-radius: 46% 54% 63% 37% / 53% 42% 58% 47%;
+  background: hsl(var(--memoir-splash) / 0.42);
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.memoir-splash-left {
+  width: 28rem;
+  height: 24rem;
+  left: -10rem;
+  top: 18%;
+  transform: rotate(18deg);
+}
+
+.memoir-splash-right {
+  width: 32rem;
+  height: 28rem;
+  right: -12rem;
+  top: 42%;
+  transform: rotate(-14deg);
+}
+
+.memoir-cover-glow {
+  position: absolute;
+  inset: 12% -10%;
+  border-radius: 42% 58% 52% 48% / 58% 38% 62% 42%;
+  background: hsl(var(--memoir-splash) / 0.48);
+  filter: blur(34px);
+}
+
+.memoir-cover-wrap img {
+  filter: drop-shadow(0 2rem 2.5rem hsl(var(--foreground) / 0.2));
+}
+
+.memoir-pages-section {
+  background: hsl(var(--memoir-panel));
+}
+
+.memoir-cta {
+  background: hsl(var(--memoir-plum));
+}
+
+@media (min-width: 640px) {
+  .memoir-display-title {
+    font-size: 4.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .memoir-display-title {
+    font-size: 6rem;
+    white-space: nowrap;
+  }
 }

@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { FaStar, FaAmazon } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 import cover from '@/assets/time-does-not-heal-cover.jpg';
+import authorPortrait from '@/assets/about-leaning.png';
 
 const amazonUrl = 'https://www.amazon.com/Time-Does-Heal-Stacy-Ann-Smith-ebook/dp/B08ZXVVMGV';
 
@@ -40,79 +41,85 @@ const Memoir = () => {
       <Header />
 
       {/* ===== Hero ===== */}
-      <section className="memoir-hero-bg relative overflow-hidden min-h-screen flex items-center justify-center px-6 pt-28 pb-16">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-[hsl(var(--memoir-violet))] opacity-30 blur-3xl" />
-          <div className="absolute bottom-10 right-16 w-5 h-5 rounded-full bg-[hsl(var(--memoir-lilac))]/60 animate-float blur-sm" />
-          <div className="absolute top-1/3 left-20 w-6 h-6 rounded-full bg-[hsl(var(--memoir-lilac))]/40 animate-float blur-sm" style={{ animationDelay: '1.4s' }} />
-        </div>
-
-        <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center text-center">
-          <motion.img
-            initial={{ scale: 0.85, opacity: 0, y: 40 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
-            src={cover}
-            alt="Time Does Not Heal — book cover by Stacy-Ann Smith"
-            className="w-44 sm:w-56 md:w-64 rounded-lg shadow-2xl"
-            style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.55)' }}
-          />
-
+      <section className="memoir-editorial-hero relative min-h-screen overflow-hidden px-5 pb-24 pt-32 sm:px-8 lg:pb-32">
+        <div className="memoir-splash memoir-splash-left" aria-hidden="true" />
+        <div className="memoir-splash memoir-splash-right" aria-hidden="true" />
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center text-center">
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.6 }}
-            className="mt-8 uppercase tracking-[0.35em] text-sm text-[hsl(var(--memoir-lilac))]"
+            transition={{ duration: 0.65 }}
+            className="mb-5 text-xs font-semibold uppercase text-muted-foreground sm:text-sm"
           >
             A Memoir by Stacy-Ann Smith
           </motion.p>
 
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.75 }}
-            className="font-playfair font-bold text-5xl sm:text-6xl md:text-7xl mt-3 text-white leading-tight"
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="memoir-display-title font-playfair font-bold uppercase leading-none text-foreground"
           >
-            TIME DOES
-            <span className="block text-[hsl(var(--memoir-lilac))]">NOT HEAL</span>
+            <span className="text-[hsl(var(--memoir-violet))]">Time</span>{' '}
+            <span>Does</span>{' '}
+            <span className="text-[hsl(var(--memoir-lilac-strong))]">Not</span>{' '}
+            <span>Heal</span>
           </motion.h1>
 
+          <motion.div
+            initial={{ scale: 0.92, opacity: 0, y: 34 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: 'easeOut', delay: 0.2 }}
+            className="memoir-cover-wrap relative mt-10 sm:mt-14"
+          >
+            <div className="memoir-cover-glow" aria-hidden="true" />
+            <img
+              src={cover}
+              alt="Time Does Not Heal by Stacy-Ann Smith"
+              width="500"
+              height="500"
+              className="relative z-10 w-[min(82vw,31rem)] object-contain"
+            />
+          </motion.div>
+
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.9 }}
-            className="mt-5 text-lg text-white/80 max-w-xl"
+            transition={{ duration: 0.65, delay: 0.45 }}
+            className="mt-10 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
             Time alone doesn't heal all wounds. You have to be intentional about your healing — that's what this book is about.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.05 }}
-            className="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center"
+            transition={{ duration: 0.65, delay: 0.55 }}
+            className="mt-8 flex w-full flex-col justify-center gap-4 sm:w-auto sm:flex-row"
           >
-            <a href={amazonUrl} target="_blank" rel="noopener noreferrer" className="flex-1 sm:flex-initial">
-              <Button size="lg" className="w-full sm:w-auto px-8 py-4 text-lg font-semibold rounded-lg shadow-lg bg-[hsl(var(--memoir-violet))] hover:bg-[hsl(var(--memoir-violet))]/85 text-white">
-                <FaAmazon className="mr-2" /> Get the Book
-              </Button>
-            </a>
-            <a href="#about-the-book" className="flex-1 sm:flex-initial">
-              <Button size="lg" variant="secondary" className="w-full sm:w-auto px-8 py-4 text-lg font-semibold rounded-lg shadow-lg bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-sm">
-                Read the Story
-              </Button>
-            </a>
+            <Button asChild size="lg" className="w-full px-8 py-4 text-lg font-semibold shadow-lg sm:w-auto">
+              <a href={amazonUrl} target="_blank" rel="noopener noreferrer">
+                <FaAmazon /> Get the Book
+              </a>
+            </Button>
+            <Button asChild size="lg" variant="secondary" className="w-full px-8 py-4 text-lg font-semibold shadow-lg sm:w-auto">
+              <a href="#about-the-book">Read the Story</a>
+            </Button>
           </motion.div>
         </div>
       </section>
 
       {/* ===== About the Book ===== */}
-      <section id="about-the-book" className="relative py-20 lg:py-28 px-6">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[hsl(var(--memoir-violet))]/5 to-transparent" />
-        <motion.div {...fadeIn} className="relative max-w-3xl mx-auto glass p-8 lg:p-12 rounded-3xl">
-          <h2 className="font-playfair font-bold text-4xl sm:text-5xl text-center mb-4 text-foreground">About the Book</h2>
-          <div className="w-24 h-1 rounded-full mx-auto mb-8 bg-gradient-to-r from-[hsl(var(--memoir-violet))] via-[hsl(var(--brand-crimson))] to-[hsl(var(--memoir-lilac))]" />
-          <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
+      <section id="about-the-book" className="relative overflow-hidden px-6 py-24 lg:py-36">
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-brand-crimson/3 to-brand-forest/5" />
+        <motion.div {...fadeIn} className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <img src={cover} alt="Time Does Not Heal memoir" loading="lazy" width="500" height="500" className="w-full object-cover shadow-2xl" />
+          </div>
+          <div className="glass p-8 lg:col-span-7 lg:p-12 rounded-3xl">
+            <h2 className="font-playfair text-4xl font-bold text-foreground sm:text-5xl">About the Book</h2>
+            <div className="my-7 h-1 w-24 rounded-full bg-gradient-to-r from-[hsl(var(--memoir-violet))] via-brand-crimson to-[hsl(var(--memoir-lilac))]" />
+            <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
             <p className="text-xl font-semibold text-foreground">
               In a compelling, message-driven memoir, Jamaican journalist and TV talk show host Stacy-Ann Smith boldly challenges the widely accepted view that time alone can heal all wounds.
             </p>
@@ -122,44 +129,55 @@ const Memoir = () => {
             <p>
               Tracing her experience with childhood trauma, a failed marriage and the impact of the death of her father, Smith readily admits that she, like many people, struggled to function. Her hope is that through her experiences, those struggling with heartbreak, guilt and pain will be motivated to take the necessary steps to pursue healing.
             </p>
+            </div>
           </div>
         </motion.div>
       </section>
 
       {/* ===== Inside the Pages ===== */}
-      <section className="relative py-20 lg:py-24 px-6">
-        <motion.div {...fadeIn} className="text-center mb-12">
-          <h2 className="font-playfair font-bold text-4xl sm:text-5xl text-foreground">Inside the Pages</h2>
-          <div className="w-24 h-1 rounded-full mx-auto mt-5 bg-gradient-to-r from-[hsl(var(--memoir-lilac))] via-[hsl(var(--memoir-violet))] to-[hsl(var(--brand-crimson))]" />
+      <section className="memoir-pages-section relative overflow-hidden px-6 py-24 lg:py-32">
+        <motion.div {...fadeIn} className="relative mx-auto mb-12 max-w-7xl text-left lg:mb-16">
+          <p className="mb-3 text-sm font-semibold uppercase text-[hsl(var(--memoir-violet))]">Reflections from the memoir</p>
+          <h2 className="font-playfair text-4xl font-bold text-foreground sm:text-6xl">Inside the Pages</h2>
         </motion.div>
-        <div className="relative max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="scrollbar-hide relative mx-auto flex max-w-7xl snap-x snap-mandatory gap-6 overflow-x-auto pb-6">
           {themes.map((t, i) => (
             <motion.div
               key={t.title}
               {...fadeIn}
               transition={{ ...fadeIn.transition, delay: i * 0.12 }}
-              className="memoir-card p-8 rounded-2xl"
+              className="group relative h-[30rem] min-w-[85vw] snap-start overflow-hidden rounded-2xl border border-border shadow-xl sm:min-w-[24rem] lg:min-w-0 lg:flex-1"
             >
-              <h3 className="font-playfair font-bold text-2xl mb-3 text-[hsl(var(--memoir-violet))]">{t.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{t.body}</p>
+              <img src={cover} alt="" aria-hidden="true" loading="lazy" width="500" height="500" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/65 to-transparent" />
+              <div className="relative z-10 flex h-full flex-col justify-end p-7 text-background sm:p-9">
+                <span className="mb-auto text-sm font-bold uppercase text-[hsl(var(--memoir-lilac))]">Chapter {String(i + 1).padStart(2, '0')}</span>
+                <h3 className="mb-4 font-playfair text-3xl font-bold">{t.title}</h3>
+                <p className="leading-relaxed opacity-90">{t.body}</p>
+              </div>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* ===== About the Author ===== */}
-      <section className="relative py-20 lg:py-24 px-6">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[hsl(var(--memoir-violet))]/5 to-transparent" />
-        <motion.div {...fadeIn} className="relative max-w-3xl mx-auto glass p-8 lg:p-12 rounded-3xl">
-          <h2 className="font-playfair font-bold text-4xl sm:text-5xl text-center mb-4 text-foreground">Meet the Author</h2>
-          <div className="w-24 h-1 rounded-full mx-auto mb-8 bg-gradient-to-r from-[hsl(var(--memoir-violet))] via-[hsl(var(--brand-crimson))] to-[hsl(var(--memoir-lilac))]" />
-          <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
+      <section className="relative overflow-hidden px-6 py-24 lg:py-36">
+        <motion.div {...fadeIn} className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="glass order-2 p-8 rounded-3xl lg:order-1 lg:col-span-7 lg:p-12">
+            <p className="mb-3 text-sm font-semibold uppercase text-brand-crimson">The voice behind the words</p>
+            <h2 className="font-playfair text-4xl font-bold text-foreground sm:text-5xl">Meet Stacy-Ann Smith</h2>
+            <div className="my-7 h-1 w-24 rounded-full bg-gradient-to-r from-[hsl(var(--memoir-violet))] via-brand-crimson to-[hsl(var(--memoir-lilac))]" />
+            <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
             <p>
               Stacy-Ann Smith is an award-winning entrepreneur, communications specialist and the Founder & CEO of Danrak Productions. A trained journalist and broadcaster, she is the creator, executive producer and host of the acclaimed TV talk show <b className="text-foreground">It's A Woman's World</b>.
             </p>
             <p>
               A Kingston native, UWI graduate, wife and mother of two, she has spent nearly 25 years in media and communications — writing for national campaigns, producing television, and lending her voice to nationally televised events. <b className="text-foreground">Time Does Not Heal</b> is her first published book, written to help others do the intentional work of healing.
             </p>
+            </div>
+          </div>
+          <div className="order-1 lg:order-2 lg:col-span-5">
+            <img src={authorPortrait} alt="Stacy-Ann Smith" loading="lazy" className="mx-auto max-h-[44rem] w-full object-contain" />
           </div>
         </motion.div>
       </section>
@@ -184,14 +202,14 @@ const Memoir = () => {
       </section>
 
       {/* ===== Get the Book ===== */}
-      <section className="relative py-24 px-6 pb-32">
-        <motion.div {...fadeIn} className="memoir-hero-bg rounded-3xl max-w-4xl mx-auto px-8 py-16 text-center overflow-hidden">
-          <h2 className="font-playfair font-bold text-4xl sm:text-5xl text-white">Begin Your Healing</h2>
-          <p className="mt-4 text-lg text-white/80 max-w-xl mx-auto">
+      <section className="relative px-6 pb-32 py-24">
+        <motion.div {...fadeIn} className="memoir-cta mx-auto max-w-4xl overflow-hidden rounded-3xl px-8 py-16 text-center">
+          <h2 className="font-playfair text-4xl font-bold text-background sm:text-5xl">Begin Your Healing</h2>
+          <p className="mx-auto mt-4 max-w-xl text-lg text-background/80">
             Time Does Not Heal is available now on Amazon. Your healing won't wait for time — start today.
           </p>
           <a href={amazonUrl} target="_blank" rel="noopener noreferrer" className="inline-block mt-8">
-            <Button size="lg" className="px-10 py-4 text-lg font-semibold rounded-lg shadow-lg bg-white text-[hsl(var(--memoir-violet))] hover:bg-white/90">
+            <Button size="lg" variant="secondary" className="px-10 py-4 text-lg font-semibold shadow-lg">
               <FaAmazon className="mr-2" /> Get the Book on Amazon
             </Button>
           </a>
