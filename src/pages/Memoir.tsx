@@ -78,7 +78,6 @@ const Memoir = () => {
               alt="Time Does Not Heal by Stacy-Ann Smith"
               width="500"
               height="500"
-              fetchpriority="high"
               className="relative z-10 w-[min(82vw,31rem)] object-contain"
             />
           </motion.div>
