@@ -16,8 +16,11 @@ const Header = ({ variant = 'glass' }: HeaderProps) => {
   const navigate = useNavigate();
 
   const navStyles = variant === 'glass' 
-    ? "bg-white/5 dark:bg-black/5 backdrop-blur-lg shadow-xl px-8 py-3 rounded-full flex gap-4 text-sm font-semibold text-foreground dark:text-white transition-all"
-    : "bg-black/30 backdrop-blur-md border border-white/20 rounded-full px-6 py-3 flex gap-2 shadow-2xl";
+    // 5% opacity let page text read straight through the pill, which is why
+    // headings vanished behind the nav mid-scroll. Raised to an opacity that
+    // actually occludes while keeping the glass look.
+    ? "bg-white/80 dark:bg-black/70 backdrop-blur-xl border border-black/5 dark:border-white/10 shadow-xl px-8 py-3 rounded-full flex gap-4 text-sm font-semibold text-foreground dark:text-white transition-all"
+    : "bg-black/70 backdrop-blur-xl border border-white/20 rounded-full px-6 py-3 flex gap-2 shadow-2xl";
 
   const linkStyles = (isActive: boolean) => {
     if (variant === 'glass') {

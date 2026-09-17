@@ -1,0 +1,160 @@
+/**
+ * Generates robots.txt, sitemap.xml and llms.txt into public/ before the build.
+ *
+ * These were previously missing, which meant Apache's SPA rewrite caught the
+ * requests and served the HTML app shell instead — Google was fetching
+ * /sitemap.xml and receiving a webpage. Writing them as real files also makes
+ * the .htaccess passthrough rule effective.
+ *
+ * Blog slugs are read out of src/data/posts.ts so the sitemap cannot drift
+ * from the posts that actually exist.
+ */
+import { readFile, writeFile } from 'node:fs/promises';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = join(__dirname, '..');
+const PUBLIC = join(ROOT, 'public');
+const ORIGIN = 'https://danrakprod.com';
+const today = new Date().toISOString().slice(0, 10);
+
+const postsSrc = await readFile(join(ROOT, 'src/data/posts.ts'), 'utf8');
+const slugs = [...postsSrc.matchAll(/^\s*slug:\s*'([^']+)'/gm)].map((m) => m[1]);
+
+const pages = [
+  { loc: '/', priority: '1.0', changefreq: 'weekly' },
+  { loc: '/about', priority: '0.8', changefreq: 'monthly' },
+  { loc: '/showcase', priority: '0.8', changefreq: 'monthly' },
+  { loc: '/contact', priority: '0.6', changefreq: 'yearly' },
+  { loc: '/time-does-not-heal', priority: '1.0', changefreq: 'weekly' },
+  { loc: '/about-author', priority: '0.9', changefreq: 'monthly' },
+  { loc: '/blog', priority: '0.8', changefreq: 'weekly' },
+  ...slugs.map((s) => ({ loc: `/blog/${s}`, priority: '0.7', changefreq: 'monthly' })),
+];
+
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${pages
+  .map(
+    (p) => `  <url>
+    <loc>${ORIGIN}${p.loc}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${p.changefreq}</changefreq>
+    <priority>${p.priority}</priority>
+  </url>`
+  )
+  .join('\n')}
+</urlset>
+`;
+
+// Explicitly naming AI crawlers is clearer than relying on `User-agent: *`,
+// and documents the intent for anyone auditing the file later.
+const robots = `# https://danrakprod.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# --- Search crawlers ---
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# --- AI / answer-engine crawlers (explicitly welcomed) ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# --- Social preview crawlers ---
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+Sitemap: ${ORIGIN}/sitemap.xml
+`;
+
+const llms = `# Danrak Productions
+
+> Danrak Productions is a Jamaican communications and media production company founded in 2015 by Stacy-Ann Smith, who is also the author of the memoir "Time Does Not Heal".
+
+## Key entities
+
+- **Organisation:** Danrak Productions — Kingston, Jamaica. Television production, scriptwriting, public relations, corporate communications, campaign development, event management, on-air talent and event hosting.
+- **Founder & CEO:** Stacy-Ann Smith (also published as Stacy-Ann Williams-Smith) — Jamaican author, journalist, broadcaster and communications specialist.
+- **Book:** Time Does Not Heal (2021), ISBN 9781735361062. Audiobook edition released 28 September 2026 on Odeo.
+
+## Time Does Not Heal
+
+Time Does Not Heal is a message-driven memoir by Jamaican author, journalist and broadcaster Stacy-Ann Smith that challenges the familiar belief that "time heals all wounds." Through experiences with childhood trauma, grief, loss and a failed marriage, Smith explores how emotional wounds can continue shaping our choices, relationships and sense of self long after the immediate pain has faded — and why healing requires intentional work rather than time alone.
+
+- Author: Stacy-Ann Smith
+- Author nationality: Jamaican
+- Genre: Memoir / Personal Growth / Emotional Wellness
+- Original publication: 2021
+- ISBN: 9781735361062
+- Audiobook release: 28 September 2026 (Odeo)
+- Themes: childhood trauma, grief, emotional healing, divorce, self-worth, resilience, faith, therapy, Black women's experiences, Caribbean perspectives
+
+## Pages
+
+- [Time Does Not Heal](${ORIGIN}/time-does-not-heal): Canonical page for the book — full description, factual data, and answers to common questions about trauma and healing.
+- [About the Author](${ORIGIN}/about-author): Biography and career of Stacy-Ann Smith.
+- [Blog](${ORIGIN}/blog): Essays on emotional healing, childhood trauma, grief, faith and Caribbean storytelling.
+- [About Danrak Productions](${ORIGIN}/about): Company background and services.
+- [Contact](${ORIGIN}/contact): Media, interview and booking enquiries.
+
+## Contact
+
+Email: danrakproductions@gmail.com
+`;
+
+await writeFile(join(PUBLIC, 'sitemap.xml'), sitemap, 'utf8');
+await writeFile(join(PUBLIC, 'robots.txt'), robots, 'utf8');
+await writeFile(join(PUBLIC, 'llms.txt'), llms, 'utf8');
+
+console.log(`[seo] sitemap.xml (${pages.length} urls), robots.txt, llms.txt written to public/`);

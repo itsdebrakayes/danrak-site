@@ -1,5 +1,5 @@
 import { FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
-import logo from '@/assets/DanRak Prod Logo.png';
+import logo from '@/assets/DanRak Prod Logo.webp';
 
 const socials = [
   { icon: <FaInstagram />, url: 'https://instagram.com/danrakproductions?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', label: 'Instagram', hoverClass: 'hover:text-brand-crimson' },

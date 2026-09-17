@@ -13,6 +13,10 @@ const Contact = React.lazy(() => import("./pages/Contact"));
 const Showcase = React.lazy(() => import("./pages/Showcase"));
 const ProjectDetails = React.lazy(() => import("./pages/ProjectDetails"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
+const TimeDoesNotHeal = React.lazy(() => import("./pages/TimeDoesNotHeal"));
+const AboutAuthor = React.lazy(() => import("./pages/AboutAuthor"));
+const Blog = React.lazy(() => import("./pages/Blog"));
+const BlogPost = React.lazy(() => import("./pages/BlogPost"));
 
 const queryClient = new QueryClient();
 
@@ -60,6 +64,12 @@ const App = () => (
               <Route path="/about" element={<Index />} />
               <Route path="/contact" element={<Index />} />
               <Route path="/showcase" element={<Index />} />
+              {/* Standalone content pages — these render outside the Swiper
+                  deck and are the pages prerendered for crawlers. */}
+              <Route path="/time-does-not-heal" element={<TimeDoesNotHeal />} />
+              <Route path="/about-author" element={<AboutAuthor />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

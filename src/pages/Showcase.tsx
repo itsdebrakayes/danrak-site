@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { projects } from "../data/projects";
 import { Button } from "@/components/ui/button";
-import Footer from '@/components/sections/Footer';
 import "swiper/css";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -60,37 +59,6 @@ const Showcase = () => {
     updateDisplayedProjects(newIndex);
     scheduleNext();
   };
-
-  // Preload all three image types for each project
-  useEffect(() => {
-    const preloadImages = () => {
-      showcaseProjects.forEach(project => {
-        // Preload carousel image
-        const carouselImg = new Image();
-        carouselImg.src = project.carouselImage;
-        
-        // Preload background image
-        const bgImg = new Image();
-        bgImg.src = project.backgroundImage;
-        
-        // Preload detail page image
-        const detailImg = new Image();
-        detailImg.src = project.image;
-      });
-      // Also add a preload link for the primary background image to improve LCP
-      try {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.as = 'image';
-        link.href = showcaseProjects[0].backgroundImage;
-        link.crossOrigin = 'anonymous';
-        document.head.appendChild(link);
-      } catch (e) {
-        // ignore if DOM not available or insertion fails
-      }
-    };
-    preloadImages();
-  }, [showcaseProjects]);
 
   // Initialize displayedProjects on mount to keep the 1-feature + 3-upcoming layout
   useEffect(() => {
@@ -375,7 +343,6 @@ const Showcase = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

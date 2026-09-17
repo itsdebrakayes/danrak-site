@@ -1,4 +1,3 @@
-import Footer from '@/components/sections/Footer';
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -273,7 +272,6 @@ const Contact = () => (
     <main className="w-full">
       <ContactSection />
     </main>
-    <Footer variant="static" />
   </div>
 );
 

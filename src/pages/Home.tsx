@@ -1,10 +1,9 @@
-import Footer from '@/components/sections/Footer';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import heroPortrait from '@/assets/hero-portrait.png';
-import danrakLogoFull from '@/assets/DanRak Prod Logo.png';
+import heroPortrait from '@/assets/hero-portrait.webp';
+import danrakLogoFull from '@/assets/DanRak Prod Logo.webp';
 
 const HeroSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -138,7 +137,6 @@ const HeroSection = () => {
 const Home = () => (
   <div className="relative min-h-screen overflow-hidden">
     <HeroSection />
-    <Footer />
   </div>
 );
 

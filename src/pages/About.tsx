@@ -1,9 +1,8 @@
-import Footer from '@/components/sections/Footer';
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import aboutLeaning from '@/assets/about-leaning.png';
+import aboutLeaning from '@/assets/about-leaning.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -219,7 +218,6 @@ const AboutSection = () => {
 const About = () => (
   <div className="relative">
     <AboutSection />
-    <Footer />
   </div>
 );
 

@@ -222,17 +222,36 @@ All colors MUST be HSL.
     opacity: 0.8 !important;
   }
 
-  /* Clean header visibility - monitor compatible */
-  header {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    z-index: 9999 !important;
-    position: fixed !important;
-    top: 1.5rem !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    pointer-events: auto !important;
+  /* Clean header visibility - monitor compatible.
+     Scoped to >=768px: this is the centred desktop pill geometry, and when it
+     applied to every <header> it also shrank the full-width mobile nav to a
+     centred 188px strip. */
+  @media (min-width: 768px) {
+    header {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      z-index: 9999 !important;
+      position: fixed !important;
+      top: 1.5rem !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      pointer-events: auto !important;
+    }
+  }
+
+  /* Mobile nav spans the viewport and is never transformed. */
+  @media (max-width: 767px) {
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      transform: none;
+      width: 100%;
+      z-index: 9999;
+      pointer-events: auto;
+    }
   }
 
   /* Ensure Swiper doesn't interfere with header */
@@ -486,3 +505,125 @@ All colors MUST be HSL.
   }
 
 }
+/* ==========================================================================
+   RESPONSIVE FOUNDATION
+   The stylesheet previously carried a single `max-width: 768px` query, so the
+   layout was effectively tuned to one monitor. This layer establishes a real
+   breakpoint system: fluid type, dynamic viewport units, wide-screen
+   containment, and explicit space reserved for the fixed chrome.
+   ========================================================================== */
+
+@layer base {
+  :root {
+    /* Fixed chrome dimensions, referenced instead of hard-coded offsets. */
+    --header-h: 4.5rem;
+    --header-top: 1.5rem;
+    --footer-h: 4.5rem;
+
+    /* Content measure. Beyond this the design stops stretching and centres,
+       which is what fixes the "looks weird on a wide monitor" case. */
+    --content-max: 1440px;
+    --content-max-wide: 1680px;
+
+    /* Safe areas for notched / gesture-bar devices. */
+    --safe-t: env(safe-area-inset-top, 0px);
+    --safe-b: env(safe-area-inset-bottom, 0px);
+    --safe-l: env(safe-area-inset-left, 0px);
+    --safe-r: env(safe-area-inset-right, 0px);
+  }
+
+  /* Dynamic viewport height: 100vh on mobile includes the collapsing browser
+     chrome, so fixed-height sections get clipped and jump while scrolling.
+     100dvh tracks the visible viewport. vh stays as the fallback. */
+  .h-screen-safe { height: 100vh; height: 100dvh; }
+  .min-h-screen-safe { min-height: 100vh; min-height: 100dvh; }
+
+  @supports (height: 100dvh) {
+    .swiper,
+    .swiper-wrapper,
+    .swiper-slide { height: 100dvh !important; }
+  }
+
+  /* Fluid type: scales continuously between 360px and 1680px viewports rather
+     than snapping at breakpoints. */
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { overflow-x: hidden; }
+
+  h1, .h1 { font-size: clamp(2rem, 1.1rem + 3.9vw, 4.75rem); line-height: 1.04; }
+  h2, .h2 { font-size: clamp(1.6rem, 1.05rem + 2.3vw, 3.25rem); line-height: 1.1; }
+  h3, .h3 { font-size: clamp(1.25rem, 1rem + 1.1vw, 2rem);      line-height: 1.2; }
+  p, li   { font-size: clamp(0.95rem, 0.9rem + 0.22vw, 1.125rem); line-height: 1.65; }
+
+  /* Never let a long word or URL force a horizontal scrollbar. */
+  h1, h2, h3, h4, p, li, a, span { overflow-wrap: break-word; }
+
+  /* Media never overflows its column. */
+  img, video, svg, canvas { max-width: 100%; height: auto; }
+}
+
+@layer components {
+  /* Reserve space for the fixed pill nav so headings don't slide underneath
+     it (the "Our Chief Strategist" / "Our Suite of Services" overlap). */
+  .below-header { padding-top: calc(var(--header-h) + var(--header-top) + var(--safe-t)); }
+  .clear-footer { padding-bottom: calc(var(--footer-h) + var(--safe-b)); }
+
+  /* Anchor targets account for the fixed header when jumped to. */
+  :target { scroll-margin-top: calc(var(--header-h) + var(--header-top) + 1rem); }
+
+  .content-shell {
+    width: 100%;
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 0.5rem + 2.5vw, 4rem);
+    padding-left: max(clamp(1rem, 0.5rem + 2.5vw, 4rem), var(--safe-l));
+    padding-right: max(clamp(1rem, 0.5rem + 2.5vw, 4rem), var(--safe-r));
+  }
+}
+
+/* --- Tablet / small laptop: 768px–1279px --------------------------------
+   Previously unhandled entirely — the desktop layout was simply squeezed. */
+@media (min-width: 768px) and (max-width: 1279px) {
+  :root { --header-h: 4rem; --content-max: 100%; }
+
+  .project-carousel { height: auto !important; min-height: 520px !important; }
+
+  /* Five-across service cards are unreadable at this width. */
+  .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+
+/* --- Large desktop ------------------------------------------------------- */
+@media (min-width: 1280px) and (max-width: 1919px) {
+  :root { --content-max: 1440px; }
+}
+
+/* --- Ultra-wide: 1920px+ -------------------------------------------------
+   Stop full-bleed sections from stretching into unreadable line lengths. */
+@media (min-width: 1920px) {
+  :root { --content-max: var(--content-max-wide); --header-h: 5rem; }
+
+  .content-shell { max-width: var(--content-max-wide); }
+
+  /* Background images should fill the viewport but stay centred on the
+     subject rather than scaling the focal point off-screen. */
+  .bg-cover-center { background-size: cover !important; background-position: center center !important; }
+}
+
+/* --- Short viewports (laptops in landscape, split screens) ---------------- */
+@media (max-height: 720px) and (min-width: 768px) {
+  :root { --header-h: 3.5rem; --header-top: 0.75rem; }
+  h1, .h1 { font-size: clamp(1.75rem, 1rem + 2.6vw, 3rem); }
+}
+
+/* --- Accessibility: honour reduced-motion across the whole site ----------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Horizontal nav strips scroll without a visible bar on mobile. */
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
