@@ -237,14 +237,18 @@ function render_head(array $opts): void
 
 function render_nav(): void
 {
+    // Mirrors the React shell: The Book carries a submenu.
     $links = [
-        '/'                   => 'Home',
-        '/about'              => 'About',
-        '/showcase'           => 'Services',
-        '/time-does-not-heal' => 'The Book',
-        '/about-author'       => 'The Author',
-        '/blog'               => 'Blog',
-        '/contact'            => 'Contact',
+        ['to' => '/',          'label' => 'Home'],
+        ['to' => '/about',     'label' => 'About'],
+        ['to' => '/showcase',  'label' => 'Services'],
+        ['to' => '/time-does-not-heal', 'label' => 'The Book', 'children' => [
+            ['to' => '/time-does-not-heal', 'label' => 'Time Does Not Heal'],
+            ['to' => '/about-author',       'label' => 'The Author'],
+            ['to' => '/blog',               'label' => 'Blog'],
+            ['to' => '/media-kit',          'label' => 'Media Kit'],
+        ]],
+        ['to' => '/contact',   'label' => 'Contact'],
     ];
     // Matches the React site's pill so the blog doesn't look like a bolt-on.
     $glass = 'bg-white/80 dark:bg-black/70 backdrop-blur-xl border border-black/5 dark:border-white/10 shadow-xl';
@@ -266,12 +270,30 @@ function render_nav(): void
     </a>
 
     <nav aria-label="Primary" class="hidden rounded-full px-3 py-2 lg:flex lg:gap-1 <?= $glass ?>">
-      <?php foreach ($links as $href => $label): ?>
-        <a href="<?= e($href) ?>"
-           <?= $active($href) ? 'aria-current="page"' : '' ?>
-           class="rounded-full px-4 py-2 text-sm font-medium text-foreground transition-all duration-300 <?= $active($href)
-               ? 'border border-white/30 bg-white/25 shadow-md backdrop-blur-sm dark:bg-white/10'
-               : 'hover:bg-white/25 hover:shadow-lg dark:hover:bg-white/10' ?>"><?= e($label) ?></a>
+      <?php foreach ($links as $l):
+        $href = $l['to']; $label = $l['label'];
+        $base = 'rounded-full px-4 py-2 text-sm font-medium text-foreground transition-all duration-300 ' . ($active($href)
+            ? 'border border-white/30 bg-white/25 shadow-md backdrop-blur-sm dark:bg-white/10'
+            : 'hover:bg-white/25 hover:shadow-lg dark:hover:bg-white/10');
+      ?>
+        <?php if (empty($l['children'])): ?>
+          <a href="<?= e($href) ?>" <?= $active($href) ? 'aria-current="page"' : '' ?> class="<?= $base ?>"><?= e($label) ?></a>
+        <?php else: ?>
+          <div class="group relative">
+            <a href="<?= e($href) ?>" <?= $active($href) ? 'aria-current="page"' : '' ?>
+               class="<?= $base ?> inline-flex items-center gap-1.5">
+              <?= e($label) ?>
+              <span aria-hidden class="text-[0.6rem] opacity-60 transition-transform duration-200 group-hover:rotate-180">&#9662;</span>
+            </a>
+            <div class="invisible absolute left-1/2 top-full z-50 w-56 -translate-x-1/2 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+              <div class="overflow-hidden rounded-2xl p-2 <?= $glass ?>">
+                <?php foreach ($l['children'] as $c): ?>
+                  <a href="<?= e($c['to']) ?>" class="block rounded-xl px-3.5 py-2.5 text-sm font-medium text-foreground/90 transition-colors hover:bg-white/30 dark:hover:bg-white/10"><?= e($c['label']) ?></a>
+                <?php endforeach; ?>
+              </div>
+            </div>
+          </div>
+        <?php endif; ?>
       <?php endforeach; ?>
     </nav>
 
@@ -288,8 +310,17 @@ function render_nav(): void
   <div id="mobileNav" hidden class="mx-4 overflow-hidden rounded-3xl lg:hidden <?= $glass ?>">
     <nav aria-label="Primary" class="p-2">
       <ul>
-        <?php foreach ($links as $href => $label): ?>
-          <li><a href="<?= e($href) ?>" class="block rounded-2xl px-4 py-3 text-base font-medium transition-colors <?= $active($href) ? 'bg-white/30 text-foreground dark:bg-white/10' : 'text-foreground/85' ?>"><?= e($label) ?></a></li>
+        <?php foreach ($links as $l): $href = $l['to']; ?>
+          <li>
+            <a href="<?= e($href) ?>" class="block rounded-2xl px-4 py-3 text-base font-medium transition-colors <?= $active($href) ? 'bg-white/30 text-foreground dark:bg-white/10' : 'text-foreground/85' ?>"><?= e($l['label']) ?></a>
+            <?php if (!empty($l['children'])): ?>
+              <ul class="mb-1 ml-3 border-l border-border/60 pl-2">
+                <?php foreach (array_slice($l['children'], 1) as $c): ?>
+                  <li><a href="<?= e($c['to']) ?>" class="block rounded-xl px-4 py-2.5 text-[0.95rem] text-foreground/75"><?= e($c['label']) ?></a></li>
+                <?php endforeach; ?>
+              </ul>
+            <?php endif; ?>
+          </li>
         <?php endforeach; ?>
       </ul>
     </nav>

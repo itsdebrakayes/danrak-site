@@ -10,6 +10,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 
 import Header from '@/components/sections/Header';
 import Footer from '@/components/sections/Footer';
+import BookPromo from '@/components/sections/BookPromo';
 import MobileIndex from './mobile/MobileIndex';
 import Home from './Home';
 import About from './About';
@@ -83,7 +84,12 @@ const Index = () => {
   // desktop page components are never mounted, so none of their viewport-unit
   // sizing or GSAP timelines run on mobile at all.
   if (isMobile) {
-    return <MobileIndex />;
+    return (
+      <>
+        <MobileIndex />
+        <BookPromo />
+      </>
+    );
   }
 
   return (
@@ -130,6 +136,7 @@ const Index = () => {
           position:fixed children — which is why the footer used to drift into
           the middle of the screen on the taller About slide. */}
       <Footer />
+      <BookPromo />
     </>
   );
 };

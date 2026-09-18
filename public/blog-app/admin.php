@@ -102,31 +102,144 @@ render_head([
       </div>
     </form>
 
+    <!-- Circular crop picker. The file is framed locally and only the chosen
+         region is uploaded, so she controls what the avatar shows the same way
+         she would on Instagram. -->
+    <div id="cropModal" hidden class="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 p-4">
+      <div class="w-full max-w-sm rounded-2xl border border-border bg-card p-5 shadow-2xl">
+        <h3 class="mb-1 font-playfair text-lg font-bold text-foreground">Position your photo</h3>
+        <p class="mb-4 text-xs text-muted-foreground">Drag to move. Use the slider to zoom.</p>
+
+        <div id="cropStage"
+             class="relative mx-auto touch-none overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-800"
+             style="width: 260px; height: 260px; cursor: grab;">
+          <img id="cropImg" alt="" class="pointer-events-none absolute left-0 top-0 select-none" draggable="false">
+          <!-- Everything outside the circle is dimmed by a huge inset shadow. -->
+          <div class="pointer-events-none absolute inset-0 rounded-xl"
+               style="box-shadow: 0 0 0 9999px rgba(0,0,0,.45) inset, 0 0 0 1px rgba(255,255,255,.6) inset;
+                      clip-path: circle(50% at 50% 50%); mix-blend-mode: normal;"></div>
+          <div class="pointer-events-none absolute inset-0 rounded-full border-2 border-white/80"></div>
+        </div>
+
+        <label for="cropZoom" class="mt-4 block text-xs font-semibold text-muted-foreground">Zoom</label>
+        <input id="cropZoom" type="range" min="1" max="3" step="0.01" value="1" class="mt-1 w-full accent-brand-ocean">
+
+        <div class="mt-5 flex items-center justify-end gap-2">
+          <span id="cropStatus" class="mr-auto text-xs text-muted-foreground"></span>
+          <button type="button" id="cropCancel" class="rounded-lg border border-border px-4 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground">Cancel</button>
+          <button type="button" id="cropSave" class="rounded-lg bg-foreground px-4 py-2 text-sm font-semibold text-background hover:opacity-90">Use photo</button>
+        </div>
+      </div>
+    </div>
+
     <script>
     (function () {
-      var csrf = document.querySelector('input[name="_csrf"]').value;
-      var file = document.getElementById('avatarFile');
+      var csrf   = document.querySelector('input[name="_csrf"]').value;
+      var file   = document.getElementById('avatarFile');
+      var modal  = document.getElementById('cropModal');
+      var stage  = document.getElementById('cropStage');
+      var img    = document.getElementById('cropImg');
+      var zoom   = document.getElementById('cropZoom');
+      var status = document.getElementById('cropStatus');
       if (!file) return;
+
+      var STAGE = 260, OUT = 512;
+      var nat = { w: 0, h: 0 }, base = 1, z = 1, off = { x: 0, y: 0 };
+      var drag = null;
+
+      function layout() {
+        var s = base * z;
+        var dw = nat.w * s, dh = nat.h * s;
+        // Keep the frame covered: never let an edge pull inside the circle.
+        off.x = Math.min(0, Math.max(STAGE - dw, off.x));
+        off.y = Math.min(0, Math.max(STAGE - dh, off.y));
+        img.style.width = dw + 'px';
+        img.style.height = dh + 'px';
+        img.style.transform = 'translate(' + off.x + 'px,' + off.y + 'px)';
+      }
+
+      function open(src) {
+        img.onload = function () {
+          nat.w = img.naturalWidth; nat.h = img.naturalHeight;
+          base = STAGE / Math.min(nat.w, nat.h);   // cover at zoom 1
+          z = 1; zoom.value = '1';
+          var dw = nat.w * base, dh = nat.h * base;
+          off.x = (STAGE - dw) / 2; off.y = (STAGE - dh) / 2;  // centre it
+          layout();
+          modal.hidden = false;
+        };
+        img.src = src;
+      }
+
       file.addEventListener('change', function (ev) {
-        if (!ev.target.files || !ev.target.files[0]) return;
-        var status = document.getElementById('avatarStatus');
-        status.textContent = 'Uploading…';
-        var fd = new FormData();
-        fd.append('image', ev.target.files[0]);
-        fd.append('_csrf', csrf);
-        fetch('/blog-app/upload.php', { method: 'POST', body: fd })
-          .then(function (r) { return r.json(); })
-          .then(function (d) {
-            if (d.error) { status.textContent = d.error; return; }
-            status.textContent = 'Added — press Save profile.';
-            document.getElementById('author_avatar').value = d.url;
-            var img = document.getElementById('avatarPreview');
-            img.src = d.url; img.classList.remove('hidden');
-            var ini = document.getElementById('avatarInitials');
-            if (ini) ini.classList.add('hidden');
-          })
-          .catch(function () { status.textContent = 'Upload failed. Please try again.'; });
+        var f = ev.target.files && ev.target.files[0];
+        if (!f) return;
+        status.textContent = '';
+        var fr = new FileReader();
+        fr.onload = function () { open(fr.result); };
+        fr.readAsDataURL(f);
+        ev.target.value = '';  // allow re-picking the same file
       });
+
+      // --- pan ---
+      stage.addEventListener('pointerdown', function (e) {
+        drag = { x: e.clientX - off.x, y: e.clientY - off.y };
+        stage.setPointerCapture(e.pointerId);
+        stage.style.cursor = 'grabbing';
+      });
+      stage.addEventListener('pointermove', function (e) {
+        if (!drag) return;
+        off.x = e.clientX - drag.x; off.y = e.clientY - drag.y;
+        layout();
+      });
+      ['pointerup', 'pointercancel'].forEach(function (evt) {
+        stage.addEventListener(evt, function () { drag = null; stage.style.cursor = 'grab'; });
+      });
+
+      // --- zoom, anchored on the frame centre ---
+      zoom.addEventListener('input', function () {
+        var prev = z;
+        z = parseFloat(zoom.value);
+        var k = z / prev;
+        off.x = STAGE / 2 - (STAGE / 2 - off.x) * k;
+        off.y = STAGE / 2 - (STAGE / 2 - off.y) * k;
+        layout();
+      });
+
+      document.getElementById('cropCancel').addEventListener('click', function () { modal.hidden = true; });
+      modal.addEventListener('click', function (e) { if (e.target === modal) modal.hidden = true; });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') modal.hidden = true; });
+
+      document.getElementById('cropSave').addEventListener('click', function () {
+        status.textContent = 'Uploading…';
+        var c = document.createElement('canvas');
+        c.width = OUT; c.height = OUT;
+        var ctx = c.getContext('2d');
+        // Same transform as the preview, scaled from stage px to output px.
+        var r = OUT / STAGE, s = base * z;
+        ctx.drawImage(img, off.x * r, off.y * r, nat.w * s * r, nat.h * s * r);
+
+        c.toBlob(function (blob) {
+          if (!blob) { status.textContent = 'Could not process that image.'; return; }
+          var fd = new FormData();
+          fd.append('image', blob, 'avatar.png');
+          fd.append('_csrf', csrf);
+          fetch('/blog-app/upload.php', { method: 'POST', body: fd })
+            .then(function (res) { return res.json(); })
+            .then(function (d) {
+              if (d.error) { status.textContent = d.error; return; }
+              document.getElementById('author_avatar').value = d.url;
+              var prev = document.getElementById('avatarPreview');
+              prev.src = d.url; prev.classList.remove('hidden');
+              var ini = document.getElementById('avatarInitials');
+              if (ini) ini.classList.add('hidden');
+              modal.hidden = true;
+              document.getElementById('avatarStatus').textContent = 'Added — press Save profile.';
+            })
+            .catch(function () { status.textContent = 'Upload failed. Please try again.'; });
+        }, 'image/png');
+      });
+
       var rm = document.getElementById('avatarRemove');
       if (rm) rm.addEventListener('click', function () {
         document.getElementById('author_avatar').value = '';

@@ -19,13 +19,28 @@ import logo from '@/assets/danrak-logo.webp';
  * These must be plain anchors: a <Link> navigates client-side, the request
  * never reaches the server, and React falls through to its catch-all 404.
  */
-const LINKS = [
+interface NavLink {
+  label: string;
+  to: string;
+  /** Routes Apache hands to PHP must be plain anchors, not <Link>. */
+  server?: boolean;
+  children?: NavLink[];
+}
+
+const LINKS: NavLink[] = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Services', to: '/showcase' },
-  { label: 'The Book', to: '/time-does-not-heal' },
-  { label: 'The Author', to: '/about-author' },
-  { label: 'Blog', to: '/blog', server: true },
+  {
+    label: 'The Book',
+    to: '/time-does-not-heal',
+    children: [
+      { label: 'Time Does Not Heal', to: '/time-does-not-heal' },
+      { label: 'The Author', to: '/about-author' },
+      { label: 'Blog', to: '/blog', server: true },
+      { label: 'Media Kit', to: '/media-kit' },
+    ],
+  },
   { label: 'Contact', to: '/contact' },
 ];
 
@@ -74,17 +89,52 @@ const PageShell = ({ children, hero }: PageShellProps) => {
           {/* Desktop: the same pill used across the site. */}
           <nav aria-label="Primary" className={`hidden rounded-full px-3 py-2 lg:flex lg:gap-1 ${GLASS}`}>
             {LINKS.map((l) => {
-              const cls = `rounded-full px-4 py-2 text-sm font-medium text-foreground transition-all duration-300 ${
+              const base = `rounded-full px-4 py-2 text-sm font-medium text-foreground transition-all duration-300 ${
                 isActive(l.to)
                   ? 'border border-white/30 bg-white/25 shadow-md backdrop-blur-sm dark:bg-white/10'
                   : 'hover:bg-white/25 hover:shadow-lg dark:hover:bg-white/10'
               }`;
-              return l.server ? (
-                <a key={l.to} href={l.to} className={cls}>{l.label}</a>
-              ) : (
-                <Link key={l.to} to={l.to} aria-current={isActive(l.to) ? 'page' : undefined} className={cls}>
-                  {l.label}
-                </Link>
+
+              if (!l.children) {
+                return l.server ? (
+                  <a key={l.to} href={l.to} className={base}>{l.label}</a>
+                ) : (
+                  <Link key={l.to} to={l.to} aria-current={isActive(l.to) ? 'page' : undefined} className={base}>
+                    {l.label}
+                  </Link>
+                );
+              }
+
+              // group-hover reveals it on pointer; focus-within covers keyboard.
+              // The panel sits flush under the pill with no gap, so the pointer
+              // never crosses dead space on the way down.
+              return (
+                <div key={l.to} className="group relative">
+                  <Link
+                    to={l.to}
+                    aria-current={isActive(l.to) ? 'page' : undefined}
+                    className={`${base} inline-flex items-center gap-1.5`}
+                  >
+                    {l.label}
+                    <span aria-hidden className="text-[0.6rem] opacity-60 transition-transform duration-200 group-hover:rotate-180">▾</span>
+                  </Link>
+
+                  <div className="invisible absolute left-1/2 top-full z-50 w-56 -translate-x-1/2 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                    <div className={`overflow-hidden rounded-2xl p-2 ${GLASS}`}>
+                      {l.children.map((c) =>
+                        c.server ? (
+                          <a key={c.to} href={c.to} className="block rounded-xl px-3.5 py-2.5 text-sm font-medium text-foreground/90 transition-colors hover:bg-white/30 dark:hover:bg-white/10">
+                            {c.label}
+                          </a>
+                        ) : (
+                          <Link key={c.to} to={c.to} className="block rounded-xl px-3.5 py-2.5 text-sm font-medium text-foreground/90 transition-colors hover:bg-white/30 dark:hover:bg-white/10">
+                            {c.label}
+                          </Link>
+                        )
+                      )}
+                    </div>
+                  </div>
+                </div>
               );
             })}
           </nav>
@@ -126,6 +176,19 @@ const PageShell = ({ children, hero }: PageShellProps) => {
                       <Link to={l.to} aria-current={isActive(l.to) ? 'page' : undefined} className={cls}>
                         {l.label}
                       </Link>
+                    )}
+                    {l.children && (
+                      <ul className="mb-1 ml-3 border-l border-border/60 pl-2">
+                        {l.children.slice(1).map((c) => (
+                          <li key={c.to}>
+                            {c.server ? (
+                              <a href={c.to} className="block rounded-xl px-4 py-2.5 text-[0.95rem] text-foreground/75">{c.label}</a>
+                            ) : (
+                              <Link to={c.to} className="block rounded-xl px-4 py-2.5 text-[0.95rem] text-foreground/75">{c.label}</Link>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
                     )}
                   </li>
                 );
