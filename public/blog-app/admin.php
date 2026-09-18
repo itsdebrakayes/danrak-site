@@ -105,9 +105,11 @@ render_head([
     <!-- Circular crop picker. The file is framed locally and only the chosen
          region is uploaded, so she controls what the avatar shows the same way
          she would on Instagram. -->
-    <div id="cropModal" hidden class="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 p-4">
+    <div id="cropModal" style="display:none"
+         class="fixed inset-0 z-[200] items-center justify-center bg-black/60 p-4"
+         role="dialog" aria-modal="true" aria-labelledby="cropTitle">
       <div class="w-full max-w-sm rounded-2xl border border-border bg-card p-5 shadow-2xl">
-        <h3 class="mb-1 font-playfair text-lg font-bold text-foreground">Position your photo</h3>
+        <h3 id="cropTitle" class="mb-1 font-playfair text-lg font-bold text-foreground">Position your photo</h3>
         <p class="mb-4 text-xs text-muted-foreground">Drag to move. Use the slider to zoom.</p>
 
         <div id="cropStage"
@@ -119,6 +121,13 @@ render_head([
                style="box-shadow: 0 0 0 9999px rgba(0,0,0,.45) inset, 0 0 0 1px rgba(255,255,255,.6) inset;
                       clip-path: circle(50% at 50% 50%); mix-blend-mode: normal;"></div>
           <div class="pointer-events-none absolute inset-0 rounded-full border-2 border-white/80"></div>
+          <!-- Rule-of-thirds guides, to help her line a face up. -->
+          <div class="pointer-events-none absolute inset-0" style="clip-path: circle(50% at 50% 50%);">
+            <div class="absolute inset-y-0" style="left:33.333%; width:1px; background:rgba(255,255,255,.35)"></div>
+            <div class="absolute inset-y-0" style="left:66.666%; width:1px; background:rgba(255,255,255,.35)"></div>
+            <div class="absolute inset-x-0" style="top:33.333%; height:1px; background:rgba(255,255,255,.35)"></div>
+            <div class="absolute inset-x-0" style="top:66.666%; height:1px; background:rgba(255,255,255,.35)"></div>
+          </div>
         </div>
 
         <label for="cropZoom" class="mt-4 block text-xs font-semibold text-muted-foreground">Zoom</label>
@@ -141,11 +150,26 @@ render_head([
       var img    = document.getElementById('cropImg');
       var zoom   = document.getElementById('cropZoom');
       var status = document.getElementById('cropStatus');
+      var save   = document.getElementById('cropSave');
       if (!file) return;
 
       var STAGE = 260, OUT = 512;
       var nat = { w: 0, h: 0 }, base = 1, z = 1, off = { x: 0, y: 0 };
-      var drag = null;
+      var drag = null, ready = false, busy = false;
+
+      function show(on) {
+        // Inline display, not the `hidden` attribute: this element carries a
+        // flex utility, and a class beats an attribute selector.
+        modal.style.display = on ? 'flex' : 'none';
+      }
+      function close() {
+        show(false);
+        ready = false; busy = false;
+        img.removeAttribute('src');
+        status.textContent = '';
+        save.disabled = false;
+        save.textContent = 'Use photo';
+      }
 
       function layout() {
         var s = base * z;
@@ -158,15 +182,23 @@ render_head([
         img.style.transform = 'translate(' + off.x + 'px,' + off.y + 'px)';
       }
 
+      // Only opens once the chosen file has actually decoded, so the circle
+      // never appears over an empty frame.
       function open(src) {
         img.onload = function () {
           nat.w = img.naturalWidth; nat.h = img.naturalHeight;
+          if (!nat.w || !nat.h) { alert('That image could not be read. Please try another file.'); return; }
           base = STAGE / Math.min(nat.w, nat.h);   // cover at zoom 1
           z = 1; zoom.value = '1';
           var dw = nat.w * base, dh = nat.h * base;
           off.x = (STAGE - dw) / 2; off.y = (STAGE - dh) / 2;  // centre it
           layout();
-          modal.hidden = false;
+          ready = true;
+          show(true);
+        };
+        img.onerror = function () {
+          alert('That file could not be opened as an image. Please choose a JPG, PNG, GIF or WebP.');
+          close();
         };
         img.src = src;
       }
@@ -206,12 +238,26 @@ render_head([
         layout();
       });
 
-      document.getElementById('cropCancel').addEventListener('click', function () { modal.hidden = true; });
-      modal.addEventListener('click', function (e) { if (e.target === modal) modal.hidden = true; });
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') modal.hidden = true; });
+      document.getElementById('cropCancel').addEventListener('click', close);
+      modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.style.display !== 'none') close();
+      });
 
-      document.getElementById('cropSave').addEventListener('click', function () {
-        status.textContent = 'Uploading…';
+      save.addEventListener('click', function () {
+        if (!ready) { status.textContent = 'Choose a picture first.'; return; }
+        if (busy) return;
+        busy = true;
+        save.disabled = true;
+        save.textContent = 'Uploading…';
+        status.textContent = '';
+
+        function fail(msg) {
+          busy = false;
+          save.disabled = false;
+          save.textContent = 'Use photo';
+          status.textContent = msg;
+        }
         var c = document.createElement('canvas');
         c.width = OUT; c.height = OUT;
         var ctx = c.getContext('2d');
@@ -220,23 +266,34 @@ render_head([
         ctx.drawImage(img, off.x * r, off.y * r, nat.w * s * r, nat.h * s * r);
 
         c.toBlob(function (blob) {
-          if (!blob) { status.textContent = 'Could not process that image.'; return; }
+          if (!blob) { fail('Could not process that image.'); return; }
           var fd = new FormData();
           fd.append('image', blob, 'avatar.png');
           fd.append('_csrf', csrf);
-          fetch('/blog-app/upload.php', { method: 'POST', body: fd })
-            .then(function (res) { return res.json(); })
+
+          // Never leave the button stuck on "Uploading…" if the network stalls.
+          var ac = ('AbortController' in window) ? new AbortController() : null;
+          var timer = setTimeout(function () { if (ac) ac.abort(); }, 30000);
+
+          fetch('/blog-app/upload.php', {
+            method: 'POST', body: fd, signal: ac ? ac.signal : undefined
+          })
+            .then(function (res) { return res.json().catch(function () { throw new Error('bad response'); }); })
             .then(function (d) {
-              if (d.error) { status.textContent = d.error; return; }
+              clearTimeout(timer);
+              if (d.error) { fail(d.error); return; }
               document.getElementById('author_avatar').value = d.url;
               var prev = document.getElementById('avatarPreview');
               prev.src = d.url; prev.classList.remove('hidden');
               var ini = document.getElementById('avatarInitials');
               if (ini) ini.classList.add('hidden');
-              modal.hidden = true;
-              document.getElementById('avatarStatus').textContent = 'Added — press Save profile.';
+              document.getElementById('avatarStatus').textContent = 'Added — now press Save profile.';
+              close();
             })
-            .catch(function () { status.textContent = 'Upload failed. Please try again.'; });
+            .catch(function () {
+              clearTimeout(timer);
+              fail('Upload failed. Please try again.');
+            });
         }, 'image/png');
       });
 

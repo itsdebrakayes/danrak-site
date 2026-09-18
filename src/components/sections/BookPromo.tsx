@@ -52,7 +52,13 @@ const BookPromo = () => {
 
   return (
     <div
-      className="promo-enter fixed bottom-4 left-4 z-[70] w-[10.5rem] sm:bottom-6 sm:left-6 sm:w-[13rem]"
+      /*
+        Bottom-right and lifted clear of the chrome: the desktop footer is
+        fixed at bottom-0 with the DKS credit on the left and the social icons
+        on the right, so bottom-24 sits above both. Kept smaller and lower on
+        phones, where a 16rem card would cover the hero's own buttons.
+      */
+      className="promo-enter fixed bottom-4 right-3 z-[70] w-[9.5rem] sm:bottom-32 sm:right-6 sm:w-[16rem]"
       style={{ paddingBottom: 'var(--safe-b)' }}
     >
       <button
@@ -66,7 +72,7 @@ const BookPromo = () => {
 
       <Link to="/time-does-not-heal" className="group block" aria-label={`${BOOK.title} — ${badge}`}>
         {/* Oval sticker, angled like a price tag. */}
-        <span className="absolute -left-2 top-4 z-10 -rotate-[14deg] rounded-full bg-brand-crimson px-2.5 py-1.5 text-center text-[0.55rem] font-bold uppercase leading-tight tracking-wider text-white shadow-lg ring-2 ring-white/70 sm:px-3 sm:text-[0.62rem] dark:ring-white/20">
+        <span className="absolute -left-2 top-3 z-10 -rotate-[14deg] rounded-full bg-brand-crimson px-2.5 py-1.5 text-center text-[0.55rem] font-bold uppercase leading-tight tracking-wider text-white shadow-lg ring-2 ring-white/70 sm:-left-3 sm:top-5 sm:px-4 sm:py-2 sm:text-[0.72rem] dark:ring-white/20">
           {badge}
         </span>
 
@@ -80,7 +86,7 @@ const BookPromo = () => {
           className="promo-float w-full drop-shadow-2xl transition-transform duration-300 group-hover:scale-[1.04]"
         />
 
-        <span className="mt-1 block text-center text-[0.68rem] font-semibold text-foreground/80 group-hover:text-brand-ocean">
+        <span className="mt-1 block text-center text-[0.68rem] font-semibold text-foreground/80 group-hover:text-brand-ocean sm:mt-2 sm:text-[0.82rem]">
           Read about the book →
         </span>
       </Link>
