@@ -134,10 +134,24 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
-  html, body {
+  html {
     height: auto;
     overflow-x: hidden;
     overflow-y: auto;
+  }
+
+  /* Body deliberately declares no overflow-y. Any explicit value here — and
+     `overflow-x: hidden` forces one, since the spec will not leave one axis
+     visible while the other is hidden — turns body into a scroll container,
+     and every position:sticky descendant then sticks to that box rather than
+     the viewport and simply scrolls away. `clip` prevents horizontal overflow
+     without establishing a scroll container. */
+  body {
+    height: auto;
+    overflow-x: clip;
+  }
+  @supports not (overflow-x: clip) {
+    body { overflow-x: hidden; }
   }
 
   body {
@@ -551,7 +565,8 @@ All colors MUST be HSL.
   /* Fluid type: scales continuously between 360px and 1680px viewports rather
      than snapping at breakpoints. */
   html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-  body { overflow-x: hidden; }
+
+
 
   h1, .h1 { font-size: clamp(2rem, 1.1rem + 3.9vw, 4.75rem); line-height: 1.04; }
   h2, .h2 { font-size: clamp(1.6rem, 1.05rem + 2.3vw, 3.25rem); line-height: 1.1; }

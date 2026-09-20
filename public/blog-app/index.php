@@ -22,7 +22,7 @@ render_head([
     'title'       => $topic !== ''
         ? "$topic | Notes on Healing & Storytelling"
         : 'Notes on Healing & Storytelling | Stacy-Ann Smith',
-    'description' => 'Essays by Jamaican author and broadcaster Stacy-Ann Smith on emotional healing, childhood trauma, grief, faith and Caribbean storytelling.',
+    'description' => 'Articles by Jamaican author and broadcaster Stacy-Ann Smith on emotional healing, childhood trauma, grief, faith and Caribbean storytelling.',
     'canonical'   => $topic !== '' ? '/blog?topic=' . rawurlencode($topic) : '/blog',
     'schema'      => [[
         '@context'  => 'https://schema.org',
@@ -72,7 +72,7 @@ function meta_row(array $p, bool $light = false): void
       Notes on Healing<br class="hidden sm:block"> &amp; Storytelling
     </h1>
     <p class="mx-auto mt-7 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-      Essays from <?= e($cfg['author_name'] ?? 'Stacy-Ann Smith') ?> on trauma, grief, intentional
+      Articles from <?= e($cfg['author_name'] ?? 'Stacy-Ann Smith') ?> on trauma, grief, intentional
       healing, Caribbean storytelling and the work of communicating honestly.
     </p>
     <div class="mx-auto mt-9 h-px w-16 bg-gradient-to-r from-transparent via-brand-crimson to-transparent"></div>
@@ -100,7 +100,7 @@ function meta_row(array $p, bool $light = false): void
         </p>
         <a href="/blog" class="mt-7 inline-flex items-center rounded-xl bg-foreground px-5 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90">See all articles</a>
       <?php else: ?>
-        <h2 class="font-playfair text-2xl font-bold text-foreground">The first essay is on its way</h2>
+        <h2 class="font-playfair text-2xl font-bold text-foreground">The first article is on its way</h2>
         <p class="mx-auto mt-3 max-w-md leading-relaxed text-muted-foreground">
           Stacy-Ann is writing about trauma, grief, intentional healing and Caribbean storytelling.
           In the meantime, there is the memoir that started it all.

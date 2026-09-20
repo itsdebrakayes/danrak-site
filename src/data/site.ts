@@ -79,7 +79,7 @@ export const BOOK = {
   bookFormat: ['Paperback', 'Audiobook'],
   inLanguage: 'en',
   audiobookReleaseDate: '2026-09-28',
-  audiobookPlatform: 'Odeo',
+  audiobookPlatform: 'ODIYO',
   url: `${SITE.url}/time-does-not-heal`,
   /** Retail links. Paperback carries the ISBN; the Kindle edition has its own ASIN. */
   amazonPaperback: 'https://www.amazon.com/Time-Does-Heal-Stacy-Ann-Smith/dp/1735361062',
@@ -123,10 +123,10 @@ export const BOOK_THEMES = [
   {
     title: 'The Valley & the Mountaintop',
     body:
-      'Growing up in Maverley, Kingston, Stacy-Ann traces the struggle, pain and loss of her early years — and the climb back to the mountaintop.',
+      'Growing up in Maverley, Kingston 20, Jamaica, Stacy-Ann traces the struggle, pain and loss of her early years — and the climb back to the mountaintop.',
   },
   {
-    title: 'Lessons from My Clothespin',
+    title: 'Lessons from A Clothespin',
     body:
       'A single childhood moment with a clothespin shaped years of negative self-perception — until she learned to rewrite the story she told herself.',
   },
@@ -193,7 +193,7 @@ export const BOOK_FAQ = [
   },
   {
     q: 'Is Time Does Not Heal available as an audiobook?',
-    a: 'Yes. The audiobook edition of Time Does Not Heal is released on 28 September 2026 on Odeo, five years after the memoir’s original 2021 publication. The paperback edition remains available under ISBN 9781735361062.',
+    a: 'Yes. The audiobook edition of Time Does Not Heal is released on 28 September 2026 on ODIYO, five years after the memoir’s original 2021 publication. The paperback edition remains available under ISBN 9781735361062.',
   },
   {
     q: 'How do you know you have moved on but not healed?',

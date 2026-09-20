@@ -82,8 +82,16 @@ render_head([
     font-family: 'Playfair Display', serif; font-weight: 700; color: hsl(var(--foreground));
   }
   #editor .ql-editor.ql-blank::before { font-style: normal; color: hsl(var(--muted-foreground)); left: 0; }
+  /* Sticks beneath the page header rather than at top:0, where the header
+     (taller than it looks once its buttons wrap, and z-30) covered it.
+     --editor-header-h is measured at runtime because that height changes with
+     the viewport width. */
   .ql-toolbar.ql-snow {
-    position: sticky; top: 0; z-index: 20; border: 0; border-bottom: 1px solid hsl(var(--border));
+    position: sticky;
+    top: var(--editor-header-h, 4rem);
+    z-index: 20; border: 0;
+    border-top: 1px solid hsl(var(--border));
+    border-bottom: 1px solid hsl(var(--border));
     background: hsl(var(--background)); border-radius: 0;
   }
   .ql-container.ql-snow { border: 0; }
@@ -164,6 +172,11 @@ render_head([
       <div class="mt-8 border-t border-border">
         <div id="editor"></div>
       </div>
+      <p class="mt-3 text-xs text-muted-foreground">
+        Shortcuts: <kbd class="rounded border border-border px-1">⌘</kbd>/<kbd class="rounded border border-border px-1">Ctrl</kbd>
+        + <b>B</b> bold, <b>I</b> italic, <b>U</b> underline, <b>K</b> link, <b>Z</b> undo,
+        <b>⇧Z</b> redo, <b>V</b> paste.
+      </p>
       <textarea name="body_html" id="body_html" class="hidden"><?= e((string) ($post['body_html'] ?? '')) ?></textarea>
     </main>
 
@@ -277,6 +290,57 @@ render_head([
   var existing = document.getElementById('body_html').value;
   if (existing) { quill.clipboard.dangerouslyPasteHTML(existing); }
 
+  // --- Keyboard shortcuts -------------------------------------------------
+  // Quill maps its "shortKey" to Cmd on macOS, so Ctrl+B and friends do
+  // nothing there. These aliases register the Ctrl variants as well, so the
+  // same keys work whichever machine she is on.
+  var FORMATS = { 66: 'bold', 73: 'italic', 85: 'underline' };
+  Object.keys(FORMATS).forEach(function (code) {
+    quill.keyboard.addBinding(
+      { key: parseInt(code, 10), ctrlKey: true },
+      function (range) {
+        var name = FORMATS[code];
+        var current = quill.getFormat(range)[name];
+        quill.format(name, !current, 'user');
+      }
+    );
+  });
+
+  // Undo / redo on Ctrl as well as Cmd.
+  quill.keyboard.addBinding({ key: 90, ctrlKey: true, shiftKey: false }, function () {
+    quill.history.undo();
+  });
+  quill.keyboard.addBinding({ key: 90, ctrlKey: true, shiftKey: true }, function () {
+    quill.history.redo();
+  });
+  quill.keyboard.addBinding({ key: 89, ctrlKey: true }, function () {
+    quill.history.redo();
+  });
+
+  // Ctrl+K for links, matching the toolbar button.
+  quill.keyboard.addBinding({ key: 75, ctrlKey: true }, function (range) {
+    var url = prompt('Link address');
+    if (url) { quill.format('link', url, 'user'); }
+  });
+
+  // The browser only raises a paste event for the platform's own shortcut, so
+  // on a Mac Ctrl+V never reaches the editor. Read the clipboard directly in
+  // that case. If the browser refuses permission we simply do nothing and the
+  // platform shortcut still works.
+  quill.root.addEventListener('keydown', function (e) {
+    var isMac = /Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent);
+    if (!isMac || !e.ctrlKey || e.metaKey || e.key.toLowerCase() !== 'v') return;
+    if (!navigator.clipboard || !navigator.clipboard.readText) return;
+    e.preventDefault();
+    navigator.clipboard.readText().then(function (text) {
+      if (!text) return;
+      var range = quill.getSelection(true);
+      quill.deleteText(range.index, range.length, 'user');
+      quill.insertText(range.index, text, 'user');
+      quill.setSelection(range.index + text.length, 0, 'user');
+    }).catch(function () { /* permission denied — Cmd+V still works */ });
+  });
+
   function uploadImage(file, onDone) {
     var status = document.getElementById('coverStatus');
     status.textContent = 'Uploading…';
@@ -337,6 +401,21 @@ render_head([
   document.getElementById('postForm').addEventListener('submit', function () {
     document.getElementById('body_html').value = quill.root.innerHTML;
   });
+
+  // Keep --editor-header-h in step with the header, whose height changes when
+  // its buttons wrap at narrow widths.
+  var pageHeader = document.querySelector('header');
+  function syncHeaderHeight() {
+    if (!pageHeader) return;
+    document.documentElement.style.setProperty(
+      '--editor-header-h', Math.round(pageHeader.getBoundingClientRect().height) + 'px'
+    );
+  }
+  syncHeaderHeight();
+  window.addEventListener('resize', syncHeaderHeight);
+  if ('ResizeObserver' in window && pageHeader) {
+    new ResizeObserver(syncHeaderHeight).observe(pageHeader);
+  }
 
   // Warn before losing unsaved work.
   var dirty = false;

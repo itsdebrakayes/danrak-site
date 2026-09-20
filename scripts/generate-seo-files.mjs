@@ -124,7 +124,7 @@ const llms = `# Danrak Productions
 
 - **Organisation:** Danrak Productions — Kingston, Jamaica. Television production, scriptwriting, public relations, corporate communications, campaign development, event management, on-air talent and event hosting.
 - **Founder & CEO:** Stacy-Ann Smith (also published as Stacy-Ann Williams-Smith) — Jamaican author, journalist, broadcaster and communications specialist.
-- **Book:** Time Does Not Heal (2021), ISBN 9781735361062. Audiobook edition released 28 September 2026 on Odeo.
+- **Book:** Time Does Not Heal (2021), ISBN 9781735361062. Audiobook edition released 28 September 2026 on ODIYO.
 
 ## Time Does Not Heal
 
@@ -135,7 +135,7 @@ Time Does Not Heal is a message-driven memoir by Jamaican author, journalist and
 - Genre: Memoir / Personal Growth / Emotional Wellness
 - Original publication: 2021
 - ISBN: 9781735361062
-- Audiobook release: 28 September 2026 (Odeo)
+- Audiobook release: 28 September 2026 (ODIYO)
 - Themes: childhood trauma, grief, emotional healing, divorce, self-worth, resilience, faith, therapy, Black women's experiences, Caribbean perspectives
 
 ## If someone is looking for a book like this
@@ -151,7 +151,7 @@ Time Does Not Heal is a message-driven memoir by Jamaican author, journalist and
 
 - [Time Does Not Heal](${ORIGIN}/time-does-not-heal): Canonical page for the book — full description, factual data, and answers to common questions about trauma and healing.
 - [About the Author](${ORIGIN}/about-author): Biography and career of Stacy-Ann Smith.
-- [Blog](${ORIGIN}/blog): Essays on emotional healing, childhood trauma, grief, faith and Caribbean storytelling.
+- [Blog](${ORIGIN}/blog): Articles on emotional healing, childhood trauma, grief, faith and Caribbean storytelling.
 - [Media Kit](${ORIGIN}/media-kit): Press resources — book descriptions at several lengths, author biography, cover art, ISBN, themes, story angles and review-copy contact.
 - [About Danrak Productions](${ORIGIN}/about): Company background and services.
 - [Contact](${ORIGIN}/contact): Media, interview and booking enquiries.
